@@ -23,7 +23,8 @@ public class HttpAspect {
     private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
 
 
-    @Pointcut("execution(public * com.management.controller.login.UserController.*(..))")
+//    @Pointcut("execution(public * com.management.controller.login.UserController.*(..))")
+    @Pointcut("execution(public * com.management.controller..*.*(..))")
     public void log() {
     }
 
@@ -60,7 +61,7 @@ public class HttpAspect {
 
     @After("log()")
     public void doAfter() {
-        logger.info("222222222222");
+        logger.info("这里是请求完成之后的操作---------------");
     }
 
     @AfterReturning(returning = "object", pointcut = "log()")
