@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.wcs.StockMiniloadMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.wcs.StockMiniload" >
+    <constructor >
+      <idArg column="LOCN_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK_LOCN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK_ROW" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK_LAYER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK_COLUMN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UNIT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOCN_SEIAL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOCK_STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="VALID_STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="INSERT_DATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONTAINER_CODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONTAINER_CODE_TMP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AREA" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="WEIGHT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ACTIV" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LOCN_ID, BANK_LOCN, BANK_ID, BANK_ROW, BANK_LAYER, BANK_COLUMN, UNIT, LOCN_SEIAL, 
+    LOCK_STATUS, VALID_STATUS, INSERT_DATE, CONTAINER_CODE, CONTAINER_CODE_TMP, AREA, 
+    WEIGHT, ACTIV
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from STOCK_MINILOAD
+    where LOCN_ID = #{locnId,jdbcType=VARCHAR}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from STOCK_MINILOAD
+    where LOCN_ID = #{locnId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.wcs.StockMiniload" >
+    insert into STOCK_MINILOAD (LOCN_ID, BANK_LOCN, BANK_ID, 
+      BANK_ROW, BANK_LAYER, BANK_COLUMN, 
+      UNIT, LOCN_SEIAL, LOCK_STATUS, 
+      VALID_STATUS, INSERT_DATE, CONTAINER_CODE, 
+      CONTAINER_CODE_TMP, AREA, WEIGHT, 
+      ACTIV)
+    values (#{locnId,jdbcType=VARCHAR}, #{bankLocn,jdbcType=VARCHAR}, #{bankId,jdbcType=VARCHAR}, 
+      #{bankRow,jdbcType=VARCHAR}, #{bankLayer,jdbcType=VARCHAR}, #{bankColumn,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{locnSeial,jdbcType=VARCHAR}, #{lockStatus,jdbcType=VARCHAR}, 
+      #{validStatus,jdbcType=VARCHAR}, #{insertDate,jdbcType=VARCHAR}, #{containerCode,jdbcType=VARCHAR}, 
+      #{containerCodeTmp,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, 
+      #{activ,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.wcs.StockMiniload" >
+    insert into STOCK_MINILOAD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="locnId != null" >
+        LOCN_ID,
+      </if>
+      <if test="bankLocn != null" >
+        BANK_LOCN,
+      </if>
+      <if test="bankId != null" >
+        BANK_ID,
+      </if>
+      <if test="bankRow != null" >
+        BANK_ROW,
+      </if>
+      <if test="bankLayer != null" >
+        BANK_LAYER,
+      </if>
+      <if test="bankColumn != null" >
+        BANK_COLUMN,
+      </if>
+      <if test="unit != null" >
+        UNIT,
+      </if>
+      <if test="locnSeial != null" >
+        LOCN_SEIAL,
+      </if>
+      <if test="lockStatus != null" >
+        LOCK_STATUS,
+      </if>
+      <if test="validStatus != null" >
+        VALID_STATUS,
+      </if>
+      <if test="insertDate != null" >
+        INSERT_DATE,
+      </if>
+      <if test="containerCode != null" >
+        CONTAINER_CODE,
+      </if>
+      <if test="containerCodeTmp != null" >
+        CONTAINER_CODE_TMP,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="weight != null" >
+        WEIGHT,
+      </if>
+      <if test="activ != null" >
+        ACTIV,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="locnId != null" >
+        #{locnId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLocn != null" >
+        #{bankLocn,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankRow != null" >
+        #{bankRow,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLayer != null" >
+        #{bankLayer,jdbcType=VARCHAR},
+      </if>
+      <if test="bankColumn != null" >
+        #{bankColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="locnSeial != null" >
+        #{locnSeial,jdbcType=VARCHAR},
+      </if>
+      <if test="lockStatus != null" >
+        #{lockStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null" >
+        #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="insertDate != null" >
+        #{insertDate,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null" >
+        #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCodeTmp != null" >
+        #{containerCodeTmp,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="activ != null" >
+        #{activ,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.wcs.StockMiniload" >
+    update STOCK_MINILOAD
+    <set >
+      <if test="bankLocn != null" >
+        BANK_LOCN = #{bankLocn,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        BANK_ID = #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankRow != null" >
+        BANK_ROW = #{bankRow,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLayer != null" >
+        BANK_LAYER = #{bankLayer,jdbcType=VARCHAR},
+      </if>
+      <if test="bankColumn != null" >
+        BANK_COLUMN = #{bankColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="locnSeial != null" >
+        LOCN_SEIAL = #{locnSeial,jdbcType=VARCHAR},
+      </if>
+      <if test="lockStatus != null" >
+        LOCK_STATUS = #{lockStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null" >
+        VALID_STATUS = #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="insertDate != null" >
+        INSERT_DATE = #{insertDate,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null" >
+        CONTAINER_CODE = #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCodeTmp != null" >
+        CONTAINER_CODE_TMP = #{containerCodeTmp,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        WEIGHT = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="activ != null" >
+        ACTIV = #{activ,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LOCN_ID = #{locnId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.wcs.StockMiniload" >
+    update STOCK_MINILOAD
+    set BANK_LOCN = #{bankLocn,jdbcType=VARCHAR},
+      BANK_ID = #{bankId,jdbcType=VARCHAR},
+      BANK_ROW = #{bankRow,jdbcType=VARCHAR},
+      BANK_LAYER = #{bankLayer,jdbcType=VARCHAR},
+      BANK_COLUMN = #{bankColumn,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      LOCN_SEIAL = #{locnSeial,jdbcType=VARCHAR},
+      LOCK_STATUS = #{lockStatus,jdbcType=VARCHAR},
+      VALID_STATUS = #{validStatus,jdbcType=VARCHAR},
+      INSERT_DATE = #{insertDate,jdbcType=VARCHAR},
+      CONTAINER_CODE = #{containerCode,jdbcType=VARCHAR},
+      CONTAINER_CODE_TMP = #{containerCodeTmp,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=VARCHAR},
+      WEIGHT = #{weight,jdbcType=VARCHAR},
+      ACTIV = #{activ,jdbcType=VARCHAR}
+    where LOCN_ID = #{locnId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectBycontainerCodeTmp" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from STOCK_MINILOAD
+    where container_code_tmp = #{boxno}
+  </select>
+</mapper>

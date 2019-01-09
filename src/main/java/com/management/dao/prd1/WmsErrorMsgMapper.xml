@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.prd1.WmsErrorMsgMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.prd1.WmsErrorMsg" >
+    <constructor >
+      <arg column="IF_KEY" jdbcType="OTHER" javaType="java.lang.Object" />
+      <arg column="IF_MESSAGE" jdbcType="OTHER" javaType="java.lang.Object" />
+      <arg column="ADDDATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FLAG" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.prd1.WmsErrorMsg" >
+    insert into WMS_ERROR_MSG (IF_KEY, IF_MESSAGE, ADDDATE, 
+      FLAG)
+    values (#{ifKey,jdbcType=OTHER}, #{ifMessage,jdbcType=OTHER}, #{adddate,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.prd1.WmsErrorMsg" >
+    insert into WMS_ERROR_MSG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ifKey != null" >
+        IF_KEY,
+      </if>
+      <if test="ifMessage != null" >
+        IF_MESSAGE,
+      </if>
+      <if test="adddate != null" >
+        ADDDATE,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ifKey != null" >
+        #{ifKey,jdbcType=OTHER},
+      </if>
+      <if test="ifMessage != null" >
+        #{ifMessage,jdbcType=OTHER},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+    <select id="selectAll" resultType="com.management.pojo.prd1.WmsErrorMsg">
+      select IF_KEY ifKey, IF_MESSAGE ifMessage, ADDDATE adddate,FLAG flag
+      from WMS_ERROR_MSG
+      where flag = 0
+    </select>
+</mapper>

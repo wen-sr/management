@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.wcs.TaskOpsMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.wcs.TaskOps" >
+    <constructor >
+      <idArg column="SN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GUID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASK_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LINE_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SRCLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DSLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONNBR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PRI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TIMESTAMP_ITF" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TIMESTAMP_ITF_INSERT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TIMESTAMP_TRANS_INSERT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HEAT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDERNBR" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SN, GUID, TASK_TYPE, STATUS, LINE_ID, SRCLOC, DSLOC, CONNBR, PRI, MARK, RES1, TIMESTAMP_ITF, 
+    TIMESTAMP_ITF_INSERT, TIMESTAMP_TRANS_INSERT, HEAT, ORDERNBR
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TASK_OPS
+    where SN = #{sn,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TASK_OPS
+    where SN = #{sn,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.wcs.TaskOps" >
+    insert into TASK_OPS (SN, GUID, TASK_TYPE, 
+      STATUS, LINE_ID, SRCLOC, 
+      DSLOC, CONNBR, PRI, 
+      MARK, RES1, TIMESTAMP_ITF, 
+      TIMESTAMP_ITF_INSERT, TIMESTAMP_TRANS_INSERT, 
+      HEAT, ORDERNBR)
+    values (#{sn,jdbcType=VARCHAR}, #{guid,jdbcType=VARCHAR}, #{taskType,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{lineId,jdbcType=VARCHAR}, #{srcloc,jdbcType=VARCHAR}, 
+      #{dsloc,jdbcType=VARCHAR}, #{connbr,jdbcType=VARCHAR}, #{pri,jdbcType=VARCHAR}, 
+      #{mark,jdbcType=VARCHAR}, #{res1,jdbcType=VARCHAR}, #{timestampItf,jdbcType=VARCHAR}, 
+      #{timestampItfInsert,jdbcType=VARCHAR}, #{timestampTransInsert,jdbcType=VARCHAR}, 
+      #{heat,jdbcType=VARCHAR}, #{ordernbr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.wcs.TaskOps" >
+    insert into TASK_OPS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="guid != null" >
+        GUID,
+      </if>
+      <if test="taskType != null" >
+        TASK_TYPE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="lineId != null" >
+        LINE_ID,
+      </if>
+      <if test="srcloc != null" >
+        SRCLOC,
+      </if>
+      <if test="dsloc != null" >
+        DSLOC,
+      </if>
+      <if test="connbr != null" >
+        CONNBR,
+      </if>
+      <if test="pri != null" >
+        PRI,
+      </if>
+      <if test="mark != null" >
+        MARK,
+      </if>
+      <if test="res1 != null" >
+        RES1,
+      </if>
+      <if test="timestampItf != null" >
+        TIMESTAMP_ITF,
+      </if>
+      <if test="timestampItfInsert != null" >
+        TIMESTAMP_ITF_INSERT,
+      </if>
+      <if test="timestampTransInsert != null" >
+        TIMESTAMP_TRANS_INSERT,
+      </if>
+      <if test="heat != null" >
+        HEAT,
+      </if>
+      <if test="ordernbr != null" >
+        ORDERNBR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="guid != null" >
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null" >
+        #{lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="srcloc != null" >
+        #{srcloc,jdbcType=VARCHAR},
+      </if>
+      <if test="dsloc != null" >
+        #{dsloc,jdbcType=VARCHAR},
+      </if>
+      <if test="connbr != null" >
+        #{connbr,jdbcType=VARCHAR},
+      </if>
+      <if test="pri != null" >
+        #{pri,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="res1 != null" >
+        #{res1,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampItf != null" >
+        #{timestampItf,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampItfInsert != null" >
+        #{timestampItfInsert,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampTransInsert != null" >
+        #{timestampTransInsert,jdbcType=VARCHAR},
+      </if>
+      <if test="heat != null" >
+        #{heat,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernbr != null" >
+        #{ordernbr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.wcs.TaskOps" >
+    update TASK_OPS
+    <set >
+      <if test="guid != null" >
+        GUID = #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        TASK_TYPE = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null" >
+        LINE_ID = #{lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="srcloc != null" >
+        SRCLOC = #{srcloc,jdbcType=VARCHAR},
+      </if>
+      <if test="dsloc != null" >
+        DSLOC = #{dsloc,jdbcType=VARCHAR},
+      </if>
+      <if test="connbr != null" >
+        CONNBR = #{connbr,jdbcType=VARCHAR},
+      </if>
+      <if test="pri != null" >
+        PRI = #{pri,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        MARK = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="res1 != null" >
+        RES1 = #{res1,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampItf != null" >
+        TIMESTAMP_ITF = #{timestampItf,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampItfInsert != null" >
+        TIMESTAMP_ITF_INSERT = #{timestampItfInsert,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampTransInsert != null" >
+        TIMESTAMP_TRANS_INSERT = #{timestampTransInsert,jdbcType=VARCHAR},
+      </if>
+      <if test="heat != null" >
+        HEAT = #{heat,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernbr != null" >
+        ORDERNBR = #{ordernbr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SN = #{sn,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.wcs.TaskOps" >
+    update TASK_OPS
+    set GUID = #{guid,jdbcType=VARCHAR},
+      TASK_TYPE = #{taskType,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      LINE_ID = #{lineId,jdbcType=VARCHAR},
+      SRCLOC = #{srcloc,jdbcType=VARCHAR},
+      DSLOC = #{dsloc,jdbcType=VARCHAR},
+      CONNBR = #{connbr,jdbcType=VARCHAR},
+      PRI = #{pri,jdbcType=VARCHAR},
+      MARK = #{mark,jdbcType=VARCHAR},
+      RES1 = #{res1,jdbcType=VARCHAR},
+      TIMESTAMP_ITF = #{timestampItf,jdbcType=VARCHAR},
+      TIMESTAMP_ITF_INSERT = #{timestampItfInsert,jdbcType=VARCHAR},
+      TIMESTAMP_TRANS_INSERT = #{timestampTransInsert,jdbcType=VARCHAR},
+      HEAT = #{heat,jdbcType=VARCHAR},
+      ORDERNBR = #{ordernbr,jdbcType=VARCHAR}
+    where SN = #{sn,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.wcs.TaskWmsMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.wcs.TaskWms" >
+    <constructor >
+      <idArg column="SN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="INFID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MSGID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONNBR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDERNBR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STORTYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASKTYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LINE_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="WEIGHT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SRCLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DSLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HEAT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RES2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TIMESTAMP_ITF" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TIMESTAMP_ITF_INSERT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TIMESTAMP_TRANS_INSERT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STOCK_LOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SN, INFID, MSGID, CONNBR, ORDERNBR, STORTYPE, TASKTYPE, LINE_ID, STATUS, WEIGHT, 
+    SRCLOC, DSLOC, HEAT, MARK, RES1, RES2, TIMESTAMP_ITF, TIMESTAMP_ITF_INSERT, TIMESTAMP_TRANS_INSERT, 
+    STOCK_LOC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TASK_WMS
+    where SN = #{sn,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TASK_WMS
+    where SN = #{sn,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.wcs.TaskWms" >
+    insert into TASK_WMS (SN, INFID, MSGID, 
+      CONNBR, ORDERNBR, STORTYPE, 
+      TASKTYPE, LINE_ID, STATUS, 
+      WEIGHT, SRCLOC, DSLOC, 
+      HEAT, MARK, RES1, RES2, 
+      TIMESTAMP_ITF, TIMESTAMP_ITF_INSERT, TIMESTAMP_TRANS_INSERT, 
+      STOCK_LOC)
+    values (#{sn,jdbcType=VARCHAR}, #{infid,jdbcType=VARCHAR}, #{msgid,jdbcType=VARCHAR}, 
+      #{connbr,jdbcType=VARCHAR}, #{ordernbr,jdbcType=VARCHAR}, #{stortype,jdbcType=VARCHAR}, 
+      #{tasktype,jdbcType=VARCHAR}, #{lineId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=VARCHAR}, #{srcloc,jdbcType=VARCHAR}, #{dsloc,jdbcType=VARCHAR}, 
+      #{heat,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, #{res1,jdbcType=VARCHAR}, #{res2,jdbcType=VARCHAR}, 
+      #{timestampItf,jdbcType=VARCHAR}, #{timestampItfInsert,jdbcType=VARCHAR}, #{timestampTransInsert,jdbcType=VARCHAR}, 
+      #{stockLoc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.wcs.TaskWms" >
+    insert into TASK_WMS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sn != null" >
+        SN,
+      </if>
+      <if test="infid != null" >
+        INFID,
+      </if>
+      <if test="msgid != null" >
+        MSGID,
+      </if>
+      <if test="connbr != null" >
+        CONNBR,
+      </if>
+      <if test="ordernbr != null" >
+        ORDERNBR,
+      </if>
+      <if test="stortype != null" >
+        STORTYPE,
+      </if>
+      <if test="tasktype != null" >
+        TASKTYPE,
+      </if>
+      <if test="lineId != null" >
+        LINE_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="weight != null" >
+        WEIGHT,
+      </if>
+      <if test="srcloc != null" >
+        SRCLOC,
+      </if>
+      <if test="dsloc != null" >
+        DSLOC,
+      </if>
+      <if test="heat != null" >
+        HEAT,
+      </if>
+      <if test="mark != null" >
+        MARK,
+      </if>
+      <if test="res1 != null" >
+        RES1,
+      </if>
+      <if test="res2 != null" >
+        RES2,
+      </if>
+      <if test="timestampItf != null" >
+        TIMESTAMP_ITF,
+      </if>
+      <if test="timestampItfInsert != null" >
+        TIMESTAMP_ITF_INSERT,
+      </if>
+      <if test="timestampTransInsert != null" >
+        TIMESTAMP_TRANS_INSERT,
+      </if>
+      <if test="stockLoc != null" >
+        STOCK_LOC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="infid != null" >
+        #{infid,jdbcType=VARCHAR},
+      </if>
+      <if test="msgid != null" >
+        #{msgid,jdbcType=VARCHAR},
+      </if>
+      <if test="connbr != null" >
+        #{connbr,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernbr != null" >
+        #{ordernbr,jdbcType=VARCHAR},
+      </if>
+      <if test="stortype != null" >
+        #{stortype,jdbcType=VARCHAR},
+      </if>
+      <if test="tasktype != null" >
+        #{tasktype,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null" >
+        #{lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="srcloc != null" >
+        #{srcloc,jdbcType=VARCHAR},
+      </if>
+      <if test="dsloc != null" >
+        #{dsloc,jdbcType=VARCHAR},
+      </if>
+      <if test="heat != null" >
+        #{heat,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="res1 != null" >
+        #{res1,jdbcType=VARCHAR},
+      </if>
+      <if test="res2 != null" >
+        #{res2,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampItf != null" >
+        #{timestampItf,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampItfInsert != null" >
+        #{timestampItfInsert,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampTransInsert != null" >
+        #{timestampTransInsert,jdbcType=VARCHAR},
+      </if>
+      <if test="stockLoc != null" >
+        #{stockLoc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.wcs.TaskWms" >
+    update TASK_WMS
+    <set >
+      <if test="infid != null" >
+        INFID = #{infid,jdbcType=VARCHAR},
+      </if>
+      <if test="msgid != null" >
+        MSGID = #{msgid,jdbcType=VARCHAR},
+      </if>
+      <if test="connbr != null" >
+        CONNBR = #{connbr,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernbr != null" >
+        ORDERNBR = #{ordernbr,jdbcType=VARCHAR},
+      </if>
+      <if test="stortype != null" >
+        STORTYPE = #{stortype,jdbcType=VARCHAR},
+      </if>
+      <if test="tasktype != null" >
+        TASKTYPE = #{tasktype,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null" >
+        LINE_ID = #{lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        WEIGHT = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="srcloc != null" >
+        SRCLOC = #{srcloc,jdbcType=VARCHAR},
+      </if>
+      <if test="dsloc != null" >
+        DSLOC = #{dsloc,jdbcType=VARCHAR},
+      </if>
+      <if test="heat != null" >
+        HEAT = #{heat,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        MARK = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="res1 != null" >
+        RES1 = #{res1,jdbcType=VARCHAR},
+      </if>
+      <if test="res2 != null" >
+        RES2 = #{res2,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampItf != null" >
+        TIMESTAMP_ITF = #{timestampItf,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampItfInsert != null" >
+        TIMESTAMP_ITF_INSERT = #{timestampItfInsert,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampTransInsert != null" >
+        TIMESTAMP_TRANS_INSERT = #{timestampTransInsert,jdbcType=VARCHAR},
+      </if>
+      <if test="stockLoc != null" >
+        STOCK_LOC = #{stockLoc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SN = #{sn,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.wcs.TaskWms" >
+    update TASK_WMS
+    set INFID = #{infid,jdbcType=VARCHAR},
+      MSGID = #{msgid,jdbcType=VARCHAR},
+      CONNBR = #{connbr,jdbcType=VARCHAR},
+      ORDERNBR = #{ordernbr,jdbcType=VARCHAR},
+      STORTYPE = #{stortype,jdbcType=VARCHAR},
+      TASKTYPE = #{tasktype,jdbcType=VARCHAR},
+      LINE_ID = #{lineId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      WEIGHT = #{weight,jdbcType=VARCHAR},
+      SRCLOC = #{srcloc,jdbcType=VARCHAR},
+      DSLOC = #{dsloc,jdbcType=VARCHAR},
+      HEAT = #{heat,jdbcType=VARCHAR},
+      MARK = #{mark,jdbcType=VARCHAR},
+      RES1 = #{res1,jdbcType=VARCHAR},
+      RES2 = #{res2,jdbcType=VARCHAR},
+      TIMESTAMP_ITF = #{timestampItf,jdbcType=VARCHAR},
+      TIMESTAMP_ITF_INSERT = #{timestampItfInsert,jdbcType=VARCHAR},
+      TIMESTAMP_TRANS_INSERT = #{timestampTransInsert,jdbcType=VARCHAR},
+      STOCK_LOC = #{stockLoc,jdbcType=VARCHAR}
+    where SN = #{sn,jdbcType=VARCHAR}
+  </update>
+</mapper>

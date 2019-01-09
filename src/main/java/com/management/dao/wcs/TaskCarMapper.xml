@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.wcs.TaskCarMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.wcs.TaskCar" >
+    <constructor >
+      <arg column="GUID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASK_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK_LOCN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK_LAYER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK_COLUMN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SOURCELAYER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SOURCEADDRESS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TARGETLAYER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TARGETADDRESS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONTAINERCODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RET" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TIMESTAMP_INSERT" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.wcs.TaskCar" >
+    insert into TASK_CAR (GUID, TASK_TYPE, STATUS, 
+      BANK_LOCN, BANK_ID, BANK_LAYER, 
+      BANK_COLUMN, SOURCELAYER, SOURCEADDRESS, 
+      TARGETLAYER, TARGETADDRESS, CONTAINERCODE, 
+      RET, MARK, TIMESTAMP_INSERT
+      )
+    values (#{guid,jdbcType=VARCHAR}, #{taskType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{bankLocn,jdbcType=VARCHAR}, #{bankId,jdbcType=VARCHAR}, #{bankLayer,jdbcType=VARCHAR}, 
+      #{bankColumn,jdbcType=VARCHAR}, #{sourcelayer,jdbcType=VARCHAR}, #{sourceaddress,jdbcType=VARCHAR}, 
+      #{targetlayer,jdbcType=VARCHAR}, #{targetaddress,jdbcType=VARCHAR}, #{containercode,jdbcType=VARCHAR}, 
+      #{ret,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, #{timestampInsert,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.wcs.TaskCar" >
+    insert into TASK_CAR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="guid != null" >
+        GUID,
+      </if>
+      <if test="taskType != null" >
+        TASK_TYPE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="bankLocn != null" >
+        BANK_LOCN,
+      </if>
+      <if test="bankId != null" >
+        BANK_ID,
+      </if>
+      <if test="bankLayer != null" >
+        BANK_LAYER,
+      </if>
+      <if test="bankColumn != null" >
+        BANK_COLUMN,
+      </if>
+      <if test="sourcelayer != null" >
+        SOURCELAYER,
+      </if>
+      <if test="sourceaddress != null" >
+        SOURCEADDRESS,
+      </if>
+      <if test="targetlayer != null" >
+        TARGETLAYER,
+      </if>
+      <if test="targetaddress != null" >
+        TARGETADDRESS,
+      </if>
+      <if test="containercode != null" >
+        CONTAINERCODE,
+      </if>
+      <if test="ret != null" >
+        RET,
+      </if>
+      <if test="mark != null" >
+        MARK,
+      </if>
+      <if test="timestampInsert != null" >
+        TIMESTAMP_INSERT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="guid != null" >
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLocn != null" >
+        #{bankLocn,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLayer != null" >
+        #{bankLayer,jdbcType=VARCHAR},
+      </if>
+      <if test="bankColumn != null" >
+        #{bankColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcelayer != null" >
+        #{sourcelayer,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceaddress != null" >
+        #{sourceaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="targetlayer != null" >
+        #{targetlayer,jdbcType=VARCHAR},
+      </if>
+      <if test="targetaddress != null" >
+        #{targetaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="containercode != null" >
+        #{containercode,jdbcType=VARCHAR},
+      </if>
+      <if test="ret != null" >
+        #{ret,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="timestampInsert != null" >
+        #{timestampInsert,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateStatus">
+    update TASK_CAR
+    set status = 0
+    where containercode = #{containercode}
+      and sourcelayer = #{sourcelayer}
+
+  </update>
+  <select id="selectByBoxno" resultType="String">
+      select status
+      from TASK_CAR
+      where containercode = #{containercode}
+      and sourcelayer = #{sourcelayer}
+    </select>
+</mapper>
