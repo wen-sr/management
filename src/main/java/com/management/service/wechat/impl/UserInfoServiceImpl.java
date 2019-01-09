@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserInfoServiceImpl implements IUserInfoService {
@@ -20,5 +22,11 @@ public class UserInfoServiceImpl implements IUserInfoService {
     public UserInfo findByOpenId(String openId) {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         return userInfoMapper.selectByOpenId(openId);
+    }
+
+    @Override
+    public List<UserInfo> findByroleId(int i) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        return userInfoMapper.findByroleId(i);
     }
 }

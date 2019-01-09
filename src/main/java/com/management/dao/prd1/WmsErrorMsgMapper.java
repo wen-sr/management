@@ -10,4 +10,6 @@ public interface WmsErrorMsgMapper {
     int insertSelective(WmsErrorMsg record);
 
     List<WmsErrorMsg> selectAll();
+
+    int updateFlage(WmsErrorMsg wmsErrorMsg);
 }

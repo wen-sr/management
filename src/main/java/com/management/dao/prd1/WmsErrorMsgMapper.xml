@@ -46,6 +46,10 @@
       </if>
     </trim>
   </insert>
+    <update id="updateFlage">
+      update wmslog.process_message set flag = 1
+      where if_key = #{ifKey}
+    </update>
     <select id="selectAll" resultType="com.management.pojo.prd1.WmsErrorMsg">
       select IF_KEY ifKey, IF_MESSAGE ifMessage, ADDDATE adddate,FLAG flag
       from WMS_ERROR_MSG

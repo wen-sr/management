@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IWmsErrorMsgService {
     List<WmsErrorMsg> selectAll();
+
+    void updateFlage(WmsErrorMsg wmsErrorMsg);
 }

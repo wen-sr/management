@@ -25,4 +25,6 @@ public interface UserInfoMapper {
     UserInfo selectUserByName(String name);
 
     UserInfo selectByLoginId(String login_id);
+
+    List<UserInfo> findByroleId(int i);
 }
