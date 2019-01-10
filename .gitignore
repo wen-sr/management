@@ -5,3 +5,4 @@
 *.project
 .idea/
 *.iml
+/catalina_home_IS_UNDEFINED/

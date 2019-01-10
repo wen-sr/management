@@ -20,8 +20,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Component
-public class TestSchedule {
-    private final static Logger logger = LoggerFactory.getLogger(TestSchedule.class);
+public class TaskSchedule {
+    private final static Logger logger = LoggerFactory.getLogger(TaskSchedule.class);
 
     @Autowired
     IWmsErrorMsgService wmsErrorMsgService;
@@ -44,10 +44,11 @@ public class TestSchedule {
             for(WmsErrorMsg wmsErrorMsg : wmsErrorMsgList){
                 for(UserInfo userInfo : userInfoList){
                     WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+//                            .toUser("oPOAgvx1Utuu0Mg25QTPs5yqDUyw")
                             .toUser(userInfo.getOpenid())
                             .templateId("3NNDKh-IQwR4vV8hbv3AY1J1hFEtkrU3MwbXtY3L8dU").build();
                     templateMessage.getData().add(new WxMpTemplateData("first", "您好，您有一条系统异常通知！", "#284177"));
-                    templateMessage.getData().add(new WxMpTemplateData("keyword1", "WMS系统", "#0044BB"));
+                    templateMessage.getData().add(new WxMpTemplateData("keyword1", String.valueOf(wmsErrorMsg.getIfName()), "#0044BB"));
                     templateMessage.getData().add(new WxMpTemplateData("keyword2", wmsErrorMsg.getAdddate(), "#0044BB"));
                     templateMessage.getData().add(new WxMpTemplateData("keyword3", "key=" + wmsErrorMsg.getIfKey() + ":" +String.valueOf(wmsErrorMsg.getIfMessage()), "#0044BB"));
                     templateMessage.getData().add(new WxMpTemplateData("remark", "江西蓝海物流技术部", "#AAAAAA"));
@@ -64,7 +65,6 @@ public class TestSchedule {
 
             }
         }
-
         logger.info("<<<---------查询WMS系统报错信息的定时任务结束--------->>>");
     }
 

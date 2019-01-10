@@ -38,6 +38,6 @@
   </insert>
 
   <delete id="deleteByRoleId" parameterType="integer">
-    delete from role_accordion where role_id = #{id} and accordion_id > 40
+    delete from role_accordion where role_id = #{id}
   </delete>
 </mapper>

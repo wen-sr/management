@@ -2,7 +2,7 @@ package com.management.service.prd1.impl;
 
 import com.management.dao.prd1.WmsErrorMsgMapper;
 import com.management.pojo.prd1.WmsErrorMsg;
-import com.management.schedule.TestSchedule;
+import com.management.schedule.TaskSchedule;
 import com.management.service.prd1.IWmsErrorMsgService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class IWmsErrorMsgServiceImpl implements IWmsErrorMsgService {
-    private final static Logger logger = LoggerFactory.getLogger(TestSchedule.class);
+    private final static Logger logger = LoggerFactory.getLogger(TaskSchedule.class);
 
     @Autowired
     WmsErrorMsgMapper wmsErrorMsgMapper;
