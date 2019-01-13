@@ -27,7 +27,6 @@
     <task:annotation-driven/>
 
     <import resource="applicationContext-datasource.xml"/>
+    <import resource="spring-webservice.xml"/>
     <util:properties id="wxProperties" location="classpath:wx.properties" />
-
-    <jaxws:endpoint implementor="com.management.ws.WebServiceTest" address="/webSerciceTest_endpoint" ></jaxws:endpoint>
 </beans>

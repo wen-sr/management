@@ -255,6 +255,23 @@
       <version>3.1.8</version>
     </dependency>
 
+    <!--websocket-->
+    <dependency>
+      <groupId>javax.websocket</groupId>
+      <artifactId>javax.websocket-api</artifactId>
+      <version>1.1</version>
+      <scope>provided</scope>
+    </dependency>
+      <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-websocket</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-messaging</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
     <!-- 定时工具quartz -->
     <dependency>
       <groupId>org.quartz-scheduler</groupId>

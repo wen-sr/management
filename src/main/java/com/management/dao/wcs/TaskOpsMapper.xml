@@ -31,7 +31,7 @@
     from TASK_OPS
     where SN = #{sn,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from TASK_OPS
     where SN = #{sn,jdbcType=VARCHAR}
   </delete>
@@ -222,4 +222,9 @@
       ORDERNBR = #{ordernbr,jdbcType=VARCHAR}
     where SN = #{sn,jdbcType=VARCHAR}
   </update>
+  <select id="selectByConnbr" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from TASK_OPS
+    where connbr = #{connbr}
+  </select>
 </mapper>

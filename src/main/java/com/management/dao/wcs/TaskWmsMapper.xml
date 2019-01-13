@@ -269,4 +269,9 @@
       STOCK_LOC = #{stockLoc,jdbcType=VARCHAR}
     where SN = #{sn,jdbcType=VARCHAR}
   </update>
+  <select id="selectByConnbr" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from TASK_WMS
+    where CONNBR = #{connbr}
+  </select>
 </mapper>

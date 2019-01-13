@@ -40,7 +40,7 @@ public class TaskSchedule {
         logger.info("<<<---------查询WMS系统报错信息的定时任务开始--------->>>");
         List<WmsErrorMsg>  wmsErrorMsgList = wmsErrorMsgService.selectAll();
         if(wmsErrorMsgList != null && wmsErrorMsgList.size() > 0){
-            List<UserInfo> userInfoList = findByroleId(Constant.Role.ROLE_ADMIN);
+            List<UserInfo> userInfoList = findByroleId(Constant.Role.ROLE_TECHNOLOGY);
             for(WmsErrorMsg wmsErrorMsg : wmsErrorMsgList){
                 for(UserInfo userInfo : userInfoList){
                     WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()

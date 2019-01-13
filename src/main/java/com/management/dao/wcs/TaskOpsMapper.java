@@ -2,6 +2,8 @@ package com.management.dao.wcs;
 
 import com.management.pojo.wcs.TaskOps;
 
+import java.util.List;
+
 public interface TaskOpsMapper {
     int deleteByPrimaryKey(String sn);
 
@@ -14,4 +16,6 @@ public interface TaskOpsMapper {
     int updateByPrimaryKeySelective(TaskOps record);
 
     int updateByPrimaryKey(TaskOps record);
+
+    List<TaskOps> selectByConnbr(String connbr);
 }

@@ -144,4 +144,9 @@
       where containercode = #{containercode}
       and sourcelayer = #{sourcelayer}
     </select>
+    <select id="selectByContainerCode" resultType="com.management.pojo.wcs.TaskCar">
+      select task_type taskType,status,ret
+      from task_car
+      where containercode =  #{containerCode}
+    </select>
 </mapper>

@@ -14,13 +14,14 @@ public class ExceptionHandle extends RuntimeException {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public ServerResponse catchException(Exception e){
+    public ServerResponse catchException(Exception e) {
 
-        if(e instanceof  MyException){
-            MyException myException = (MyException)e;
+        if (e instanceof MyException) {
+            MyException myException = (MyException) e;
+            logger.error("【======系统异常======】{}", e);
             return ServerResponse.createByErrorCodeMessage(myException.getCode(), myException.getMessage());
-        }else {
-            logger.error("【======系统异常======】{}",e);
+        } else {
+            logger.error("【======系统异常======】{}", e);
             return ServerResponse.createByErrorCodeMessage(-1, e.getMessage());
         }
 
