@@ -14,6 +14,10 @@ public class Constant {
     public static final String FTPURL                       = "ftp://141.168.1.137/img/";
     public static final String DESSOLT                      = "56ag5ahg;agjag/;arga;lg;kre";
     public static final String PERFORMANCE                  = "performance";
+    public static final String URL_PALLET                   = "http://141.168.1.108:8081/ncsmwcs/addCookie";
+    public static final String URL_JIAOCAI                  = "http://141.168.1.188:8080/jxxhwl/user_addCookie";
+    public static final String URL_JIAOCAI_2                = "http://www.jxlh56.com/jxxhwl/user_addCookie";
+    public static final String URL_CANG_GUAN                = "http://141.168.1.137:8022/addCookie.ashx";
 
 
     public interface Role{
@@ -21,6 +25,7 @@ public class Constant {
         int ROLE_ADMIN = 1;//管理员
         int ROLE_TECHNOLOGY = 2;
         int ROLE_DEVICE = 3;
+        int ROLE_INFOR = 24;
     }
     public interface LoginSystemFlag{
         String DEFAULT = "0";

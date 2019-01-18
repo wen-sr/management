@@ -6,6 +6,8 @@ import com.management.common.ServerResponse;
 import com.management.pojo.login.Login;
 import com.management.service.oa.IPerformanceService;
 import com.management.util.ImportExcelUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +28,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/performance")
 public class PerformanceController {
-
+    private final static Logger logger = LoggerFactory.getLogger(PerformanceController.class);
     @Autowired
     IPerformanceService performanceService;
 
@@ -42,8 +44,9 @@ public class PerformanceController {
     @RequestMapping(value = "/uploadPerformanceExcel", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public ServerResponse uploadExcel(HttpServletRequest request) throws Exception {
+
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        System.out.println("通过传统方式form表单提交方式导入excel文件！");
+        logger.info("通过传统方式form表单提交方式导入excel文件！");
 
         InputStream in = null;
         List<List<Object>> listob = null;
@@ -82,7 +85,7 @@ public class PerformanceController {
     public ServerResponse ajaxUploadExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 
-        System.out.println("通过 jquery.form.js 提供的ajax方式上传文件！");
+        logger.info("通过 jquery.form.js 提供的ajax方式上传文件！");
 
         InputStream in = null;
         List<List<Object>> listob = null;

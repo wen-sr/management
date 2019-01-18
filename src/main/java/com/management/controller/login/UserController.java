@@ -200,28 +200,21 @@ public class UserController extends BaseCotroller {
     private List<Map<String,String>> addCookies(Login user){
         List<Map<String,String>> targetCookies = new ArrayList<Map<String,String>>();
         // 向其他服务器发送增加cookie
-        Map<String,String> targetCookiea = new HashMap<String,String>();
-        String url_pallet = "http://141.168.1.108:8081/ncsmwcs/addCookie";
-        targetCookiea.put("targetUrl", url_pallet);
-        targetCookiea.put("cookieName", Constant.USERID);
-        targetCookiea.put("cookieValue", user.getId());
-        targetCookies.add(targetCookiea);
-
-        Map<String,String> targetCookieb = new HashMap<String,String>();
-        String url_jiaocai = "http://141.168.40.188:8070/jxxhwl/user_addCookie";
-        targetCookieb.put("targetUrl", url_jiaocai);
-        targetCookieb.put("cookieName", Constant.USERID);
-        targetCookieb.put("cookieValue", user.getId());
-        targetCookies.add(targetCookieb);
-
-        Map<String,String> targetCookiec = new HashMap<String,String>();
-        String url_jiaocai_139 = "http://141.168.1.137:8022/addCookie.ashx";
-        targetCookiec.put("targetUrl", url_jiaocai_139);
-        targetCookiec.put("cookieName", Constant.USERID);
-        targetCookiec.put("cookieValue", user.getId());
-        targetCookies.add(targetCookiec);
+        targetCookies.add(addWebSite(Constant.URL_PALLET, Constant.USERID, user.getId()));
+        targetCookies.add(addWebSite(Constant.URL_JIAOCAI, Constant.USERID, user.getId()));
+        targetCookies.add(addWebSite(Constant.URL_JIAOCAI_2, Constant.USERID, user.getId()));
+        targetCookies.add(addWebSite(Constant.URL_CANG_GUAN, Constant.USERID, user.getId()));
 
         return targetCookies;
     }
 
-}
+
+    private Map<String, String> addWebSite(String targetUrl, String cookieName, String cookieValue){
+        Map<String,String> targetCookie = new HashMap<String,String>();
+        targetCookie.put("targetUrl", targetUrl);
+        targetCookie.put("cookieName", cookieName);
+        targetCookie.put("cookieValue", cookieValue);
+        return targetCookie;
+
+    }
+ }
