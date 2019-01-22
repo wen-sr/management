@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jc.JiaoCaiStorerMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jc.JiaoCaiStorer" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="storerkey" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="shortname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="phone" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="address1" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="contact" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="orderBy" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="loc" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="sortBy" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, storerkey, shortname, type, phone, address1, contact, orderBy, loc, sortBy
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.management.pojo.jc.JiaoCaiStorerKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from JiaoCaiStorer
+    where id = #{id,jdbcType=INTEGER}
+      and storerkey = #{storerkey,jdbcType=VARCHAR}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiStorerKey" >
+    delete from JiaoCaiStorer
+    where id = #{id,jdbcType=INTEGER}
+      and storerkey = #{storerkey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiStorer" >
+    insert into JiaoCaiStorer (id, storerkey, shortname, 
+      type, phone, address1, 
+      contact, orderBy, loc, 
+      sortBy)
+    values (#{id,jdbcType=INTEGER}, #{storerkey,jdbcType=VARCHAR}, #{shortname,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{phone,jdbcType=NVARCHAR}, #{address1,jdbcType=NVARCHAR}, 
+      #{contact,jdbcType=NVARCHAR}, #{orderby,jdbcType=INTEGER}, #{loc,jdbcType=NVARCHAR}, 
+      #{sortby,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiStorer" >
+    insert into JiaoCaiStorer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storerkey != null" >
+        storerkey,
+      </if>
+      <if test="shortname != null" >
+        shortname,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="address1 != null" >
+        address1,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="orderby != null" >
+        orderBy,
+      </if>
+      <if test="loc != null" >
+        loc,
+      </if>
+      <if test="sortby != null" >
+        sortBy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="storerkey != null" >
+        #{storerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=NVARCHAR},
+      </if>
+      <if test="address1 != null" >
+        #{address1,jdbcType=NVARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderby != null" >
+        #{orderby,jdbcType=INTEGER},
+      </if>
+      <if test="loc != null" >
+        #{loc,jdbcType=NVARCHAR},
+      </if>
+      <if test="sortby != null" >
+        #{sortby,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jc.JiaoCaiStorer" >
+    update JiaoCaiStorer
+    <set >
+      <if test="shortname != null" >
+        shortname = #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=NVARCHAR},
+      </if>
+      <if test="address1 != null" >
+        address1 = #{address1,jdbcType=NVARCHAR},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderby != null" >
+        orderBy = #{orderby,jdbcType=INTEGER},
+      </if>
+      <if test="loc != null" >
+        loc = #{loc,jdbcType=NVARCHAR},
+      </if>
+      <if test="sortby != null" >
+        sortBy = #{sortby,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and storerkey = #{storerkey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiStorer" >
+    update JiaoCaiStorer
+    set shortname = #{shortname,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=NVARCHAR},
+      address1 = #{address1,jdbcType=NVARCHAR},
+      contact = #{contact,jdbcType=NVARCHAR},
+      orderBy = #{orderby,jdbcType=INTEGER},
+      loc = #{loc,jdbcType=NVARCHAR},
+      sortBy = #{sortby,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+      and storerkey = #{storerkey,jdbcType=VARCHAR}
+  </update>
+  <select id="findAll" resultType="com.management.pojo.jc.JiaoCaiStorer">
+    select <include refid="Base_Column_List" />
+    from JiaoCaiStorer
+    <where>
+      <if test="id != null and id != '' ">
+        and id = #{id,jdbcType=NVARCHAR}
+      </if>
+      <if test="type != null and type != '' " >
+        and type = #{type}
+      </if>
+      <if test="phone != null and phone != '' " >
+        and phone = #{phone}
+      </if>
+      <if test="shortname != null and shortname != '' " >
+        and shortname like CONCAT('%',#{shortname},'%')
+      </if>
+      <if test="address1 != null and address1 != '' " >
+        and address1 like CONCAT('%',#{address1},'%')
+      </if>
+      <if test="contact != null and contact != '' " >
+        and contact like CONCAT('%',#{contact},'%')
+      </if>
+    </where>
+    order by shortname
+  </select>
+</mapper>

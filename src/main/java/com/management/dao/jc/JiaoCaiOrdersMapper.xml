@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jc.JiaoCaiOrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jc.JiaoCaiOrders" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="issuenumber" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="subcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="orderqty" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="editwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="editdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="order" jdbcType="NVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, issuenumber, subcode, orderqty, addwho, adddate, editwho, editdate, order
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from JiaoCaiOrders
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from JiaoCaiOrders
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiOrders" >
+    insert into JiaoCaiOrders (id, issuenumber, subcode, 
+      orderqty, addwho, adddate, 
+      editwho, editdate, order
+      )
+    values (#{id,jdbcType=BIGINT}, #{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, 
+      #{orderqty,jdbcType=INTEGER}, #{addwho,jdbcType=NVARCHAR}, #{adddate,jdbcType=TIMESTAMP}, 
+      #{editwho,jdbcType=NVARCHAR}, #{editdate,jdbcType=TIMESTAMP}, #{order,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiOrders" >
+    insert into JiaoCaiOrders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="issuenumber != null" >
+        issuenumber,
+      </if>
+      <if test="subcode != null" >
+        subcode,
+      </if>
+      <if test="orderqty != null" >
+        orderqty,
+      </if>
+      <if test="addwho != null" >
+        addwho,
+      </if>
+      <if test="adddate != null" >
+        adddate,
+      </if>
+      <if test="editwho != null" >
+        editwho,
+      </if>
+      <if test="editdate != null" >
+        editdate,
+      </if>
+      <if test="order != null" >
+        order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="issuenumber != null" >
+        #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderqty != null" >
+        #{orderqty,jdbcType=INTEGER},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="order != null" >
+        #{order,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jc.JiaoCaiOrders" >
+    update JiaoCaiOrders
+    <set >
+      <if test="issuenumber != null" >
+        issuenumber = #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        subcode = #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderqty != null" >
+        orderqty = #{orderqty,jdbcType=INTEGER},
+      </if>
+      <if test="addwho != null" >
+        addwho = #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        editwho = #{editwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="editdate != null" >
+        editdate = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="order != null" >
+        order = #{order,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiOrders" >
+    update JiaoCaiOrders
+    set issuenumber = #{issuenumber,jdbcType=NVARCHAR},
+      subcode = #{subcode,jdbcType=NVARCHAR},
+      orderqty = #{orderqty,jdbcType=INTEGER},
+      addwho = #{addwho,jdbcType=NVARCHAR},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
+      editwho = #{editwho,jdbcType=NVARCHAR},
+      editdate = #{editdate,jdbcType=TIMESTAMP},
+      order = #{order,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

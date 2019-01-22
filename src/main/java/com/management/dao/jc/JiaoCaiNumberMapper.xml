@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jc.JiaoCaiNumberMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jc.JiaoCaiNumber" >
+    <constructor >
+      <arg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="batchno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="shipno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pickno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="computeno" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiNumber" >
+    insert into JiaoCaiNumber (id, batchno, shipno, 
+      pickno, computeno)
+    values (#{id,jdbcType=INTEGER}, #{batchno,jdbcType=VARCHAR}, #{shipno,jdbcType=VARCHAR}, 
+      #{pickno,jdbcType=VARCHAR}, #{computeno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiNumber" >
+    insert into JiaoCaiNumber
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="batchno != null" >
+        batchno,
+      </if>
+      <if test="shipno != null" >
+        shipno,
+      </if>
+      <if test="pickno != null" >
+        pickno,
+      </if>
+      <if test="computeno != null" >
+        computeno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="batchno != null" >
+        #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="shipno != null" >
+        #{shipno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickno != null" >
+        #{pickno,jdbcType=VARCHAR},
+      </if>
+      <if test="computeno != null" >
+        #{computeno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

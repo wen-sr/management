@@ -22,7 +22,7 @@
         <jdbcConnection
                 driverClass="${db.driverClassName}"
                 connectionURL="${db.url}"
-                userId="${db.username}"
+                organizationId="${db.username}"
                 password="${db.password}">
         </jdbcConnection>
 
@@ -38,7 +38,7 @@
             targetProject     指定在该项目下所在的路径
         -->
         <!--<javaModelGenerator targetPackage="com.mmall.pojo" targetProject=".\src\main\java">-->
-        <javaModelGenerator targetPackage="com.management.pojo.jc" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="com.management.device.pojo" targetProject="./src/main/java">
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
             <property name="enableSubPackages" value="false"/>
             <!-- 是否对model添加 构造函数 -->
@@ -51,7 +51,7 @@
 
         <!--mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
         <!--<sqlMapGenerator targetPackage="mappers" targetProject=".\src\main\resources">-->
-        <sqlMapGenerator targetPackage="com.management.dao.jc" targetProject="./src/main/java">
+        <sqlMapGenerator targetPackage="device" targetProject="./src/main/resources/mappers">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
@@ -63,23 +63,15 @@
 
         <!-- targetPackage：mapper接口dao生成的位置 -->
         <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.mmall.dao" targetProject=".\src\main\java">-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.management.dao.jc" targetProject="./src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.management.device.dao" targetProject="./src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 
 
-        <table tableName="JiaoCaiIssuenumber" domainObjectName="JiaoCaiIssuenumber" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="JiaoCaiCompute" domainObjectName="JiaoCaiCompute" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="JiaoCaiDistribute" domainObjectName="JiaoCaiDistribute" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="JiaoCaiInventory" domainObjectName="JiaoCaiInventory" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="JiaoCaiInventory_detail" domainObjectName="JiaoCaiInventory_detail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="JiaoCaiNumber" domainObjectName="JiaoCaiNumber" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="JiaoCaiOrders" domainObjectName="JiaoCaiOrders" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="JiaoCaiPack" domainObjectName="JiaoCaiPack" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="JiaoCaiReceipt" domainObjectName="JiaoCaiReceipt" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="JiaoCaiSku" domainObjectName="JiaoCaiSku" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="JiaoCaiStorer" domainObjectName="JiaoCaiStorer" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="DEVICE_TYPE" domainObjectName="DeviceType" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="DEVICE_USERS" domainObjectName="DeviceUsers" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="DEVICE_STATUS" domainObjectName="DeviceStatus" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
         <!-- geelynote mybatis插件的搭建 -->
     </context>

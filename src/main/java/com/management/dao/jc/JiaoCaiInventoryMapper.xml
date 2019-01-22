@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jc.JiaoCaiInventoryMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jc.JiaoCaiInventory" >
+    <constructor >
+      <idArg column="id" jdbcType="NUMERIC" javaType="java.lang.Long" />
+      <arg column="issuenumber" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="subcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="qtyreceipt" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="qtyallocated" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="qtyshipped" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="qtyfree" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, issuenumber, subcode, qtyreceipt, qtyallocated, qtyshipped, qtyfree
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from JiaoCaiInventory
+    where id = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from JiaoCaiInventory
+    where id = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiInventory" >
+    insert into JiaoCaiInventory (id, issuenumber, subcode, 
+      qtyreceipt, qtyallocated, qtyshipped, 
+      qtyfree)
+    values (#{id,jdbcType=NUMERIC}, #{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, 
+      #{qtyreceipt,jdbcType=INTEGER}, #{qtyallocated,jdbcType=INTEGER}, #{qtyshipped,jdbcType=INTEGER}, 
+      #{qtyfree,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiInventory" >
+    insert into JiaoCaiInventory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="issuenumber != null" >
+        issuenumber,
+      </if>
+      <if test="subcode != null" >
+        subcode,
+      </if>
+      <if test="qtyreceipt != null" >
+        qtyreceipt,
+      </if>
+      <if test="qtyallocated != null" >
+        qtyallocated,
+      </if>
+      <if test="qtyshipped != null" >
+        qtyshipped,
+      </if>
+      <if test="qtyfree != null" >
+        qtyfree,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="issuenumber != null" >
+        #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="qtyreceipt != null" >
+        #{qtyreceipt,jdbcType=INTEGER},
+      </if>
+      <if test="qtyallocated != null" >
+        #{qtyallocated,jdbcType=INTEGER},
+      </if>
+      <if test="qtyshipped != null" >
+        #{qtyshipped,jdbcType=INTEGER},
+      </if>
+      <if test="qtyfree != null" >
+        #{qtyfree,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jc.JiaoCaiInventory" >
+    update JiaoCaiInventory
+    <set >
+      <if test="issuenumber != null" >
+        issuenumber = #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        subcode = #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="qtyreceipt != null" >
+        qtyreceipt = #{qtyreceipt,jdbcType=INTEGER},
+      </if>
+      <if test="qtyallocated != null" >
+        qtyallocated = #{qtyallocated,jdbcType=INTEGER},
+      </if>
+      <if test="qtyshipped != null" >
+        qtyshipped = #{qtyshipped,jdbcType=INTEGER},
+      </if>
+      <if test="qtyfree != null" >
+        qtyfree = #{qtyfree,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiInventory" >
+    update JiaoCaiInventory
+    set issuenumber = #{issuenumber,jdbcType=NVARCHAR},
+      subcode = #{subcode,jdbcType=NVARCHAR},
+      qtyreceipt = #{qtyreceipt,jdbcType=INTEGER},
+      qtyallocated = #{qtyallocated,jdbcType=INTEGER},
+      qtyshipped = #{qtyshipped,jdbcType=INTEGER},
+      qtyfree = #{qtyfree,jdbcType=INTEGER}
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>

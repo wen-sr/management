@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jc.JiaoCaiReceiptMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jc.JiaoCaiReceipt" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="issuenumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="subcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pack" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="qtyreceipt" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="status" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="addwho" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="editwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="editdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="receiptno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="printPlant" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, issuenumber, subcode, pack, qtyreceipt, status, adddate, addwho, editwho, editdate, 
+    receiptno, printPlant
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from JiaoCaiReceipt
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from JiaoCaiReceipt
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiReceipt" >
+    insert into JiaoCaiReceipt (id, issuenumber, subcode, 
+      pack, qtyreceipt, status, 
+      adddate, addwho, editwho, 
+      editdate, receiptno, printPlant
+      )
+    values (#{id,jdbcType=INTEGER}, #{issuenumber,jdbcType=VARCHAR}, #{subcode,jdbcType=VARCHAR}, 
+      #{pack,jdbcType=INTEGER}, #{qtyreceipt,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=VARCHAR}, #{editwho,jdbcType=NVARCHAR}, 
+      #{editdate,jdbcType=TIMESTAMP}, #{receiptno,jdbcType=VARCHAR}, #{printplant,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiReceipt" >
+    insert into JiaoCaiReceipt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="issuenumber != null" >
+        issuenumber,
+      </if>
+      <if test="subcode != null" >
+        subcode,
+      </if>
+      <if test="pack != null" >
+        pack,
+      </if>
+      <if test="qtyreceipt != null" >
+        qtyreceipt,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="adddate != null" >
+        adddate,
+      </if>
+      <if test="addwho != null" >
+        addwho,
+      </if>
+      <if test="editwho != null" >
+        editwho,
+      </if>
+      <if test="editdate != null" >
+        editdate,
+      </if>
+      <if test="receiptno != null" >
+        receiptno,
+      </if>
+      <if test="printplant != null" >
+        printPlant,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="issuenumber != null" >
+        #{issuenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subcode != null" >
+        #{subcode,jdbcType=VARCHAR},
+      </if>
+      <if test="pack != null" >
+        #{pack,jdbcType=INTEGER},
+      </if>
+      <if test="qtyreceipt != null" >
+        #{qtyreceipt,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiptno != null" >
+        #{receiptno,jdbcType=VARCHAR},
+      </if>
+      <if test="printplant != null" >
+        #{printplant,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jc.JiaoCaiReceipt" >
+    update JiaoCaiReceipt
+    <set >
+      <if test="issuenumber != null" >
+        issuenumber = #{issuenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subcode != null" >
+        subcode = #{subcode,jdbcType=VARCHAR},
+      </if>
+      <if test="pack != null" >
+        pack = #{pack,jdbcType=INTEGER},
+      </if>
+      <if test="qtyreceipt != null" >
+        qtyreceipt = #{qtyreceipt,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        addwho = #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editwho != null" >
+        editwho = #{editwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="editdate != null" >
+        editdate = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiptno != null" >
+        receiptno = #{receiptno,jdbcType=VARCHAR},
+      </if>
+      <if test="printplant != null" >
+        printPlant = #{printplant,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiReceipt" >
+    update JiaoCaiReceipt
+    set issuenumber = #{issuenumber,jdbcType=VARCHAR},
+      subcode = #{subcode,jdbcType=VARCHAR},
+      pack = #{pack,jdbcType=INTEGER},
+      qtyreceipt = #{qtyreceipt,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
+      addwho = #{addwho,jdbcType=VARCHAR},
+      editwho = #{editwho,jdbcType=NVARCHAR},
+      editdate = #{editdate,jdbcType=TIMESTAMP},
+      receiptno = #{receiptno,jdbcType=VARCHAR},
+      printPlant = #{printplant,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

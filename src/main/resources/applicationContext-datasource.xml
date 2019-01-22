@@ -219,7 +219,16 @@
         <!-- 使用了一个 以上的 DataSource ,自动装配可能会失效,需要手工配置SqlSessionFactoryBean -->
         <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate" />
         <!--使用分号或逗号 作为分隔符设置多于一个的包路径-->
-        <property name="basePackage" value="com.management.dao.device;com.management.dao.info;com.management.dao.login;com.management.dao.oa;com.management.dao.prd1;com.management.dao.xhwl;com.management.dao.wechat;com.management.dao.wcs;"/>
+        <property name="basePackage" value="com.management.dao.device;
+                                            com.management.dao.info;
+                                            com.management.dao.login;
+                                            com.management.dao.oa;
+                                            com.management.dao.prd1;
+                                            com.management.dao.xhwl;
+                                            com.management.dao.wechat;
+                                            com.management.dao.wcs;
+                                            com.management.dao.jc;
+                                                            "/>
     </bean>
 
     <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->

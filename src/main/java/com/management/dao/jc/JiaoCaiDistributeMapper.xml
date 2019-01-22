@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jc.JiaoCaiDistributeMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jc.JiaoCaiDistribute" >
+    <constructor >
+      <idArg column="id" jdbcType="NUMERIC" javaType="java.lang.Long" />
+      <arg column="issuenumber" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="subcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="code" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="shortname" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="pack" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="oldpack" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="qtyallocated" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="status" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="caseqty" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="oddpack" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="odd" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="batchno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="shipno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pickno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="editwho" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="editdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="packwho" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="packdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="computeno" jdbcType="NVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, issuenumber, subcode, code, shortname, pack, oldpack, qtyallocated, status, adddate, 
+    addwho, caseqty, oddpack, odd, type, batchno, shipno, pickno, editwho, editdate, 
+    packwho, packdate, computeno
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from JiaoCaiDistribute
+    where id = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from JiaoCaiDistribute
+    where id = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiDistribute" >
+    insert into JiaoCaiDistribute (id, issuenumber, subcode, 
+      code, shortname, pack, 
+      oldpack, qtyallocated, status, 
+      adddate, addwho, caseqty, 
+      oddpack, odd, type, 
+      batchno, shipno, pickno, 
+      editwho, editdate, packwho, 
+      packdate, computeno)
+    values (#{id,jdbcType=NUMERIC}, #{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, 
+      #{code,jdbcType=NVARCHAR}, #{shortname,jdbcType=NVARCHAR}, #{pack,jdbcType=INTEGER}, 
+      #{oldpack,jdbcType=INTEGER}, #{qtyallocated,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=NVARCHAR}, #{caseqty,jdbcType=INTEGER}, 
+      #{oddpack,jdbcType=INTEGER}, #{odd,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{batchno,jdbcType=VARCHAR}, #{shipno,jdbcType=VARCHAR}, #{pickno,jdbcType=VARCHAR}, 
+      #{editwho,jdbcType=VARCHAR}, #{editdate,jdbcType=TIMESTAMP}, #{packwho,jdbcType=VARCHAR}, 
+      #{packdate,jdbcType=TIMESTAMP}, #{computeno,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiDistribute" >
+    insert into JiaoCaiDistribute
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="issuenumber != null" >
+        issuenumber,
+      </if>
+      <if test="subcode != null" >
+        subcode,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="shortname != null" >
+        shortname,
+      </if>
+      <if test="pack != null" >
+        pack,
+      </if>
+      <if test="oldpack != null" >
+        oldpack,
+      </if>
+      <if test="qtyallocated != null" >
+        qtyallocated,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="adddate != null" >
+        adddate,
+      </if>
+      <if test="addwho != null" >
+        addwho,
+      </if>
+      <if test="caseqty != null" >
+        caseqty,
+      </if>
+      <if test="oddpack != null" >
+        oddpack,
+      </if>
+      <if test="odd != null" >
+        odd,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="batchno != null" >
+        batchno,
+      </if>
+      <if test="shipno != null" >
+        shipno,
+      </if>
+      <if test="pickno != null" >
+        pickno,
+      </if>
+      <if test="editwho != null" >
+        editwho,
+      </if>
+      <if test="editdate != null" >
+        editdate,
+      </if>
+      <if test="packwho != null" >
+        packwho,
+      </if>
+      <if test="packdate != null" >
+        packdate,
+      </if>
+      <if test="computeno != null" >
+        computeno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="issuenumber != null" >
+        #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=NVARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=NVARCHAR},
+      </if>
+      <if test="pack != null" >
+        #{pack,jdbcType=INTEGER},
+      </if>
+      <if test="oldpack != null" >
+        #{oldpack,jdbcType=INTEGER},
+      </if>
+      <if test="qtyallocated != null" >
+        #{qtyallocated,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="caseqty != null" >
+        #{caseqty,jdbcType=INTEGER},
+      </if>
+      <if test="oddpack != null" >
+        #{oddpack,jdbcType=INTEGER},
+      </if>
+      <if test="odd != null" >
+        #{odd,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="batchno != null" >
+        #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="shipno != null" >
+        #{shipno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickno != null" >
+        #{pickno,jdbcType=VARCHAR},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packwho != null" >
+        #{packwho,jdbcType=VARCHAR},
+      </if>
+      <if test="packdate != null" >
+        #{packdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="computeno != null" >
+        #{computeno,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jc.JiaoCaiDistribute" >
+    update JiaoCaiDistribute
+    <set >
+      <if test="issuenumber != null" >
+        issuenumber = #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        subcode = #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=NVARCHAR},
+      </if>
+      <if test="shortname != null" >
+        shortname = #{shortname,jdbcType=NVARCHAR},
+      </if>
+      <if test="pack != null" >
+        pack = #{pack,jdbcType=INTEGER},
+      </if>
+      <if test="oldpack != null" >
+        oldpack = #{oldpack,jdbcType=INTEGER},
+      </if>
+      <if test="qtyallocated != null" >
+        qtyallocated = #{qtyallocated,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        addwho = #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="caseqty != null" >
+        caseqty = #{caseqty,jdbcType=INTEGER},
+      </if>
+      <if test="oddpack != null" >
+        oddpack = #{oddpack,jdbcType=INTEGER},
+      </if>
+      <if test="odd != null" >
+        odd = #{odd,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="batchno != null" >
+        batchno = #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="shipno != null" >
+        shipno = #{shipno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickno != null" >
+        pickno = #{pickno,jdbcType=VARCHAR},
+      </if>
+      <if test="editwho != null" >
+        editwho = #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        editdate = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packwho != null" >
+        packwho = #{packwho,jdbcType=VARCHAR},
+      </if>
+      <if test="packdate != null" >
+        packdate = #{packdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="computeno != null" >
+        computeno = #{computeno,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiDistribute" >
+    update JiaoCaiDistribute
+    set issuenumber = #{issuenumber,jdbcType=NVARCHAR},
+      subcode = #{subcode,jdbcType=NVARCHAR},
+      code = #{code,jdbcType=NVARCHAR},
+      shortname = #{shortname,jdbcType=NVARCHAR},
+      pack = #{pack,jdbcType=INTEGER},
+      oldpack = #{oldpack,jdbcType=INTEGER},
+      qtyallocated = #{qtyallocated,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
+      addwho = #{addwho,jdbcType=NVARCHAR},
+      caseqty = #{caseqty,jdbcType=INTEGER},
+      oddpack = #{oddpack,jdbcType=INTEGER},
+      odd = #{odd,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      batchno = #{batchno,jdbcType=VARCHAR},
+      shipno = #{shipno,jdbcType=VARCHAR},
+      pickno = #{pickno,jdbcType=VARCHAR},
+      editwho = #{editwho,jdbcType=VARCHAR},
+      editdate = #{editdate,jdbcType=TIMESTAMP},
+      packwho = #{packwho,jdbcType=VARCHAR},
+      packdate = #{packdate,jdbcType=TIMESTAMP},
+      computeno = #{computeno,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>

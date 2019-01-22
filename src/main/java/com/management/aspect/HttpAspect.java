@@ -1,15 +1,23 @@
 package com.management.aspect;
 
+import com.management.common.Constant;
+import com.management.common.RequestHolder;
+import com.management.pojo.login.Login;
+import com.management.service.login.UserService;
 import com.management.util.IpUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -22,6 +30,9 @@ public class HttpAspect {
 
     private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
 
+    @Autowired
+    UserService userService;
+
 
 //    @Pointcut("execution(public * com.management.controller.login.UserController.*(..))")
     @Pointcut("execution(public * com.management.controller..*.*(..))")
@@ -32,16 +43,28 @@ public class HttpAspect {
     public void doBefore(JoinPoint joinPoint) throws IOException {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        //HttpServletResponse response = attributes.getResponse();
-        //HttpSession session = request.getSession();
-        //Login login = (Login) session.getAttribute("login");
-        //if(login == null ){
-        //    response.sendRedirect("/login.html");
-        //    return;
-        //}
-        //
-        //RequestHolder.add(login);
-        //RequestHolder.add(request);
+        HttpServletResponse response = attributes.getResponse();
+        HttpSession session = request.getSession();
+        Login login = (Login) session.getAttribute(Constant.CURRENT_USER);
+        if(login == null ){
+            Cookie[] cookies = request.getCookies();
+            if(null!=cookies) {
+                for (Cookie cookie : cookies) {
+                    if(Constant.USERID.equals(cookie.getName()) && cookie.getValue() != ""){
+                        login = userService.getUserInfoById(cookie.getValue());
+                        login.setPwd("");
+                        session.setAttribute(Constant.CURRENT_USER, login);
+                        break;
+                    }
+                }
+                if(login == null ){
+                    response.sendRedirect("/login.html");
+                }
+            }
+            return;
+        }
+        RequestHolder.add(login);
+        RequestHolder.add(request);
 
         //url
         logger.info("url={}", request.getRequestURL());
