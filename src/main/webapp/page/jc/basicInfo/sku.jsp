@@ -40,15 +40,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th data-options="field:'issuenumber',width:50">期号</th>
 					<th data-options="field:'subcode',width:80">征订代码</th>
 					<th data-options="field:'barcode',width:80">条码</th>
-					<th data-options="field:'descr',width:80">书名</th>
-					<th data-options="field:'price',width:80">定价</th>
-					<th data-options="field:'pack',width:80">捆扎</th>
-					<th data-options="field:'bundle',width:80">每包捆数</th>
+					<th data-options="field:'descr',width:100">书名</th>
+					<th data-options="field:'price',width:30">定价</th>
+					<th data-options="field:'pack',width:30">捆扎</th>
+					<th data-options="field:'bundle',width:30">每包捆数</th>
 					<th data-options="field:'publisher',width:80">出版社代码</th>
 					<th data-options="field:'shortname',width:80">出版社</th>
-					<th data-options="field:'addwho',width:80">添加人</th>
+					<th data-options="field:'addwho',width:50">添加人</th>
 					<th data-options="field:'adddate',width:80">添加时间</th>
-					<th data-options="field:'editwho',width:80">修订人</th>
+					<th data-options="field:'editwho',width:50">修订人</th>
 					<th data-options="field:'editdate',width:80">修订时间</th>
 				</tr>
 			</thead>
@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="hidden" id="oldId">
 				<table border="0px" align="center" cellpadding='2'width="100%">
 				<tr>
-					<td>期号:</td><td><select class="easyui-combobox" id="issuenumber1" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" ></td>
+					<td>期号:</td><td><select class="easyui-combobox" id="issuenumber1" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" ></select></td>
 					<td>征订代码：</td><td><input class="easyui-textbox" type="text" id="subcode1"  data-options="readonly:true"/></td>
 				</tr>
 				<tr>
@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>书名：</td><td><input class="easyui-textbox" type="text" id="descr1" /></td>
 				</tr>
 				<tr>
-					<td>出版社：</td><td><select class="easyui-combobox" id="publisher1" data-options="url:'/management/jc/storer/tips',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',readonly:true" ></select></td>
+					<td>出版社：</td><td><select class="easyui-combobox" id="publisher1" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',readonly:true" ></select></td>
 					<td>定价：</td><td><input class="easyui-textbox" type="text" id="price1" /></td>
 				</tr>
 				<tr>
@@ -107,10 +107,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			style="width: 700px; height: 400px; padding: 0px;">
 			<form align="center" style="text-align:center;margin: 10px;line-height: 41px;">
 				<h2>添加捆扎信息</h2>
-				<input type="hidden" id="oldId">
+				<input type="hidden" id="oldId_2">
 				<table border="0px" align="center" cellpadding='2'width="100%">
 				<tr>
-					<td>期号:</td><td><select class="easyui-combobox" id="addPack_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" ></td>
+					<td>期号:</td><td><select class="easyui-combobox" id="addPack_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true,width:155" ></select></td>
 					<td>征订代码：</td><td><input class="easyui-textbox" type="text" id="addPack_subcode"  data-options="readonly:true"/></td>
 				</tr>
 				<tr>
@@ -134,13 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			style="width: 700px; height: 400px; padding: 0px;">
 			<form align="center" style="text-align:center;margin: 10px;line-height: 41px;">
 				<h2>查看捆扎信息</h2>
-				<table  border="0px" align="center" cellpadding='2'width="100%" class="showPackTab">
-					<tr>
-						<th data-options="field:'id',width:80,checkbox:true">编号</th>
-						<th data-options="field:'issuenumber',width:50">期号</th>
-						<th data-options="field:'subcode',width:80">征订代码</th>
-						<th data-options="field:'pack',width:80">捆扎</th>
-					</tr>
+				<table id = 'showPackTab' border="0px" align="center" cellpadding='2'width="100%" class="showPackTab">
 				</table>
 			</form>
 	</div>
@@ -154,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<h2>修改捆扎信息</h2>
 				<table id="formtable_edit" border="0px" align="center" cellpadding='2'width="100%" class="updatePackTab">
 					<tr>
-						<td>期号:</td><td><select class="easyui-combobox" id="updatepack_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" ></td>
+						<td>期号:</td><td><select class="easyui-combobox" id="updatepack_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true,width:155" ></select></td>
 						<td>征订代码：</td><td><input class="easyui-textbox" type="text" id="updatepack_subcode" data-options="readonly:true" /></td>
 					</tr>
 					<tr>
@@ -173,7 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<h2>查询图书资料</h2>
 			<table id="formtable" border="0px" align="center" cellpadding='2'width="100%">
 				<tr>
-					<td>期号:</td><td><select class="easyui-combobox" id="query_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200'" ></td>
+					<td>期号:</td><td><select class="easyui-combobox" id="query_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200'" ></select></td>
 					<td>征订代码：</td><td><input class="easyui-textbox" type="text" id="query_subcode" /></td>
 				</tr>
 				<tr>
@@ -181,7 +175,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>书名：</td><td><input class="easyui-textbox" type="text" id="query_descr" /></td>
 				</tr>
 				<tr>
-					<td>出版社：</td><td><select class="easyui-combobox" id="query_publisher" data-options="url:'/management/jc/storer/tips',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200'" ></select></td>
+					<td>出版社：</td><td><select class="easyui-combobox" id="query_publisher" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200'" ></select></td>
 					<td>添加人：</td><td><input class="easyui-textbox" type="text" id="query_addwho" /></td>
 				</tr>
 				<tr>
@@ -214,7 +208,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>书名：</td><td><input class="easyui-textbox" type="text" id="descr" /></td>
 				</tr>
 				<tr>
-					<td>出版社：</td><td><select class="easyui-combobox" id="publisher" data-options="url:'/management/jc/storer/tips',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',width:155" ></select></td>
+					<td>出版社：</td><td><select class="easyui-combobox" id="publisher" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',width:155" ></select></td>
 					<td>定价：</td><td><input class="easyui-textbox" type="text" id="price" /></td>
 				</tr>
 				<tr>

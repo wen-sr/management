@@ -158,6 +158,9 @@
       <if test="id != null and id != '' ">
         and id = #{id,jdbcType=NVARCHAR}
       </if>
+      <if test="storerkey != null and storerkey != '' " >
+        and type = #{storerkey}
+      </if>
       <if test="type != null and type != '' " >
         and type = #{type}
       </if>
@@ -165,15 +168,23 @@
         and phone = #{phone}
       </if>
       <if test="shortname != null and shortname != '' " >
-        and shortname like CONCAT('%',#{shortname},'%')
+        <bind name="pattern" value="'%' + shortname + '%'" />
+        AND shortname LIKE #{pattern}
       </if>
       <if test="address1 != null and address1 != '' " >
-        and address1 like CONCAT('%',#{address1},'%')
+        <bind name="pattern" value="'%' + address1 + '%'" />
+        AND address1 LIKE #{pattern}
       </if>
       <if test="contact != null and contact != '' " >
-        and contact like CONCAT('%',#{contact},'%')
+        <bind name="pattern" value="'%' + contact + '%'" />
+        AND contact LIKE #{pattern}
       </if>
     </where>
     order by shortname
+  </select>
+  <select id="selectByStorerKey" resultType="com.management.pojo.jc.JiaoCaiStorer">
+    select <include refid="Base_Column_List"/>
+    from JiaoCaiStorer
+    where storerkey = #{storerkey}
   </select>
 </mapper>

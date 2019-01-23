@@ -17,6 +17,8 @@ public class JiaoCaiSkuVo extends JiaoCaiSkuKey {
 
     private String publisher;
 
+    private String shortname;
+
     private String addwho;
 
     private String editwho;
@@ -26,6 +28,14 @@ public class JiaoCaiSkuVo extends JiaoCaiSkuKey {
     private String editdate;
 
     private Integer bundle;
+
+    public String getShortname() {
+        return shortname;
+    }
+
+    public void setShortname(String shortname) {
+        this.shortname = shortname;
+    }
 
     public String getAdddate() {
         return adddate;

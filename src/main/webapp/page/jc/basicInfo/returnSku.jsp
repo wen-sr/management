@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -27,14 +26,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jc/base.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jc/returnSku.js"></script>
+	<script type="text/javascript" src="returnSku.js"></script>
   </head>
   
   <body>
-  	<input type="hidden" value="<s:property value='#session.id'/>" id="userid"/>
-	<input type="hidden" value="<s:property value='#session.name'/>" id="username"/>
     <div align="center">
-		<h2 style="color:#0078CA">教材退货图书信息维护&nbsp;<span style="font-size:20px;color:#0078CA"><s:property value='#session.name'/></span></h2>
+		<h2 style="color:#0078CA">教材退货图书信息维护&nbsp;</h2>
 	</div>
 	
     <div id="w-addInfo" class="easyui-window" title="添加图书资料"

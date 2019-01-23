@@ -75,14 +75,18 @@ function addInfo(){
  */
 function removeInfo(){
 	var row = $('#data').datagrid('getSelected');
+	var formData = {
+		'issuenumber' 	: row.issuenumber,
+		'subcode'		: row.subcode
+	};
 	if(row){
 		$.ajax({
-			url:'jc/sku_delete.action',
-			data:'id=' + row.id,
+			url:'/management/jc/sku/delete',
+			data: formData,
 			dataType:'json',
 			success:function(data){
 				if(data){
-					$.messager.alert("操作提示",data,"info");
+					$.messager.alert("操作提示",data.msg,"info");
 					$("#data").datagrid('reload');
 				}
 			},
@@ -160,11 +164,6 @@ function editInfo(){
 	if(pack == null || pack == ""){
 		pack = 9999;
 	}
-	var addwho = $.trim($("#addwho1").val());
-	if(addwho == null || addwho == ""){
-		$.messager.alert("操作提示","修改人不能为空！","error");
-		return;
-	}
 	var publisher = $.trim($("#publisher1").combobox('getValue'));
 	if(publisher == null || publisher == "" ){
 		$.messager.alert("操作提示","出版社不能为空！","error");
@@ -193,16 +192,17 @@ function editInfo(){
 		$.messager.alert("操作提示","每包捆数只能输入数字！","error");
 		return;
 	}
-	var param = "id=" + id + "&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode + "&descr=" + descr + "&price=" + price + "&pack=" + pack+ "&publisher=" + publisher + "&addwho=" + addwho + "&editwho=" + addwho +"&bundle=" + bundle ;      
+	var param = "id=" + id + "&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode + "&descr=" + descr + "&price=" + price + "&pack=" + pack+ "&publisher=" + publisher +"&bundle=" + bundle ;
 	$.ajax({
 		type:"post",
-		url:"jc/sku_update.action",
+		url:"/management/jc/sku/update",
 		data:param,
 		dataType:'json',
 		success:function(data){
-			$.messager.alert("操作提示",data,"info");
-			$("#w-editInfo").window("close");
-			loadData();
+			$.messager.alert("操作提示",data.msg,"info",function () {
+				$("#w-editInfo").window("close");
+				loadData();
+			});
 		},
 		error:function(){
 			$.messager.alert("操作提示","数据错误，联系管理员！","error");
@@ -244,19 +244,19 @@ function addPackInfo(){
 	var issuenumber = $("#addPack_issuenumber").combobox("getValue");
 	var subcode = $("#addPack_subcode").textbox("getValue");
 	var pack = $("#addPack_pack").textbox("getValue");
-	var addwho = $("#addPack_addwho").textbox("getValue");
 	if(pack == ''){
 		$.messager.alert("操作提示","捆扎数不能为空！","error");
 		return;
 	}
 	$.ajax({
 		type:'post',
-		url:'jc/pack_save.action',
-		data:"issuenumber=" + issuenumber + "&subcode=" + subcode + "&pack=" + pack + "&addwho=" + addwho,
+		url:'/management/jc/pack/add',
+		data:"issuenumber=" + issuenumber + "&subcode=" + subcode + "&pack=" + pack,
 		dataType:'json',
 		success:function(data){
-			$.messager.alert("操作提示",data,"info");
-			$("#w-addPackInfo").window("close");
+			$.messager.alert("操作提示",data.msg,"info",function () {
+				$("#w-addPackInfo").window("close");
+			});
 		},
 		error:function(){
 			$.messager.alert("操作提示","数据错误，联系管理员！","error");
@@ -268,11 +268,12 @@ function addPackInfo(){
  * 查询捆扎信息
  */
 function queryPack(){
+	$("#w-showPackInfo").window("open");
 	var row = $('#data').datagrid('getSelected');
 	var issuenumber = row.issuenumber;
 	var subcode = row.subcode;
-	$(".showPackTab").datagrid({
-		url:'jc/pack_query.action?issuenumber=' + issuenumber + "&subcode=" + subcode,
+	$("#showPackTab").datagrid({
+		url:'/management/jc/pack/info?issuenumber=' + issuenumber + "&subcode=" + subcode,
 		height:'auto',	
 		fitColumns: true,
 		striped:true,
@@ -299,7 +300,7 @@ function queryPack(){
 		    width:30
 		}]]
 	});
-	$("#w-showPackInfo").window("open");
+
 }
 /**
  * 删除捆扎
@@ -308,11 +309,11 @@ function removePack(){
 	var row = $('.showPackTab').datagrid('getSelected');
 	$.ajax({
 		type:'post',
-		url:'jc/pack_delete.action',
+		url:'/management/jc/pack/delete',
 		data:'issuenumber=' + row.issuenumber + '&subcode=' + row.subcode + '&pack=' + row.pack,
 		dataType:'json',
 		success:function(data){
-			$.messager.alert("操作提示",data,"info");
+			$.messager.alert("操作提示",data.msg,"info");
 			$(".showPackTab").datagrid('reload');
 		},
 		error:function(){
@@ -372,22 +373,23 @@ function loadInfoByBarcode(){
  */
 function updatePackInfo(){
 	var id = $("#editpack_id").val();
-	var oldpack = $("#oldpack").val();
-	var issuenumber = $("#updatepack_issuenumber").textbox('getValue');
-	var subcode =$("#updatepack_subcode").textbox('getValue');
 	var pack =$("#updatepack_pack").textbox('getValue');
 	var reg = new RegExp("^[0-9]*$");
 	if(!reg.test(pack)){
 		$.messager.alert("操作提示","捆扎只能输入数字！","error");
 		return;
 	}
+	var formData = {
+		"id" 	: id,
+		"pack"	: pack
+	};
 	$.ajax({
 		type:'post',
-		url:'jc/pack_updatePack.action',
-		data:'issuenumber=' + issuenumber + '&subcode=' + subcode + '&pack=' + pack + "&id=" +id + "&oldpack=" + oldpack,
+		url:'/management/jc/pack/update',
+		data: formData,
 		dataType:'json',
 		success:function(data){
-			$.messager.alert("操作提示",data,"info");
+			$.messager.alert("操作提示",data.msg,"info");
 			$("#w_updatePackInfo").window('close');
 			$("#data").datagrid('reload');
 			$(".showPackTab").datagrid('reload');

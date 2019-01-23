@@ -2,15 +2,21 @@ package com.management.service.jc.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.management.common.RequestHolder;
 import com.management.common.ServerResponse;
+import com.management.dao.jc.JiaoCaiPackMapper;
 import com.management.dao.jc.JiaoCaiSkuMapper;
+import com.management.dao.jc.JiaoCaiStorerMapper;
 import com.management.dao.login.LoginMapper;
+import com.management.pojo.jc.JiaoCaiPack;
 import com.management.pojo.jc.JiaoCaiSku;
+import com.management.pojo.jc.JiaoCaiStorer;
 import com.management.pojo.login.Login;
 import com.management.service.jc.IJiaoCaiSkuService;
 import com.management.util.DataSourceContextHolder;
 import com.management.util.DateTimeUtil;
 import com.management.vo.jc.JiaoCaiSkuVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +40,12 @@ public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
     @Autowired
     LoginMapper loginMapper;
 
+    @Autowired
+    JiaoCaiStorerMapper jiaoCaiStorerMapper;
+
+    @Autowired
+    JiaoCaiPackMapper jiaoCaiPackMapper;
+
     @Override
     public ServerResponse findAll(Integer pageSize, Integer pageNum, JiaoCaiSkuVo jiaoCaiSku) {
 
@@ -53,15 +65,51 @@ public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
     @Override
     public ServerResponse add(JiaoCaiSku jiaoCaiSku) {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
-
+        jiaoCaiSku.setAddwho(RequestHolder.getCurrentUser().getId());
+        jiaoCaiSku.setEditwho(RequestHolder.getCurrentUser().getId());
         int i = jiaoCaiSkuMapper.insertSelective(jiaoCaiSku);
         if(i > 0){
+            if(jiaoCaiSku.getPack() > 0) {
+                JiaoCaiPack jiaoCaiPack = new JiaoCaiPack();
+                jiaoCaiPack.setIssuenumber(jiaoCaiSku.getIssuenumber());
+                jiaoCaiPack.setSubcode(jiaoCaiSku.getSubcode());
+                jiaoCaiPack.setPack(jiaoCaiSku.getPack().intValue());
+                jiaoCaiPackMapper.insertSelective(jiaoCaiPack);
+            }
             return ServerResponse.createBySuccessMsg("添加资料成功");
         }else {
             return ServerResponse.createByErrorMessage("添加资料失败，请联系管理员");
         }
     }
 
+    @Override
+    public ServerResponse update(JiaoCaiSku jiaoCaiSku) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        if(StringUtils.isBlank(jiaoCaiSku.getIssuenumber()) || StringUtils.isBlank(jiaoCaiSku.getSubcode())){
+            return ServerResponse.createByErrorMessage("未获得期号和征订代码无法修改资料，请联系管理员");
+        }
+        jiaoCaiSku.setEditwho(RequestHolder.getCurrentUser().getId());
+        int i = jiaoCaiSkuMapper.updateByPrimaryKeySelective(jiaoCaiSku);
+        if(i > 0 ){
+            return ServerResponse.createBySuccessMsg("修改成功");
+        }else {
+            return ServerResponse.createByErrorMessage("修改失败");
+        }
+    }
+
+    @Override
+    public ServerResponse delete(JiaoCaiSku jiaoCaiSku) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        if(StringUtils.isBlank(jiaoCaiSku.getIssuenumber()) || StringUtils.isBlank(jiaoCaiSku.getSubcode())){
+            return ServerResponse.createByErrorMessage("未获得期号和征订代码无法删除资料，请联系管理员");
+        }
+        int i = jiaoCaiSkuMapper.deleteByPrimaryKey(jiaoCaiSku);
+        if(i > 0 ){
+            return ServerResponse.createBySuccessMsg("删除成功");
+        }else {
+            return ServerResponse.createByErrorMessage("删除失败");
+        }
+    }
 
 
     private List<JiaoCaiSkuVo> parseToJiaoCaiSkuVo(List<JiaoCaiSku> jiaoCaiSkuList) {
@@ -80,7 +128,7 @@ public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
                 jiaoCaiSkuVo.setAddwho(user.getName());
             }
             if(user2 != null && user2.getName() != null){
-                jiaoCaiSkuVo.setEditwho(user.getName());
+                jiaoCaiSkuVo.setEditwho(user2.getName());
             }
             jiaoCaiSkuVo.setBarcode(d.getBarcode());
             jiaoCaiSkuVo.setBundle(d.getBundle());
@@ -89,6 +137,10 @@ public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
             jiaoCaiSkuVo.setPack(d.getPack());
             jiaoCaiSkuVo.setPrice(d.getPrice());
             jiaoCaiSkuVo.setPublisher(d.getPublisher());
+
+            JiaoCaiStorer jiaoCaiStorer = jiaoCaiStorerMapper.selectByStorerKey(d.getPublisher());
+            jiaoCaiSkuVo.setShortname(jiaoCaiStorer.getShortname());
+
             jiaoCaiSkuVo.setIssuenumber(d.getIssuenumber());
             jiaoCaiSkuVo.setSubcode(d.getSubcode());
             jiaoCaiSkuVoList.add(jiaoCaiSkuVo);

@@ -43,7 +43,7 @@
     values (#{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, #{id,jdbcType=NUMERIC}, 
       #{barcode,jdbcType=NVARCHAR}, #{descr,jdbcType=NVARCHAR}, #{price,jdbcType=NUMERIC}, 
       #{pack,jdbcType=NUMERIC}, #{publisher,jdbcType=NVARCHAR}, #{addwho,jdbcType=NVARCHAR}, 
-      #{editwho,jdbcType=NVARCHAR}, #{adddate,jdbcType=TIMESTAMP}, #{editdate,jdbcType=TIMESTAMP}, 
+      #{editwho,jdbcType=NVARCHAR}, getdate(), getdate(),
       #{bundle,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiSku" >
@@ -79,10 +79,10 @@
       <if test="editwho != null" >
         editwho,
       </if>
-      <if test="adddate != null" >
+      <if test="1 == 1" >
         adddate,
       </if>
-      <if test="editdate != null" >
+      <if test="1 == 1" >
         editdate,
       </if>
       <if test="bundle != null" >
@@ -120,11 +120,11 @@
       <if test="editwho != null" >
         #{editwho,jdbcType=NVARCHAR},
       </if>
-      <if test="adddate != null" >
-        #{adddate,jdbcType=TIMESTAMP},
+      <if test="1 == 1" >
+        getdate(),
       </if>
-      <if test="editdate != null" >
-        #{editdate,jdbcType=TIMESTAMP},
+      <if test="1 == 1" >
+        getdate(),
       </if>
       <if test="bundle != null" >
         #{bundle,jdbcType=INTEGER},
@@ -134,9 +134,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jc.JiaoCaiSku" >
     update JiaoCaiSku
     <set >
-      <if test="id != null" >
-        id = #{id,jdbcType=NUMERIC},
-      </if>
       <if test="barcode != null" >
         barcode = #{barcode,jdbcType=NVARCHAR},
       </if>
@@ -161,8 +158,8 @@
       <if test="adddate != null" >
         adddate = #{adddate,jdbcType=TIMESTAMP},
       </if>
-      <if test="editdate != null" >
-        editdate = #{editdate,jdbcType=TIMESTAMP},
+      <if test="1 == 1" >
+        editdate = getdate(),
       </if>
       <if test="bundle != null" >
         bundle = #{bundle,jdbcType=INTEGER},
@@ -173,7 +170,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiSku" >
     update JiaoCaiSku
-    set id = #{id,jdbcType=NUMERIC},
+    set
       barcode = #{barcode,jdbcType=NVARCHAR},
       descr = #{descr,jdbcType=NVARCHAR},
       price = #{price,jdbcType=NUMERIC},
@@ -182,7 +179,7 @@
       addwho = #{addwho,jdbcType=NVARCHAR},
       editwho = #{editwho,jdbcType=NVARCHAR},
       adddate = #{adddate,jdbcType=TIMESTAMP},
-      editdate = #{editdate,jdbcType=TIMESTAMP},
+      editdate = getdate(),
       bundle = #{bundle,jdbcType=INTEGER}
     where issuenumber = #{issuenumber,jdbcType=NVARCHAR}
       and subcode = #{subcode,jdbcType=NVARCHAR}
@@ -202,7 +199,8 @@
         and barcode = #{barcode}
       </if>
       <if test="descr != null and descr != '' " >
-        and descr = #{descr}
+        <bind name="descr" value="'%' + descr + '%'" />
+        AND descr LIKE #{descr}
       </if>
       <if test="subcode != null and subcode != '' " >
         and subcode = #{subcode}
@@ -214,7 +212,8 @@
         and addwho = #{addwho}
       </if>
       <if test="adddate != null and adddate != '' " >
-        and adddate = #{adddate}
+        <bind name="adddate" value="'%' + adddate + '%'" />
+        and convert(varchar(20),adddate,20) like #{adddate}
       </if>
     </where>
   order by adddate desc

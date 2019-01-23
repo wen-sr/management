@@ -14,4 +14,8 @@ public interface IJiaoCaiSkuService {
     ServerResponse findAll(Integer pageSize, Integer pageNum, JiaoCaiSkuVo jiaoCaiSku);
 
     ServerResponse add(JiaoCaiSku jiaoCaiSku);
+
+    ServerResponse update(JiaoCaiSku jiaoCaiSku);
+
+    ServerResponse delete(JiaoCaiSku jiaoCaiSku);
 }

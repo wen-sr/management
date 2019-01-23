@@ -2,6 +2,8 @@ package com.management.dao.jc;
 
 import com.management.pojo.jc.JiaoCaiOrders;
 
+import java.util.List;
+
 public interface JiaoCaiOrdersMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface JiaoCaiOrdersMapper {
     int updateByPrimaryKeySelective(JiaoCaiOrders record);
 
     int updateByPrimaryKey(JiaoCaiOrders record);
+
+    List<JiaoCaiOrders> findAll(JiaoCaiOrders jiaoCaiOrders);
 }

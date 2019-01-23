@@ -3,6 +3,8 @@ package com.management.dao.jc;
 import com.management.pojo.jc.JiaoCaiPack;
 import com.management.pojo.jc.JiaoCaiPackKey;
 
+import java.util.List;
+
 public interface JiaoCaiPackMapper {
     int deleteByPrimaryKey(JiaoCaiPackKey key);
 
@@ -15,4 +17,8 @@ public interface JiaoCaiPackMapper {
     int updateByPrimaryKeySelective(JiaoCaiPack record);
 
     int updateByPrimaryKey(JiaoCaiPack record);
+
+    List<JiaoCaiPack> findAll(JiaoCaiPack jiaoCaiPack);
+
+    int updateById(JiaoCaiPack jiaoCaiPack);
 }

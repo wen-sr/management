@@ -36,4 +36,14 @@ public class JiaoCaiSkuController {
         return  jiaoCaiSkuService.add(jiaoCaiSku);
     }
 
+    @RequestMapping("/update")
+    public ServerResponse update(JiaoCaiSku jiaoCaiSku) {
+        return jiaoCaiSkuService.update(jiaoCaiSku);
+    }
+
+    @RequestMapping("/delete")
+    public ServerResponse delete(JiaoCaiSku jiaoCaiSku){
+        return jiaoCaiSkuService.delete(jiaoCaiSku);
+    }
+
 }

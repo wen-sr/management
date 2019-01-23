@@ -20,7 +20,7 @@
       and pack = #{pack,jdbcType=INTEGER}
       and issuenumber = #{issuenumber,jdbcType=NVARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiPackKey" >
+    <delete id="deleteByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiPackKey" >
     delete from JiaoCaiPack
     where subcode = #{subcode,jdbcType=NVARCHAR}
       and pack = #{pack,jdbcType=INTEGER}
@@ -81,4 +81,15 @@
       and pack = #{pack,jdbcType=INTEGER}
       and issuenumber = #{issuenumber,jdbcType=NVARCHAR}
   </update>
+  <update id="updateById">
+    update JiaoCaiPack
+    set pack = #{pack}
+    where id = #{id}
+  </update>
+  <select id="findAll" resultType="com.management.pojo.jc.JiaoCaiPack">
+    select <include refid="Base_Column_List"/>
+    from JiaoCaiPack
+    where issuenumber = #{issuenumber}
+    and subcode = #{subcode}
+  </select>
 </mapper>

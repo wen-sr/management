@@ -19,4 +19,6 @@ public interface JiaoCaiStorerMapper {
     int updateByPrimaryKey(JiaoCaiStorer record);
 
     List<JiaoCaiStorer> findAll(JiaoCaiStorer jiaoCaiStorer);
+
+    JiaoCaiStorer selectByStorerKey(String publisher);
 }

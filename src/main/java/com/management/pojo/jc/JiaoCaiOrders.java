@@ -19,9 +19,9 @@ public class JiaoCaiOrders {
 
     private Date editdate;
 
-    private String order;
+    private String ordernumber;
 
-    public JiaoCaiOrders(Long id, String issuenumber, String subcode, Integer orderqty, String addwho, Date adddate, String editwho, Date editdate, String order) {
+    public JiaoCaiOrders(Long id, String issuenumber, String subcode, Integer orderqty, String addwho, Date adddate, String editwho, Date editdate, String ordernumber) {
         this.id = id;
         this.issuenumber = issuenumber;
         this.subcode = subcode;
@@ -30,7 +30,7 @@ public class JiaoCaiOrders {
         this.adddate = adddate;
         this.editwho = editwho;
         this.editdate = editdate;
-        this.order = order;
+        this.ordernumber = ordernumber;
     }
 
     public JiaoCaiOrders() {
@@ -101,11 +101,11 @@ public class JiaoCaiOrders {
         this.editdate = editdate;
     }
 
-    public String getOrder() {
-        return order;
+    public String getOrdernumber() {
+        return ordernumber;
     }
 
-    public void setOrder(String order) {
-        this.order = order == null ? null : order.trim();
+    public void setOrdernumber(String ordernumber) {
+        this.ordernumber = ordernumber == null ? null : ordernumber.trim();
     }
 }
