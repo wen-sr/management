@@ -20,10 +20,10 @@
 
         <!--jdbc的数据库连接 -->
         <jdbcConnection
-                driverClass="${db.driverClassName}"
-                connectionURL="${db.url}"
-                userId="${db.username}"
-                password="${db.password}">
+                driverClass="${wms.driverClassName}"
+                connectionURL="${wms.url}"
+                userId="${wms.username}"
+                password="${wms.password}">
         </jdbcConnection>
 
 
@@ -76,7 +76,8 @@
         <!--<table tableName="JiaoCaiInventory_detail" domainObjectName="JiaoCaiInventory_detail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiNumber" domainObjectName="JiaoCaiNumber" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiOrders" domainObjectName="JiaoCaiOrders" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
-        <table tableName="allowDistribution" domainObjectName="AllowDistribution" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <!--<table tableName="allowDistribution" domainObjectName="AllowDistribution" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <table tableName="allowReceipt" domainObjectName="AllowReceipt" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <!--<table tableName="JiaoCaiPack" domainObjectName="JiaoCaiPack" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiReceipt" domainObjectName="JiaoCaiReceipt" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiSku" domainObjectName="JiaoCaiSku" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jc.AllowReceiptMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jc.AllowReceipt" >
+    <constructor >
+      <arg column="issuenumber" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="subcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="barcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="descr" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="publisher" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="shortname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="orderqty" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="qtyreceipt" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="qty" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.jc.AllowReceipt" >
+    insert into allowReceipt (issuenumber, subcode, barcode, 
+      descr, price, publisher, 
+      shortname, orderqty, qtyreceipt, 
+      qty)
+    values (#{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, #{barcode,jdbcType=NVARCHAR}, 
+      #{descr,jdbcType=NVARCHAR}, #{price,jdbcType=NUMERIC}, #{publisher,jdbcType=NVARCHAR}, 
+      #{shortname,jdbcType=VARCHAR}, #{orderqty,jdbcType=INTEGER}, #{qtyreceipt,jdbcType=INTEGER}, 
+      #{qty,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jc.AllowReceipt" >
+    insert into allowReceipt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="issuenumber != null" >
+        issuenumber,
+      </if>
+      <if test="subcode != null" >
+        subcode,
+      </if>
+      <if test="barcode != null" >
+        barcode,
+      </if>
+      <if test="descr != null" >
+        descr,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="publisher != null" >
+        publisher,
+      </if>
+      <if test="shortname != null" >
+        shortname,
+      </if>
+      <if test="orderqty != null" >
+        orderqty,
+      </if>
+      <if test="qtyreceipt != null" >
+        qtyreceipt,
+      </if>
+      <if test="qty != null" >
+        qty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="issuenumber != null" >
+        #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="barcode != null" >
+        #{barcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="descr != null" >
+        #{descr,jdbcType=NVARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=NUMERIC},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=NVARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="orderqty != null" >
+        #{orderqty,jdbcType=INTEGER},
+      </if>
+      <if test="qtyreceipt != null" >
+        #{qtyreceipt,jdbcType=INTEGER},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="findAll" resultType="com.management.pojo.jc.AllowReceipt">
+    select issuenumber, subcode, barcode,descr, price, publisher,shortname, orderqty, qtyreceipt,qty
+    from allowReceipt
+    <where>
+      <if test="issuenumber != null and issuenumber != '' " >
+        and issuenumber = #{issuenumber}
+      </if>
+      <if test="barcode != null and barcode != '' " >
+        and barcode = #{barcode}
+      </if>
+      <if test="descr != null and descr != '' " >
+        <bind name="descr" value="'%' + descr + '%'" />
+        AND descr LIKE #{descr}
+      </if>
+      <if test="subcode != null and subcode != '' " >
+        and subcode = #{subcode}
+      </if>
+      <if test="publisher != null and publisher != '' " >
+        and publisher = #{publisher}
+      </if>
+    </where>
+    order by qty desc
+  </select>
+</mapper>

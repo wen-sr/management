@@ -14,4 +14,8 @@ public interface JiaoCaiInventoryMapper {
     int updateByPrimaryKeySelective(JiaoCaiInventory record);
 
     int updateByPrimaryKey(JiaoCaiInventory record);
+
+    JiaoCaiInventory selectByIssuenumberAndSubcode(JiaoCaiInventory jiaoCaiInventory);
+
+    int addInventory(JiaoCaiInventory jiaoCaiInventory);
 }

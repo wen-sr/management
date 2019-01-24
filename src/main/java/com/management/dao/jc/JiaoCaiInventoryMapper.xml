@@ -21,7 +21,7 @@
     from JiaoCaiInventory
     where id = #{id,jdbcType=NUMERIC}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from JiaoCaiInventory
     where id = #{id,jdbcType=NUMERIC}
   </delete>
@@ -115,5 +115,18 @@
       qtyshipped = #{qtyshipped,jdbcType=INTEGER},
       qtyfree = #{qtyfree,jdbcType=INTEGER}
     where id = #{id,jdbcType=NUMERIC}
+  </update>
+  <select id="selectByIssuenumberAndSubcode" resultType="com.management.pojo.jc.JiaoCaiInventory">
+    select <include refid="Base_Column_List"/>
+    from JiaoCaiInventory
+    where issuenumber = #{issuenumber,jdbcType=NVARCHAR}
+    and subcode = #{subcode,jdbcType=NVARCHAR}
+  </select>
+  <update id="addInventory" parameterType="com.management.pojo.jc.JiaoCaiInventory" >
+    update JiaoCaiInventory
+    set qtyreceipt = qtyreceipt + #{qtyreceipt},
+    qtyfree = qtyfree + #{qtyreceipt}
+    where issuenumber = #{issuenumber,jdbcType=NVARCHAR}
+    and subcode = #{subcode,jdbcType=NVARCHAR}
   </update>
 </mapper>

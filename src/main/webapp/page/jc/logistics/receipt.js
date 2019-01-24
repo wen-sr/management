@@ -384,7 +384,7 @@ function go(){
 	var param = "type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode;
 	if(type == 0){
 		$("#data").datagrid({
-			url:'jc/receipt_waitReceiptSubcodeData.action?issuenumber=' + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode,
+			url:'/management/jc/allowReceipt/info?issuenumber=' + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode,
 			height:'auto',
 			fitColumns: true,
 			striped:true,
@@ -430,15 +430,15 @@ function go(){
 				title:"已收货数",
 			    width:30
 			},{
-				field:"qtyunreceipt",
+				field:"qty",
 				title:"未到数",
 			    width:30
 			},{
-				field:"storerkey",
+				field:"publisher",
 				title:"出版社代码",
 			    width:30
 			},{
-				field:"publisher",
+				field:"shortname",
 				title:"出版社",
 			    width:30
 			}]]
@@ -446,7 +446,7 @@ function go(){
 		$("#currentType").val("0");
 	}else if(type == 1){
 		$("#data").datagrid({
-			url:'jc/receipt_loadData.action?issuenumber=' + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode + "&receiptno=" + receiptno ,
+			url:'/management/jc/receipt/info?issuenumber=' + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode + "&receiptno=" + receiptno ,
 			height:'auto',
 			fitColumns: true,
 			striped:true,

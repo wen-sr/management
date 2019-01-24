@@ -9,11 +9,9 @@ import com.management.dao.jc.JiaoCaiReceiptMapper;
 import com.management.dao.jc.JiaoCaiSkuMapper;
 import com.management.dao.jc.JiaoCaiStorerMapper;
 import com.management.dao.login.LoginMapper;
-import com.management.pojo.jc.JiaoCaiReceipt;
-import com.management.pojo.jc.JiaoCaiSku;
-import com.management.pojo.jc.JiaoCaiSkuKey;
-import com.management.pojo.jc.JiaoCaiStorer;
+import com.management.pojo.jc.*;
 import com.management.pojo.login.Login;
+import com.management.service.jc.IJiaoCaiInventoryService;
 import com.management.service.jc.IJiaoCaiReceiptService;
 import com.management.util.DataSourceContextHolder;
 import com.management.util.DateTimeUtil;
@@ -46,6 +44,9 @@ public class JiaoCaiReceiptServiceImpl implements IJiaoCaiReceiptService {
     @Autowired
     JiaoCaiStorerMapper jiaoCaiStorerMapper;
 
+    @Autowired
+    IJiaoCaiInventoryService jiaoCaiInventoryService;
+
     @Override
     public ServerResponse getInfo(Integer pageSize, Integer pageNum, JiaoCaiReceipt jiaoCaiReceipt) {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
@@ -73,7 +74,27 @@ public class JiaoCaiReceiptServiceImpl implements IJiaoCaiReceiptService {
         jiaoCaiReceipt.setEditwho(RequestHolder.getCurrentUser().getId());
         jiaoCaiReceipt.setStatus("0");
         int i = jiaoCaiReceiptMapper.insertSelective(jiaoCaiReceipt);
-        return null;
+        if(i > 0){
+            //增加库存总账
+            JiaoCaiInventory jiaoCaiInventory = new JiaoCaiInventory();
+            jiaoCaiInventory.setIssuenumber(jiaoCaiReceipt.getIssuenumber());
+            jiaoCaiInventory.setSubcode(jiaoCaiReceipt.getSubcode());
+            jiaoCaiInventory.setQtyreceipt(jiaoCaiReceipt.getQtyreceipt());
+            //增加库存明细
+            JiaoCaiInventory_detail jiaoCaiInventory_detail = new JiaoCaiInventory_detail();
+            jiaoCaiInventory_detail.setIssuenumber(jiaoCaiReceipt.getIssuenumber());
+            jiaoCaiInventory_detail.setPack(jiaoCaiReceipt.getPack());
+            jiaoCaiInventory_detail.setQtyreceipt(jiaoCaiReceipt.getQtyreceipt());
+            jiaoCaiInventory_detail.setQtyfree(jiaoCaiReceipt.getQtyreceipt());
+            jiaoCaiInventory_detail.setSubcode(jiaoCaiReceipt.getSubcode());
+
+            i = jiaoCaiInventoryService.add(jiaoCaiInventory, jiaoCaiInventory_detail);
+        }
+        if(i > 0){
+            return ServerResponse.createBySuccessMsg("收货成功");
+        }else {
+            return ServerResponse.createByErrorMessage("收货失败，请联系管理员");
+        }
     }
 
     @Override
