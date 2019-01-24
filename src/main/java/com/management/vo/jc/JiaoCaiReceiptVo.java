@@ -1,8 +1,8 @@
-package com.management.pojo.jc;
+package com.management.vo.jc;
 
-import java.util.Date;
+import java.math.BigDecimal;
 
-public class JiaoCaiReceipt {
+public class JiaoCaiReceiptVo {
     private Integer id;
 
     private String issuenumber;
@@ -15,34 +15,95 @@ public class JiaoCaiReceipt {
 
     private String status;
 
-    private Date adddate;
+    private String adddate;
 
     private String addwho;
 
     private String editwho;
 
-    private Date editdate;
+    private String editdate;
 
     private String receiptno;
 
     private String printPlant;
 
-    public JiaoCaiReceipt(Integer id, String issuenumber, String subcode, Integer pack, Integer qtyreceipt, String status, Date adddate, String addwho, String editwho, Date editdate, String receiptno, String printplant) {
-        this.id = id;
-        this.issuenumber = issuenumber;
-        this.subcode = subcode;
-        this.pack = pack;
-        this.qtyreceipt = qtyreceipt;
-        this.status = status;
-        this.adddate = adddate;
-        this.addwho = addwho;
-        this.editwho = editwho;
-        this.editdate = editdate;
-        this.receiptno = receiptno;
-        this.printPlant = printplant;
+    private String barcode;
+
+    private String descr;
+
+    private BigDecimal price;
+
+    private String publisher;
+
+    private String storerkey;
+
+    private String printPlantName;
+
+    public String getPrintPlantName() {
+        return printPlantName;
     }
 
-    public JiaoCaiReceipt() {
+    public void setPrintPlantName(String printPlantName) {
+        this.printPlantName = printPlantName;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getStorerkey() {
+        return storerkey;
+    }
+
+    public void setStorerkey(String storerkey) {
+        this.storerkey = storerkey;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getAdddate() {
+        return adddate;
+    }
+
+    public void setAdddate(String adddate) {
+        this.adddate = adddate;
+    }
+
+    public String getEditdate() {
+        return editdate;
+    }
+
+    public void setEditdate(String editdate) {
+        this.editdate = editdate;
+    }
+
+    public JiaoCaiReceiptVo() {
         super();
     }
 
@@ -94,13 +155,6 @@ public class JiaoCaiReceipt {
         this.status = status == null ? null : status.trim();
     }
 
-    public Date getAdddate() {
-        return adddate;
-    }
-
-    public void setAdddate(Date adddate) {
-        this.adddate = adddate;
-    }
 
     public String getAddwho() {
         return addwho;
@@ -116,14 +170,6 @@ public class JiaoCaiReceipt {
 
     public void setEditwho(String editwho) {
         this.editwho = editwho == null ? null : editwho.trim();
-    }
-
-    public Date getEditdate() {
-        return editdate;
-    }
-
-    public void setEditdate(Date editdate) {
-        this.editdate = editdate;
     }
 
     public String getReceiptno() {

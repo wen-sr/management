@@ -49,7 +49,7 @@ public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
     @Override
     public ServerResponse findAll(Integer pageSize, Integer pageNum, JiaoCaiSkuVo jiaoCaiSku) {
 
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         List<JiaoCaiSku> jiaoCaiSkuList = null;
         PageHelper.startPage(pageNum,pageSize);
 
@@ -64,7 +64,7 @@ public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
 
     @Override
     public ServerResponse add(JiaoCaiSku jiaoCaiSku) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         jiaoCaiSku.setAddwho(RequestHolder.getCurrentUser().getId());
         jiaoCaiSku.setEditwho(RequestHolder.getCurrentUser().getId());
         int i = jiaoCaiSkuMapper.insertSelective(jiaoCaiSku);
@@ -84,7 +84,7 @@ public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
 
     @Override
     public ServerResponse update(JiaoCaiSku jiaoCaiSku) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         if(StringUtils.isBlank(jiaoCaiSku.getIssuenumber()) || StringUtils.isBlank(jiaoCaiSku.getSubcode())){
             return ServerResponse.createByErrorMessage("未获得期号和征订代码无法修改资料，请联系管理员");
         }
@@ -99,7 +99,7 @@ public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
 
     @Override
     public ServerResponse delete(JiaoCaiSku jiaoCaiSku) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         if(StringUtils.isBlank(jiaoCaiSku.getIssuenumber()) || StringUtils.isBlank(jiaoCaiSku.getSubcode())){
             return ServerResponse.createByErrorMessage("未获得期号和征订代码无法删除资料，请联系管理员");
         }
@@ -113,14 +113,13 @@ public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
 
 
     private List<JiaoCaiSkuVo> parseToJiaoCaiSkuVo(List<JiaoCaiSku> jiaoCaiSkuList) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         List<JiaoCaiSkuVo> jiaoCaiSkuVoList = new ArrayList<>();
         JiaoCaiSkuVo jiaoCaiSkuVo = null;
         for(JiaoCaiSku d : jiaoCaiSkuList) {
             jiaoCaiSkuVo = new JiaoCaiSkuVo();
             jiaoCaiSkuVo.setAdddate(DateTimeUtil.dateToStr(d.getAdddate()));
             jiaoCaiSkuVo.setEditdate(DateTimeUtil.dateToStr(d.getEditdate()));
-
+            DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
             Login user = loginMapper.selectByPrimaryKey(d.getAddwho());
             Login user2 = loginMapper.selectByPrimaryKey(d.getEditwho());
 
@@ -137,7 +136,7 @@ public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
             jiaoCaiSkuVo.setPack(d.getPack());
             jiaoCaiSkuVo.setPrice(d.getPrice());
             jiaoCaiSkuVo.setPublisher(d.getPublisher());
-
+            DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
             JiaoCaiStorer jiaoCaiStorer = jiaoCaiStorerMapper.selectByStorerKey(d.getPublisher());
             jiaoCaiSkuVo.setShortname(jiaoCaiStorer.getShortname());
 

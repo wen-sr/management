@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,8 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    <title>收货</title>
+    <title>收货管理</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -22,21 +20,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jc/predistribution.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jc/base.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jc/receipt.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/base.js"></script>
+	<script type="text/javascript" src="receipt.js"></script>
   </head>
   
   <body>
 	<div align="center">
-		<h2 style="color:#0078CA">收货&nbsp;<span style="font-size:20px;color:#0078CA"><s:property value='#session.name'/></span></h2>
+		<h2 style="color:#0078CA">收货管理</h2>
 	</div>
-	
-	<input type="hidden" value="<s:property value='#session.id'/>" id="userid"/>
-	<input type="hidden" value="<s:property value='#session.name'/>" id="username"/>
 	<input type="hidden" id="currentType"/>
 	<!-- 查询 -->
 	<div align="center">
@@ -44,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="0">可收货品种</option>
 			<option value="1">已收货品种</option>
 		</select>
-		期号：<input type="text" id="issuenumber" class="easyui-combobox" data-options="url: 'jc/issuenumber_info.action',method: 'get',valueField: 'issuenumber',textField: 'issuenumber',
+		期号：<input type="text" id="issuenumber" class="easyui-combobox" data-options="url: '/management/jc/issuenumber/tips',method: 'get',valueField: 'issuenumber',textField: 'issuenumber',
 				panelWidth: 150,panelHeight: '100' "/>
 		征订代码：<input class="easyui-textbox" id="subcode" style="width:150px" /><a class="easyui-linkbutton" id="choosesubcode"  onclick="chooseSubcode()">选择征订代码</a>
 		条码：<input class="easyui-textbox" id="barcode" style="width:150px"  />
@@ -56,11 +50,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div align="center" id="w-addInfo" class="easyui-window" title="新增收货信息"
 			data-options="modal:false,closed:true,iconCls:'icon-save'"
 			style="width: 700px; height: 450px; padding: 10px;">
-		<form id="f1" name="f1">
+		<form name="f1">
 			<h2 align="center">新增收货信息</h2>
-			<table id="formtable" border="0px" align="center" cellpadding='2'width="100%" >
+			<table border="0px" align="center" cellpadding='2'width="100%" >
 				<tr>
-					<td>期号:</td><td><input type="text" class="easyui-combobox" id="add_issuenumber" data-options="url:'jc/issuenumber_info.action',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" /></td>
+					<td>期号:</td><td><input type="text" class="easyui-combobox" id="add_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" /></td>
 					<td>征订代码：</td><td><input class="easyui-textbox" type="text" id="add_subcode" data-options="readonly:true" /></td>
 				</tr>
 				<tr>
@@ -68,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>书名：</td><td><input class="easyui-textbox" type="text" id="add_descr" data-options="readonly:true" /></td>
 				</tr>
 				<tr>
-					<td>出版社：</td><td><input class="easyui-combobox" id="add_publisher" data-options="url:'jc/storer_getSupplier.action',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',readonly:true"/></td>
+					<td>出版社：</td><td><input class="easyui-combobox" id="add_publisher" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',readonly:true"/></td>
 					<td>捆扎：</td><td><input class="easyui-combobox" type="text" id="add_pack" /></td>
 				</tr>
 				<tr>
@@ -81,14 +75,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<td>收货编号：</td><td><input class="easyui-textbox" type="text" id="add_receiptno"/></td>
-					<td>印刷厂：</td><td><input class="easyui-combobox" id="add_printPlant" data-options="url:'jc/storer_getSupplier.action',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200'"/></td>
-				</tr>
-				<tr>
-					<td>收货人：</td><td><input class="easyui-textbox" data-options="readonly:true" type="text" id="add_addwho" value="<s:property value='#session.id'/>" /></td>
+					<td>印刷厂：</td><td><input class="easyui-combobox" id="add_printPlant" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200'"/></td>
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
-						<a class="easyui-linkbutton" id="submitgo" onclick="addInfo()">提交</a>
+						<a class="easyui-linkbutton" onclick="addInfo()">提交</a>
 					</td>
 				</tr>
 			</table>
@@ -104,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<input type="hidden"  id = 'edit_id'/>
 			<table id="formtable" border="0px" align="center" cellpadding='2'width="100%" >
 				<tr>
-					<td>期号:</td><td><input type="text" class="easyui-combobox" id="edit_issuenumber" data-options="url:'jc/issuenumber_info.action',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" /></td>
+					<td>期号:</td><td><input type="text" class="easyui-combobox" id="edit_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" /></td>
 					<td>征订代码：</td><td><input class="easyui-textbox" type="text" id="edit_subcode" data-options="readonly:true" /></td>
 				</tr>
 				<tr>
@@ -112,7 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>书名：</td><td><input class="easyui-textbox" type="text" id="edit_descr" data-options="readonly:true" /></td>
 				</tr>
 				<tr>
-					<td>出版社：</td><td><input class="easyui-combobox" id="edit_publisher" data-options="url:'jc/storer_getSupplier.action',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',readonly:true"/></td>
+					<td>出版社：</td><td><input class="easyui-combobox" id="edit_publisher" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',readonly:true"/></td>
 					<td>捆扎：</td><td><input class="easyui-textbox" type="text" id="edit_pack" /></td>
 				</tr>
 				<tr>
@@ -121,10 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<td>收货编号：</td><td><input class="easyui-textbox" type="text" id="edit_receiptno"/></td>
-					<td>印刷厂：</td><td><input class="easyui-combobox" id="edit_printPlant" data-options="url:'jc/storer_getSupplier.action',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200'"/></td>
-				</tr>
-				<tr>
-					<td>收货人：</td><td><input class="easyui-textbox" data-options="readonly:true" type="text" id="edit_addwho" value="<s:property value='#session.id'/>" /></td>
+					<td>印刷厂：</td><td><input class="easyui-combobox" id="edit_printPlant" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200'"/></td>
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;

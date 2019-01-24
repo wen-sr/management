@@ -27,7 +27,7 @@ public class JiaoCaiStorerServiceImpl implements IJiaoCaiStorerService {
 
     @Override
     public ServerResponse getInfo(Integer pageSize, Integer pageNum, JiaoCaiStorer jiaoCaiStorer) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         List<JiaoCaiStorer> jiaoCaiStorerList = null;
 
         PageHelper.startPage(pageNum,pageSize);

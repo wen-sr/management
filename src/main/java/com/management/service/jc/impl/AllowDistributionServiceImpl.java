@@ -5,10 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.management.common.ServerResponse;
 import com.management.dao.jc.AllowDistributionMapper;
 import com.management.pojo.jc.AllowDistribution;
-import com.management.pojo.jc.JiaoCaiOrders;
 import com.management.service.jc.IAllowDistributionService;
 import com.management.util.DataSourceContextHolder;
-import com.management.vo.jc.JiaoCaiOrdersVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +26,7 @@ public class AllowDistributionServiceImpl implements IAllowDistributionService {
 
     @Override
     public ServerResponse getInfo(Integer pageSize, Integer pageNum, AllowDistribution allowDistribution) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
-
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         List<AllowDistribution> allowDistributionList = null;
         PageHelper.startPage(pageNum,pageSize);
 

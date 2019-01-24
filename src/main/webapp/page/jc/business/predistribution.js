@@ -25,11 +25,6 @@ function submitgo(){
 		$.messager.alert("操作提示","分发数量不能为空！","error");
 		return;
 	}
-	var addwho = $.trim($("#addwho").val());
-	if(addwho == null || addwho == "" ){
-		$.messager.alert("操作提示","分发人不能为空！","error");
-		return;
-	}
 	var reg = new RegExp("^[0-9]*$");
 	if(!reg.test(qtyallocated)){
 		$.messager.alert("操作提示","分发数量只能输入数字！","error");
@@ -40,26 +35,22 @@ function submitgo(){
 		$.messager.alert("操作提示","分发数量不能大于可分发数！","error");
 		return;
 	}
-	var param = "subcode=" + subcode + "&code=" + code + "&qtyallocated=" + qtyallocated + "&addwho=" + addwho + "&issuenumber=" + issuenumber;
+	var param = "subcode=" + subcode + "&code=" + code + "&qtyallocated=" + qtyallocated + "&issuenumber=" + issuenumber;
 	$.ajax({
 		type:'POST',
-		url:'jc/distribution_predistribution.action',
+		url:'/management/jc/distribute/add',
 		data:param,
 		dataType:'json',
 		success:function(data){
 			if(data){
-				if(data["msg"] == "保存成功"){
-					$.messager.alert("操作提示",data["msg"],"info",function(){
-						if(data["qtyfree"] || data["qtyfree"] == 0){
-							$("#add_qtyfree").textbox('setValue',data["qtyfree"]);
-						}
+				$.messager.alert("操作提示",data.msg,"info",function(){
+					if(data.status == '0'){
+						$("#add_qtyfree").textbox('setValue',data.data[0].qtyfree);
 						$("#add_qtyallocated").textbox('setValue','');
 						$("#add_code").combobox('setValue','');
-						load();
-					});
-				}else {
-					$.messager.alert("操作提示",data["msg"],"error");
-				}
+					}
+					load( );
+				});
 			}
 		},
 		error:function(){
@@ -132,7 +123,7 @@ function loadWaitPreDistributionData(){
  */
 function load(){
 	$("#data").datagrid({
-		url:'jc/distribution_loadDistributedData.action?type=0',
+		url:'/management/jc/distribute/info?type=0',
 		height:'auto',	
 		fitColumns: true,
 		striped:true,
@@ -212,26 +203,30 @@ function chooseSubcode(){
 		$.messager.alert("操作提示","请先选择期号","error");
 		return;
 	}
+	$("#showSubcode").window("open");
 	if(type == "0") {
 		$("#c_subcode").datagrid({
-			url:'jc/distribution_waitPreDistributionData.action?issuenumber=' + issuenumber,
+			url:'/management/jc/allowDistribution/info?issuenumber=' + issuenumber,
 			height:'auto',
 			fitColumns: true,
 			striped:true,
 			rownumbers:true,
 			border:true,
 			singleSelect:true,
+			pagination:true,
+			pageSize:20,
+			pageList:[10,20,50],
 			showFooter: true,
 			toolbar:'#tb2',
 			columns:[[{
 				field:"id",
 			    title:"编号",
 			    checkbox:true,
-			    width:50
+			    width:20
 			},{
 				field:"issuenumber",
 				title:"期号",
-			    width:50
+			    width:30
 			},{
 				field:"subcode",
 				title:"征订代码",
@@ -247,7 +242,7 @@ function chooseSubcode(){
 			},{
 				field:"price",
 				title:"定价",
-			    width:50
+			    width:30
 			},{
 				field:"publisher",
 				title:"出版社代码",
@@ -255,19 +250,21 @@ function chooseSubcode(){
 			},{
 				field:"shortname",
 				title:"出版社",
-			    width:30
+			    width:50
 			}]]
 		});
-		$("#showSubcode").window("open");
 	}else if(type == "1"){
 		$("#c_subcode").datagrid({
-			url:'jc/distribution_loadDistributedSubcodeByIssuenumber.action?issuenumber=' + issuenumber + "&type=0",
+			url:'/management/jc/distribute/info?issuenumber=' + issuenumber,
 			height:'auto',
 			fitColumns: true,
 			striped:true,
 			rownumbers:true,
 			border:true,
 			singleSelect:true,
+			pagination:true,
+			pageSize:20,
+			pageList:[10,20,50],
 			showFooter: true,
 			toolbar:'#tb2',
 			columns:[[{
@@ -294,7 +291,7 @@ function chooseSubcode(){
 			},{
 				field:"price",
 				title:"定价",
-			    width:50
+			    width:30
 			},{
 				field:"publisher",
 				title:"出版社代码",
@@ -302,7 +299,7 @@ function chooseSubcode(){
 			},{
 				field:"shortname",
 				title:"出版社",
-			    width:30
+			    width:50
 			}]]
 		});
 		$("#showSubcode").window("open");
@@ -336,12 +333,13 @@ function removeInfo(){
 	var row = $('#data').datagrid('getSelected');
 	if(row){
 		$.ajax({
-			url:'jc/distribution_delete.action',
+			url:'/management/jc/distribute/delete',
 			data:'id=' + row.id,
 			dataType:'json',
 			success:function(data){
-				$.messager.alert("操作提示",data,"info");
-				load();
+				$.messager.alert("操作提示",data.msg,"info",function () {
+					$("#data").datagrid('reload');
+				});
 			},
 			error:function(){
 				$.messager.alert("提示","数据错误，联系管理员","info");
@@ -362,7 +360,7 @@ function go(){
 	var param = "type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode;
 	if(type == 0){
 		$("#data").datagrid({
-			url:'jc/distribution_waitPreDistributionData.action?issuenumber=' + issuenumber + "&subcode=" + subcode,
+			url:'/management/jc/allowDistribution/info?issuenumber=' + issuenumber + "&subcode=" + subcode,
 			height:'auto',
 			fitColumns: true,
 			striped:true,
@@ -416,7 +414,7 @@ function go(){
 		$("#currentType").val("0");
 	}else if(type == 1){
 		$("#data").datagrid({
-			url:'jc/distribution_loadDistributedData.action?issuenumber=' + issuenumber + "&subcode=" + subcode + "&type=0",
+			url:'/management/jc/distribute/info?issuenumber=' + issuenumber + "&subcode=" + subcode + "&type=0",
 			height:'auto',
 			fitColumns: true,
 			striped:true,
@@ -464,7 +462,11 @@ function go(){
 			},{
 				field:"qtyallocated",
 				title:"分发数",
-			    width:30
+				width:30
+			},{
+				field:"status",
+				title:"状态",
+				width:30
 			},{
 				field:"storerkey",
 				title:"出版社代码",
@@ -602,11 +604,6 @@ function editInfo(){
 		$.messager.alert("操作提示","书名不能为空！","error");
 		return;
 	}
-	var addwho = $.trim($("#edit_addwho").val());
-	if(addwho == null || addwho == ""){
-		$.messager.alert("操作提示","修改人不能为空！","error");
-		return;
-	}
 	var publisher = $.trim($("#edit_publisher").combobox('getValue'));
 	if(publisher == null || publisher == "" ){
 		$.messager.alert("操作提示","出版社不能为空！","error");
@@ -632,18 +629,19 @@ function editInfo(){
 		$.messager.alert("操作提示","定价只能输入数字！","error");
 		return;
 	}
-	var param = "id=" + id + "&subcode=" + subcode + "&code=" + code + "&qtyallocated=" + qtyallocated + "&addwho=" + addwho + "&issuenumber=" + issuenumber + "&type=0";      
+	var param = "id=" + id + "&subcode=" + subcode + "&code=" + code + "&qtyallocated=" + qtyallocated + "&issuenumber=" + issuenumber;
 	$.ajax({
 		type:"post",
-		url:"jc/distribution_update.action",
+		url:"/management/jc/distribute/update",
 		data:param,
 		dataType:'json',
 		success:function(data){
 			if(data){
-				$.messager.alert("操作提示",data,"info");
+				$.messager.alert("操作提示",data.msg,"info",function () {
+					$("#w-editInfo").window("close");
+					$("#data").datagrid('reload');
+				});
 			}
-			$("#w-editInfo").window("close");
-			$("#data").datagrid('reload');
 		},
 		error:function(){
 			$.messager.alert("操作提示","数据错误，联系管理员！","error");

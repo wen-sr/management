@@ -1,7 +1,5 @@
 package com.management.pojo.jc;
 
-import com.management.common.ServerResponse;
-
 public class JiaoCaiIssuenumber {
     private Integer id;
 

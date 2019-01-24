@@ -27,7 +27,7 @@
     from JiaoCaiReceipt
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from JiaoCaiReceipt
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -39,8 +39,8 @@
       )
     values (#{id,jdbcType=INTEGER}, #{issuenumber,jdbcType=VARCHAR}, #{subcode,jdbcType=VARCHAR}, 
       #{pack,jdbcType=INTEGER}, #{qtyreceipt,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
-      #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=VARCHAR}, #{editwho,jdbcType=NVARCHAR}, 
-      #{editdate,jdbcType=TIMESTAMP}, #{receiptno,jdbcType=VARCHAR}, #{printplant,jdbcType=VARCHAR}
+      getdate(), #{addwho,jdbcType=VARCHAR}, #{editwho,jdbcType=NVARCHAR},
+      getdate(), #{receiptno,jdbcType=VARCHAR}, #{printPlant,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiReceipt" >
@@ -64,7 +64,7 @@
       <if test="status != null" >
         status,
       </if>
-      <if test="adddate != null" >
+      <if test="1==1" >
         adddate,
       </if>
       <if test="addwho != null" >
@@ -73,13 +73,13 @@
       <if test="editwho != null" >
         editwho,
       </if>
-      <if test="editdate != null" >
+      <if test="1==1" >
         editdate,
       </if>
       <if test="receiptno != null" >
         receiptno,
       </if>
-      <if test="printplant != null" >
+      <if test="printPlant != null" >
         printPlant,
       </if>
     </trim>
@@ -102,8 +102,8 @@
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="adddate != null" >
-        #{adddate,jdbcType=TIMESTAMP},
+      <if test="1==1" >
+        getdate(),
       </if>
       <if test="addwho != null" >
         #{addwho,jdbcType=VARCHAR},
@@ -111,14 +111,14 @@
       <if test="editwho != null" >
         #{editwho,jdbcType=NVARCHAR},
       </if>
-      <if test="editdate != null" >
-        #{editdate,jdbcType=TIMESTAMP},
+      <if test="1==1" >
+        getdate(),
       </if>
       <if test="receiptno != null" >
         #{receiptno,jdbcType=VARCHAR},
       </if>
-      <if test="printplant != null" >
-        #{printplant,jdbcType=VARCHAR},
+      <if test="printPlant != null" >
+        #{printPlant,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -149,14 +149,14 @@
       <if test="editwho != null" >
         editwho = #{editwho,jdbcType=NVARCHAR},
       </if>
-      <if test="editdate != null" >
-        editdate = #{editdate,jdbcType=TIMESTAMP},
+      <if test="1==1" >
+        editdate = getdate(),
       </if>
       <if test="receiptno != null" >
         receiptno = #{receiptno,jdbcType=VARCHAR},
       </if>
-      <if test="printplant != null" >
-        printPlant = #{printplant,jdbcType=VARCHAR},
+      <if test="printPlant != null" >
+        printPlant = #{printPlant,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -171,9 +171,41 @@
       adddate = #{adddate,jdbcType=TIMESTAMP},
       addwho = #{addwho,jdbcType=VARCHAR},
       editwho = #{editwho,jdbcType=NVARCHAR},
-      editdate = #{editdate,jdbcType=TIMESTAMP},
+      editdate = getdate(),
       receiptno = #{receiptno,jdbcType=VARCHAR},
-      printPlant = #{printplant,jdbcType=VARCHAR}
+      printPlant = #{printPlant,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findAll" resultType="com.management.pojo.jc.JiaoCaiReceipt">
+    select <include refid="Base_Column_List"/>
+    from JiaoCaiReceipt
+    <where>
+      <if test="id != null and id != '' ">
+        and id = #{id,jdbcType=NVARCHAR}
+      </if>
+      <if test="issuenumber != null and issuenumber != '' " >
+        and issuenumber = #{issuenumber}
+      </if>
+      <if test="subcode != null and subcode != '' " >
+        and subcode = #{subcode}
+      </if>
+      <if test="addwho != null and addwho != '' " >
+        and addwho = #{addwho}
+      </if>
+      <if test="status != null and status != '' " >
+        and status = #{status}
+      </if>
+      <if test="receiptno != null and receiptno != '' " >
+        and receiptno = #{receiptno}
+      </if>
+      <if test="printPlant != null and printPlant != '' " >
+        and printPlant = #{printPlant}
+      </if>
+      <if test="adddate != null and adddate != '' " >
+        <bind name="adddate" value="'%' + adddate + '%'" />
+        and convert(varchar(20),adddate,20) like #{adddate}
+      </if>
+    </where>
+    order by adddate desc
+  </select>
 </mapper>

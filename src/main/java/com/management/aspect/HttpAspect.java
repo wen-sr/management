@@ -35,7 +35,7 @@ public class HttpAspect {
 
 
 //    @Pointcut("execution(public * com.management.controller.login.UserController.*(..))")
-    @Pointcut("execution(public * com.management.controller..*.*(..))")
+    @Pointcut("execution(public * com.management.controller..*.*(..)) && !execution(public * com.management.controller.wechat..*.*(..))")
     public void log() {
     }
 
@@ -63,9 +63,11 @@ public class HttpAspect {
             }
             return;
         }
+        logger.info("---------------成功获得登录信息："+ login.getId() +"---------------");
         RequestHolder.add(login);
         RequestHolder.add(request);
 
+        logger.info("---------------这里是请求完成之前的操作---------------");
         //url
         logger.info("url={}", request.getRequestURL());
 
@@ -84,7 +86,7 @@ public class HttpAspect {
 
     @After("log()")
     public void doAfter() {
-        logger.info("这里是请求完成之后的操作---------------");
+        logger.info("---------------这里是请求完成之后的操作---------------");
     }
 
     @AfterReturning(returning = "object", pointcut = "log()")

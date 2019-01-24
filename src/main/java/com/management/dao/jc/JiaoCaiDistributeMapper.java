@@ -2,6 +2,8 @@ package com.management.dao.jc;
 
 import com.management.pojo.jc.JiaoCaiDistribute;
 
+import java.util.List;
+
 public interface JiaoCaiDistributeMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface JiaoCaiDistributeMapper {
     int updateByPrimaryKeySelective(JiaoCaiDistribute record);
 
     int updateByPrimaryKey(JiaoCaiDistribute record);
+
+    List<JiaoCaiDistribute> findAll(JiaoCaiDistribute jiaoCaiDistribute);
 }

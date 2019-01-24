@@ -49,7 +49,7 @@ public class JiaoCaiOrdersServiceImpl implements IJiaoCaiOrdersService {
 
     @Override
     public ServerResponse getInfo(Integer pageSize, Integer pageNum, JiaoCaiOrders jiaoCaiOrders) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
 
         List<JiaoCaiOrders> jiaoCaiOrdersList = null;
         PageHelper.startPage(pageNum,pageSize);
@@ -65,7 +65,7 @@ public class JiaoCaiOrdersServiceImpl implements IJiaoCaiOrdersService {
 
     @Override
     public ServerResponse add(JiaoCaiOrders jiaoCaiOrders) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         jiaoCaiOrders.setAddwho(RequestHolder.getCurrentUser().getId());
         jiaoCaiOrders.setEditwho(RequestHolder.getCurrentUser().getId());
         int i = jiaoCaiOrdersMapper.insertSelective(jiaoCaiOrders);
@@ -78,7 +78,7 @@ public class JiaoCaiOrdersServiceImpl implements IJiaoCaiOrdersService {
 
     @Override
     public ServerResponse update(JiaoCaiOrders jiaoCaiOrders) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         jiaoCaiOrders.setEditwho(RequestHolder.getCurrentUser().getId());
         int i = jiaoCaiOrdersMapper.updateByPrimaryKeySelective(jiaoCaiOrders);
         if(i > 0 ){
@@ -90,7 +90,7 @@ public class JiaoCaiOrdersServiceImpl implements IJiaoCaiOrdersService {
 
     @Override
     public ServerResponse delete(JiaoCaiOrders jiaoCaiOrders) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         int i = jiaoCaiOrdersMapper.deleteByPrimaryKey(jiaoCaiOrders.getId());
         if(i > 0 ){
             return ServerResponse.createBySuccessMsg("删除信息成功");
@@ -101,13 +101,12 @@ public class JiaoCaiOrdersServiceImpl implements IJiaoCaiOrdersService {
 
 
     private List<JiaoCaiOrdersVo> parseToJiaoCaiOrdersVo(List<JiaoCaiOrders> jiaoCaiOrdersList) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         List<JiaoCaiOrdersVo> jiaoCaiOrdersVoList = new ArrayList<>();
         JiaoCaiOrdersVo jiaoCaiOrdersVo = null;
         for(JiaoCaiOrders j : jiaoCaiOrdersList){
             jiaoCaiOrdersVo = new JiaoCaiOrdersVo();
             jiaoCaiOrdersVo.setAdddate(DateTimeUtil.dateToStr(j.getAdddate()));
-
+            DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
             Login user = loginMapper.selectByPrimaryKey(j.getAddwho());
             Login user2 = loginMapper.selectByPrimaryKey(j.getEditwho());
             if(user != null) {
@@ -120,6 +119,7 @@ public class JiaoCaiOrdersServiceImpl implements IJiaoCaiOrdersService {
             JiaoCaiSkuKey jiaoCaiSkuKey = new JiaoCaiSkuKey();
             jiaoCaiSkuKey.setIssuenumber(j.getIssuenumber());
             jiaoCaiSkuKey.setSubcode(j.getSubcode());
+            DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
             JiaoCaiSku jiaoCaiSku = jiaoCaiSkuMapper.selectByPrimaryKey(jiaoCaiSkuKey);
             if(jiaoCaiSku != null){
                 jiaoCaiOrdersVo.setBarcode(jiaoCaiSku.getBarcode());

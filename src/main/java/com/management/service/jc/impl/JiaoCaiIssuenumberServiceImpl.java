@@ -26,7 +26,7 @@ public class JiaoCaiIssuenumberServiceImpl implements IJiaoCaiIssuenumberService
 
     @Override
     public ServerResponse<PageInfo> getInfo(Integer pageSize, Integer pageNum, JiaoCaiIssuenumber jiaoCaiIssuenumber) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         List<JiaoCaiIssuenumber> jiaoCaiIssuenumberList = null;
         PageHelper.startPage(pageNum,pageSize);
         PageHelper.orderBy("id");

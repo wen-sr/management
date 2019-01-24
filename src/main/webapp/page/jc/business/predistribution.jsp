@@ -98,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<h2 align="center">修改预分发信息</h2>
 			<table  border="0px" align="center" cellpadding='2'width="100%">
 				<tr>
-					<td>期号:</td><td><select class="easyui-combobox" id="edit_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" ></select></td>
+					<td>期号:</td><td><select class="easyui-combobox" id="edit_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true,width:155" ></select></td>
 					<td>征订代码：</td><td><input class="easyui-textbox" type="text" id="edit_subcode" data-options="readonly:true" /></td>
 				</tr>
 				<tr>
@@ -106,16 +106,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>书名：</td><td><input class="easyui-textbox" type="text" id="edit_descr"  data-options="readonly:true"/></td>
 				</tr>
 				<tr>
-					<td>出版社：</td><td><select class="easyui-combobox" id="edit_publisher" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',readonly:true" ></select></td>
+					<td>出版社：</td><td><select class="easyui-combobox" id="edit_publisher" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',readonly:true,width:155" ></select></td>
 					<td>定价：</td><td><input class="easyui-textbox" type="text" id="edit_price" data-options="readonly:true" /></td>
 				</tr>
 				<tr>
-					<td>分发店：</td><td><select class="easyui-combobox" id="edit_customer" data-options="url:'/management/jc/storer/tips?type=0',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200'" ></select></td>
+					<td>分发店：</td><td><select class="easyui-combobox" id="edit_customer" data-options="url:'/management/jc/storer/tips?type=0',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',width:155" ></select></td>
 					<td>分发数量：</td><td><input class="easyui-textbox" type="text" id="edit_qtyfenfa"/></td>
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
-						<a class="easyui-linkbutton" onclick="editInfo()">提交</a>
+						<a class="easyui-linkbutton" onclick="editInfo()">&nbsp;提交&nbsp;</a>
 					</td>
 				</tr>
 			</table>

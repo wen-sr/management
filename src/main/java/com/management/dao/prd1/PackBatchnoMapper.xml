@@ -53,7 +53,11 @@
       </if>
     </trim>
   </insert>
-    <select id="getData" resultType="com.management.pojo.prd1.PackBatchno">
+  <update id="gouBaoConfirm">
+    update caseid set status = '0',susr5=#{dd}
+    where batchno = #{id} and status = '-1'
+  </update>
+  <select id="getData" resultType="com.management.pojo.prd1.PackBatchno">
       select dd,batchno,caseqty,pack_user as packUser,usr_name as usrName from packBatchno
       where
       <if test="dd == null">
@@ -66,5 +70,22 @@
         and pack_user = #{id}
       </if>
       ORDER BY 4
+    </select>
+    <select id="getGouBaoData" resultType="com.management.vo.prd1.GouBaoDataVo">
+      select batchno id,sum(nvl(susr1,1)) caseQty, sum(qty) qty, susr5 dd
+      from caseid
+      where boxno is null
+      <if test="dd == null or dd == ''">
+        and susr5 = to_char(sysdate, 'yyyy-mm-dd')
+      </if>
+      <if test="dd != null and dd != ''">
+        and susr5 = #{dd}
+      </if>
+      <if test="id != null and id != ''">
+        <bind name="id" value="'%' + id + '%'" />
+        AND batchno LIKE #{id}
+      </if>
+      group by batchno,susr5
+      order by 1
     </select>
 </mapper>

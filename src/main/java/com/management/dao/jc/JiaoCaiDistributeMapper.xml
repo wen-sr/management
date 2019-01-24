@@ -91,7 +91,7 @@
       <if test="status != null" >
         status,
       </if>
-      <if test="adddate != null" >
+      <if test="1 == 1" >
         adddate,
       </if>
       <if test="addwho != null" >
@@ -121,7 +121,7 @@
       <if test="editwho != null" >
         editwho,
       </if>
-      <if test="editdate != null" >
+      <if test="1 ==1 " >
         editdate,
       </if>
       <if test="packwho != null" >
@@ -162,8 +162,8 @@
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="adddate != null" >
-        #{adddate,jdbcType=TIMESTAMP},
+      <if test="1 == 1" >
+        getdate(),
       </if>
       <if test="addwho != null" >
         #{addwho,jdbcType=NVARCHAR},
@@ -192,8 +192,8 @@
       <if test="editwho != null" >
         #{editwho,jdbcType=VARCHAR},
       </if>
-      <if test="editdate != null" >
-        #{editdate,jdbcType=TIMESTAMP},
+      <if test="1 == 1" >
+        getdate(),
       </if>
       <if test="packwho != null" >
         #{packwho,jdbcType=VARCHAR},
@@ -304,4 +304,45 @@
       computeno = #{computeno,jdbcType=NVARCHAR}
     where id = #{id,jdbcType=NUMERIC}
   </update>
+  <select id="findAll" resultType="com.management.pojo.jc.JiaoCaiDistribute">
+    select <include refid="Base_Column_List"/>
+    from JiaoCaiDistribute
+    <where>
+      <if test="id != null and id != '' ">
+        and id = #{id,jdbcType=NVARCHAR}
+      </if>
+      <if test="issuenumber != null and issuenumber != '' " >
+        and issuenumber = #{issuenumber}
+      </if>
+      <if test="subcode != null and subcode != '' " >
+        and subcode = #{subcode}
+      </if>
+      <if test="addwho != null and addwho != '' " >
+        and addwho = #{addwho}
+      </if>
+      <if test="type != null and type != '' " >
+        and type = #{type}
+      </if>
+      <if test="computeno != null and computeno != '' " >
+        and computeno = #{computeno}
+      </if>
+      <if test="shipno != null and shipno != '' " >
+        and shipno = #{shipno}
+      </if>
+      <if test="pickno != null and pickno != '' " >
+        and pickno = #{pickno}
+      </if>
+      <if test="batchno != null and batchno != '' " >
+        and batchno = #{batchno}
+      </if>
+      <if test="status != null and status != '' " >
+        and status = #{status}
+      </if>
+      <if test="adddate != null and adddate != '' " >
+        <bind name="adddate" value="'%' + adddate + '%'" />
+        and convert(varchar(20),adddate,20) like #{adddate}
+      </if>
+    </where>
+    order by adddate desc
+  </select>
 </mapper>

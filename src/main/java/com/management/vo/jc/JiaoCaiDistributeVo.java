@@ -1,8 +1,8 @@
-package com.management.pojo.jc;
+package com.management.vo.jc;
 
-import java.util.Date;
+import java.math.BigDecimal;
 
-public class JiaoCaiDistribute {
+public class JiaoCaiDistributeVo {
     private Long id;
 
     private String issuenumber;
@@ -21,7 +21,7 @@ public class JiaoCaiDistribute {
 
     private String status;
 
-    private Date adddate;
+    private String adddate;
 
     private String addwho;
 
@@ -41,41 +41,89 @@ public class JiaoCaiDistribute {
 
     private String editwho;
 
-    private Date editdate;
+    private String editdate;
 
     private String packwho;
 
-    private Date packdate;
+    private String packdate;
 
     private String computeno;
 
-    public JiaoCaiDistribute(Long id, String issuenumber, String subcode, String code, String shortname, Integer pack, Integer oldpack, Integer qtyallocated, String status, Date adddate, String addwho, Integer caseqty, Integer oddpack, Integer odd, Integer type, String batchno, String shipno, String pickno, String editwho, Date editdate, String packwho, Date packdate, String computeno) {
-        this.id = id;
-        this.issuenumber = issuenumber;
-        this.subcode = subcode;
-        this.code = code;
-        this.shortname = shortname;
-        this.pack = pack;
-        this.oldpack = oldpack;
-        this.qtyallocated = qtyallocated;
-        this.status = status;
-        this.adddate = adddate;
-        this.addwho = addwho;
-        this.caseqty = caseqty;
-        this.oddpack = oddpack;
-        this.odd = odd;
-        this.type = type;
-        this.batchno = batchno;
-        this.shipno = shipno;
-        this.pickno = pickno;
-        this.editwho = editwho;
-        this.editdate = editdate;
-        this.packwho = packwho;
-        this.packdate = packdate;
-        this.computeno = computeno;
+    private String barcode;
+
+    private String descr;
+
+    private BigDecimal price;
+
+    private String publisher;
+
+    private String storerkey;
+
+    public String getBarcode() {
+        return barcode;
     }
 
-    public JiaoCaiDistribute() {
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getStorerkey() {
+        return storerkey;
+    }
+
+    public void setStorerkey(String storerkey) {
+        this.storerkey = storerkey;
+    }
+
+    public String getAdddate() {
+        return adddate;
+    }
+
+    public void setAdddate(String adddate) {
+        this.adddate = adddate;
+    }
+
+    public String getEditdate() {
+        return editdate;
+    }
+
+    public void setEditdate(String editdate) {
+        this.editdate = editdate;
+    }
+
+    public String getPackdate() {
+        return packdate;
+    }
+
+    public void setPackdate(String packdate) {
+        this.packdate = packdate;
+    }
+
+    public JiaoCaiDistributeVo() {
         super();
     }
 
@@ -151,13 +199,6 @@ public class JiaoCaiDistribute {
         this.status = status == null ? null : status.trim();
     }
 
-    public Date getAdddate() {
-        return adddate;
-    }
-
-    public void setAdddate(Date adddate) {
-        this.adddate = adddate;
-    }
 
     public String getAddwho() {
         return addwho;
@@ -231,13 +272,6 @@ public class JiaoCaiDistribute {
         this.editwho = editwho == null ? null : editwho.trim();
     }
 
-    public Date getEditdate() {
-        return editdate;
-    }
-
-    public void setEditdate(Date editdate) {
-        this.editdate = editdate;
-    }
 
     public String getPackwho() {
         return packwho;
@@ -245,14 +279,6 @@ public class JiaoCaiDistribute {
 
     public void setPackwho(String packwho) {
         this.packwho = packwho == null ? null : packwho.trim();
-    }
-
-    public Date getPackdate() {
-        return packdate;
-    }
-
-    public void setPackdate(Date packdate) {
-        this.packdate = packdate;
     }
 
     public String getComputeno() {
