@@ -15,6 +15,7 @@ import com.management.service.jc.IJiaoCaiInventoryService;
 import com.management.service.jc.IJiaoCaiReceiptService;
 import com.management.util.DataSourceContextHolder;
 import com.management.util.DateTimeUtil;
+import com.management.vo.jc.JiaoCaiInventoryVo;
 import com.management.vo.jc.JiaoCaiReceiptVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ import java.util.List;
  * Modified By：
  */
 @Service
-@Transactional
+@Transactional(value = "transactionManager_wms",readOnly = false)
 public class JiaoCaiReceiptServiceImpl implements IJiaoCaiReceiptService {
     @Autowired
     JiaoCaiReceiptMapper jiaoCaiReceiptMapper;
@@ -64,7 +65,36 @@ public class JiaoCaiReceiptServiceImpl implements IJiaoCaiReceiptService {
 
     @Override
     public ServerResponse delete(JiaoCaiReceipt jiaoCaiReceipt) {
-        return null;
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        jiaoCaiReceipt = jiaoCaiReceiptMapper.selectByPrimaryKey(jiaoCaiReceipt.getId());
+        //库存总账
+        JiaoCaiInventory jiaoCaiInventory = new JiaoCaiInventory();
+        jiaoCaiInventory.setIssuenumber(jiaoCaiReceipt.getIssuenumber());
+        jiaoCaiInventory.setSubcode(jiaoCaiReceipt.getSubcode());
+        jiaoCaiInventory.setQtyreceipt(0-jiaoCaiReceipt.getQtyreceipt());
+        //库存明细
+        JiaoCaiInventory_detail jiaoCaiInventory_detail = new JiaoCaiInventory_detail();
+        jiaoCaiInventory_detail.setIssuenumber(jiaoCaiReceipt.getIssuenumber());
+        jiaoCaiInventory_detail.setPack(jiaoCaiReceipt.getPack());
+        jiaoCaiInventory_detail.setQtyreceipt(0-jiaoCaiReceipt.getQtyreceipt());
+        jiaoCaiInventory_detail.setSubcode(jiaoCaiReceipt.getSubcode());
+//        判断平置区的库存是否足够，只有未上架的才允许修改收货数量
+        jiaoCaiInventory_detail.setLoc("STAGE");
+        List<JiaoCaiInventoryVo> jiaoCaiInventoryVoList = jiaoCaiInventoryService.selectInventoryDetail(1, 1,jiaoCaiInventory_detail).getData().getList();
+        if(jiaoCaiInventoryVoList == null ||
+                jiaoCaiInventoryVoList.size() == 0 || ((jiaoCaiInventoryVoList.get(0).getQtyfree() - jiaoCaiReceipt.getQtyreceipt()) < 0)){
+            return ServerResponse.createByErrorMessage("平置区库存已经上架，无法删除收货！");
+        }
+
+        //调整库存
+        int i = jiaoCaiInventoryService.add(jiaoCaiInventory, jiaoCaiInventory_detail);
+        //删除收货记录
+        i += jiaoCaiReceiptMapper.deleteByPrimaryKey(jiaoCaiReceipt.getId());
+        if(i > 0){
+            return ServerResponse.createBySuccessMsg("修改成功");
+        }else {
+            return ServerResponse.createByErrorMessage("修改失败，请联系管理员");
+        }
     }
 
     @Override
@@ -75,19 +105,20 @@ public class JiaoCaiReceiptServiceImpl implements IJiaoCaiReceiptService {
         jiaoCaiReceipt.setStatus("0");
         int i = jiaoCaiReceiptMapper.insertSelective(jiaoCaiReceipt);
         if(i > 0){
-            //增加库存总账
+            //库存总账
             JiaoCaiInventory jiaoCaiInventory = new JiaoCaiInventory();
             jiaoCaiInventory.setIssuenumber(jiaoCaiReceipt.getIssuenumber());
             jiaoCaiInventory.setSubcode(jiaoCaiReceipt.getSubcode());
             jiaoCaiInventory.setQtyreceipt(jiaoCaiReceipt.getQtyreceipt());
-            //增加库存明细
+            jiaoCaiInventory.setQtyfree(jiaoCaiReceipt.getQtyreceipt());
+            //库存明细
             JiaoCaiInventory_detail jiaoCaiInventory_detail = new JiaoCaiInventory_detail();
             jiaoCaiInventory_detail.setIssuenumber(jiaoCaiReceipt.getIssuenumber());
             jiaoCaiInventory_detail.setPack(jiaoCaiReceipt.getPack());
             jiaoCaiInventory_detail.setQtyreceipt(jiaoCaiReceipt.getQtyreceipt());
             jiaoCaiInventory_detail.setQtyfree(jiaoCaiReceipt.getQtyreceipt());
             jiaoCaiInventory_detail.setSubcode(jiaoCaiReceipt.getSubcode());
-
+//            加库存
             i = jiaoCaiInventoryService.add(jiaoCaiInventory, jiaoCaiInventory_detail);
         }
         if(i > 0){
@@ -99,7 +130,38 @@ public class JiaoCaiReceiptServiceImpl implements IJiaoCaiReceiptService {
 
     @Override
     public ServerResponse update(JiaoCaiReceipt jiaoCaiReceipt) {
-        return null;
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        JiaoCaiReceipt j = jiaoCaiReceiptMapper.selectByPrimaryKey(jiaoCaiReceipt.getId());
+        //库存总账
+        JiaoCaiInventory jiaoCaiInventory = new JiaoCaiInventory();
+        jiaoCaiInventory.setIssuenumber(j.getIssuenumber());
+        jiaoCaiInventory.setSubcode(j.getSubcode());
+        jiaoCaiInventory.setQtyreceipt(jiaoCaiReceipt.getQtyreceipt() - j.getQtyreceipt());
+        //库存明细
+        JiaoCaiInventory_detail jiaoCaiInventory_detail = new JiaoCaiInventory_detail();
+        jiaoCaiInventory_detail.setIssuenumber(j.getIssuenumber());
+        jiaoCaiInventory_detail.setPack(j.getPack());
+        jiaoCaiInventory_detail.setQtyreceipt(jiaoCaiReceipt.getQtyreceipt() - j.getQtyreceipt());
+        jiaoCaiInventory_detail.setSubcode(j.getSubcode());
+        if((j.getQtyreceipt() - jiaoCaiReceipt.getQtyreceipt() ) != 0){
+//        判断平置区的库存是否足够，只有未上架的才允许修改收货数量
+            jiaoCaiInventory_detail.setLoc("STAGE");
+            List<JiaoCaiInventoryVo> jiaoCaiInventoryVoList = jiaoCaiInventoryService.selectInventoryDetail(1, 1,jiaoCaiInventory_detail).getData().getList();
+            if(jiaoCaiInventoryVoList == null ||
+                    jiaoCaiInventoryVoList.size() == 0 || ((jiaoCaiInventoryVoList.get(0).getQtyfree() - Math.abs(j.getQtyreceipt())) < 0)){
+                return ServerResponse.createByErrorMessage("平置区库存已经上架，无法修改收货！");
+            }
+        }
+
+        //调整库存
+        int i = jiaoCaiInventoryService.add(jiaoCaiInventory, jiaoCaiInventory_detail);
+//        调整收货记录
+        i += jiaoCaiReceiptMapper.updateByPrimaryKeySelective(jiaoCaiReceipt);
+        if(i > 0){
+            return ServerResponse.createBySuccessMsg("修改成功");
+        }else {
+            return ServerResponse.createByErrorMessage("修改失败，请联系管理员");
+        }
     }
 
     private List<JiaoCaiReceiptVo> parseToJiaoCaiReceiptVo(List<JiaoCaiReceipt> jiaoCaiReceiptList) {
@@ -154,3 +216,4 @@ public class JiaoCaiReceiptServiceImpl implements IJiaoCaiReceiptService {
         return jiaoCaiReceiptVoList;
     }
 }
+

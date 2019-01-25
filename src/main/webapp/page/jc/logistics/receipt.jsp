@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<input type="hidden" id="currentType"/>
 	<!-- 查询 -->
 	<div align="center">
-		<select id="type" class="easyui-combobox" style="width:100px;">
+		<select id="type" class="easyui-combobox" style="width:120px;">
 			<option value="0">可收货品种</option>
 			<option value="1">已收货品种</option>
 		</select>

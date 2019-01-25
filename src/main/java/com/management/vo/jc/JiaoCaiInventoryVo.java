@@ -1,6 +1,14 @@
-package com.management.pojo.jc;
+package com.management.vo.jc;
 
-public class JiaoCaiInventory_detail {
+import java.math.BigDecimal;
+
+/**
+ * Author: wen-sir
+ * Description:
+ * DateCrated: 2019/1/25 17:38
+ * Modified By：
+ */
+public class JiaoCaiInventoryVo {
     private Long id;
 
     private String issuenumber;
@@ -29,6 +37,32 @@ public class JiaoCaiInventory_detail {
 
     private String bk5;
 
+    private String barcode;
+
+    private String descr;
+
+    private BigDecimal price;
+
+    private String publisher;
+
+    private String storerkey;
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getStorerkey() {
+        return storerkey;
+    }
+
+    public void setStorerkey(String storerkey) {
+        this.storerkey = storerkey;
+    }
+
     public Long getId() {
         return id;
     }
@@ -42,7 +76,7 @@ public class JiaoCaiInventory_detail {
     }
 
     public void setIssuenumber(String issuenumber) {
-        this.issuenumber = issuenumber == null ? null : issuenumber.trim();
+        this.issuenumber = issuenumber;
     }
 
     public String getSubcode() {
@@ -50,7 +84,7 @@ public class JiaoCaiInventory_detail {
     }
 
     public void setSubcode(String subcode) {
-        this.subcode = subcode == null ? null : subcode.trim();
+        this.subcode = subcode;
     }
 
     public Integer getQtyreceipt() {
@@ -98,7 +132,7 @@ public class JiaoCaiInventory_detail {
     }
 
     public void setLoc(String loc) {
-        this.loc = loc == null ? null : loc.trim();
+        this.loc = loc;
     }
 
     public String getBk1() {
@@ -106,7 +140,7 @@ public class JiaoCaiInventory_detail {
     }
 
     public void setBk1(String bk1) {
-        this.bk1 = bk1 == null ? null : bk1.trim();
+        this.bk1 = bk1;
     }
 
     public String getBk2() {
@@ -114,7 +148,7 @@ public class JiaoCaiInventory_detail {
     }
 
     public void setBk2(String bk2) {
-        this.bk2 = bk2 == null ? null : bk2.trim();
+        this.bk2 = bk2;
     }
 
     public String getBk3() {
@@ -122,7 +156,7 @@ public class JiaoCaiInventory_detail {
     }
 
     public void setBk3(String bk3) {
-        this.bk3 = bk3 == null ? null : bk3.trim();
+        this.bk3 = bk3;
     }
 
     public String getBk4() {
@@ -130,7 +164,7 @@ public class JiaoCaiInventory_detail {
     }
 
     public void setBk4(String bk4) {
-        this.bk4 = bk4 == null ? null : bk4.trim();
+        this.bk4 = bk4;
     }
 
     public String getBk5() {
@@ -138,6 +172,30 @@ public class JiaoCaiInventory_detail {
     }
 
     public void setBk5(String bk5) {
-        this.bk5 = bk5 == null ? null : bk5.trim();
+        this.bk5 = bk5;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

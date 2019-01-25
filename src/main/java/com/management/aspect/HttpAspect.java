@@ -35,7 +35,7 @@ public class HttpAspect {
 
 
 //    @Pointcut("execution(public * com.management.controller.login.UserController.*(..))")
-    @Pointcut("execution(public * com.management.controller..*.*(..)) && !execution(public * com.management.controller.wechat..*.*(..))")
+    @Pointcut("execution(public * com.management.controller..*.*(..)) && !execution(public * com.management.controller.wechat..*.*(..)) && !execution(public * com.management.controller.login.UserController.login(..))")
     public void log() {
     }
 
@@ -58,7 +58,7 @@ public class HttpAspect {
                     }
                 }
                 if(login == null ){
-                    response.sendRedirect("/login.html");
+                    response.sendRedirect("/management/login.html");
                 }
             }
             return;

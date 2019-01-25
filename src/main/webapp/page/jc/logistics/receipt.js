@@ -5,11 +5,10 @@ function addInfo(){
 	var receiptno = $("#add_receiptno").textbox("getValue");
 	var issuenumber = $("#add_issuenumber").combobox("getValue");
 	var subcode = $("#add_subcode").textbox('getValue');
-	var qtyunreceipt = $("#add_qtyunreceipt").textbox('getValue');
+	var qty = $("#add_qtyunreceipt").textbox('getValue');
 	var qtyreceipt = $("#add_qtyreceipt").textbox('getValue');
 	var pack = $("#add_pack").combobox('getValue');
 	var printPlant = $("#add_printPlant").combobox('getValue');
-	var addwho = $("#add_addwho").textbox('getValue');
 	if(receiptno == null || receiptno == "" ){
 		$.messager.alert("操作提示","收货编号不能为空！","error");
 		return;
@@ -26,10 +25,6 @@ function addInfo(){
 		$.messager.alert("操作提示","收货数量不能为空！","error");
 		return;
 	}
-	if(addwho == null || addwho == "" ){
-		$.messager.alert("操作提示","收货人不能为空！","error");
-		return;
-	}
 	var reg = new RegExp("^[0-9]*$");
 	if(!reg.test(pack)){
 		$.messager.alert("操作提示","捆扎数只能输入数字！","error");
@@ -39,7 +34,7 @@ function addInfo(){
 		$.messager.alert("操作提示","收货数量只能输入数字！","error");
 		return;
 	}
-	if(parseInt(qtyreceipt) > parseInt(qtyunreceipt)){
+	if(parseInt(qtyreceipt) > parseInt(qty)){
 		$.messager.alert("操作提示","收货数量不能大于未到数量！","error");
 		return;
 	}
@@ -47,17 +42,18 @@ function addInfo(){
 		$.messager.alert("操作提示","印刷厂不能为空！","error");
 		return;
 	}
-	var param ="printPlant="+ printPlant + "&receiptno=" + receiptno + "&subcode=" + subcode + "&pack=" + pack + "&qtyreceipt=" + qtyreceipt + "&addwho=" + addwho + "&issuenumber=" + issuenumber + "&qtyunreceipt=" + qtyunreceipt;
+	var param ="printPlant="+ printPlant + "&receiptno=" + receiptno + "&subcode=" + subcode + "&pack=" + pack + "&qtyreceipt=" + qtyreceipt + "&issuenumber=" + issuenumber + "&qty=" + qty;
 	$.ajax({
 		type:'POST',
-		url:'jc/receipt_save.action',
+		url:'/management/jc/receipt/add',
 		data:param,
 		dataType:'json',
 		success:function(data){
 			if(data){
-				$.messager.alert("操作提示",data,"info");
-				$("#w-addInfo").window("close");
-				load();
+				$.messager.alert("操作提示",data.msg,"info",function () {
+					$("#w-addInfo").window("close");
+					load();
+				});
 			}else{
 				$.messager.alert("操作提示","修改失败","error");
 			}
@@ -186,11 +182,6 @@ function editInfo(){
 		$.messager.alert("操作提示","征订代码不能为空！","error");
 		return;
 	}
-	var addwho = $.trim($("#edit_addwho").val());
-	if(addwho == null || addwho == ""){
-		$.messager.alert("操作提示","修改人不能为空！","error");
-		return;
-	}
 	var pack = $("#edit_pack").combobox('getValue');
 	if(pack == null || pack == "" ){
 		$.messager.alert("操作提示","捆扎不能为空！","error");
@@ -198,12 +189,12 @@ function editInfo(){
 	}
 	var qtyreceipt = $.trim($("#edit_qtyreceipt").val());
 	if(qtyreceipt == null || qtyreceipt == "" ){
-		$.messager.alert("操作提示","收获数量不能为空！","error");
+		$.messager.alert("操作提示","收货数量不能为空！","error");
 		return;
 	}
 	var receiptno = $("#edit_receiptno").textbox('getValue');
 	if(receiptno == null || receiptno == "" ){
-		$.messager.alert("操作提示","收获编号不能为空！","error");
+		$.messager.alert("操作提示","收货编号不能为空！","error");
 		return;
 	}
 	var printPlant = $("#edit_printPlant").combobox('getValue');
@@ -221,18 +212,19 @@ function editInfo(){
 		return;
 	}
 	
-	var param = "printPlant=" + printPlant + "&id=" + id + "&subcode=" + subcode + "&pack=" + pack + "&qtyreceipt=" + qtyreceipt + "&addwho=" + addwho + "&issuenumber=" + issuenumber + "&receiptno=" + receiptno;      
+	var param = "printPlant=" + printPlant + "&id=" + id + "&subcode=" + subcode + "&pack=" + pack + "&qtyreceipt=" + qtyreceipt + "&issuenumber=" + issuenumber + "&receiptno=" + receiptno;
 	$.ajax({
 		type:"post",
-		url:"jc/receipt_update.action",
+		url:"/management/jc/receipt/update",
 		data:param,
 		dataType:'json',
 		success:function(data){
 			if(data){
-				$.messager.alert("操作提示",data,"info");
+				$.messager.alert("操作提示",data.msg,"info", function () {
+                    $("#w-editInfo").window("close");
+                    $("#data").datagrid('reload');
+                });
 			}
-			$("#w-editInfo").window("close");
-			$("#data").datagrid('reload');
 		},
 		error:function(){
 			$.messager.alert("操作提示","数据错误，联系管理员！","error");
@@ -248,12 +240,13 @@ function removeInfo(){
 	var row = $('#data').datagrid('getSelected');
 	if(row){
 		$.ajax({
-			url:'jc/receipt_delete.action',
+			url:'/management/jc/receipt/delete',
 			data:'id=' + row.id,
 			dataType:'json',
 			success:function(data){
-				$.messager.alert("操作提示",data,"info");
-				load();
+				$.messager.alert("操作提示",data.msg,"info",function () {
+                    $("#data").datagrid('reload');
+                });
 			},
 			error:function(){
 				$.messager.alert("提示","数据错误，联系管理员","info");
@@ -272,12 +265,15 @@ function chooseSubcode (){
 	var issuenumber = $("#issuenumber").combobox("getValue");
 	if(type == "0") {
 		$("#c_subcode").datagrid({
-			url:'jc/receipt_waitReceiptSubcodeData.action?issuenumber=' + issuenumber,
+			url:'/management/jc/allowReceipt/info?issuenumber=' + issuenumber,
 			height:'auto',
 			fitColumns: true,
 			striped:true,
 			rownumbers:true,
 			border:true,
+            pagination:true,
+            pageSize:20,
+            pageList:[10,20,50],
 			singleSelect:true,
 			showFooter: true,
 			toolbar:'#tb2',
@@ -318,12 +314,16 @@ function chooseSubcode (){
 		});
 		$("#showSubcode").window("open");
 	}else if(type == "1"){
+		$("#showSubcode").window("open");
 		$("#c_subcode").datagrid({
-			url:'jc/receipt_loadReceiptSubcodeInfo.action?issuenumber=' + issuenumber + "&type=0",
+			url:'/management/jc/receipt/info?issuenumber=' + issuenumber,
 			height:'auto',
 			fitColumns: true,
 			striped:true,
 			rownumbers:true,
+            pagination:true,
+            pageSize:20,
+            pageList:[10,20,50],
 			border:true,
 			singleSelect:true,
 			showFooter: true,
@@ -367,8 +367,7 @@ function chooseSubcode (){
 			    width:30
 			}]]
 		});
-		$("#showSubcode").window("open");
-		
+
 	}
 	
 }
@@ -540,23 +539,25 @@ tool = {
 				$.messager.alert("操作提示","没有选中的记录","error");
 				return;
 			}
+			$("#w-addInfo").window("open");
 			$("#add_issuenumber").combobox("setValue",row.issuenumber);
 			$("#add_subcode").textbox('setValue',row.subcode);
 			$("#add_barcode").textbox('setValue',row.barcode);
 			$("#add_descr").textbox('setValue',row.descr);
-			$("#add_publisher").combobox('setValue',row.storerkey);
+			$("#add_publisher").combobox('setValue',row.publisher);
 			$("#add_price").textbox('setValue',row.price);
 			$("#add_orderqty").textbox('setValue',row.orderqty);
-			$("#add_qtyunreceipt").textbox('setValue',row.qtyunreceipt);
+			$("#add_qtyunreceipt").textbox('setValue',row.qty);
 			$("#add_qtyreceipt").textbox('setValue','');
+			$("#add_receiptno").textbox('setValue','');
+			$("#add_printPlant").combobox('setValue','');
 			$("#add_pack").combobox({
-				url:'jc/pack_query.action?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
+				url:'/management/jc/pack/tips?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
 				valueField:'pack',
 				textField:'pack',
 				panelHeight:'auto',
 				editable:false
 			});
-			$("#w-addInfo").window("open");
 		},
 		edit : function (){
 			var currentType = $("#currentType").val();

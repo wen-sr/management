@@ -177,7 +177,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="findAll" resultType="com.management.pojo.jc.JiaoCaiReceipt">
-    select <include refid="Base_Column_List"/>
+    select distinct <include refid="Base_Column_List"/>
     from JiaoCaiReceipt
     <where>
       <if test="id != null and id != '' ">
