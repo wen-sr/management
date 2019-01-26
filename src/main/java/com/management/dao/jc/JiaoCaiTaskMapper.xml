@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jc.JiaoCaiTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jc.JiaoCaiTask" >
+    <constructor >
+      <idArg column="id" jdbcType="NUMERIC" javaType="java.lang.Long" />
+      <arg column="infid" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="method" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="trk_no" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="tasktype" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="trk_desc" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="trk_prty" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="orderId" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="warehouseId" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="districtid" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="isback" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="trk_st" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="traycodes" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="needwinding" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="storetype" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="sendcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="sendmsg" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="retcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="retmsg" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="rettime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="bk1" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="bk2" jdbcType="NVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, infid, method, trk_no, tasktype, trk_desc, trk_prty, orderId, warehouseId, districtid, 
+    isback, trk_st, traycodes, needwinding, storetype, sendcode, sendmsg, retcode, retmsg, 
+    rettime, adddate, addwho, bk1, bk2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from JiaoCaiTask
+    where id = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from JiaoCaiTask
+    where id = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiTask" >
+    insert into JiaoCaiTask (id, infid, method, 
+      trk_no, tasktype, trk_desc, 
+      trk_prty, orderId, warehouseId, 
+      districtid, isback, trk_st, 
+      traycodes, needwinding, storetype, 
+      sendcode, sendmsg, retcode, 
+      retmsg, rettime, adddate, 
+      addwho, bk1, bk2
+      )
+    values (#{id,jdbcType=NUMERIC}, #{infid,jdbcType=NVARCHAR}, #{method,jdbcType=NVARCHAR}, 
+      #{trkNo,jdbcType=NVARCHAR}, #{tasktype,jdbcType=NVARCHAR}, #{trkDesc,jdbcType=NVARCHAR}, 
+      #{trkPrty,jdbcType=NVARCHAR}, #{orderid,jdbcType=NVARCHAR}, #{warehouseid,jdbcType=NVARCHAR}, 
+      #{districtid,jdbcType=NVARCHAR}, #{isback,jdbcType=NVARCHAR}, #{trkSt,jdbcType=NVARCHAR}, 
+      #{traycodes,jdbcType=NVARCHAR}, #{needwinding,jdbcType=NVARCHAR}, #{storetype,jdbcType=NVARCHAR}, 
+      #{sendcode,jdbcType=NVARCHAR}, #{sendmsg,jdbcType=NVARCHAR}, #{retcode,jdbcType=NVARCHAR}, 
+      #{retmsg,jdbcType=NVARCHAR}, #{rettime,jdbcType=TIMESTAMP}, #{adddate,jdbcType=TIMESTAMP}, 
+      #{addwho,jdbcType=NVARCHAR}, #{bk1,jdbcType=NVARCHAR}, #{bk2,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiTask" >
+    insert into JiaoCaiTask
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="infid != null" >
+        infid,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="trkNo != null" >
+        trk_no,
+      </if>
+      <if test="tasktype != null" >
+        tasktype,
+      </if>
+      <if test="trkDesc != null" >
+        trk_desc,
+      </if>
+      <if test="trkPrty != null" >
+        trk_prty,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="warehouseid != null" >
+        warehouseId,
+      </if>
+      <if test="districtid != null" >
+        districtid,
+      </if>
+      <if test="isback != null" >
+        isback,
+      </if>
+      <if test="trkSt != null" >
+        trk_st,
+      </if>
+      <if test="traycodes != null" >
+        traycodes,
+      </if>
+      <if test="needwinding != null" >
+        needwinding,
+      </if>
+      <if test="storetype != null" >
+        storetype,
+      </if>
+      <if test="sendcode != null" >
+        sendcode,
+      </if>
+      <if test="sendmsg != null" >
+        sendmsg,
+      </if>
+      <if test="retcode != null" >
+        retcode,
+      </if>
+      <if test="retmsg != null" >
+        retmsg,
+      </if>
+      <if test="rettime != null" >
+        rettime,
+      </if>
+      <if test="adddate != null" >
+        adddate,
+      </if>
+      <if test="addwho != null" >
+        addwho,
+      </if>
+      <if test="bk1 != null" >
+        bk1,
+      </if>
+      <if test="bk2 != null" >
+        bk2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="infid != null" >
+        #{infid,jdbcType=NVARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=NVARCHAR},
+      </if>
+      <if test="trkNo != null" >
+        #{trkNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="tasktype != null" >
+        #{tasktype,jdbcType=NVARCHAR},
+      </if>
+      <if test="trkDesc != null" >
+        #{trkDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="trkPrty != null" >
+        #{trkPrty,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=NVARCHAR},
+      </if>
+      <if test="warehouseid != null" >
+        #{warehouseid,jdbcType=NVARCHAR},
+      </if>
+      <if test="districtid != null" >
+        #{districtid,jdbcType=NVARCHAR},
+      </if>
+      <if test="isback != null" >
+        #{isback,jdbcType=NVARCHAR},
+      </if>
+      <if test="trkSt != null" >
+        #{trkSt,jdbcType=NVARCHAR},
+      </if>
+      <if test="traycodes != null" >
+        #{traycodes,jdbcType=NVARCHAR},
+      </if>
+      <if test="needwinding != null" >
+        #{needwinding,jdbcType=NVARCHAR},
+      </if>
+      <if test="storetype != null" >
+        #{storetype,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendcode != null" >
+        #{sendcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendmsg != null" >
+        #{sendmsg,jdbcType=NVARCHAR},
+      </if>
+      <if test="retcode != null" >
+        #{retcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="retmsg != null" >
+        #{retmsg,jdbcType=NVARCHAR},
+      </if>
+      <if test="rettime != null" >
+        #{rettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="bk1 != null" >
+        #{bk1,jdbcType=NVARCHAR},
+      </if>
+      <if test="bk2 != null" >
+        #{bk2,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jc.JiaoCaiTask" >
+    update JiaoCaiTask
+    <set >
+      <if test="infid != null" >
+        infid = #{infid,jdbcType=NVARCHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=NVARCHAR},
+      </if>
+      <if test="trkNo != null" >
+        trk_no = #{trkNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="tasktype != null" >
+        tasktype = #{tasktype,jdbcType=NVARCHAR},
+      </if>
+      <if test="trkDesc != null" >
+        trk_desc = #{trkDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="trkPrty != null" >
+        trk_prty = #{trkPrty,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=NVARCHAR},
+      </if>
+      <if test="warehouseid != null" >
+        warehouseId = #{warehouseid,jdbcType=NVARCHAR},
+      </if>
+      <if test="districtid != null" >
+        districtid = #{districtid,jdbcType=NVARCHAR},
+      </if>
+      <if test="isback != null" >
+        isback = #{isback,jdbcType=NVARCHAR},
+      </if>
+      <if test="trkSt != null" >
+        trk_st = #{trkSt,jdbcType=NVARCHAR},
+      </if>
+      <if test="traycodes != null" >
+        traycodes = #{traycodes,jdbcType=NVARCHAR},
+      </if>
+      <if test="needwinding != null" >
+        needwinding = #{needwinding,jdbcType=NVARCHAR},
+      </if>
+      <if test="storetype != null" >
+        storetype = #{storetype,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendcode != null" >
+        sendcode = #{sendcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendmsg != null" >
+        sendmsg = #{sendmsg,jdbcType=NVARCHAR},
+      </if>
+      <if test="retcode != null" >
+        retcode = #{retcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="retmsg != null" >
+        retmsg = #{retmsg,jdbcType=NVARCHAR},
+      </if>
+      <if test="rettime != null" >
+        rettime = #{rettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        addwho = #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="bk1 != null" >
+        bk1 = #{bk1,jdbcType=NVARCHAR},
+      </if>
+      <if test="bk2 != null" >
+        bk2 = #{bk2,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiTask" >
+    update JiaoCaiTask
+    set infid = #{infid,jdbcType=NVARCHAR},
+      method = #{method,jdbcType=NVARCHAR},
+      trk_no = #{trkNo,jdbcType=NVARCHAR},
+      tasktype = #{tasktype,jdbcType=NVARCHAR},
+      trk_desc = #{trkDesc,jdbcType=NVARCHAR},
+      trk_prty = #{trkPrty,jdbcType=NVARCHAR},
+      orderId = #{orderid,jdbcType=NVARCHAR},
+      warehouseId = #{warehouseid,jdbcType=NVARCHAR},
+      districtid = #{districtid,jdbcType=NVARCHAR},
+      isback = #{isback,jdbcType=NVARCHAR},
+      trk_st = #{trkSt,jdbcType=NVARCHAR},
+      traycodes = #{traycodes,jdbcType=NVARCHAR},
+      needwinding = #{needwinding,jdbcType=NVARCHAR},
+      storetype = #{storetype,jdbcType=NVARCHAR},
+      sendcode = #{sendcode,jdbcType=NVARCHAR},
+      sendmsg = #{sendmsg,jdbcType=NVARCHAR},
+      retcode = #{retcode,jdbcType=NVARCHAR},
+      retmsg = #{retmsg,jdbcType=NVARCHAR},
+      rettime = #{rettime,jdbcType=TIMESTAMP},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
+      addwho = #{addwho,jdbcType=NVARCHAR},
+      bk1 = #{bk1,jdbcType=NVARCHAR},
+      bk2 = #{bk2,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>
