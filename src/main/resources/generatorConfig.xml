@@ -77,12 +77,12 @@
         <!--<table tableName="JiaoCaiNumber" domainObjectName="JiaoCaiNumber" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiOrders" domainObjectName="JiaoCaiOrders" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="allowDistribution" domainObjectName="AllowDistribution" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
-        <table tableName="allowReceipt" domainObjectName="AllowReceipt" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <!--<table tableName="allowReceipt" domainObjectName="AllowReceipt" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <table tableName="JiaoCaiItrn" domainObjectName="JiaoCaiItrn" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <!--<table tableName="JiaoCaiPack" domainObjectName="JiaoCaiPack" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiReceipt" domainObjectName="JiaoCaiReceipt" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiSku" domainObjectName="JiaoCaiSku" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiStorer" domainObjectName="JiaoCaiStorer" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
 
-        <!-- geelynote mybatis插件的搭建 -->
     </context>
 </generatorConfiguration>

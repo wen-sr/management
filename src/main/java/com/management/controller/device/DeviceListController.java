@@ -32,7 +32,7 @@ public class DeviceListController extends BaseCotroller {
     public ServerResponse addDevice(HttpSession session, DeviceList deviceList, @RequestParam(value = "organizationId", defaultValue = "0") String organizationId ){
         Login user = (Login) session.getAttribute(Constant.CURRENT_USER);
         if(user != null){
-            if(!super.isAllow(user, Constant.Role.ROLE_TECHNOLOGY)){
+            if(!super.isAllow(user, Constant.Role.ROLE_DEVICE)){
                 return ServerResponse.createByErrorCodeMessage(ResponseCode.NO_AUTHORITY.getCode(),"对不起，您没有权限操作");
             }
 
@@ -56,7 +56,7 @@ public class DeviceListController extends BaseCotroller {
         Login user = (Login) session.getAttribute(Constant.CURRENT_USER);
 
         if(user != null){
-            if(!super.isAllow(user, Constant.Role.ROLE_TECHNOLOGY)){
+            if(!super.isAllow(user, Constant.Role.ROLE_DEVICE)){
                 return ServerResponse.createByErrorCodeMessage(ResponseCode.NO_AUTHORITY.getCode(),"对不起，您没有权限操作");
             }
             return deviceListService.editDevice(deviceList);
@@ -69,7 +69,7 @@ public class DeviceListController extends BaseCotroller {
     public ServerResponse deleteDevice(HttpSession session, DeviceList deviceList){
         Login user = (Login) session.getAttribute(Constant.CURRENT_USER);
         if(user != null){
-            if(!super.isAllow(user, Constant.Role.ROLE_TECHNOLOGY)){
+            if(!super.isAllow(user, Constant.Role.ROLE_DEVICE)){
                 return ServerResponse.createByErrorCodeMessage(ResponseCode.NO_AUTHORITY.getCode(),"对不起，您没有权限操作");
             }
             return deviceListService.deleteDevice(deviceList);

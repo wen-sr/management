@@ -122,7 +122,23 @@
     where issuenumber = #{issuenumber,jdbcType=NVARCHAR}
     and subcode = #{subcode,jdbcType=NVARCHAR}
   </select>
-  <update id="addInventory" parameterType="com.management.pojo.jc.JiaoCaiInventory" >
+    <select id="selectAll" resultType="com.management.pojo.jc.JiaoCaiInventory">
+      select <include refid="Base_Column_List"/>
+      from JiaoCaiInventory
+      <where>
+        <if test="id != null and id != '' ">
+          and id = #{id,jdbcType=NVARCHAR}
+        </if>
+        <if test="issuenumber != null and issuenumber != '' " >
+          and issuenumber = #{issuenumber}
+        </if>
+        <if test="subcode != null and subcode != '' " >
+          and subcode = #{subcode}
+        </if>
+      </where>
+      order by issuenumber,subcode
+    </select>
+    <update id="addInventory" parameterType="com.management.pojo.jc.JiaoCaiInventory" >
     update JiaoCaiInventory
     set qtyreceipt = qtyreceipt + #{qtyreceipt},
     qtyfree = qtyfree + #{qtyreceipt}

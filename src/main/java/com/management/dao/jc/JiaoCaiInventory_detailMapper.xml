@@ -201,9 +201,23 @@
   <select id="selectByIssuenumberAndSubcodeAndPack" resultType="com.management.pojo.jc.JiaoCaiInventory_detail">
     select <include refid="Base_Column_List" />
     from JiaoCaiInventory_detail
-    where issuenumber = #{issuenumber,jdbcType=NVARCHAR}
-    and subcode = #{subcode,jdbcType=NVARCHAR}
-    and pack = #{pack,jdbcType=INTEGER}
+    <where>
+      <if test="id != null and id != '' ">
+        and id = #{id,jdbcType=NVARCHAR}
+      </if>
+      <if test="issuenumber != null and issuenumber != '' " >
+        and issuenumber = #{issuenumber}
+      </if>
+      <if test="subcode != null and subcode != '' " >
+        and subcode = #{subcode}
+      </if>
+      <if test="pack != null and pack != '' " >
+        and pack = #{pack}
+      </if>
+      <if test="loc != null and loc != '' " >
+        and loc = #{loc}
+      </if>
+    </where>
   </select>
   <select id="selectAll" resultType="com.management.pojo.jc.JiaoCaiInventory_detail">
     select <include refid="Base_Column_List"/>
@@ -235,5 +249,9 @@
     and subcode = #{subcode,jdbcType=NVARCHAR}
     and pack = #{pack,jdbcType=INTEGER}
     and loc = #{loc,jdbcType=NVARCHAR}
+  </update>
+
+  <update id="move" parameterType="com.management.vo.jc.JiaoCaiInventoryVo">
+    update JiaoCaiInventory_detail
   </update>
 </mapper>

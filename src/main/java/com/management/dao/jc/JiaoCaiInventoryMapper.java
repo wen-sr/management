@@ -2,6 +2,8 @@ package com.management.dao.jc;
 
 import com.management.pojo.jc.JiaoCaiInventory;
 
+import java.util.List;
+
 public interface JiaoCaiInventoryMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -18,4 +20,6 @@ public interface JiaoCaiInventoryMapper {
     JiaoCaiInventory selectByIssuenumberAndSubcode(JiaoCaiInventory jiaoCaiInventory);
 
     int addInventory(JiaoCaiInventory jiaoCaiInventory);
+
+    List<JiaoCaiInventory> selectAll(JiaoCaiInventory jiaoCaiInventory);
 }

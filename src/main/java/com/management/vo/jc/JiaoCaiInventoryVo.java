@@ -15,13 +15,13 @@ public class JiaoCaiInventoryVo {
 
     private String subcode;
 
-    private Integer qtyreceipt;
+    private Integer qtyreceipt = 0;
 
-    private Integer qtyallocated;
+    private Integer qtyallocated = 0;
 
-    private Integer qtyshipped;
+    private Integer qtyshipped = 0;
 
-    private Integer qtyfree;
+    private Integer qtyfree = 0;
 
     private Integer pack;
 
@@ -46,6 +46,16 @@ public class JiaoCaiInventoryVo {
     private String publisher;
 
     private String storerkey;
+
+    private String toLoc;
+
+    public String getToLoc() {
+        return toLoc;
+    }
+
+    public void setToLoc(String toLoc) {
+        this.toLoc = toLoc;
+    }
 
     public String getPublisher() {
         return publisher;
