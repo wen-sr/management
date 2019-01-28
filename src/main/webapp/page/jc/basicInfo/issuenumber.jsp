@@ -55,8 +55,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			style="width: 500px; height: 250px; padding: 10px;">
 			<form id="addform" align="center" style="text-align:center;margin: 10px;line-height: 41px;">
 				<h2>添加期号</h2>
-				输入新的期号：<input class="easyui-textbox" type="text" id="issuenumber"/><br>
-				说明：<input class="easyui-textbox" type="text" id="note"/>
+				输入新的期号：<input class="easyui-textbox" type="text" id="issuenumber" data-options="required:true"/><br>
+				说明：<input class="easyui-textbox" type="text" id="note" data-options="required:true"/>
 				<br>
 				<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-add" id="addInfo" onclick="addInfo()">确认</a>
 			</form>

@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>书名：</td><td><input class="easyui-textbox" type="text" id="addPack_descr" data-options="readonly:true"/></td>
 				</tr>
 				<tr>
-					<td>捆扎：</td><td><input class="easyui-textbox" type="text" id="addPack_pack" /></td>
+					<td>捆扎：</td><td><input class="easyui-textbox" type="text" id="addPack_pack"  data-options="required:true"/></td>
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
@@ -200,15 +200,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<h2>添加图书资料</h2>
 				<table id="formtable_add" border="0px" align="center" cellpadding='2'width="100%">
 				<tr>
-					<td>期号:</td><td><select class="easyui-combobox" id="issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',width:155" ></select></td>
-					<td>征订代码：</td><td><input class="easyui-textbox" type="text" id="subcode" /></td>
+					<td>期号:</td><td><select class="easyui-combobox" id="issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',width:155"  data-options="required:true"></select></td>
+					<td>征订代码：</td><td><input class="easyui-textbox" type="text" id="subcode"  data-options="required:true"/></td>
 				</tr>
 				<tr>
-					<td>条码：</td><td><input class="easyui-textbox" type="text" id="barcode" /></td>
-					<td>书名：</td><td><input class="easyui-textbox" type="text" id="descr" /></td>
+					<td>条码：</td><td><input class="easyui-textbox" type="text" id="barcode"  data-options="required:true"/></td>
+					<td>书名：</td><td><input class="easyui-textbox" type="text" id="descr"  data-options="required:true"/></td>
 				</tr>
 				<tr>
-					<td>出版社：</td><td><select class="easyui-combobox" id="publisher" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',width:155" ></select></td>
+					<td>出版社：</td><td><select class="easyui-combobox" id="publisher" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',width:155,required:true" ></select></td>
 					<td>定价：</td><td><input class="easyui-textbox" type="text" id="price" /></td>
 				</tr>
 				<tr>

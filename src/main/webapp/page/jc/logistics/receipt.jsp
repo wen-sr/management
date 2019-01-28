@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<td>出版社：</td><td><input class="easyui-combobox" id="add_publisher" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',readonly:true"/></td>
-					<td>捆扎：</td><td><input class="easyui-combobox" type="text" id="add_pack" /></td>
+					<td>捆扎：</td><td><input class="easyui-combobox" type="text" id="add_pack" data-options="required:true"/></td>
 				</tr>
 				<tr>
 					<td>定价：</td><td><input class="easyui-textbox" type="text" id="add_price" data-options="readonly:true" /></td>
@@ -71,15 +71,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<td>未到数量：</td><td><input class="easyui-textbox" type="text" id="add_qtyunreceipt" data-options="readonly:true"  /></td>
-					<td>收货数量：</td><td><input class="easyui-textbox" type="text" id="add_qtyreceipt"/></td>
+					<td>收货数量：</td><td><input class="easyui-textbox" type="text" id="add_qtyreceipt" data-options="required:true"/></td>
 				</tr>
 				<tr>
-					<td>收货编号：</td><td><input class="easyui-textbox" type="text" id="add_receiptno"/></td>
-					<td>印刷厂：</td><td><input class="easyui-combobox" id="add_printPlant" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200'"/></td>
+					<td>收货编号：</td><td><input class="easyui-textbox" type="text" id="add_receiptno" data-options="required:true"/></td>
+					<td>印刷厂：</td><td><input class="easyui-combobox" id="add_printPlant" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',required:true"/></td>
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
-						<a class="easyui-linkbutton" onclick="addInfo()">提交</a>
+						<a class="easyui-linkbutton" iconCls="icon-ok" onclick="addInfo()">提交</a>
 					</td>
 				</tr>
 			</table>
@@ -116,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
-						<a class="easyui-linkbutton" id="submitgo" onclick="editInfo()">提交</a>
+						<a class="easyui-linkbutton" iconCls="icon-ok" id="submitgo" onclick="editInfo()">提交</a>
 					</td>
 				</tr>
 			</table>

@@ -44,7 +44,7 @@
 	<table width="100%"  id="data">
 	</table>
 </div>
-<div id="tb3" style="text-align:left;display: none;padding-left:5%;" >
+<div id="tb3" style="text-align:center;display: none;">
 	<a class="easyui-linkbutton" iconCls="icon-edit" id="split" onclick="tool.split()" >上架移库</a>
 	<a class="easyui-linkbutton" iconCls="icon-edit" id="compute" onclick="tool.compute()">移库</a>
 </div>
@@ -67,7 +67,7 @@
 <div id="w-detail" class="easyui-window" title="库存明细" data-options="modal:true,closed:true,iconCls:'icon-save',maximized:true,minimizable: false, maximizable: false" >
 	<table id="data-detail"></table>
 </div>
-<div id="w-detail-split" class="easyui-window" title="上架移库" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:750px;height:300px;padding:10px;" >
+<div id="w-detail-split" class="easyui-window" title="上架移库" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:auto;height:300px;padding:10px;" >
 	<input type="hidden"  id="split_id"/>
 	<h2 align="center">上架移库</h2>
 	<table id="data-detail-split" align="center">
@@ -77,20 +77,21 @@
 			<td>捆扎：</td><td><input class="easyui-textbox" type="text" id="split_pack" data-options="readonly:true" /></td>
 		</tr>
 		<tr>
-			<td>可移动数量：</td><td><input class="easyui-textbox" type="text" id="split_qtyallocated" data-options="readonly:true"  /></td>
+			<td>可移动数量：</td><td><input class="easyui-textbox" type="text" id="split_qtyfree" data-options="readonly:true"  /></td>
 			<td>原储位：</td><td><input class="easyui-textbox" type="text" id="split_loc" data-options="readonly:true"  /></td>
-			<td>移动数量：</td><td><input class="easyui-textbox" type="text" id="split_qtysplit" data-options="required:true"/></td>
+			<td>原容器：</td><td><input class="easyui-textbox" type="text" id="split_containerId" data-options="readonly:true"  /></td>
 		</tr>
 		<tr>
+			<td>移动数量：</td><td><input class="easyui-textbox" type="text" id="split_qtysplit" data-options="required:true"/></td>
 			<td>目的储位：</td><td><input class="easyui-textbox" type="text" id="split_toLoc" data-options="required:true"/></td>
+			<td>目的容器：</td><td><input class="easyui-textbox" type="text" id="split_toContainerId"/></td>
 		</tr>
 		<tr>
 			<td colspan='8' align="center">
-				<a class="easyui-linkbutton" id="splitInfo" onclick="move()">提交</a>
+				<a class="easyui-linkbutton" iconCls="icon-ok" id="splitInfo" onclick="move()">提交</a>
 			</td>
 		</tr>
 	</table>
 </div>
-
 </body>
 </html>

@@ -204,6 +204,7 @@ public class UserController extends BaseCotroller {
         targetCookies.add(addWebSite(Constant.URL_JIAOCAI, Constant.USERID, user.getId()));
         targetCookies.add(addWebSite(Constant.URL_JIAOCAI_2, Constant.USERID, user.getId()));
         targetCookies.add(addWebSite(Constant.URL_CANG_GUAN, Constant.USERID, user.getId()));
+        targetCookies.add(addWebSite(Constant.URL_TMS, Constant.USERID, user.getId()));
 
         return targetCookies;
     }

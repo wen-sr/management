@@ -76,11 +76,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>定价：</td><td><input class="easyui-textbox" type="text" id="add_price" data-options="readonly:true"  /></td>
 				</tr>
 				<tr>
-					<td>采购数量：</td><td><input class="easyui-textbox" type="text" id="add_orderqty" /></td>
+					<td>采购数量：</td><td><input class="easyui-textbox" type="text" id="add_orderqty" data-options="required:true" /></td>
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
-						<a class="easyui-linkbutton"  onclick="addInfo()">提交</a>
+						<a class="easyui-linkbutton" iconCls="icon-ok" onclick="addInfo()">提交</a>
 					</td>
 				</tr>
 			</table>
@@ -111,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
-						<a class="easyui-linkbutton" id="submitgo" onclick="editInfo()">提交</a>
+						<a class="easyui-linkbutton" iconCls="icon-ok" id="submitgo" onclick="editInfo()">提交</a>
 					</td>
 				</tr>
 			</table>

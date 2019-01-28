@@ -12,6 +12,7 @@
       <arg column="qtyfree" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="pack" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="loc" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="containerId" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="BK1" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="BK2" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="BK3" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -21,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, issuenumber, subcode, qtyreceipt, qtyallocated, qtyshipped, qtyfree, pack, loc, 
-    BK1, BK2, BK3, BK4, BK5
+    containerId, BK1, BK2, BK3, BK4, BK5
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -37,13 +38,13 @@
     insert into JiaoCaiInventory_detail (id, issuenumber, subcode, 
       qtyreceipt, qtyallocated, qtyshipped, 
       qtyfree, pack, loc, 
-      BK1, BK2, BK3, BK4, 
-      BK5)
+      containerId, BK1, BK2, 
+      BK3, BK4, BK5)
     values (#{id,jdbcType=NUMERIC}, #{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, 
       #{qtyreceipt,jdbcType=INTEGER}, #{qtyallocated,jdbcType=INTEGER}, #{qtyshipped,jdbcType=INTEGER}, 
       #{qtyfree,jdbcType=INTEGER}, #{pack,jdbcType=INTEGER}, #{loc,jdbcType=NVARCHAR}, 
-      #{bk1,jdbcType=NVARCHAR}, #{bk2,jdbcType=NVARCHAR}, #{bk3,jdbcType=NVARCHAR}, #{bk4,jdbcType=NVARCHAR}, 
-      #{bk5,jdbcType=NVARCHAR})
+      #{containerId,jdbcType=NVARCHAR}, #{bk1,jdbcType=NVARCHAR}, #{bk2,jdbcType=NVARCHAR},
+      #{bk3,jdbcType=NVARCHAR}, #{bk4,jdbcType=NVARCHAR}, #{bk5,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiInventory_detail">
     insert into JiaoCaiInventory_detail
@@ -74,6 +75,9 @@
       </if>
       <if test="loc != null">
         loc,
+      </if>
+      <if test="containerId != null">
+        containerId,
       </if>
       <if test="bk1 != null">
         BK1,
@@ -119,6 +123,9 @@
       <if test="loc != null">
         #{loc,jdbcType=NVARCHAR},
       </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=NVARCHAR},
+      </if>
       <if test="bk1 != null">
         #{bk1,jdbcType=NVARCHAR},
       </if>
@@ -163,6 +170,9 @@
       <if test="loc != null">
         loc = #{loc,jdbcType=NVARCHAR},
       </if>
+      <if test="containerId != null">
+        containerId = #{containerId,jdbcType=NVARCHAR},
+      </if>
       <if test="bk1 != null">
         BK1 = #{bk1,jdbcType=NVARCHAR},
       </if>
@@ -191,6 +201,7 @@
       qtyfree = #{qtyfree,jdbcType=INTEGER},
       pack = #{pack,jdbcType=INTEGER},
       loc = #{loc,jdbcType=NVARCHAR},
+      containerId = #{containerId,jdbcType=NVARCHAR},
       BK1 = #{bk1,jdbcType=NVARCHAR},
       BK2 = #{bk2,jdbcType=NVARCHAR},
       BK3 = #{bk3,jdbcType=NVARCHAR},
@@ -205,38 +216,44 @@
       <if test="id != null and id != '' ">
         and id = #{id,jdbcType=NVARCHAR}
       </if>
-      <if test="issuenumber != null and issuenumber != '' " >
+      <if test="issuenumber != null and issuenumber != '' ">
         and issuenumber = #{issuenumber}
       </if>
-      <if test="subcode != null and subcode != '' " >
+      <if test="subcode != null and subcode != '' ">
         and subcode = #{subcode}
       </if>
-      <if test="pack != null and pack != '' " >
+      <if test="pack != null and pack != '' ">
         and pack = #{pack}
       </if>
-      <if test="loc != null and loc != '' " >
+      <if test="loc != null and loc != '' ">
         and loc = #{loc}
+      </if>
+      <if test="containerId != null and containerId != '' ">
+        and containerId = #{containerId}
       </if>
     </where>
   </select>
   <select id="selectAll" resultType="com.management.pojo.jc.JiaoCaiInventory_detail">
-    select <include refid="Base_Column_List"/>
+    select <include refid="Base_Column_List" />
     from JiaoCaiInventory_detail
     <where>
       <if test="id != null and id != '' ">
         and id = #{id,jdbcType=NVARCHAR}
       </if>
-      <if test="issuenumber != null and issuenumber != '' " >
+      <if test="issuenumber != null and issuenumber != '' ">
         and issuenumber = #{issuenumber}
       </if>
-      <if test="subcode != null and subcode != '' " >
+      <if test="subcode != null and subcode != '' ">
         and subcode = #{subcode}
       </if>
-      <if test="pack != null and pack != '' " >
+      <if test="pack != null and pack != '' ">
         and pack = #{pack}
       </if>
-      <if test="loc != null and loc != '' " >
+      <if test="loc != null and loc != '' ">
         and loc = #{loc}
+      </if>
+      <if test="containerId != null and containerId != '' ">
+        and containerId = #{containerId}
       </if>
     </where>
     order by issuenumber,subcode
@@ -249,8 +266,10 @@
     and subcode = #{subcode,jdbcType=NVARCHAR}
     and pack = #{pack,jdbcType=INTEGER}
     and loc = #{loc,jdbcType=NVARCHAR}
+    <if test="containerId != null and containerId != '' ">
+      and containerId = #{containerId}
+    </if>
   </update>
-
   <update id="move" parameterType="com.management.vo.jc.JiaoCaiInventoryVo">
     update JiaoCaiInventory_detail
   </update>

@@ -19,6 +19,8 @@ public class JiaoCaiInventory_detail {
 
     private String loc;
 
+    private String containerId;
+
     private String bk1;
 
     private String bk2;
@@ -28,6 +30,36 @@ public class JiaoCaiInventory_detail {
     private String bk4;
 
     private String bk5;
+
+    public JiaoCaiInventory_detail(String issuenumber, String subcode, Integer pack, String loc, String containerId) {
+        this.issuenumber = issuenumber;
+        this.subcode = subcode;
+        this.pack = pack;
+        this.loc = loc;
+        this.containerId = containerId;
+    }
+
+    public JiaoCaiInventory_detail(Long id, String issuenumber, String subcode, Integer qtyreceipt, Integer qtyallocated, Integer qtyshipped, Integer qtyfree, Integer pack, String loc, String containerid, String bk1, String bk2, String bk3, String bk4, String bk5) {
+        this.id = id;
+        this.issuenumber = issuenumber;
+        this.subcode = subcode;
+        this.qtyreceipt = qtyreceipt;
+        this.qtyallocated = qtyallocated;
+        this.qtyshipped = qtyshipped;
+        this.qtyfree = qtyfree;
+        this.pack = pack;
+        this.loc = loc;
+        this.containerId = containerid;
+        this.bk1 = bk1;
+        this.bk2 = bk2;
+        this.bk3 = bk3;
+        this.bk4 = bk4;
+        this.bk5 = bk5;
+    }
+
+    public JiaoCaiInventory_detail() {
+        super();
+    }
 
     public Long getId() {
         return id;
@@ -99,6 +131,14 @@ public class JiaoCaiInventory_detail {
 
     public void setLoc(String loc) {
         this.loc = loc == null ? null : loc.trim();
+    }
+
+    public String getContainerId() {
+        return containerId;
+    }
+
+    public void setContainerId(String containerId) {
+        this.containerId = containerId == null ? null : containerId.trim();
     }
 
     public String getBk1() {

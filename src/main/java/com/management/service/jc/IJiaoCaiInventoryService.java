@@ -20,4 +20,5 @@ public interface IJiaoCaiInventoryService {
     ServerResponse selectInventory(Integer pageSize, Integer pageNum, JiaoCaiInventory jiaoCaiInventory);
 
     ServerResponse move(JiaoCaiInventoryVo jiaoCaiInventoryVo);
+
 }

@@ -75,15 +75,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>定价：</td><td><input class="easyui-textbox" type="text" id="add_price" data-options="readonly:true"/></td>
 				</tr>
 				<tr>
-					<td>分发店：</td><td><select class="easyui-combobox" id="add_code" data-options="url:'/management/jc/storer/tips?type=0',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200'" ></select></td>
-					<td>分发数量：</td><td><input class="easyui-textbox" type="text" id="add_qtyallocated"/></td>
+					<td>分发店：</td><td><select class="easyui-combobox" id="add_code" data-options="url:'/management/jc/storer/tips?type=0',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:'200',required:true" ></select></td>
+					<td>分发数量：</td><td><input class="easyui-textbox" type="text" id="add_qtyallocated" data-options="required:true"/></td>
 				</tr>
 				<tr>
 					<td>可分数量：</td><td><input class="easyui-textbox" type="text" id="add_qtyfree" data-options="readonly:true"/></td>
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
-					<a class="easyui-linkbutton" id="submitgo" onclick="submitgo()">提交</a>
+					<a class="easyui-linkbutton" iconCls="icon-ok" id="submitgo" onclick="submitgo()">提交</a>
 					</td>
 				</tr>
 			</table>
@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
-						<a class="easyui-linkbutton" onclick="editInfo()">&nbsp;提交&nbsp;</a>
+						<a class="easyui-linkbutton" iconCls="icon-ok" onclick="editInfo()">&nbsp;提交&nbsp;</a>
 					</td>
 				</tr>
 			</table>

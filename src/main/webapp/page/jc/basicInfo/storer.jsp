@@ -62,12 +62,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			style="width: 500px; height: 400px; padding: 10px;">
 		<form id="addform" align="center" style="text-align:center;margin: 10px;line-height: 41px;">
 			<h2>添加</h2>
-			代码：<input class="easyui-textbox" type="text" id="storerkey"/><br>
-			名称：<input class="easyui-textbox" type="text" id="shortname"/></br>
+			代码：<input class="easyui-textbox" type="text" id="storerkey" data-options="required:true"/><br>
+			名称：<input class="easyui-textbox" type="text" id="shortname" data-options="required:true"/></br>
 			联系人：<input class="easyui-textbox" type="text" id="contact"/></br>
 			联系电话：<input class="easyui-textbox" type="text" id="phone"/></br>
 			地址：<input class="easyui-textbox" type="text" id="address"/></br>
-			类型：<select id="type" class="easyui-combobox" style="width:100px;" data-options="editable:false">
+			类型：<select id="type" class="easyui-combobox" style="width:100px;" data-options="editable:false,required:true">
 					<option value="0">客户</option>
 					<option value="1">供商</option>
 				</select>
@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<option value="1">供商</option>
 				</select>
 			<br>
-			<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-search" id="queryInfo" onclick="queryInfo()">查询</a>
+			<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-search" onclick="queryInfo()">查询</a>
 		</form>
 	</div>
     <!-- 修改期号信息窗口 -->

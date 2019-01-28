@@ -49,6 +49,26 @@ public class JiaoCaiInventoryVo {
 
     private String toLoc;
 
+    private String containerId;
+
+    private String toContainerId;
+
+    public String getToContainerId() {
+        return toContainerId;
+    }
+
+    public void setToContainerId(String toContainerId) {
+        this.toContainerId = toContainerId;
+    }
+
+    public String getContainerId() {
+        return containerId;
+    }
+
+    public void setContainerId(String containerId) {
+        this.containerId = containerId;
+    }
+
     public String getToLoc() {
         return toLoc;
     }

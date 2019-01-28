@@ -204,12 +204,16 @@ tool = {
             $.messager.alert("操作提示","没有选中记录","error");
             return;
         }
+        $("#w-detail-split").window("open");
         $("#split_id").val(row.id);
         $("#split_issuenumber").textbox('setValue',row.issuenumber);
         $("#split_subcode").textbox('setValue',row.subcode);
-        $("#split_qtyallocated").textbox('setValue',row.qtyallocated);
+        $("#split_qtyfree").textbox('setValue',row.qtyfree);
+        $("#split_pack").textbox('setValue',row.pack);
         $("#split_qtysplit").textbox('setValue',"");
-        $("#w-detail-split").window("open");
+        $("#split_toLoc").textbox('setValue',"");
+        $("#split_toContainerId").textbox('setValue',"");
+        $("#split_loc").textbox('setValue',row.loc);
     }
 }
 
@@ -229,7 +233,7 @@ function dataDetail(){
         striped:true,
         rownumbers:true,
         border:true,
-        singleSelect:false,
+        singleSelect:true,
         pagination:true,
         pageSize:20,
         pageList:[10,20,50],
@@ -255,7 +259,7 @@ function dataDetail(){
         },{
             field:"descr",
             title:"书名",
-            width:50
+            width:80
         },{
             field:"price",
             title:"定价",
@@ -267,23 +271,27 @@ function dataDetail(){
         },{
             field:"loc",
             title:"储位",
-            width:50
+            width:40
+        },{
+            field:"containerId",
+            title:"容器号",
+            width:40
         },{
             field:"qtyreceipt",
             title:"总收货数",
-            width:50
+            width:40
         },{
             field:"qtyallocated",
             title:"分发数量",
-            width:50
+            width:40
         },{
             field:"qtyshipped",
             title:"总发货数",
-            width:50
+            width:40
         },{
             field:"qtyfree",
             title:"可用库存",
-            width:50
+            width:40
         }]],
         // onSelect : function (index, row) {
         //     var t_qtyoccupied = 0;
@@ -402,6 +410,8 @@ function move(){
     var qtyfree = $("#split_qtysplit").textbox('getValue');
     var loc = $("#split_loc").textbox('getValue');
     var toLoc = $("#split_toLoc").textbox('getValue');
+    var containerId = $("#split_containerId").textbox('getValue');
+    var toContainerId = $("#split_toContainerId").textbox('getValue');
     var pack = $("#split_pack").textbox('getValue');
     if(qtyfree == ""){
         $.messager.alert("操作提示","移动数量不能为空","error");
@@ -422,7 +432,9 @@ function move(){
         'qtyfree'       : qtyfree,
         'loc'           : loc,
         'toLoc'         : toLoc,
-        'pack'          : pack
+        'pack'          : pack,
+        'containerId'   : containerId,
+        'toContainerId' : toContainerId
     };
     $.ajax({
         type:'post',
@@ -440,8 +452,6 @@ function move(){
         }
     });
 }
-
-
 
 function go(){
     var issuenumber = $("#issuenumber").combobox("getValue");

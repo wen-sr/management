@@ -2,16 +2,15 @@ package com.management.service.jc.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.management.common.RequestHolder;
 import com.management.common.ServerResponse;
-import com.management.dao.jc.JiaoCaiInventoryMapper;
-import com.management.dao.jc.JiaoCaiInventory_detailMapper;
-import com.management.dao.jc.JiaoCaiSkuMapper;
-import com.management.dao.jc.JiaoCaiStorerMapper;
+import com.management.dao.jc.*;
 import com.management.dao.login.LoginMapper;
 import com.management.pojo.jc.*;
 import com.management.service.jc.IJiaoCaiInventoryService;
 import com.management.util.DataSourceContextHolder;
 import com.management.vo.jc.JiaoCaiInventoryVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +42,12 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
 
     @Autowired
     JiaoCaiStorerMapper jiaoCaiStorerMapper;
+
+    @Autowired
+    JiaoCaiLocMapper jiaoCaiLocMapper;
+
+    @Autowired
+    JiaoCaiItrnMapper jiaoCaiItrnMapper;
 
     @Override
     public int add(JiaoCaiInventory jiaoCaiInventory, JiaoCaiInventory_detail jiaoCaiInventory_detail) {
@@ -93,41 +98,81 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
     @Override
     public ServerResponse move(JiaoCaiInventoryVo jiaoCaiInventoryVo) {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
-        if(!(jiaoCaiInventoryVo.getToLoc().endsWith("SMART"))){
-            //todo
-            //不是移动到只能仓库，则直接移动
+        jiaoCaiInventoryVo.setToLoc(jiaoCaiInventoryVo.getToLoc().toUpperCase());
+        //判断目的储位是否存在
+        JiaoCaiLoc jiaoCaiLoc = jiaoCaiLocMapper.selectByLoc(jiaoCaiInventoryVo.getToLoc().toUpperCase());
+        if(jiaoCaiLoc == null || StringUtils.isBlank(jiaoCaiLoc.getLoc())){
+            return ServerResponse.createByErrorMessage("您要移库的目的储位不存在");
         }
-//        将库存移至REP储位上
+
+        //目的储位增加库存
+        //1.不是移动到智能仓库，则直接移动
+        if(!(jiaoCaiInventoryVo.getToLoc().endsWith("SMART"))){
+            moveFromAndTo(jiaoCaiInventoryVo);
+        }
+        int i = 0;
+        //2.如果是移动到智能仓库，则先移动要REP储位
+        jiaoCaiInventoryVo.setToLoc("REP");
+        i += moveFromAndTo(jiaoCaiInventoryVo);
+        //3.生成入库任务
+        //todo
+        if(i > 0){
+            return ServerResponse.createBySuccessMsg("移库成功");
+        }else {
+            return ServerResponse.createByErrorMessage("移库失败，请联系管理员");
+        }
+
+    }
+
+    private int moveFromAndTo(JiaoCaiInventoryVo jiaoCaiInventoryVo) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         JiaoCaiInventory_detail jiaoCaiInventory_detail = new JiaoCaiInventory_detail();
-        jiaoCaiInventory_detail.setLoc("REP");
+        jiaoCaiInventory_detail.setLoc(jiaoCaiInventoryVo.getToLoc());
         jiaoCaiInventory_detail.setSubcode(jiaoCaiInventoryVo.getSubcode());
         jiaoCaiInventory_detail.setIssuenumber(jiaoCaiInventoryVo.getIssuenumber());
         jiaoCaiInventory_detail.setPack(jiaoCaiInventoryVo.getPack());
         jiaoCaiInventory_detail.setQtyreceipt(jiaoCaiInventoryVo.getQtyfree());
         jiaoCaiInventory_detail.setQtyfree(jiaoCaiInventoryVo.getQtyfree());
-        int i = 0;
-
+        jiaoCaiInventory_detail.setContainerId(jiaoCaiInventoryVo.getToContainerId());
         JiaoCaiInventory_detail j = jiaoCaiInventoryDetailMapper.selectByIssuenumberAndSubcodeAndPack(jiaoCaiInventory_detail);
-//        判断REP上是否有记录
+        int i = 0,qtyreceipt = 0,qtyfree = 0;
+        //1.目的储位添加库存
         if(j == null){
-//            如果没有则插入一条REP的记录
+//            如果没有则插入一条该储位的记录
             i += jiaoCaiInventoryDetailMapper.insertSelective(jiaoCaiInventory_detail);
         }else {
 //            如果有则在原来的库存上加上此次移动的数量
             j.setQtyreceipt(jiaoCaiInventoryVo.getQtyfree() + j.getQtyreceipt());
             j.setQtyfree(jiaoCaiInventoryVo.getQtyfree() + j.getQtyfree());
-            i += jiaoCaiInventoryDetailMapper.updateByPrimaryKey(j);
+            i += jiaoCaiInventoryDetailMapper.updateByPrimaryKeySelective(j);
         }
-        if(i > 0){
-            //生成入托盘库的任务
-        }
-
-
-
-
-
-
-        return null;
+        //2.源储位扣减库存
+        //TODO
+        j = jiaoCaiInventoryDetailMapper.selectByIssuenumberAndSubcodeAndPack(
+                new JiaoCaiInventory_detail(jiaoCaiInventoryVo.getIssuenumber(),jiaoCaiInventoryVo.getSubcode(),
+                        jiaoCaiInventoryVo.getPack(), jiaoCaiInventoryVo.getLoc(),jiaoCaiInventoryVo.getContainerId()));
+        qtyreceipt = j.getQtyreceipt();
+        qtyfree = j.getQtyfree();
+        j.setLoc(jiaoCaiInventoryVo.getLoc());
+        j.setQtyreceipt(qtyreceipt - jiaoCaiInventoryVo.getQtyfree());
+        j.setQtyfree(qtyfree - jiaoCaiInventoryVo.getQtyfree());
+        i += jiaoCaiInventoryDetailMapper.updateByPrimaryKeySelective(j);
+        //记录交易记录
+        JiaoCaiItrn jiaoCaiItrn = new JiaoCaiItrn();
+        jiaoCaiItrn.setAddwho(RequestHolder.getCurrentUser().getId());
+        jiaoCaiItrn.setFromid(jiaoCaiInventoryVo.getContainerId());
+        jiaoCaiItrn.setFromloc(jiaoCaiInventoryVo.getLoc());
+        jiaoCaiItrn.setToloc(jiaoCaiInventoryVo.getToLoc());
+        jiaoCaiItrn.setFromtable("JiaoCaiInventory_detail");
+        jiaoCaiItrn.setIssuenumber(jiaoCaiInventoryVo.getIssuenumber());
+        jiaoCaiItrn.setSubcode(jiaoCaiInventoryVo.getSubcode());
+        jiaoCaiItrn.setPack(jiaoCaiInventoryVo.getPack());
+        jiaoCaiItrn.setQty(jiaoCaiInventoryVo.getQtyfree().longValue());
+        jiaoCaiItrn.setSourceid(jiaoCaiInventoryVo.getId());
+        jiaoCaiItrn.setToid(jiaoCaiInventoryVo.getToContainerId());
+        jiaoCaiItrn.setType("MV");
+        i += jiaoCaiItrnMapper.insertSelective(jiaoCaiItrn);
+        return i;
     }
 
 
@@ -185,6 +230,7 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
             jiaoCaiInventoryVo.setQtyreceipt(d.getQtyreceipt());
             jiaoCaiInventoryVo.setQtyshipped(d.getQtyshipped());
             jiaoCaiInventoryVo.setSubcode(d.getSubcode());
+            jiaoCaiInventoryVo.setContainerId(d.getContainerId());
             jiaoCaiInventoryVoList.add(jiaoCaiInventoryVo);
         }
         return jiaoCaiInventoryVoList;
