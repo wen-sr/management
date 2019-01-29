@@ -6,6 +6,8 @@ import com.management.common.RequestHolder;
 import com.management.common.ServerResponse;
 import com.management.dao.jc.*;
 import com.management.dao.login.LoginMapper;
+import com.management.dao.prd1.TaskViewMapper;
+import com.management.exception.MyException;
 import com.management.pojo.jc.*;
 import com.management.service.jc.IJiaoCaiInventoryService;
 import com.management.util.DataSourceContextHolder;
@@ -48,6 +50,9 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
 
     @Autowired
     JiaoCaiItrnMapper jiaoCaiItrnMapper;
+
+    @Autowired
+    TaskViewMapper taskViewMapper;
 
     @Override
     public int add(JiaoCaiInventory jiaoCaiInventory, JiaoCaiInventory_detail jiaoCaiInventory_detail) {
@@ -97,25 +102,43 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
 
     @Override
     public ServerResponse move(JiaoCaiInventoryVo jiaoCaiInventoryVo) {
-        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         jiaoCaiInventoryVo.setToLoc(jiaoCaiInventoryVo.getToLoc().toUpperCase());
+        jiaoCaiInventoryVo.setToContainerId(jiaoCaiInventoryVo.getToContainerId().toUpperCase());
+        //判断目的容器是否存在
+        if(StringUtils.isNotBlank(jiaoCaiInventoryVo.getToContainerId())){
+            if(!isExistContainerId(jiaoCaiInventoryVo.getToContainerId())){
+                return ServerResponse.createByErrorMessage("您要移动的容器号不存在");
+            }
+        }
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         //判断目的储位是否存在
         JiaoCaiLoc jiaoCaiLoc = jiaoCaiLocMapper.selectByLoc(jiaoCaiInventoryVo.getToLoc().toUpperCase());
         if(jiaoCaiLoc == null || StringUtils.isBlank(jiaoCaiLoc.getLoc())){
             return ServerResponse.createByErrorMessage("您要移库的目的储位不存在");
         }
-
-        //目的储位增加库存
-        //1.不是移动到智能仓库，则直接移动
-        if(!(jiaoCaiInventoryVo.getToLoc().endsWith("SMART"))){
-            moveFromAndTo(jiaoCaiInventoryVo);
-        }
         int i = 0;
-        //2.如果是移动到智能仓库，则先移动要REP储位
-        jiaoCaiInventoryVo.setToLoc("REP");
-        i += moveFromAndTo(jiaoCaiInventoryVo);
-        //3.生成入库任务
-        //todo
+        //目的储位增加库存
+        //1.不是移动到智能仓库，或从特殊储位移出，则直接移动
+        if((!(jiaoCaiInventoryVo.getToLoc().endsWith("SMART")))
+                || (jiaoCaiInventoryVo.getLoc().equals("REP"))
+                || (jiaoCaiInventoryVo.getLoc().equals("SHORT"))
+                || (jiaoCaiInventoryVo.getLoc().equals("PICKTO"))){
+            if(jiaoCaiInventoryVo.getToLoc().endsWith("SMART")){
+                if(StringUtils.isBlank(jiaoCaiInventoryVo.getToContainerId())){
+                    return ServerResponse.createByErrorMessage("移动到智能仓库目的容器号不能为空");
+                }
+            }
+            i += moveFromAndTo(jiaoCaiInventoryVo);
+        }else {
+            //2.如果是移动到智能仓库，则先移动要REP储位
+            if(StringUtils.isBlank(jiaoCaiInventoryVo.getToContainerId())){
+                return ServerResponse.createByErrorMessage("移动到智能仓库目的容器号不能为空");
+            }
+            jiaoCaiInventoryVo.setToLoc("REP");
+            i += moveFromAndTo(jiaoCaiInventoryVo);
+            //3.生成入库任务
+            //todo
+        }
         if(i > 0){
             return ServerResponse.createBySuccessMsg("移库成功");
         }else {
@@ -147,12 +170,14 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
             i += jiaoCaiInventoryDetailMapper.updateByPrimaryKeySelective(j);
         }
         //2.源储位扣减库存
-        //TODO
         j = jiaoCaiInventoryDetailMapper.selectByIssuenumberAndSubcodeAndPack(
                 new JiaoCaiInventory_detail(jiaoCaiInventoryVo.getIssuenumber(),jiaoCaiInventoryVo.getSubcode(),
                         jiaoCaiInventoryVo.getPack(), jiaoCaiInventoryVo.getLoc(),jiaoCaiInventoryVo.getContainerId()));
         qtyreceipt = j.getQtyreceipt();
         qtyfree = j.getQtyfree();
+        if(qtyfree - jiaoCaiInventoryVo.getQtyfree() < 0){
+            throw new MyException(-1, "源储位库存不足，无法移动");
+        }
         j.setLoc(jiaoCaiInventoryVo.getLoc());
         j.setQtyreceipt(qtyreceipt - jiaoCaiInventoryVo.getQtyfree());
         j.setQtyfree(qtyfree - jiaoCaiInventoryVo.getQtyfree());
@@ -175,6 +200,14 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
         return i;
     }
 
+    private boolean isExistContainerId(String containerId){
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
+        String boxno = taskViewMapper.selectBoxno(containerId);
+        if(StringUtils.isNotBlank(boxno)){
+            return true;
+        }
+        return false;
+    }
 
     private boolean isExistInventory(JiaoCaiInventory jiaoCaiInventory){
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);

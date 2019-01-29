@@ -82,8 +82,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>可分数量：</td><td><input class="easyui-textbox" type="text" id="add_qtyfree" data-options="readonly:true"/></td>
 				</tr>
 				<tr>
-					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
-					<a class="easyui-linkbutton" iconCls="icon-ok" id="submitgo" onclick="submitgo()">提交</a>
+					<td colspan='8' align="center">
+						<a class="easyui-linkbutton" onclick="submitgo()">提交</a>
 					</td>
 				</tr>
 			</table>
@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<td colspan='8' align="center">&nbsp;&nbsp;&nbsp;
-						<a class="easyui-linkbutton" iconCls="icon-ok" onclick="editInfo()">&nbsp;提交&nbsp;</a>
+						<a class="easyui-linkbutton" iconCls="icon-ok" onclick="editInfo()">提交</a>
 					</td>
 				</tr>
 			</table>

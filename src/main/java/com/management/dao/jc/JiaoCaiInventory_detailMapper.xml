@@ -231,6 +231,9 @@
       <if test="containerId != null and containerId != '' ">
         and containerId = #{containerId}
       </if>
+      <if test="containerId == null or containerId == '' ">
+        and containerId is null
+      </if>
     </where>
   </select>
   <select id="selectAll" resultType="com.management.pojo.jc.JiaoCaiInventory_detail">
@@ -256,7 +259,7 @@
         and containerId = #{containerId}
       </if>
     </where>
-    order by issuenumber,subcode
+    order by qtyfree desc
   </select>
   <update id="addInventoryDetail" parameterType="com.management.pojo.jc.JiaoCaiInventory_detail">
     update JiaoCaiInventory_detail
@@ -269,8 +272,5 @@
     <if test="containerId != null and containerId != '' ">
       and containerId = #{containerId}
     </if>
-  </update>
-  <update id="move" parameterType="com.management.vo.jc.JiaoCaiInventoryVo">
-    update JiaoCaiInventory_detail
   </update>
 </mapper>

@@ -48,7 +48,7 @@
       )
     values (#{id,jdbcType=NUMERIC}, #{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, 
       #{fromloc,jdbcType=NVARCHAR}, #{toloc,jdbcType=NVARCHAR}, #{addwho,jdbcType=NVARCHAR}, 
-      #{adddate,jdbcType=TIMESTAMP}, #{qty,jdbcType=NUMERIC}, #{sourceid,jdbcType=NUMERIC}, 
+      getdate(), #{qty,jdbcType=NUMERIC}, #{sourceid,jdbcType=NUMERIC},
       #{fromid,jdbcType=NVARCHAR}, #{toid,jdbcType=NVARCHAR}, #{type,jdbcType=NVARCHAR}, 
       #{pack,jdbcType=INTEGER}, #{bk1,jdbcType=NVARCHAR}, #{bk2,jdbcType=NVARCHAR}, #{bk3,jdbcType=NVARCHAR}, 
       #{bk4,jdbcType=NVARCHAR}, #{bk5,jdbcType=NVARCHAR}, #{fromtable,jdbcType=NVARCHAR}
@@ -75,7 +75,7 @@
       <if test="addwho != null" >
         addwho,
       </if>
-      <if test="adddate != null" >
+      <if test="1 == 1" >
         adddate,
       </if>
       <if test="qty != null" >
@@ -134,8 +134,8 @@
       <if test="addwho != null" >
         #{addwho,jdbcType=NVARCHAR},
       </if>
-      <if test="adddate != null" >
-        #{adddate,jdbcType=TIMESTAMP},
+      <if test="1 == 1" >
+        getdate(),
       </if>
       <if test="qty != null" >
         #{qty,jdbcType=NUMERIC},

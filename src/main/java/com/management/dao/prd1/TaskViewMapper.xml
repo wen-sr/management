@@ -94,4 +94,9 @@
       </if>
     order by 3
     </select>
+  <select id="selectBoxno" resultType="java.lang.String">
+    select Boxno
+    from box
+    where boxno = #{boxno}
+  </select>
 </mapper>

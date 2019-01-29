@@ -31,7 +31,7 @@
 <body>
 <input type="hidden" id="currentType"/>
 <div align="center">
-	<h2 style="color:#0078CA">配发</h2>
+	<h2 style="color:#0078CA">库存管理</h2>
 </div>
 <div align="center">
 	期号：<input type="text" id="issuenumber" class="easyui-combobox" data-options="url: '/management/jc/issuenumber/tips',method: 'get',valueField: 'issuenumber',textField: 'issuenumber',
@@ -46,7 +46,6 @@
 </div>
 <div id="tb3" style="text-align:center;display: none;">
 	<a class="easyui-linkbutton" iconCls="icon-edit" id="split" onclick="tool.split()" >上架移库</a>
-	<a class="easyui-linkbutton" iconCls="icon-edit" id="compute" onclick="tool.compute()">移库</a>
 </div>
 <div id="tb2" style="text-align: center;display: none;">
 	<a class="easyui-linkbutton" iconCls="icon-edit" onclick="tool.yes()">确定</a>
@@ -79,7 +78,7 @@
 		<tr>
 			<td>可移动数量：</td><td><input class="easyui-textbox" type="text" id="split_qtyfree" data-options="readonly:true"  /></td>
 			<td>原储位：</td><td><input class="easyui-textbox" type="text" id="split_loc" data-options="readonly:true"  /></td>
-			<td>原容器：</td><td><input class="easyui-textbox" type="text" id="split_containerId" data-options="readonly:true"  /></td>
+			<td>原容器：</td><td><input class="easyui-textbox" type="text" id="split_containerId" data-options="readonly:true" /></td>
 		</tr>
 		<tr>
 			<td>移动数量：</td><td><input class="easyui-textbox" type="text" id="split_qtysplit" data-options="required:true"/></td>

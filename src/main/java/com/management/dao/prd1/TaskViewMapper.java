@@ -12,4 +12,6 @@ public interface TaskViewMapper {
     int insertSelective(TaskView record);
 
     List<TaskViewDto> getData(TaskViewDto taskView);
+
+    String selectBoxno(String boxno);
 }

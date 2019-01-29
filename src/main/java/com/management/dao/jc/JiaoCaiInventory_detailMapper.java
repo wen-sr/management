@@ -1,7 +1,6 @@
 package com.management.dao.jc;
 
 import com.management.pojo.jc.JiaoCaiInventory_detail;
-import com.management.vo.jc.JiaoCaiInventoryVo;
 
 import java.util.List;
 
@@ -24,5 +23,4 @@ public interface JiaoCaiInventory_detailMapper {
 
     List<JiaoCaiInventory_detail> selectAll(JiaoCaiInventory_detail jiaoCaiInventory_detail);
 
-    int move(JiaoCaiInventoryVo jiaoCaiInventoryVo);
 }

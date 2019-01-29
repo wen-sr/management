@@ -71,92 +71,6 @@ function loadInventoryData(pageSize, method, formData){
  * 工具栏
  */
 tool = {
-    compute : function (){
-        var rows = $('#data-detail').datagrid('getSelections');
-        var currentType = $("#currentType").val();
-        if("1" == currentType){
-            $.messager.alert("操作提示","请先切换到需配发计算界面才能计算","error");
-            return;
-        }
-        var pack = $("#t_pack").textbox('getValue');
-        if(pack == ""){
-            $.messager.alert("操作提示","请先选择捆扎才能配发计算","error");
-            return;
-        }
-        var t_qty = $("#t_qty").textbox('getValue');
-        if(parseInt(t_qty) < 0 || t_qty == ''){
-            $.messager.alert("操作提示","库存不足，无法计算","error");
-            return;
-        }
-        if(!rows || rows.length == 0) {
-            $.messager.alert("操作提示","没有选中记录","error");
-            return;
-        }
-        compute();
-
-    },
-    editpack : function (){
-        var currentType = $("#currentType").val();
-        if("0" != currentType){
-            $.messager.alert("操作提示","请先切换到需配发计算界面才能选择捆扎数","error");
-            return;
-        }
-        var issuenumber = $("#span_issuenumber").val();
-        var subcode = $("#span_subcode").val();
-        $("#t_choosepack").datagrid({
-            url:'jc/inventory_queryInventory.action?issuenumber=' + issuenumber + "&subcode=" + subcode,
-            height:'auto',
-            fitColumns: true,
-            fit: true,
-            striped:true,
-            rownumbers:true,
-            border:true,
-            singleSelect:true,
-            showFooter: true,
-            toolbar:'#tb4',
-            columns:[[{
-                field:"id",
-                title:"编号",
-                checkbox:true,
-                width:30
-            },{
-                field:"issuenumber",
-                title:"期号",
-                width:30
-            },{
-                field:"subcode",
-                title:"征订代码",
-                width:50
-            },{
-                field:"pack",
-                title:"捆扎",
-                width:30
-            },{
-                field:"qtyfree",
-                title:"可用库存",
-                width:50
-            }]]
-        });
-
-        $("#w_choosePack").window("open");
-    },
-    cancelcompute : function (){
-        var currentType = $("#currentType").val();
-        var rows = $('#data').datagrid('getSelections');
-        if(!rows || rows.length == 0) {
-            $.messager.alert("操作提示","没有选中记录","error");
-            return;
-        }
-        $.messager.confirm("操作提示", "您确定要取消这  "+ rows.length +" 条记录的计算吗？", function (data) {
-            if (data) {
-                cancelcompute();
-            }
-            else {
-                return;
-            }
-        });
-
-    },
     yes : function (){
         var row = $("#c_subcode").datagrid('getSelected');
         if(row == null){
@@ -214,6 +128,8 @@ tool = {
         $("#split_toLoc").textbox('setValue',"");
         $("#split_toContainerId").textbox('setValue',"");
         $("#split_loc").textbox('setValue',row.loc);
+        $("#split_containerId").textbox('setValue', row.containerId);
+
     }
 }
 

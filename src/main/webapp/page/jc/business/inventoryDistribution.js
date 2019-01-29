@@ -5,7 +5,7 @@
 function loadWaitDistributionData(){
 
 	$("#data").datagrid({
-		url:'jc/distribution_loadWaitDistributionData.action',
+		url:'/management/jc/inventory/info',
 		height:'auto',	
 		fitColumns: true,
 		striped:true,
@@ -14,7 +14,7 @@ function loadWaitDistributionData(){
 		singleSelect:true,
 		pagination:true,
         pageSize:20,
-        pageList:[10,15,20],
+        pageList:[10,20,50],
 		showFooter: true,
 		toolbar:'#tb',
 		columns:[[{
@@ -43,11 +43,11 @@ function loadWaitDistributionData(){
 			title:"定价",
 		    width:50
 		},{
-			field:"publisher",
+			field:"storerkey",
 			title:"出版社代码",
 		    width:60
 		},{
-			field:"shortname",
+			field:"publisher",
 			title:"出版社",
 		    width:60
 		},{
@@ -79,11 +79,6 @@ function addInfo(){
 		$.messager.alert("操作提示","征订代码不能为空！","error");
 		return;
 	}
-	var addwho = $.trim($("#add_addwho").val());
-	if(addwho == null || addwho == ""){
-		$.messager.alert("操作提示","修改人不能为空！","error");
-		return;
-	}
 	var code = $.trim($("#add_code").combobox('getValue'));
 	if(code == null || code == "" ){
 		$.messager.alert("操作提示","分发店不能为空！","error");
@@ -99,7 +94,7 @@ function addInfo(){
 		$.messager.alert("操作提示","分发数量只能输入数字！","error");
 		return;
 	}
-	var param = "subcode=" + subcode + "&qtyallocated=" + qtyallocated + "&addwho=" + addwho + "&issuenumber=" + issuenumber + "&code=" + code + "&type=1";
+	var param = "subcode=" + subcode + "&qtyallocated=" + qtyallocated + "&issuenumber=" + issuenumber + "&code=" + code + "&type=1";
 	$.ajax({
 		type:'post',
 		url:'jc/distribution_submitInventoryDistributionData.action',
@@ -138,11 +133,6 @@ function editInfo(){
 		$.messager.alert("操作提示","征订代码不能为空！","error");
 		return;
 	}
-	var addwho = $.trim($("#edit_addwho").val());
-	if(addwho == null || addwho == ""){
-		$.messager.alert("操作提示","修改人不能为空！","error");
-		return;
-	}
 	var code = $.trim($("#edit_code").combobox('getValue'));
 	if(code == null || code == "" ){
 		$.messager.alert("操作提示","分发店不能为空！","error");
@@ -158,10 +148,10 @@ function editInfo(){
 		$.messager.alert("操作提示","分发数量只能输入数字！","error");
 		return;
 	}
-	var param = "id=" + id + "&subcode=" + subcode + "&qtyallocated=" + qtyallocated + "&addwho=" + addwho + "&issuenumber=" + issuenumber + "&code=" + code + "&type=1";
+	var param = "id=" + id + "&subcode=" + subcode + "&qtyallocated=" + qtyallocated + "&issuenumber=" + issuenumber + "&code=" + code + "&type=1";
 	$.ajax({
 		type:'post',
-		url:'jc/distribution_submitEditInventoryDistributionData.action',
+		url:'/management/jc/distribute/add',
 		data:param,
 		dataType:'json',
 		success:function(data){
@@ -188,7 +178,7 @@ function go(){
 	var param = "type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode;
 	if("0" == type ){
 		$("#data").datagrid({
-			url:"jc/distribution_loadWaitDistributionData.action?type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode,
+			url:"/management/jc/inventory/info?issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode,
 			height:'auto',	
 			fitColumns: true,
 			striped:true,
@@ -197,7 +187,7 @@ function go(){
 			singleSelect:true,
 			pagination:true,
 	        pageSize:20,
-	        pageList:[10,15,20],
+	        pageList:[10,20,50],
 			showFooter: true,
 			toolbar:'#tb',
 			columns:[[{
@@ -226,11 +216,11 @@ function go(){
 				title:"定价",
 			    width:50
 			},{
-				field:"publisher",
+				field:"storerkey",
 				title:"出版社代码",
 			    width:60
 			},{
-				field:"shortname",
+				field:"publisher",
 				title:"出版社",
 			    width:60
 			},{
@@ -246,7 +236,7 @@ function go(){
 		$("#currentType").val("0");
 	}else {
 		$("#data").datagrid({
-			url:"jc/distribution_loadDistributedData.action?&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode + "&type=1",
+			url:"/management/jc/distribute/info?&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode + "&type=1",
 			height:'auto',	
 			fitColumns: true,
 			striped:true,
@@ -255,7 +245,7 @@ function go(){
 			singleSelect:true,
 			pagination:true,
 	        pageSize:20,
-	        pageList:[10,15,20],
+	        pageList:[10,20,50],
 			showFooter: true,
 			toolbar:'#tb',
 			columns:[[{
@@ -399,7 +389,7 @@ tool = {
 function loadDistributedData(){
 
 	$("#data").datagrid({
-		url:'jc/distribution_loadDistributedData.action?type=1',
+		url:'/management/jc/distribute/info?type=1',
 		height:'auto',	
 		fitColumns: true,
 		striped:true,
@@ -408,7 +398,7 @@ function loadDistributedData(){
 		singleSelect:true,
 		pagination:true,
         pageSize:20,
-        pageList:[10,15,20],
+        pageList:[10,20,50],
 		showFooter: true,
 		toolbar:'#tb',
 		columns:[[{
@@ -473,7 +463,7 @@ function chooseSubcode(){
 	var issuenumber = $("#issuenumber").combobox("getValue");
 	if("0" == type) {
 		$("#c_subcode").datagrid({
-			url:'jc/distribution_loadDistributionSubcodeByIssuenumber.action?issuenumber=' + issuenumber,
+			url:'/managenemt/jc/inventory/info?issuenumber=' + issuenumber,
 			height:'auto',
 			fitColumns: true,
 			striped:true,
@@ -529,7 +519,7 @@ function chooseSubcode(){
 		
 	}else {
 		$("#c_subcode").datagrid({
-			url:'jc/distribution_loadDistributedSubcodeByIssuenumber.action?issuenumber=' + issuenumber + "&type=1",
+			url:'/management/jc/distribute/info?issuenumber=' + issuenumber + "&type=1",
 			height:'auto',
 			fitColumns: true,
 			striped:true,
@@ -564,11 +554,11 @@ function chooseSubcode(){
 				title:"定价",
 			    width:50
 			},{
-				field:"publisher",
+				field:"storerkey",
 				title:"出版社代码",
 			    width:30
 			},{
-				field:"shortname",
+				field:"publisher",
 				title:"出版社",
 			    width:30
 			},{
@@ -588,12 +578,13 @@ function removeInfo(){
 	var row = $("#data").datagrid('getSelected');
 	if(row){
 		$.ajax({
-			url:'jc/distribution_delete_1.action',
+			url:'/management/jc/distribute/delete',
 			data:'id=' + row.id,
 			dataType:'json',
 			success:function(data){
-				$.messager.alert("操作提示",data,"info");
-				$("#data").datagrid('reload');
+				$.messager.alert("操作提示",data.msg,"info", function () {
+					$("#data").datagrid('reload');
+				});
 			},
 			error:function(){
 				$.messager.alert("提示","数据错误，联系管理员","info");
