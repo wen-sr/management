@@ -23,4 +23,9 @@ public interface JiaoCaiInventory_detailMapper {
 
     List<JiaoCaiInventory_detail> selectAll(JiaoCaiInventory_detail jiaoCaiInventory_detail);
 
+    List<JiaoCaiInventory_detail> selectByQtyfree(JiaoCaiInventory_detail jiaoCaiInventory_detail);
+
+    List<JiaoCaiInventory_detail> selectByQtyfree2(JiaoCaiInventory_detail jiaoCaiInventory_detail);
+
+    List<JiaoCaiInventory_detail> selectAllTotal(JiaoCaiInventory_detail jiaoCaiInventory_detail);
 }

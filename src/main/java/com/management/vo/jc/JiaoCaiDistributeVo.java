@@ -59,6 +59,26 @@ public class JiaoCaiDistributeVo {
 
     private String storerkey;
 
+    private String qtyfree;
+
+    private BigDecimal amt;
+
+    public BigDecimal getAmt() {
+        return amt;
+    }
+
+    public void setAmt(BigDecimal amt) {
+        this.amt = amt;
+    }
+
+    public String getQtyfree() {
+        return qtyfree;
+    }
+
+    public void setQtyfree(String qtyfree) {
+        this.qtyfree = qtyfree;
+    }
+
     public String getBarcode() {
         return barcode;
     }

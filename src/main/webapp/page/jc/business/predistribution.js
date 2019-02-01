@@ -35,7 +35,7 @@ function submitgo(){
 		$.messager.alert("操作提示","分发数量不能大于可分发数！","error");
 		return;
 	}
-	var param = "subcode=" + subcode + "&code=" + code + "&qtyallocated=" + qtyallocated + "&issuenumber=" + issuenumber;
+	var param = "subcode=" + subcode + "&code=" + code + "&qtyallocated=" + qtyallocated + "&issuenumber=" + issuenumber + "&type=0";
 	$.ajax({
 		type:'POST',
 		url:'/management/jc/distribute/add',

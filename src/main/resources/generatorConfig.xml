@@ -78,13 +78,14 @@
         <!--<table tableName="JiaoCaiOrders" domainObjectName="JiaoCaiOrders" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="allowDistribution" domainObjectName="AllowDistribution" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="allowReceipt" domainObjectName="AllowReceipt" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="allowAllocate" domainObjectName="AllowAllocate" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiItrn" domainObjectName="JiaoCaiItrn" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiTask" domainObjectName="JiaoCaiTask" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
-        <!--<table tableName="JiaoCaiPack" domainObjectName="JiaoCaiPack" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <table tableName="JiaoCaiPack" domainObjectName="JiaoCaiPack" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <!--<table tableName="JiaoCaiReceipt" domainObjectName="JiaoCaiReceipt" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiSku" domainObjectName="JiaoCaiSku" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="JiaoCaiStorer" domainObjectName="JiaoCaiStorer" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
-        <table tableName="JiaoCaiLoc" domainObjectName="JiaoCaiLoc" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-
+        <!--<table tableName="JiaoCaiLoc" domainObjectName="JiaoCaiLoc" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="JiaoCaiPick" domainObjectName="JiaoCaiPick" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
     </context>
 </generatorConfiguration>

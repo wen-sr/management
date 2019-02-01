@@ -25,6 +25,11 @@ public class JiaoCaiInventory {
         this.qtyfree = qtyfree;
     }
 
+    public JiaoCaiInventory(String issuenumber, String subcode) {
+        this.issuenumber = issuenumber;
+        this.subcode = subcode;
+    }
+
     public JiaoCaiInventory() {
         super();
     }

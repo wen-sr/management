@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,8 +7,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
     <title>配发</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -23,28 +20,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jc/predistribution.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jc/base.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jc/compute.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/base.js"></script>
+	<script type="text/javascript" src="compute.js"></script>
 
   </head>
   
   <body>
-	<input type="hidden" value="<s:property value='#session.id'/>" id="userid"/>
-	<input type="hidden" value="<s:property value='#session.name'/>" id="username"/>
 	<input type="hidden" id="currentType"/>
 	<div align="center">
-		<h2 style="color:#0078CA">配发&nbsp;<span style="font-size:20px;color:#0078CA"><s:property value='#session.name'/></span></h2>
+		<h2 style="color:#0078CA">配发</h2>
 	</div>
 	<div align="center">
-		<select id="type" class="easyui-combobox" style="width:100px;">
+		<select id="type" class="easyui-combobox" style="width:150px;">
 			<option value="0">需配发品种</option>
 			<option value="1">已配发品种</option>
 		</select>
-		期号：<input type="text" id="issuenumber" class="easyui-combobox" data-options="url: 'jc/issuenumber_info.action',method: 'get',valueField: 'issuenumber',textField: 'issuenumber',
+		期号：<input type="text" id="issuenumber" class="easyui-combobox" data-options="url: '/management/jc/issuenumber/tips',method: 'get',valueField: 'issuenumber',textField: 'issuenumber',
 				panelWidth: 150,panelHeight: '100' "/>
 		<input class="easyui-textbox" id="subcode" style="width:150px" ><a class="easyui-linkbutton" id="choosesubcode"  onclick="chooseSubcode()">选择征订代码</a>
 		条码：<input class="easyui-textbox" id="barcode" style="width:150px"  />
@@ -96,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h2 align="center">分书拆分</h2>
 		<table id="data-detail-split" align="center">
 			<tr>
-				<td>期号:</td><td><input type="text" class="easyui-combobox" id="split_issuenumber" data-options="url:'jc/issuenumber_info.action',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" /></td>
+				<td>期号:</td><td><input type="text" class="easyui-combobox" id="split_issuenumber" data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:'200',readonly:true" /></td>
 				<td>征订代码：</td><td><input class="easyui-textbox" type="text" id="split_subcode" data-options="readonly:true" /></td>
 			</tr>
 			<tr>

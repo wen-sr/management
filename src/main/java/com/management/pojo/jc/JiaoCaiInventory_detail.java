@@ -39,6 +39,13 @@ public class JiaoCaiInventory_detail {
         this.containerId = containerId;
     }
 
+    public JiaoCaiInventory_detail(String issuenumber, String subcode, Integer qtyfree, Integer pack) {
+        this.issuenumber = issuenumber;
+        this.subcode = subcode;
+        this.qtyfree = qtyfree;
+        this.pack = pack;
+    }
+
     public JiaoCaiInventory_detail(Long id, String issuenumber, String subcode, Integer qtyreceipt, Integer qtyallocated, Integer qtyshipped, Integer qtyfree, Integer pack, String loc, String containerid, String bk1, String bk2, String bk3, String bk4, String bk5) {
         this.id = id;
         this.issuenumber = issuenumber;

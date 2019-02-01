@@ -345,4 +345,48 @@
     </where>
     order by adddate desc
   </select>
+    <select id="loadWaitComputeData" resultType="com.management.vo.jc.JiaoCaiDistributeVo">
+      select a.issuenumber,a.subcode,b.barcode,b.descr,b.price,SUM(a.qtyallocated) qtyallocated,(select SUM(qtyfree) from JiaoCaiInventory_detail c where a.issuenumber=c.issuenumber and a.subcode=c.subcode) qtyfree,sum(b.price*a.qtyallocated) amt
+      from JiaoCaiDistribute a,JiaoCaiSku b
+      where a.issuenumber = b.issuenumber and a.subcode = b.subcode and a.status = 0
+      <if test="id != null and id != '' ">
+        and a.id = #{id,jdbcType=NVARCHAR}
+      </if>
+      <if test="issuenumber != null and issuenumber != '' " >
+        and a.issuenumber = #{issuenumber}
+      </if>
+      <if test="subcode != null and subcode != '' " >
+        and a.subcode = #{subcode}
+      </if>
+      <if test="addwho != null and addwho != '' " >
+        and a.addwho = #{addwho}
+      </if>
+      <if test="type != null and type != '' " >
+        and a.type = #{type}
+      </if>
+      <if test="barcode != null and barcode != '' " >
+        and b.barcode = #{barcode}
+      </if>
+      <if test="computeno != null and computeno != '' " >
+        and a.computeno = #{computeno}
+      </if>
+      <if test="shipno != null and shipno != '' " >
+        and a.shipno = #{shipno}
+      </if>
+      <if test="pickno != null and pickno != '' " >
+        and a.pickno = #{pickno}
+      </if>
+      <if test="batchno != null and batchno != '' " >
+        and a.batchno = #{batchno}
+      </if>
+      <if test="status != null and status != '' " >
+        and a.status = #{status}
+      </if>
+      <if test="adddate != null and adddate != '' " >
+        <bind name="adddate" value="'%' + adddate + '%'" />
+        and convert(varchar(20),a.adddate,20) like #{adddate}
+      </if>
+      group by a.issuenumber,a.subcode,b.barcode,b.descr,b.price
+      order by a.issuenumber,b.barcode
+    </select>
 </mapper>

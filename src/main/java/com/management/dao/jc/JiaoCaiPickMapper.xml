@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jc.JiaoCaiPickMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jc.JiaoCaiPick" >
+    <constructor >
+      <idArg column="id" jdbcType="NUMERIC" javaType="java.lang.Long" />
+      <arg column="distributeId" jdbcType="NUMERIC" javaType="java.lang.Long" />
+      <arg column="issuenumber" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="subcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="qty" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="qtyPicked" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="status" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="loc" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="containerId" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="pack" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="batchno" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="pickno" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="sendcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="senddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="pickwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="pickdate" jdbcType="NVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, distributeId, issuenumber, subcode, qty, qtyPicked, status, loc, containerId, 
+    pack, batchno, pickno, sendcode, senddate, addwho, adddate, pickwho, pickdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from JiaoCaiPick
+    where id = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from JiaoCaiPick
+    where id = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiPick" >
+    insert into JiaoCaiPick (id, distributeId, issuenumber, 
+      subcode, qty, qtyPicked, 
+      status, loc, containerId, 
+      pack, batchno, pickno, 
+      sendcode, senddate, addwho, 
+      adddate, pickwho, pickdate
+      )
+    values (#{id,jdbcType=NUMERIC}, #{distributeid,jdbcType=NUMERIC}, #{issuenumber,jdbcType=NVARCHAR}, 
+      #{subcode,jdbcType=NVARCHAR}, #{qty,jdbcType=INTEGER}, #{qtypicked,jdbcType=INTEGER}, 
+      #{status,jdbcType=NVARCHAR}, #{loc,jdbcType=NVARCHAR}, #{containerid,jdbcType=NVARCHAR}, 
+      #{pack,jdbcType=INTEGER}, #{batchno,jdbcType=NVARCHAR}, #{pickno,jdbcType=NVARCHAR}, 
+      #{sendcode,jdbcType=NVARCHAR}, #{senddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=NVARCHAR}, 
+      #{adddate,jdbcType=TIMESTAMP}, #{pickwho,jdbcType=NVARCHAR}, #{pickdate,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiPick" >
+    insert into JiaoCaiPick
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="distributeid != null" >
+        distributeId,
+      </if>
+      <if test="issuenumber != null" >
+        issuenumber,
+      </if>
+      <if test="subcode != null" >
+        subcode,
+      </if>
+      <if test="qty != null" >
+        qty,
+      </if>
+      <if test="qtypicked != null" >
+        qtyPicked,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="loc != null" >
+        loc,
+      </if>
+      <if test="containerid != null" >
+        containerId,
+      </if>
+      <if test="pack != null" >
+        pack,
+      </if>
+      <if test="batchno != null" >
+        batchno,
+      </if>
+      <if test="pickno != null" >
+        pickno,
+      </if>
+      <if test="sendcode != null" >
+        sendcode,
+      </if>
+      <if test="senddate != null" >
+        senddate,
+      </if>
+      <if test="addwho != null" >
+        addwho,
+      </if>
+      <if test="adddate != null" >
+        adddate,
+      </if>
+      <if test="pickwho != null" >
+        pickwho,
+      </if>
+      <if test="pickdate != null" >
+        pickdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="distributeid != null" >
+        #{distributeid,jdbcType=NUMERIC},
+      </if>
+      <if test="issuenumber != null" >
+        #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=INTEGER},
+      </if>
+      <if test="qtypicked != null" >
+        #{qtypicked,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="loc != null" >
+        #{loc,jdbcType=NVARCHAR},
+      </if>
+      <if test="containerid != null" >
+        #{containerid,jdbcType=NVARCHAR},
+      </if>
+      <if test="pack != null" >
+        #{pack,jdbcType=INTEGER},
+      </if>
+      <if test="batchno != null" >
+        #{batchno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pickno != null" >
+        #{pickno,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendcode != null" >
+        #{sendcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="senddate != null" >
+        #{senddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pickwho != null" >
+        #{pickwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="pickdate != null" >
+        #{pickdate,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jc.JiaoCaiPick" >
+    update JiaoCaiPick
+    <set >
+      <if test="distributeid != null" >
+        distributeId = #{distributeid,jdbcType=NUMERIC},
+      </if>
+      <if test="issuenumber != null" >
+        issuenumber = #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        subcode = #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="qty != null" >
+        qty = #{qty,jdbcType=INTEGER},
+      </if>
+      <if test="qtypicked != null" >
+        qtyPicked = #{qtypicked,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="loc != null" >
+        loc = #{loc,jdbcType=NVARCHAR},
+      </if>
+      <if test="containerid != null" >
+        containerId = #{containerid,jdbcType=NVARCHAR},
+      </if>
+      <if test="pack != null" >
+        pack = #{pack,jdbcType=INTEGER},
+      </if>
+      <if test="batchno != null" >
+        batchno = #{batchno,jdbcType=NVARCHAR},
+      </if>
+      <if test="pickno != null" >
+        pickno = #{pickno,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendcode != null" >
+        sendcode = #{sendcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="senddate != null" >
+        senddate = #{senddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        addwho = #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pickwho != null" >
+        pickwho = #{pickwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="pickdate != null" >
+        pickdate = #{pickdate,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiPick" >
+    update JiaoCaiPick
+    set distributeId = #{distributeid,jdbcType=NUMERIC},
+      issuenumber = #{issuenumber,jdbcType=NVARCHAR},
+      subcode = #{subcode,jdbcType=NVARCHAR},
+      qty = #{qty,jdbcType=INTEGER},
+      qtyPicked = #{qtypicked,jdbcType=INTEGER},
+      status = #{status,jdbcType=NVARCHAR},
+      loc = #{loc,jdbcType=NVARCHAR},
+      containerId = #{containerid,jdbcType=NVARCHAR},
+      pack = #{pack,jdbcType=INTEGER},
+      batchno = #{batchno,jdbcType=NVARCHAR},
+      pickno = #{pickno,jdbcType=NVARCHAR},
+      sendcode = #{sendcode,jdbcType=NVARCHAR},
+      senddate = #{senddate,jdbcType=TIMESTAMP},
+      addwho = #{addwho,jdbcType=NVARCHAR},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
+      pickwho = #{pickwho,jdbcType=NVARCHAR},
+      pickdate = #{pickdate,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>

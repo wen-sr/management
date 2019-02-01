@@ -7,10 +7,13 @@ public class JiaoCaiPackKey {
 
     private String issuenumber;
 
-    public JiaoCaiPackKey(String subcode, Integer pack, String issuenumber) {
+    private Integer bundle;
+
+    public JiaoCaiPackKey(String subcode, Integer pack, String issuenumber, Integer bundle) {
         this.subcode = subcode;
         this.pack = pack;
         this.issuenumber = issuenumber;
+        this.bundle = bundle;
     }
 
     public JiaoCaiPackKey() {
@@ -39,5 +42,13 @@ public class JiaoCaiPackKey {
 
     public void setIssuenumber(String issuenumber) {
         this.issuenumber = issuenumber == null ? null : issuenumber.trim();
+    }
+
+    public Integer getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(Integer bundle) {
+        this.bundle = bundle;
     }
 }

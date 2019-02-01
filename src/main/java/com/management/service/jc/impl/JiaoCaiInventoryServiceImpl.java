@@ -90,6 +90,18 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
     }
 
     @Override
+    public ServerResponse selectInventoryDetailTotal(Integer pageSize, Integer pageNum, JiaoCaiInventory_detail jiaoCaiInventory_detail) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        PageHelper.startPage(pageNum,pageSize);
+        List<JiaoCaiInventory_detail> jiaoCaiInventoryDetailList = jiaoCaiInventoryDetailMapper.selectAllTotal(jiaoCaiInventory_detail);
+        List<JiaoCaiInventoryVo> jiaoCaiInventoryVoList = parseToJiaoCaiInventoryVo2(jiaoCaiInventoryDetailList);
+        PageInfo pageInfo = new PageInfo(jiaoCaiInventoryDetailList);
+        pageInfo.setList(jiaoCaiInventoryVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
+
+    @Override
     public ServerResponse selectInventory(Integer pageSize, Integer pageNum, JiaoCaiInventory jiaoCaiInventory) {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         PageHelper.startPage(pageNum,pageSize);

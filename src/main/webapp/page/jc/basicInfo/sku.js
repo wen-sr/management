@@ -244,6 +244,7 @@ function addPackInfo(){
 	var issuenumber = $("#addPack_issuenumber").combobox("getValue");
 	var subcode = $("#addPack_subcode").textbox("getValue");
 	var pack = $("#addPack_pack").textbox("getValue");
+	var bundle = $("#addPack_bundle").textbox("getValue");
 	if(pack == ''){
 		$.messager.alert("操作提示","捆扎数不能为空！","error");
 		return;
@@ -251,7 +252,7 @@ function addPackInfo(){
 	$.ajax({
 		type:'post',
 		url:'/management/jc/pack/add',
-		data:"issuenumber=" + issuenumber + "&subcode=" + subcode + "&pack=" + pack,
+		data:"issuenumber=" + issuenumber + "&subcode=" + subcode + "&pack=" + pack + "&bundle=" + bundle,
 		dataType:'json',
 		success:function(data){
 			$.messager.alert("操作提示",data.msg,"info",function () {
@@ -297,7 +298,11 @@ function queryPack(){
 		},{
 			field:"pack",
 			title:"捆扎",
-		    width:30
+			width:30
+		},{
+			field:"bundle",
+			title:"每包捆数",
+			width:30
 		}]]
 	});
 
@@ -310,7 +315,7 @@ function removePack(){
 	$.ajax({
 		type:'post',
 		url:'/management/jc/pack/delete',
-		data:'issuenumber=' + row.issuenumber + '&subcode=' + row.subcode + '&pack=' + row.pack,
+		data:'issuenumber=' + row.issuenumber + '&subcode=' + row.subcode + '&pack=' + row.pack + '&bundle=' + row.bundle,
 		dataType:'json',
 		success:function(data){
 			$.messager.alert("操作提示",data.msg,"info");
@@ -374,6 +379,7 @@ function loadInfoByBarcode(){
 function updatePackInfo(){
 	var id = $("#editpack_id").val();
 	var pack =$("#updatepack_pack").textbox('getValue');
+	var bundle =$("#updatepack_bundle").textbox('getValue');
 	var reg = new RegExp("^[0-9]*$");
 	if(!reg.test(pack)){
 		$.messager.alert("操作提示","捆扎只能输入数字！","error");
@@ -381,7 +387,8 @@ function updatePackInfo(){
 	}
 	var formData = {
 		"id" 	: id,
-		"pack"	: pack
+		"pack"	: pack,
+		"bundle": bundle
 	};
 	$.ajax({
 		type:'post',
@@ -423,6 +430,7 @@ tool = {
 			$("#updatepack_issuenumber").textbox('setValue',row.issuenumber);
 			$("#updatepack_subcode").textbox('setValue',row.subcode);
 			$("#updatepack_pack").textbox('setValue',row.pack);
+			$("#updatepack_bundle").textbox('setValue',row.bundle);
 			$("#editpack_id").val(row.id);
 			$("#oldpack").val(row.pack);
 			$("#w_updatePackInfo").window('open');

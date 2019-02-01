@@ -2,6 +2,7 @@ package com.management.service.jc;
 
 import com.management.common.ServerResponse;
 import com.management.pojo.jc.JiaoCaiDistribute;
+import com.management.vo.jc.JiaoCaiDistributeVo;
 
 /**
  * Author: wen-sir
@@ -17,4 +18,6 @@ public interface IJiaoCaiDistributeService {
     ServerResponse delete(JiaoCaiDistribute jiaoCaiDistribute);
 
     ServerResponse update(JiaoCaiDistribute jiaoCaiDistribute);
+
+    ServerResponse loadWaitComputeData(Integer pageSize, Integer pageNum, JiaoCaiDistributeVo jiaoCaiDistributeVo);
 }

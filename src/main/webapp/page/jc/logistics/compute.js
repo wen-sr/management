@@ -2,10 +2,12 @@
  * 加载需配发计算信息
  * @returns
  */
-function loadWaitComputeData(){
+function loadWaitComputeData(pageSize, method, formData){
 
 	$("#data").datagrid({
-		url:'jc/compute_loadWaitComputeData.action',
+		url:'/management/jc/distribute/loadWaitComputeData',
+		method: method || 'GET',
+		queryParams:formData || '',
 		height:'auto',	
 		fitColumns: true,
 		striped:true,
@@ -14,7 +16,7 @@ function loadWaitComputeData(){
 		singleSelect:true,
 		pagination:true,
         pageSize:20,
-        pageList:[10,15,20],
+        pageList:[10,20,50],
 		showFooter: true,
 		toolbar:'#tb',
 		columns:[[{
@@ -95,10 +97,11 @@ tool = {
 				$.messager.alert("操作提示","请先切换到需配发计算界面才能选择捆扎数","error");
 				return;
 			}
-			var issuenumber = $("#span_issuenumber").val();
-			var subcode = $("#span_subcode").val();
+			var rows=$('#data-detail').datagrid("getRows");
+			var row = rows[0];
+			$("#w_choosePack").window("open");
 			$("#t_choosepack").datagrid({
-				url:'jc/inventory_queryInventory.action?issuenumber=' + issuenumber + "&subcode=" + subcode,
+				url:'/management/jc/inventory/infoDetailTotal?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
 				height:'auto',	
 				fitColumns: true,
 				fit: true,
@@ -129,10 +132,12 @@ tool = {
 					field:"qtyfree",
 					title:"可用库存",
 				    width:50
-				}]]
+				}]],
+				onDblClickRow: function (index, row) {
+					tool.yes2();
+				}
 			});
 			
-			$("#w_choosePack").window("open");
 		},
 		cancelcompute : function (){
 			var currentType = $("#currentType").val();
@@ -173,6 +178,23 @@ tool = {
 			$("#t_qty").textbox('setValue',row.qtyfree);
 			$("#t_pack").combobox('setValue',row.pack);
 			$("#w_choosePack").window("close");
+			formData = {
+				"issuenumber" 	: row.issuenumber,
+				"subcode"		: row.subcode,
+				"pack"			: row.pack
+			};
+			$.ajax({
+				type:'post',
+				url:'/management/jc/pack/tips',
+				data: formData,
+				dataType:'json',
+				success:function (data){
+					$("#t_bundle").textbox('setValue',data[0].bundle);
+				},
+				error:function(){
+					$.messager.alert("提示","数据错误，联系管理员","info");
+				}
+			});
 			$('#data-detail').datagrid('reload');
 		},
 		no2 : function (){
@@ -189,8 +211,8 @@ tool = {
 				$.messager.alert("操作提示","没有选中记录","error");
 				return;
 			}
-			dataDetail();
 			$("#w-detail").window("open");
+			dataDetail();
 		},
 		split : function(){
 			var currentType = $("#currentType").val();
@@ -303,11 +325,8 @@ function splitInfo(){
  */
 function dataDetail(){
 	var row = $('#data').datagrid('getSelected');
-	$("#span_issuenumber").val(row.issuenumber);
-	$("#span_subcode").val(row.subcode);
-	
 	$("#data-detail").datagrid({
-		url:'jc/compute_loadDataDetail.action?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
+		url:'/management/jc/distribute/info?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode + "&status=0",
 		height:'auto',	
 		fitColumns: true,
 		fit: true,
@@ -317,7 +336,7 @@ function dataDetail(){
 		singleSelect:false,
 		pagination:true,
         pageSize:1000,
-        pageList:[10,15,20,1000],
+        pageList:[10,20,50,1000],
 		showFooter: true,
 		toolbar:'#tb3',
 		columns:[[{
@@ -364,10 +383,6 @@ function dataDetail(){
 		},{
 			field:"amt",
 			title:"分发码洋",
-		    width:50
-		},{
-			field:"type",
-			title:"类型",
 		    width:50
 		}]],
 		onSelect : function (index, row) {
@@ -430,52 +445,26 @@ function dataDetail(){
 		}
 	});
 	$('#editpack').linkbutton('disable');
-	$.ajax({
-		type:"post",
-		url:"jc/inventory_queryInventoryAndBundle.action",
-		data:"issuenumber=" + row.issuenumber + "&subcode=" + row.subcode,
-		dataType:"json",
-		success:function(data){
-			if(data){
-				$("#t_qtyfree").textbox('setValue',data.qtyfree);
-				$("#t_qty").textbox('setValue',data.qtyfree);
-				$("#t_bundle").textbox('setValue',data.bundle);
-			}
-		},
-		error:function(){
-			$.messager.alert("操作提示","数据错误，联系管理员！","error");
-			return;
-		}
-	});
-	
-	$("#t_pack").combobox({
-		url:'jc/pack_query.action?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
-		valueField:'pack',
-		textField:'pack',
-		panelHeight:'auto',
-		editable:false,
-		readonly:true,
-		onLoadSuccess: function () { //加载完成后,设置选中第一项
-            var val = $(this).combobox("getData");
-            if(val.length == 1){
-            	$("#t_pack").combobox('setValue',val[0]['pack']);
-            }else{
-            	$('#editpack').linkbutton('enable');
-            	$("#t_qtyfree").textbox('setValue','');
-				$("#t_qty").textbox('setValue','');
-				$("#t_qtyoccupied").textbox('setValue','');
-            }
-        }
-	});
-	
-	$("#span_pack").combobox({
-		url:'jc/pack_query.action?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
-		valueField:'pack',
-		textField:'pack',
-		panelHeight:'auto',
-		editable:false
-	});
-	
+	// $("#t_pack").combobox({
+	// 	url:'/management/jc/inventory/infoDetailTips?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
+	// 	valueField:'pack',
+	// 	textField:'pack',
+	// 	panelHeight:'auto',
+	// 	editable:false,
+	// 	readonly:true,
+	// 	onLoadSuccess: function () { //加载完成后,设置选中第一项
+    //         var val = $(this).combobox("getData");
+    //         if(val.length == 1){
+    //         	$("#t_pack").combobox('setValue',val[0]['pack']);
+    //         }else{
+    //         	$('#editpack').linkbutton('enable');
+    //         	$("#t_qtyfree").textbox('setValue','');
+	// 			$("#t_qty").textbox('setValue','');
+	// 			$("#t_qtyoccupied").textbox('setValue','');
+    //         }
+    //     }
+	// });
+	//
 }
 
 function go(){
@@ -495,7 +484,7 @@ function go(){
 			singleSelect:true,
 			pagination:true,
 	        pageSize:20,
-	        pageList:[10,15,20],
+	        pageList:[10,20,50],
 			showFooter: true,
 			toolbar:'#tb',
 			columns:[[{
@@ -551,7 +540,7 @@ function go(){
 			singleSelect:false,
 			pagination:true,
 	        pageSize:20,
-	        pageList:[10,15,20],
+	        pageList:[10,20,50],
 			showFooter: true,
 			toolbar:'#tb5',
 			columns:[[{
@@ -631,7 +620,7 @@ function loadComputedData(){
 		singleSelect:false,
 		pagination:true,
         pageSize:20,
-        pageList:[10,15,20],
+        pageList:[10,20,50],
 		showFooter: true,
 		toolbar:'#tb',
 		columns:[[{

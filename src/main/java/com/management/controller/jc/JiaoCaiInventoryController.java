@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Author: wen-sir
  * Description:
@@ -38,6 +40,24 @@ public class JiaoCaiInventoryController {
                                     JiaoCaiInventory_detail jiaoCaiInventory_detail){
         ServerResponse response = jiaoCaiInventoryService.selectInventoryDetail(pageSize, pageNum, jiaoCaiInventory_detail);
         return response.parseToEasyuiTableResponse(response);
+
+    }
+
+    @RequestMapping("/infoDetailTotal")
+    public EasyuiTableResponse infoDetailTotal(@RequestParam(value = "rows", defaultValue = "10") Integer pageSize,
+                                    @RequestParam(value = "page", defaultValue = "1") Integer pageNum,
+                                    JiaoCaiInventory_detail jiaoCaiInventory_detail){
+        ServerResponse response = jiaoCaiInventoryService.selectInventoryDetailTotal(pageSize, pageNum, jiaoCaiInventory_detail);
+        return response.parseToEasyuiTableResponse(response);
+
+    }
+
+    @RequestMapping("/infoDetailTips")
+    public List<JiaoCaiInventoryVo> infoDetailTips(@RequestParam(value = "rows", defaultValue = "10") Integer pageSize,
+                                                   @RequestParam(value = "page", defaultValue = "1") Integer pageNum,
+                                                   JiaoCaiInventory_detail jiaoCaiInventory_detail){
+        ServerResponse<List<JiaoCaiInventoryVo>> response = jiaoCaiInventoryService.selectInventoryDetailTotal(pageSize, pageNum, jiaoCaiInventory_detail);
+        return response.getData();
 
     }
 

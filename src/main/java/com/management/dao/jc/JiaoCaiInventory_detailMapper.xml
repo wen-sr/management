@@ -261,7 +261,51 @@
     </where>
     order by qtyfree desc
   </select>
-  <update id="addInventoryDetail" parameterType="com.management.pojo.jc.JiaoCaiInventory_detail">
+  <select id="selectAllTotal" resultType="com.management.pojo.jc.JiaoCaiInventory_detail">
+    select issuenumber, subcode, pack, sum(qtyfree) qtyfree
+    from JiaoCaiInventory_detail
+    <where>
+      <if test="id != null and id != '' ">
+        and id = #{id,jdbcType=NVARCHAR}
+      </if>
+      <if test="issuenumber != null and issuenumber != '' ">
+        and issuenumber = #{issuenumber}
+      </if>
+      <if test="subcode != null and subcode != '' ">
+        and subcode = #{subcode}
+      </if>
+      <if test="pack != null and pack != '' ">
+        and pack = #{pack}
+      </if>
+      <if test="loc != null and loc != '' ">
+        and loc = #{loc}
+      </if>
+      <if test="containerId != null and containerId != '' ">
+        and containerId = #{containerId}
+      </if>
+    </where>
+    group by issuenumber, subcode, pack
+    order by issuenumber, subcode
+  </select>
+  <select id="selectByQtyfree" resultType="com.management.pojo.jc.JiaoCaiInventory_detail">
+    select <include refid="Base_Column_List" />
+    from JiaoCaiInventory_detail
+    where issuenumber = #{issuenumber}
+    and subcode = #{subcode}
+    and pack = #{pack}
+    and qtyfree &gt;= #{qtyfree}
+    order by qtyfree
+  </select>
+  <select id="selectByQtyfree2" resultType="com.management.pojo.jc.JiaoCaiInventory_detail">
+    select <include refid="Base_Column_List" />
+    from JiaoCaiInventory_detail
+    where issuenumber = #{issuenumber}
+    and subcode = #{subcode}
+    and pack = #{pack}
+    and qtyfree &lt; #{qtyfree}
+    order by qtyfree desc
+  </select>
+    <update id="addInventoryDetail" parameterType="com.management.pojo.jc.JiaoCaiInventory_detail">
     update JiaoCaiInventory_detail
     set qtyreceipt = qtyreceipt + #{qtyreceipt},
     qtyfree = qtyfree + #{qtyreceipt}

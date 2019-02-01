@@ -2,10 +2,12 @@
  * 加载库存分发信息
  * @returns
  */
-function loadWaitDistributionData(){
+function loadWaitDistributionData(pageSize, method, formData){
 
 	$("#data").datagrid({
-		url:'/management/jc/inventory/info',
+		url:'/management/jc/allowAllocate/info',
+		method: method || 'GET',
+		queryParams:formData || '',
 		height:'auto',	
 		fitColumns: true,
 		striped:true,
@@ -47,7 +49,7 @@ function loadWaitDistributionData(){
 			title:"出版社代码",
 		    width:60
 		},{
-			field:"publisher",
+			field:"shortname",
 			title:"出版社",
 		    width:60
 		},{
@@ -58,6 +60,10 @@ function loadWaitDistributionData(){
 			field:"qtyallocated",
 			title:"已分发数量",
 		    width:50
+		},{
+			field:"allowallocate",
+			title:"可分发数量",
+			width:50
 		}]]
 	});
 	$("#currentType").val("0");
@@ -97,19 +103,20 @@ function addInfo(){
 	var param = "subcode=" + subcode + "&qtyallocated=" + qtyallocated + "&issuenumber=" + issuenumber + "&code=" + code + "&type=1";
 	$.ajax({
 		type:'post',
-		url:'jc/distribution_submitInventoryDistributionData.action',
+		url:'/management/jc/distribute/add',
 		data:param,
 		dataType:'json',
 		success:function(data){
 			if(data){
-				$.messager.alert("操作提示",data["msg"],"info");
-				if(data["qtyfree"] || data["qtyfree"] == 0){
-					$("#add_qtyfree").textbox('setValue',data["qtyfree"]);
-				}
+				$.messager.alert("操作提示",data.msg,"info",function(){
+					if(data.status == '0'){
+						$("#add_qtyfree").textbox('setValue',data.data[0].allowallocate);
+						$("#add_qtyallocated").textbox('setValue','');
+						$("#add_code").combobox('setValue','');
+					}
+					loadDistributedData();
+				});
 			}
-			$("#add_qtyallocated").textbox('setValue','');
-			$("#add_code").combobox('setValue','');
-			loadDistributedData();
 		},
 		error:function(){
 			$.messager.alert("操作提示","数据错误，联系管理员！","error");
@@ -151,12 +158,12 @@ function editInfo(){
 	var param = "id=" + id + "&subcode=" + subcode + "&qtyallocated=" + qtyallocated + "&issuenumber=" + issuenumber + "&code=" + code + "&type=1";
 	$.ajax({
 		type:'post',
-		url:'/management/jc/distribute/add',
+		url:'/management/jc/distribute/update',
 		data:param,
 		dataType:'json',
 		success:function(data){
 			if(data){
-				$.messager.alert("操作提示",data,"info");
+				$.messager.alert("操作提示",data.msg,"info");
 			}
 			$("#w-editInfo").window("close");
 			$("#data").datagrid('reload');
@@ -175,130 +182,12 @@ function go(){
 	var issuenumber = $("#issuenumber").combobox("getValue");
 	var subcode = $("#subcode").textbox('getValue');
 	var barcode = $("#barcode").textbox('getValue');
-	var param = "type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode;
+	var formData = "issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode;
 	if("0" == type ){
-		$("#data").datagrid({
-			url:"/management/jc/inventory/info?issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode,
-			height:'auto',	
-			fitColumns: true,
-			striped:true,
-			rownumbers:true,
-			border:true,
-			singleSelect:true,
-			pagination:true,
-	        pageSize:20,
-	        pageList:[10,20,50],
-			showFooter: true,
-			toolbar:'#tb',
-			columns:[[{
-				field:"id",
-			    title:"编号",
-			    checkbox:true,
-			    width:50
-			},{
-				field:"issuenumber",
-				title:"期号",
-			    width:60
-			},{
-				field:"subcode",
-				title:"征订代码",
-			    width:100
-			},{
-				field:"barcode",
-				title:"条码",
-			    width:100
-			},{
-				field:"descr",
-				title:"书名",
-			    width:100
-			},{
-				field:"price",
-				title:"定价",
-			    width:50
-			},{
-				field:"storerkey",
-				title:"出版社代码",
-			    width:60
-			},{
-				field:"publisher",
-				title:"出版社",
-			    width:60
-			},{
-				field:"qtyfree",
-				title:"可用库存",
-			    width:50
-			},{
-				field:"qtyallocated",
-				title:"已分发数量",
-			    width:50
-			}]]
-		});
+		loadWaitDistributionData(20, 'POST', formData);
 		$("#currentType").val("0");
 	}else {
-		$("#data").datagrid({
-			url:"/management/jc/distribute/info?&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode + "&type=1",
-			height:'auto',	
-			fitColumns: true,
-			striped:true,
-			rownumbers:true,
-			border:true,
-			singleSelect:true,
-			pagination:true,
-	        pageSize:20,
-	        pageList:[10,20,50],
-			showFooter: true,
-			toolbar:'#tb',
-			columns:[[{
-				field:"id",
-			    title:"编号",
-			    checkbox:true,
-			    width:50
-			},{
-				field:"issuenumber",
-				title:"期号",
-			    width:50
-			},{
-				field:"subcode",
-				title:"征订代码",
-			    width:50
-			},{
-				field:"barcode",
-				title:"条码",
-			    width:50
-			},{
-				field:"descr",
-				title:"书名",
-			    width:50
-			},{
-				field:"price",
-				title:"定价",
-			    width:50
-			},{
-				field:"storerkey",
-				title:"出版社代码",
-			    width:30
-			},{
-				field:"publisher",
-				title:"出版社",
-			    width:30
-			},{
-				field:"code",
-				title:"分发店代码",
-			    width:50
-			},{
-				field:"shortname",
-				title:"分发店",
-			    width:30
-			},{
-				field:"qtyallocated",
-				title:"已分发数量",
-			    width:50
-			},{
-				field:"amt",
-				title:"已分发码洋",
-			    width:50
-			}]]
-		});
+		loadDistributedData(20, 'POST', formData);
 		$("#currentType").val("1");
 	}
 }
@@ -322,9 +211,9 @@ tool = {
 			$("#add_subcode").textbox('setValue',row.subcode);
 			$("#add_barcode").textbox('setValue',row.barcode);
 			$("#add_descr").textbox('setValue',row.descr);
-			$("#add_publisher").combobox('setValue',row.publisher);
+			$("#add_publisher").combobox('setValue',row.storerkey);
 			$("#add_price").textbox('setValue',row.price);
-			$("#add_qtyfree").textbox('setValue',row.qtyfree);
+			$("#add_qtyfree").textbox('setValue',row.allowallocate);
 			$("#w-addInfo").window("open");
 		},
 		edit : function (){
@@ -386,10 +275,12 @@ tool = {
  * 加载库存已分发信息
  * @returns
  */
-function loadDistributedData(){
+function loadDistributedData(pageSize, method, formData){
 
 	$("#data").datagrid({
-		url:'/management/jc/distribute/info?type=1',
+		url:'/management/jc/distribute/info',
+		method: method || 'GET',
+		queryParams:formData || '',
 		height:'auto',	
 		fitColumns: true,
 		striped:true,
@@ -445,10 +336,6 @@ function loadDistributedData(){
 		},{
 			field:"qtyallocated",
 			title:"已分发数量",
-		    width:50
-		},{
-			field:"amt",
-			title:"已分发码洋",
 		    width:50
 		}]]
 	});
@@ -598,5 +485,5 @@ function removeInfo(){
 }
 
 $(function(){
-	loadWaitDistributionData();
+	loadWaitDistributionData(20, 'POST','');
 });

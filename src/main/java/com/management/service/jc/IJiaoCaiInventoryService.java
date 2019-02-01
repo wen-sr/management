@@ -21,4 +21,6 @@ public interface IJiaoCaiInventoryService {
 
     ServerResponse move(JiaoCaiInventoryVo jiaoCaiInventoryVo);
 
+    ServerResponse selectInventoryDetailTotal(Integer pageSize, Integer pageNum, JiaoCaiInventory_detail jiaoCaiInventory_detail);
+
 }
