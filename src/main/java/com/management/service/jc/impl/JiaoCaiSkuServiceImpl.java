@@ -31,7 +31,7 @@ import java.util.List;
  * Modified By：
  */
 @Service
-@Transactional
+@Transactional(value = "transactionManager_wms",readOnly = false)
 public class JiaoCaiSkuServiceImpl implements IJiaoCaiSkuService {
 
     @Autowired

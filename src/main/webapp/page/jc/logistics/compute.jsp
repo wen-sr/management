@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		剩余库存：<input class="easyui-textbox" id="t_qty" style="width:80px" data-options="readonly:true" />
 		占用库存：<input class="easyui-textbox" id="t_qtyoccupied" style="width:80px" data-options="readonly:true" />
 		每包捆数：<input class="easyui-textbox" id="t_bundle" style="width:80px" data-options="readonly:true" />
-		捆扎：<input class="easyui-textbox" id="t_pack"style="width:80px" />
+		捆扎：<input class="easyui-combobox" id="t_pack"style="width:80px" />
 	    <a class="easyui-linkbutton" iconCls="icon-edit" id="editpack" onclick="tool.editpack()" >选择捆扎数</a>
 	    <a class="easyui-linkbutton" iconCls="icon-edit" id="split" onclick="tool.split()" >分书拆分</a>
 	    <a class="easyui-linkbutton" iconCls="icon-edit" id="compute" onclick="tool.compute()">配发计算</a>

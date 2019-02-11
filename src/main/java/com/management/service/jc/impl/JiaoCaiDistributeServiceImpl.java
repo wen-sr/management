@@ -29,7 +29,7 @@ import java.util.List;
  * Modified By：
  */
 @Service
-@Transactional
+@Transactional(value = "transactionManager_wms",readOnly = false)
 public class JiaoCaiDistributeServiceImpl implements IJiaoCaiDistributeService {
 
     @Autowired
@@ -105,52 +105,6 @@ public class JiaoCaiDistributeServiceImpl implements IJiaoCaiDistributeService {
         return ServerResponse.createByErrorMessage("添加失败，请联系管理员");
     }
 
-    public ServerResponse compute(JiaoCaiDistribute jiaoCaiDistribute){
-        int i = 0;
-        //库存分发，需占用库存
-        //todo 1.判断整件还是零件
-        //库存表头
-        JiaoCaiInventory jiaoCaiInventory = jiaoCaiInventoryMapper.selectByIssuenumberAndSubcode(new JiaoCaiInventory(jiaoCaiDistribute.getIssuenumber(), jiaoCaiDistribute.getSubcode()));
-        jiaoCaiInventory.setQtyallocated(jiaoCaiInventory.getQtyallocated() + jiaoCaiDistribute.getQtyallocated());
-        if(jiaoCaiInventory.getQtyfree() - jiaoCaiDistribute.getQtyallocated() > 0){
-            jiaoCaiInventory.setQtyfree(jiaoCaiInventory.getQtyfree() - jiaoCaiDistribute.getQtyallocated());
-        } else {
-            throw new MyException(-1, "库存不足，无法分发");
-        }
-        i += jiaoCaiInventoryMapper.updateByPrimaryKeySelective(jiaoCaiInventory);
-        //库存明细
-        JiaoCaiInventory_detail jiaoCaiInventory_detail = null;
-        JiaoCaiPick jiaoCaiPick = null;
-        //1.查找一块托盘能符合的，选择数量最接近的那条
-        List<JiaoCaiInventory_detail> jiaoCaiInventoryDetailList = jiaoCaiInventoryDetailMapper.selectByQtyfree(new JiaoCaiInventory_detail(jiaoCaiDistribute.getIssuenumber(), jiaoCaiDistribute.getSubcode(), jiaoCaiDistribute.getPack(), jiaoCaiDistribute.getQtyallocated()));
-        if(jiaoCaiInventoryDetailList != null && jiaoCaiInventoryDetailList.size() > 0){
-            //占用库存
-            jiaoCaiInventory_detail = jiaoCaiInventoryDetailList.get(0);
-            jiaoCaiInventory_detail.setQtyfree(jiaoCaiInventory_detail.getQtyfree() - jiaoCaiDistribute.getQtyallocated());
-            jiaoCaiInventory_detail.setQtyallocated(jiaoCaiInventory_detail.getQtyallocated() + jiaoCaiDistribute.getQtyallocated());
-            i += jiaoCaiInventoryDetailMapper.updateByPrimaryKeySelective(jiaoCaiInventory_detail);
-            //写入pick表
-            i += addPick(jiaoCaiDistribute, jiaoCaiInventory_detail);
-        }{
-            //2.如果没有，则选择数量最大
-            jiaoCaiInventoryDetailList = jiaoCaiInventoryDetailMapper.selectByQtyfree2(new JiaoCaiInventory_detail(jiaoCaiDistribute.getIssuenumber(), jiaoCaiDistribute.getSubcode(), jiaoCaiDistribute.getPack(), jiaoCaiDistribute.getQtyallocated()));
-            int qty = jiaoCaiInventory.getQtyallocated();
-            for(JiaoCaiInventory_detail j : jiaoCaiInventoryDetailList){
-                //占用库存
-                j.setQtyfree(j.getQtyfree() - qty > 0 ? j.getQtyfree() - qty : 0 );
-                j.setQtyallocated(j.getQtyallocated() + (j.getQtyfree() - qty > 0 ? j.getQtyfree() - qty : j.getQtyfree()));
-                i += jiaoCaiInventoryDetailMapper.updateByPrimaryKeySelective(j);
-                //写入pick表
-                i += addPick(jiaoCaiDistribute, j);
-                qty = qty - j.getQtyfree();
-                if(qty == 0){
-                    break;
-                }
-            }
-        }
-        return null;
-    }
-
     private int addPick(JiaoCaiDistribute jiaoCaiDistribute,JiaoCaiInventory_detail jiaoCaiInventory_detail){
         JiaoCaiPick jiaoCaiPick = new JiaoCaiPick();
         jiaoCaiPick.setAddwho(RequestHolder.getCurrentUser().getId());
@@ -216,6 +170,65 @@ public class JiaoCaiDistributeServiceImpl implements IJiaoCaiDistributeService {
         PageInfo pageInfo = new PageInfo(jiaoCaiDistributeVoList);
         return ServerResponse.createBySuccess(pageInfo);
     }
+
+    @Override
+    public ServerResponse compute(Long[] ids, Integer pack, Integer bundle) {
+        for(Long l : ids){
+            JiaoCaiDistribute jiaoCaiDistribute = jiaoCaiDistributeMapper.selectByPrimaryKey(l);
+            jiaoCaiDistribute.setPack(pack);
+            jiaoCaiDistribute.setOldpack(bundle);
+            jiaoCaiDistributeMapper.updateByPrimaryKeySelective(jiaoCaiDistribute);
+            JiaoCaiCompute jiaoCaiCompute = new JiaoCaiCompute();
+            jiaoCaiCompute.setBatchno();
+        }
+        return null;
+    }
+    private ServerResponse computeDo(JiaoCaiDistribute jiaoCaiDistribute){
+        int i = 0;
+        //库存分发，需占用库存
+        //todo 1.判断整件还是零件
+        //库存表头
+        JiaoCaiInventory jiaoCaiInventory = jiaoCaiInventoryMapper.selectByIssuenumberAndSubcode(new JiaoCaiInventory(jiaoCaiDistribute.getIssuenumber(), jiaoCaiDistribute.getSubcode()));
+        jiaoCaiInventory.setQtyallocated(jiaoCaiInventory.getQtyallocated() + jiaoCaiDistribute.getQtyallocated());
+        if(jiaoCaiInventory.getQtyfree() - jiaoCaiDistribute.getQtyallocated() > 0){
+            jiaoCaiInventory.setQtyfree(jiaoCaiInventory.getQtyfree() - jiaoCaiDistribute.getQtyallocated());
+        } else {
+            throw new MyException(-1, "库存不足，无法分发");
+        }
+        i += jiaoCaiInventoryMapper.updateByPrimaryKeySelective(jiaoCaiInventory);
+        //库存明细
+        JiaoCaiInventory_detail jiaoCaiInventory_detail = null;
+        JiaoCaiPick jiaoCaiPick = null;
+        //1.查找一块托盘能符合的，选择数量最接近的那条
+        List<JiaoCaiInventory_detail> jiaoCaiInventoryDetailList = jiaoCaiInventoryDetailMapper.selectByQtyfree(new JiaoCaiInventory_detail(jiaoCaiDistribute.getIssuenumber(), jiaoCaiDistribute.getSubcode(), jiaoCaiDistribute.getPack(), jiaoCaiDistribute.getQtyallocated()));
+        if(jiaoCaiInventoryDetailList != null && jiaoCaiInventoryDetailList.size() > 0){
+            //占用库存
+            jiaoCaiInventory_detail = jiaoCaiInventoryDetailList.get(0);
+            jiaoCaiInventory_detail.setQtyfree(jiaoCaiInventory_detail.getQtyfree() - jiaoCaiDistribute.getQtyallocated());
+            jiaoCaiInventory_detail.setQtyallocated(jiaoCaiInventory_detail.getQtyallocated() + jiaoCaiDistribute.getQtyallocated());
+            i += jiaoCaiInventoryDetailMapper.updateByPrimaryKeySelective(jiaoCaiInventory_detail);
+            //写入pick表
+            i += addPick(jiaoCaiDistribute, jiaoCaiInventory_detail);
+        }{
+            //2.如果没有，则选择数量最大
+            jiaoCaiInventoryDetailList = jiaoCaiInventoryDetailMapper.selectByQtyfree2(new JiaoCaiInventory_detail(jiaoCaiDistribute.getIssuenumber(), jiaoCaiDistribute.getSubcode(), jiaoCaiDistribute.getPack(), jiaoCaiDistribute.getQtyallocated()));
+            int qty = jiaoCaiInventory.getQtyallocated();
+            for(JiaoCaiInventory_detail j : jiaoCaiInventoryDetailList){
+                //占用库存
+                j.setQtyfree(j.getQtyfree() - qty > 0 ? j.getQtyfree() - qty : 0 );
+                j.setQtyallocated(j.getQtyallocated() + (j.getQtyfree() - qty > 0 ? j.getQtyfree() - qty : j.getQtyfree()));
+                i += jiaoCaiInventoryDetailMapper.updateByPrimaryKeySelective(j);
+                //写入pick表
+                i += addPick(jiaoCaiDistribute, j);
+                qty = qty - j.getQtyfree();
+                if(qty == 0){
+                    break;
+                }
+            }
+        }
+        return null;
+    }
+
 
     private List<JiaoCaiDistributeVo> parseToJiaoCaiDistributeVo(List<JiaoCaiDistribute> jiaoCaiDistributeList) {
         List<JiaoCaiDistributeVo> jiaoCaiDistributeVoList = new ArrayList<>();

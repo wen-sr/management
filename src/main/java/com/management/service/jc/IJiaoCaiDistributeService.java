@@ -20,4 +20,6 @@ public interface IJiaoCaiDistributeService {
     ServerResponse update(JiaoCaiDistribute jiaoCaiDistribute);
 
     ServerResponse loadWaitComputeData(Integer pageSize, Integer pageNum, JiaoCaiDistributeVo jiaoCaiDistributeVo);
+
+    ServerResponse compute(Long[] ids, Integer pack, Integer bundle);
 }

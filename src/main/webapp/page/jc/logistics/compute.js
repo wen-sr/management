@@ -238,22 +238,17 @@ tool = {
  */
 function compute(){
 	var rows = $('#data-detail').datagrid('getSelections');
-	var addwho = $("#userid").val();
-	if(addwho == ""){
-		$.messager.alert("提示","登录信息失效，请重新登录","info",function(){
-			getTopWinow().location.href = 'login.action';
-		});
-	}
 	var ids = [];
 	for(var i=0; i<rows.length; i++){
 		var row = rows[i];
 		ids.push(row.id);
 	}
-	var pack = $("#t_pack").textbox('getValue');
+	var pack = $("#t_pack").combobox('getValue');
+	var bundle = $("#t_bundle").textbox('getValue');
 	$.ajax({
 		type:'post',
-		url:'jc/compute_compute.action',
-		data:"id=" + ids + "&pack=" + pack + "&addwho=" + addwho,
+		url:'/management/jc/distribute/compute',
+		data:"id=" + ids + "&pack=" + pack + "&bundle=" + bundle,
 		dataType:'json',
 		success:function (data){
 			$.messager.alert("操作提示",data,"info");
@@ -444,7 +439,7 @@ function dataDetail(){
 			$("#t_qty").textbox('setValue',parseInt(t_qtyfree) - t_qtyoccupied);
 		}
 	});
-	$('#editpack').linkbutton('disable');
+	// $('#editpack').linkbutton('disable');
 	// $("#t_pack").combobox({
 	// 	url:'/management/jc/inventory/infoDetailTips?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
 	// 	valueField:'pack',

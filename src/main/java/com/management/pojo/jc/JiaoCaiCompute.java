@@ -13,7 +13,13 @@ public class JiaoCaiCompute {
 
     private String shortname;
 
+    private String loc;
+
+    private String containerid;
+
     private Integer pack;
+
+    private Integer bundle;
 
     private Integer qtyallocated;
 
@@ -53,13 +59,16 @@ public class JiaoCaiCompute {
 
     private Date loaddate;
 
-    public JiaoCaiCompute(Long id, String issuenumber, String subcode, String code, String shortname, Integer pack, Integer qtyallocated, String status, Date computedate, String computewho, Integer caseqty, Integer oddpack, Integer odd, Integer type, String batchno, String shipno, String pickno, String editwho, Date editdate, String packwho, Date packdate, String computeno, String shipwho, Date shipdate, Date loaddate) {
+    public JiaoCaiCompute(Long id, String issuenumber, String subcode, String code, String shortname, String loc, String containerid, Integer pack, Integer bundle, Integer qtyallocated, String status, Date computedate, String computewho, Integer caseqty, Integer oddpack, Integer odd, Integer type, String batchno, String shipno, String pickno, String editwho, Date editdate, String packwho, Date packdate, String computeno, String shipwho, Date shipdate, Date loaddate) {
         this.id = id;
         this.issuenumber = issuenumber;
         this.subcode = subcode;
         this.code = code;
         this.shortname = shortname;
+        this.loc = loc;
+        this.containerid = containerid;
         this.pack = pack;
+        this.bundle = bundle;
         this.qtyallocated = qtyallocated;
         this.status = status;
         this.computedate = computedate;
@@ -125,12 +134,36 @@ public class JiaoCaiCompute {
         this.shortname = shortname == null ? null : shortname.trim();
     }
 
+    public String getLoc() {
+        return loc;
+    }
+
+    public void setLoc(String loc) {
+        this.loc = loc == null ? null : loc.trim();
+    }
+
+    public String getContainerid() {
+        return containerid;
+    }
+
+    public void setContainerid(String containerid) {
+        this.containerid = containerid == null ? null : containerid.trim();
+    }
+
     public Integer getPack() {
         return pack;
     }
 
     public void setPack(Integer pack) {
         this.pack = pack;
+    }
+
+    public Integer getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(Integer bundle) {
+        this.bundle = bundle;
     }
 
     public Integer getQtyallocated() {

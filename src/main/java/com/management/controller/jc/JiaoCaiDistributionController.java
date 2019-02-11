@@ -52,4 +52,9 @@ public class JiaoCaiDistributionController {
         return response.parseToEasyuiTableResponse(response);
     }
 
+    @RequestMapping("/compute")
+    public ServerResponse compute(@RequestParam(value = "ids") Long[] ids,@RequestParam(value = "pack") Integer pack,@RequestParam(value = "bundle") Integer bundle){
+        return jiaoCaiDistributeService.compute(ids, pack, bundle);
+    }
+
 }

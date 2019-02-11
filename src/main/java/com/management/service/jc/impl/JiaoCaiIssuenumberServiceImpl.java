@@ -9,6 +9,7 @@ import com.management.service.jc.IJiaoCaiIssuenumberService;
 import com.management.util.DataSourceContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
  * Modified By：
  */
 @Service
+@Transactional(value = "transactionManager_wms",readOnly = false)
 public class JiaoCaiIssuenumberServiceImpl implements IJiaoCaiIssuenumberService {
 
     @Autowired
