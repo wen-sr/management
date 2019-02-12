@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.management.pojo.jc.JiaoCaiCompute">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="NUMERIC" />
+      <arg column="distributeId" javaType="java.lang.Long" jdbcType="NUMERIC" />
       <arg column="issuenumber" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="subcode" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="code" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -31,12 +32,19 @@
       <arg column="shipwho" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="shipdate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="loaddate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="picktype" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sendcode" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="senddate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="retcode" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="retdate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="retmsg" javaType="java.lang.String" jdbcType="NVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, issuenumber, subcode, code, shortname, loc, containerId, pack, bundle, qtyallocated, 
-    status, computedate, computewho, caseqty, oddpack, odd, type, batchno, shipno, pickno, 
-    editwho, editdate, packwho, packdate, computeno, shipwho, shipdate, loaddate
+    id, distributeId, issuenumber, subcode, code, shortname, loc, containerId, pack, 
+    bundle, qtyallocated, status, computedate, computewho, caseqty, oddpack, odd, type, 
+    batchno, shipno, pickno, editwho, editdate, packwho, packdate, computeno, shipwho, 
+    shipdate, loaddate, picktype, sendcode, senddate, retcode, retdate, retmsg
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -49,32 +57,39 @@
     where id = #{id,jdbcType=NUMERIC}
   </delete>
   <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiCompute">
-    insert into JiaoCaiCompute (id, issuenumber, subcode, 
-      code, shortname, loc, 
-      containerId, pack, bundle, 
-      qtyallocated, status, computedate, 
-      computewho, caseqty, oddpack, 
-      odd, type, batchno, 
-      shipno, pickno, editwho, 
-      editdate, packwho, packdate, 
-      computeno, shipwho, shipdate, 
-      loaddate)
-    values (#{id,jdbcType=NUMERIC}, #{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, 
-      #{code,jdbcType=NVARCHAR}, #{shortname,jdbcType=NVARCHAR}, #{loc,jdbcType=NVARCHAR}, 
-      #{containerid,jdbcType=NVARCHAR}, #{pack,jdbcType=INTEGER}, #{bundle,jdbcType=INTEGER}, 
-      #{qtyallocated,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, getdate(),
-      #{computewho,jdbcType=NVARCHAR}, #{caseqty,jdbcType=INTEGER}, #{oddpack,jdbcType=INTEGER}, 
-      #{odd,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{batchno,jdbcType=VARCHAR}, 
-      #{shipno,jdbcType=VARCHAR}, #{pickno,jdbcType=VARCHAR}, #{editwho,jdbcType=VARCHAR}, 
-      #{editdate,jdbcType=TIMESTAMP}, #{packwho,jdbcType=VARCHAR}, #{packdate,jdbcType=TIMESTAMP}, 
-      #{computeno,jdbcType=NVARCHAR}, #{shipwho,jdbcType=NVARCHAR}, #{shipdate,jdbcType=TIMESTAMP}, 
-      #{loaddate,jdbcType=TIMESTAMP})
+    insert into JiaoCaiCompute (id, distributeId, issuenumber, 
+      subcode, code, shortname, 
+      loc, containerId, pack, 
+      bundle, qtyallocated, status, 
+      computedate, computewho, caseqty, 
+      oddpack, odd, type, 
+      batchno, shipno, pickno, 
+      editwho, editdate, packwho, 
+      packdate, computeno, shipwho, 
+      shipdate, loaddate, picktype, 
+      sendcode, senddate, retcode, 
+      retdate, retmsg)
+    values (#{id,jdbcType=NUMERIC}, #{distributeid,jdbcType=NUMERIC}, #{issuenumber,jdbcType=NVARCHAR}, 
+      #{subcode,jdbcType=NVARCHAR}, #{code,jdbcType=NVARCHAR}, #{shortname,jdbcType=NVARCHAR}, 
+      #{loc,jdbcType=NVARCHAR}, #{containerid,jdbcType=NVARCHAR}, #{pack,jdbcType=INTEGER}, 
+      #{bundle,jdbcType=INTEGER}, #{qtyallocated,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{computedate,jdbcType=TIMESTAMP}, #{computewho,jdbcType=NVARCHAR}, #{caseqty,jdbcType=INTEGER}, 
+      #{oddpack,jdbcType=INTEGER}, #{odd,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{batchno,jdbcType=VARCHAR}, #{shipno,jdbcType=VARCHAR}, #{pickno,jdbcType=VARCHAR}, 
+      #{editwho,jdbcType=VARCHAR}, #{editdate,jdbcType=TIMESTAMP}, #{packwho,jdbcType=VARCHAR}, 
+      #{packdate,jdbcType=TIMESTAMP}, #{computeno,jdbcType=NVARCHAR}, #{shipwho,jdbcType=NVARCHAR}, 
+      #{shipdate,jdbcType=TIMESTAMP}, #{loaddate,jdbcType=TIMESTAMP}, #{picktype,jdbcType=INTEGER}, 
+      #{sendcode,jdbcType=INTEGER}, #{senddate,jdbcType=TIMESTAMP}, #{retcode,jdbcType=INTEGER}, 
+      #{retdate,jdbcType=TIMESTAMP}, #{retmsg,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiCompute">
     insert into JiaoCaiCompute
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="distributeid != null">
+        distributeId,
       </if>
       <if test="issuenumber != null">
         issuenumber,
@@ -136,7 +151,7 @@
       <if test="editwho != null">
         editwho,
       </if>
-      <if test="1 == 1">
+      <if test="editdate != null">
         editdate,
       </if>
       <if test="packwho != null">
@@ -157,10 +172,31 @@
       <if test="loaddate != null">
         loaddate,
       </if>
+      <if test="picktype != null">
+        picktype,
+      </if>
+      <if test="sendcode != null">
+        sendcode,
+      </if>
+      <if test="senddate != null">
+        senddate,
+      </if>
+      <if test="retcode != null">
+        retcode,
+      </if>
+      <if test="retdate != null">
+        retdate,
+      </if>
+      <if test="retmsg != null">
+        retmsg,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="distributeid != null">
+        #{distributeid,jdbcType=NUMERIC},
       </if>
       <if test="issuenumber != null">
         #{issuenumber,jdbcType=NVARCHAR},
@@ -222,8 +258,8 @@
       <if test="editwho != null">
         #{editwho,jdbcType=VARCHAR},
       </if>
-      <if test="1 == 1  ">
-        getdate(),
+      <if test="editdate != null">
+        #{editdate,jdbcType=TIMESTAMP},
       </if>
       <if test="packwho != null">
         #{packwho,jdbcType=VARCHAR},
@@ -243,11 +279,32 @@
       <if test="loaddate != null">
         #{loaddate,jdbcType=TIMESTAMP},
       </if>
+      <if test="picktype != null">
+        #{picktype,jdbcType=INTEGER},
+      </if>
+      <if test="sendcode != null">
+        #{sendcode,jdbcType=INTEGER},
+      </if>
+      <if test="senddate != null">
+        #{senddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retcode != null">
+        #{retcode,jdbcType=INTEGER},
+      </if>
+      <if test="retdate != null">
+        #{retdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retmsg != null">
+        #{retmsg,jdbcType=NVARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jc.JiaoCaiCompute">
     update JiaoCaiCompute
     <set>
+      <if test="distributeid != null">
+        distributeId = #{distributeid,jdbcType=NUMERIC},
+      </if>
       <if test="issuenumber != null">
         issuenumber = #{issuenumber,jdbcType=NVARCHAR},
       </if>
@@ -278,8 +335,8 @@
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="1 == 1">
-        computedate = getdate(),
+      <if test="computedate != null">
+        computedate = #{computedate,jdbcType=TIMESTAMP},
       </if>
       <if test="computewho != null">
         computewho = #{computewho,jdbcType=NVARCHAR},
@@ -329,12 +386,31 @@
       <if test="loaddate != null">
         loaddate = #{loaddate,jdbcType=TIMESTAMP},
       </if>
+      <if test="picktype != null">
+        picktype = #{picktype,jdbcType=INTEGER},
+      </if>
+      <if test="sendcode != null">
+        sendcode = #{sendcode,jdbcType=INTEGER},
+      </if>
+      <if test="senddate != null">
+        senddate = #{senddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retcode != null">
+        retcode = #{retcode,jdbcType=INTEGER},
+      </if>
+      <if test="retdate != null">
+        retdate = #{retdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retmsg != null">
+        retmsg = #{retmsg,jdbcType=NVARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=NUMERIC}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiCompute">
     update JiaoCaiCompute
-    set issuenumber = #{issuenumber,jdbcType=NVARCHAR},
+    set distributeId = #{distributeid,jdbcType=NUMERIC},
+      issuenumber = #{issuenumber,jdbcType=NVARCHAR},
       subcode = #{subcode,jdbcType=NVARCHAR},
       code = #{code,jdbcType=NVARCHAR},
       shortname = #{shortname,jdbcType=NVARCHAR},
@@ -354,13 +430,66 @@
       shipno = #{shipno,jdbcType=VARCHAR},
       pickno = #{pickno,jdbcType=VARCHAR},
       editwho = #{editwho,jdbcType=VARCHAR},
-      editdate = getdate(),
+      editdate = #{editdate,jdbcType=TIMESTAMP},
       packwho = #{packwho,jdbcType=VARCHAR},
       packdate = #{packdate,jdbcType=TIMESTAMP},
       computeno = #{computeno,jdbcType=NVARCHAR},
       shipwho = #{shipwho,jdbcType=NVARCHAR},
       shipdate = #{shipdate,jdbcType=TIMESTAMP},
-      loaddate = #{loaddate,jdbcType=TIMESTAMP}
+      loaddate = #{loaddate,jdbcType=TIMESTAMP},
+      picktype = #{picktype,jdbcType=INTEGER},
+      sendcode = #{sendcode,jdbcType=INTEGER},
+      senddate = #{senddate,jdbcType=TIMESTAMP},
+      retcode = #{retcode,jdbcType=INTEGER},
+      retdate = #{retdate,jdbcType=TIMESTAMP},
+      retmsg = #{retmsg,jdbcType=NVARCHAR}
     where id = #{id,jdbcType=NUMERIC}
   </update>
+  <select id="getComputeNo" parameterType="map" statementType="CALLABLE">
+      {CALL JiaoCaiGetComputeno(#{computeNo,jdbcType=VARCHAR,mode=OUT})}
+  </select>
+  <select id="findAll" resultType="com.management.pojo.jc.JiaoCaiCompute">
+    select <include refid="Base_Column_List"/>
+    from JiaoCaiCompute
+    <where>
+      <if test="id != null and id != '' ">
+        and id = #{id,jdbcType=NVARCHAR}
+      </if>
+      <if test="issuenumber != null and issuenumber != '' " >
+        and issuenumber = #{issuenumber}
+      </if>
+      <if test="subcode != null and subcode != '' " >
+        and subcode = #{subcode}
+      </if>
+      <if test="computewho != null and computewho != '' " >
+        and computewho = #{computewho}
+      </if>
+      <if test="type != null and type != '' " >
+        and type = #{type}
+      </if>
+      <if test="picktype != null and picktype != '' " >
+        and picktype = #{picktype}
+      </if>
+      <if test="computeno != null and computeno != '' " >
+        and computeno = #{computeno}
+      </if>
+      <if test="shipno != null and shipno != '' " >
+        and shipno = #{shipno}
+      </if>
+      <if test="pickno != null and pickno != '' " >
+        and pickno = #{pickno}
+      </if>
+      <if test="batchno != null and batchno != '' " >
+        and batchno = #{batchno}
+      </if>
+      <if test="status != null and status != '' " >
+        and status = #{status}
+      </if>
+      <if test="computedate != null and computedate != '' " >
+        <bind name="computedate" value="'%' + computedate + '%'" />
+        and convert(varchar(20),computedate,20) like #{computedate}
+      </if>
+    </where>
+    order by computedate desc
+  </select>
 </mapper>

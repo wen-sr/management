@@ -231,8 +231,11 @@
       <if test="containerId != null and containerId != '' ">
         and containerId = #{containerId}
       </if>
-      <if test="containerId == null or containerId == '' ">
+      <if test="containerId == null">
         and containerId is null
+      </if>
+      <if test="containerId == '' ">
+        and containerId = ''
       </if>
     </where>
   </select>
@@ -294,6 +297,8 @@
     and subcode = #{subcode}
     and pack = #{pack}
     and qtyfree &gt;= #{qtyfree}
+    and qtyfree &gt; 0
+    and loc not in (select loc from JiaoCaiLoc where type in ('NONE') )
     order by qtyfree
   </select>
   <select id="selectByQtyfree2" resultType="com.management.pojo.jc.JiaoCaiInventory_detail">
@@ -303,6 +308,8 @@
     and subcode = #{subcode}
     and pack = #{pack}
     and qtyfree &lt; #{qtyfree}
+    and qtyfree &gt; 0
+    and loc not in (select loc from JiaoCaiLoc where type in ('NONE') )
     order by qtyfree desc
   </select>
     <update id="addInventoryDetail" parameterType="com.management.pojo.jc.JiaoCaiInventory_detail">

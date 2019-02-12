@@ -1,8 +1,14 @@
-package com.management.pojo.jc;
+package com.management.vo.jc;
 
-import java.util.Date;
+import java.math.BigDecimal;
 
-public class JiaoCaiCompute {
+/**
+ * Author: wen-sir
+ * Description:
+ * DateCrated: 2019/2/12 13:09
+ * Modified By：
+ */
+public class JiaoCaiComputeVo {
     private Long id;
 
     private Long distributeid;
@@ -27,7 +33,7 @@ public class JiaoCaiCompute {
 
     private String status;
 
-    private Date computedate;
+    private String computedate;
 
     private String computewho;
 
@@ -47,72 +53,80 @@ public class JiaoCaiCompute {
 
     private String editwho;
 
-    private Date editdate;
+    private String editdate;
 
     private String packwho;
 
-    private Date packdate;
+    private String packdate;
 
     private String computeno;
 
     private String shipwho;
 
-    private Date shipdate;
+    private String shipdate;
 
-    private Date loaddate;
+    private String loaddate;
 
     private Integer picktype;
 
     private Integer sendcode;
 
-    private Date senddate;
+    private String senddate;
 
     private Integer retcode;
 
-    private Date retdate;
+    private String retdate;
 
     private String retmsg;
 
-    public JiaoCaiCompute(Long id, Long distributeid, String issuenumber, String subcode, String code, String shortname, String loc, String containerid, Integer pack, Integer bundle, Integer qtyallocated, String status, Date computedate, String computewho, Integer caseqty, Integer oddpack, Integer odd, Integer type, String batchno, String shipno, String pickno, String editwho, Date editdate, String packwho, Date packdate, String computeno, String shipwho, Date shipdate, Date loaddate, Integer picktype, Integer sendcode, Date senddate, Integer retcode, Date retdate, String retmsg) {
-        this.id = id;
-        this.distributeid = distributeid;
-        this.issuenumber = issuenumber;
-        this.subcode = subcode;
-        this.code = code;
-        this.shortname = shortname;
-        this.loc = loc;
-        this.containerid = containerid;
-        this.pack = pack;
-        this.bundle = bundle;
-        this.qtyallocated = qtyallocated;
-        this.status = status;
-        this.computedate = computedate;
-        this.computewho = computewho;
-        this.caseqty = caseqty;
-        this.oddpack = oddpack;
-        this.odd = odd;
-        this.type = type;
-        this.batchno = batchno;
-        this.shipno = shipno;
-        this.pickno = pickno;
-        this.editwho = editwho;
-        this.editdate = editdate;
-        this.packwho = packwho;
-        this.packdate = packdate;
-        this.computeno = computeno;
-        this.shipwho = shipwho;
-        this.shipdate = shipdate;
-        this.loaddate = loaddate;
-        this.picktype = picktype;
-        this.sendcode = sendcode;
-        this.senddate = senddate;
-        this.retcode = retcode;
-        this.retdate = retdate;
-        this.retmsg = retmsg;
+    private String barcode;
+
+    private String descr;
+
+    private BigDecimal price;
+
+    private String publisher;
+
+    private String storerkey;
+
+    public String getPublisher() {
+        return publisher;
     }
 
-    public JiaoCaiCompute() {
-        super();
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getStorerkey() {
+        return storerkey;
+    }
+
+    public void setStorerkey(String storerkey) {
+        this.storerkey = storerkey;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Long getId() {
@@ -136,7 +150,7 @@ public class JiaoCaiCompute {
     }
 
     public void setIssuenumber(String issuenumber) {
-        this.issuenumber = issuenumber == null ? null : issuenumber.trim();
+        this.issuenumber = issuenumber;
     }
 
     public String getSubcode() {
@@ -144,7 +158,7 @@ public class JiaoCaiCompute {
     }
 
     public void setSubcode(String subcode) {
-        this.subcode = subcode == null ? null : subcode.trim();
+        this.subcode = subcode;
     }
 
     public String getCode() {
@@ -152,7 +166,7 @@ public class JiaoCaiCompute {
     }
 
     public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+        this.code = code;
     }
 
     public String getShortname() {
@@ -160,7 +174,7 @@ public class JiaoCaiCompute {
     }
 
     public void setShortname(String shortname) {
-        this.shortname = shortname == null ? null : shortname.trim();
+        this.shortname = shortname;
     }
 
     public String getLoc() {
@@ -168,7 +182,7 @@ public class JiaoCaiCompute {
     }
 
     public void setLoc(String loc) {
-        this.loc = loc == null ? null : loc.trim();
+        this.loc = loc;
     }
 
     public String getContainerid() {
@@ -176,7 +190,7 @@ public class JiaoCaiCompute {
     }
 
     public void setContainerid(String containerid) {
-        this.containerid = containerid == null ? null : containerid.trim();
+        this.containerid = containerid;
     }
 
     public Integer getPack() {
@@ -208,14 +222,14 @@ public class JiaoCaiCompute {
     }
 
     public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+        this.status = status;
     }
 
-    public Date getComputedate() {
+    public String getComputedate() {
         return computedate;
     }
 
-    public void setComputedate(Date computedate) {
+    public void setComputedate(String computedate) {
         this.computedate = computedate;
     }
 
@@ -224,7 +238,7 @@ public class JiaoCaiCompute {
     }
 
     public void setComputewho(String computewho) {
-        this.computewho = computewho == null ? null : computewho.trim();
+        this.computewho = computewho;
     }
 
     public Integer getCaseqty() {
@@ -264,7 +278,7 @@ public class JiaoCaiCompute {
     }
 
     public void setBatchno(String batchno) {
-        this.batchno = batchno == null ? null : batchno.trim();
+        this.batchno = batchno;
     }
 
     public String getShipno() {
@@ -272,7 +286,7 @@ public class JiaoCaiCompute {
     }
 
     public void setShipno(String shipno) {
-        this.shipno = shipno == null ? null : shipno.trim();
+        this.shipno = shipno;
     }
 
     public String getPickno() {
@@ -280,7 +294,7 @@ public class JiaoCaiCompute {
     }
 
     public void setPickno(String pickno) {
-        this.pickno = pickno == null ? null : pickno.trim();
+        this.pickno = pickno;
     }
 
     public String getEditwho() {
@@ -288,14 +302,14 @@ public class JiaoCaiCompute {
     }
 
     public void setEditwho(String editwho) {
-        this.editwho = editwho == null ? null : editwho.trim();
+        this.editwho = editwho;
     }
 
-    public Date getEditdate() {
+    public String getEditdate() {
         return editdate;
     }
 
-    public void setEditdate(Date editdate) {
+    public void setEditdate(String editdate) {
         this.editdate = editdate;
     }
 
@@ -304,14 +318,14 @@ public class JiaoCaiCompute {
     }
 
     public void setPackwho(String packwho) {
-        this.packwho = packwho == null ? null : packwho.trim();
+        this.packwho = packwho;
     }
 
-    public Date getPackdate() {
+    public String getPackdate() {
         return packdate;
     }
 
-    public void setPackdate(Date packdate) {
+    public void setPackdate(String packdate) {
         this.packdate = packdate;
     }
 
@@ -320,7 +334,7 @@ public class JiaoCaiCompute {
     }
 
     public void setComputeno(String computeno) {
-        this.computeno = computeno == null ? null : computeno.trim();
+        this.computeno = computeno;
     }
 
     public String getShipwho() {
@@ -328,22 +342,22 @@ public class JiaoCaiCompute {
     }
 
     public void setShipwho(String shipwho) {
-        this.shipwho = shipwho == null ? null : shipwho.trim();
+        this.shipwho = shipwho;
     }
 
-    public Date getShipdate() {
+    public String getShipdate() {
         return shipdate;
     }
 
-    public void setShipdate(Date shipdate) {
+    public void setShipdate(String shipdate) {
         this.shipdate = shipdate;
     }
 
-    public Date getLoaddate() {
+    public String getLoaddate() {
         return loaddate;
     }
 
-    public void setLoaddate(Date loaddate) {
+    public void setLoaddate(String loaddate) {
         this.loaddate = loaddate;
     }
 
@@ -363,11 +377,11 @@ public class JiaoCaiCompute {
         this.sendcode = sendcode;
     }
 
-    public Date getSenddate() {
+    public String getSenddate() {
         return senddate;
     }
 
-    public void setSenddate(Date senddate) {
+    public void setSenddate(String senddate) {
         this.senddate = senddate;
     }
 
@@ -379,11 +393,11 @@ public class JiaoCaiCompute {
         this.retcode = retcode;
     }
 
-    public Date getRetdate() {
+    public String getRetdate() {
         return retdate;
     }
 
-    public void setRetdate(Date retdate) {
+    public void setRetdate(String retdate) {
         this.retdate = retdate;
     }
 
@@ -392,6 +406,6 @@ public class JiaoCaiCompute {
     }
 
     public void setRetmsg(String retmsg) {
-        this.retmsg = retmsg == null ? null : retmsg.trim();
+        this.retmsg = retmsg;
     }
 }

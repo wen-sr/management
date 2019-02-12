@@ -245,16 +245,20 @@ function compute(){
 	}
 	var pack = $("#t_pack").combobox('getValue');
 	var bundle = $("#t_bundle").textbox('getValue');
+	var formData = {
+		"ids" 	: 	ids,
+		"pack"	: 	pack,
+		"bundle":	bundle
+	}
 	$.ajax({
 		type:'post',
 		url:'/management/jc/distribute/compute',
-		data:"id=" + ids + "&pack=" + pack + "&bundle=" + bundle,
+		data:formData,
 		dataType:'json',
 		success:function (data){
-			$.messager.alert("操作提示",data,"info");
-//			$('#data-detail').datagrid('reload');
+			$.messager.alert("操作提示",data.msg,"info");
+			// $('#data-detail').datagrid('reload');
 			dataDetail();
-			
 		},
 		error:function(){
 			$.messager.alert("提示","数据错误，联系管理员","info");
@@ -271,13 +275,16 @@ function cancelcompute(){
 		var row = rows[i];
 		ids.push(row.id);
 	}
+	var formData = {
+		'ids' : ids
+	}
 	$.ajax({
 		type:'post',
-		url:'jc/compute_cancelCompute.action',
-		data:'id=' + ids,
+		url:'/management/jc/compute/cancelCompute',
+		data:formData,
 		dataType:'json',
 		success : function(data){
-			$.messager.alert("操作提示",data,"info");
+			$.messager.alert("操作提示",data.msg,"info");
 			$('#data').datagrid('reload');
 		},
 		error:function(){
@@ -439,27 +446,50 @@ function dataDetail(){
 			$("#t_qty").textbox('setValue',parseInt(t_qtyfree) - t_qtyoccupied);
 		}
 	});
-	// $('#editpack').linkbutton('disable');
-	// $("#t_pack").combobox({
-	// 	url:'/management/jc/inventory/infoDetailTips?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
-	// 	valueField:'pack',
-	// 	textField:'pack',
-	// 	panelHeight:'auto',
-	// 	editable:false,
-	// 	readonly:true,
-	// 	onLoadSuccess: function () { //加载完成后,设置选中第一项
-    //         var val = $(this).combobox("getData");
-    //         if(val.length == 1){
-    //         	$("#t_pack").combobox('setValue',val[0]['pack']);
-    //         }else{
-    //         	$('#editpack').linkbutton('enable');
-    //         	$("#t_qtyfree").textbox('setValue','');
-	// 			$("#t_qty").textbox('setValue','');
-	// 			$("#t_qtyoccupied").textbox('setValue','');
-    //         }
-    //     }
-	// });
-	//
+	$.ajax({
+		type:'post',
+		url:'/management/jc/inventory/infoDetailTips?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
+		dataType:'json',
+		async:false,
+		success : function(data){
+			if(data.length == 1){
+				$('#editpack').linkbutton('disable');
+				$("#t_pack").combobox('setValue',data[0].pack);
+				$("#t_qtyfree").textbox('setValue',data[0].qtyfree);
+				$("#t_qty").textbox('setValue',data[0].qtyfree);
+				$("#t_qtyoccupied").textbox('setValue','');
+				formData = {
+					"issuenumber" 	: row.issuenumber,
+					"subcode"		: row.subcode,
+					"pack"			: data[0].pack
+				};
+				$.ajax({
+					type: 'post',
+					url: '/management/jc/pack/tips',
+					data: formData,
+					dataType: 'json',
+					async:false,
+					success: function (data) {
+						$("#t_bundle").textbox('setValue', data[0].bundle);
+					},
+					error: function () {
+						$.messager.alert("提示", "数据错误，联系管理员", "info");
+					}
+				});
+			}else{
+				$('#editpack').linkbutton('enable');
+				$("#t_pack").combobox('setValue','');
+				$("#t_qtyfree").textbox('setValue','');
+				$("#t_qty").textbox('setValue','');
+				$("#t_bundle").textbox('setValue','');
+				$("#t_qtyoccupied").textbox('setValue','');
+			}
+		},
+		error:function(){
+			$.messager.alert("提示","数据错误，联系管理员","info");
+		}
+	});
+
 }
 
 function go(){
@@ -467,132 +497,19 @@ function go(){
 	var issuenumber = $("#issuenumber").combobox("getValue");
 	var subcode = $("#subcode").textbox('getValue');
 	var barcode = $("#barcode").textbox('getValue');
-	var param = "type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode;
+	var formData = {
+		"issuenumber"	: issuenumber,
+		"subcode" 		: subcode
+
+	}
+
 	if("0" == type ){
-		$("#data").datagrid({
-			url:"jc/compute_loadWaitComputeData.action?type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode,
-			height:'auto',	
-			fitColumns: true,
-			striped:true,
-			rownumbers:true,
-			border:true,
-			singleSelect:true,
-			pagination:true,
-	        pageSize:20,
-	        pageList:[10,20,50],
-			showFooter: true,
-			toolbar:'#tb',
-			columns:[[{
-				field:"id",
-			    title:"编号",
-			    checkbox:true,
-			    width:50
-			},{
-				field:"issuenumber",
-				title:"期号",
-			    width:50
-			},{
-				field:"subcode",
-				title:"征订代码",
-			    width:50
-			},{
-				field:"barcode",
-				title:"条码",
-			    width:50
-			},{
-				field:"descr",
-				title:"书名",
-			    width:50
-			},{
-				field:"price",
-				title:"定价",
-			    width:50
-			},{
-				field:"qtyallocated",
-				title:"已分发数量",
-			    width:50
-			},{
-				field:"qtyfree",
-				title:"可用库存",
-			    width:50
-			},{
-				field:"amt",
-				title:"已分发码洋",
-			    width:50
-			}]]
-		});
+		loadWaitComputeData(20, 'POST', formData);
 	    $("#currentType").val("0");
 	    $('#cancelcompute').linkbutton('disable');
 	    $('#abcd').linkbutton('enable');
 	}else {
-		$("#data").datagrid({
-			url:"jc/compute_loadComputedData.action?type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode,
-			height:'auto',	
-			fitColumns: true,
-			striped:true,
-			rownumbers:true,
-			border:true,
-			singleSelect:false,
-			pagination:true,
-	        pageSize:20,
-	        pageList:[10,20,50],
-			showFooter: true,
-			toolbar:'#tb5',
-			columns:[[{
-				field:"id",
-			    title:"编号",
-			    checkbox:true,
-			    width:50
-			},{
-				field:"issuenumber",
-				title:"期号",
-			    width:50
-			},{
-				field:"subcode",
-				title:"征订代码",
-			    width:50
-			},{
-				field:"barcode",
-				title:"条码",
-			    width:50
-			},{
-				field:"descr",
-				title:"书名",
-			    width:50
-			},{
-				field:"price",
-				title:"定价",
-			    width:50
-			},{
-				field:"pack",
-				title:"包册数",
-			    width:30
-			},{
-				field:"storerkey",
-				title:"出版社代码",
-			    width:30
-			},{
-				field:"publisher",
-				title:"出版社",
-			    width:30
-			},{
-				field:"code",
-				title:"分发店代码",
-			    width:50
-			},{
-				field:"shortname",
-				title:"分发店",
-			    width:30
-			},{
-				field:"qtyallocated",
-				title:"已分发数量",
-			    width:50
-			},{
-				field:"amt",
-				title:"已分发码洋",
-			    width:50
-			}]]
-		});
+		loadComputedData(20, 'POST', formData);
 	    $("#currentType").val("1");
 	    $('#cancelcompute').linkbutton('enable');
 	    $('#abcd').linkbutton('disable');
@@ -603,11 +520,13 @@ function go(){
  * 加载已配发信息
  * @returns
  */
-function loadComputedData(){
+function loadComputedData(pageSize, method, formData){
 
 	$("#data").datagrid({
-		url:'jc/compute_loadComputedData.action',
-		height:'auto',	
+		url:'/management/jc/compute/info',
+		method: method || 'GET',
+		queryParams:formData || '',
+		height:'auto',
 		fitColumns: true,
 		striped:true,
 		rownumbers:true,

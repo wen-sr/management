@@ -4,6 +4,8 @@ import com.management.common.ServerResponse;
 import com.management.pojo.jc.JiaoCaiDistribute;
 import com.management.vo.jc.JiaoCaiDistributeVo;
 
+import java.util.List;
+
 /**
  * Author: wen-sir
  * Description:
@@ -21,5 +23,5 @@ public interface IJiaoCaiDistributeService {
 
     ServerResponse loadWaitComputeData(Integer pageSize, Integer pageNum, JiaoCaiDistributeVo jiaoCaiDistributeVo);
 
-    ServerResponse compute(Long[] ids, Integer pack, Integer bundle);
+    ServerResponse compute(List<Long> ids, Integer pack, Integer bundle);
 }

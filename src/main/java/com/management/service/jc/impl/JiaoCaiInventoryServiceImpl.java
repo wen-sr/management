@@ -115,7 +115,9 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
     @Override
     public ServerResponse move(JiaoCaiInventoryVo jiaoCaiInventoryVo) {
         jiaoCaiInventoryVo.setToLoc(jiaoCaiInventoryVo.getToLoc().toUpperCase());
-        jiaoCaiInventoryVo.setToContainerId(jiaoCaiInventoryVo.getToContainerId().toUpperCase());
+        if(jiaoCaiInventoryVo.getToContainerId() != null){
+            jiaoCaiInventoryVo.setToContainerId(jiaoCaiInventoryVo.getToContainerId().toUpperCase());
+        }
         //判断目的容器是否存在
         if(StringUtils.isNotBlank(jiaoCaiInventoryVo.getToContainerId())){
             if(!isExistContainerId(jiaoCaiInventoryVo.getToContainerId())){

@@ -2,6 +2,9 @@ package com.management.dao.jc;
 
 import com.management.pojo.jc.JiaoCaiCompute;
 
+import java.util.List;
+import java.util.Map;
+
 public interface JiaoCaiComputeMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +17,8 @@ public interface JiaoCaiComputeMapper {
     int updateByPrimaryKeySelective(JiaoCaiCompute record);
 
     int updateByPrimaryKey(JiaoCaiCompute record);
+
+    void getComputeNo(Map<String, Integer> map);
+
+    List<JiaoCaiCompute> findAll(JiaoCaiCompute jiaoCaiCompute);
 }

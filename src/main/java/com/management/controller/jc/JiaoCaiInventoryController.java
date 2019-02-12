@@ -1,5 +1,6 @@
 package com.management.controller.jc;
 
+import com.github.pagehelper.PageInfo;
 import com.management.common.EasyuiTableResponse;
 import com.management.common.ServerResponse;
 import com.management.pojo.jc.JiaoCaiInventory;
@@ -56,8 +57,8 @@ public class JiaoCaiInventoryController {
     public List<JiaoCaiInventoryVo> infoDetailTips(@RequestParam(value = "rows", defaultValue = "10") Integer pageSize,
                                                    @RequestParam(value = "page", defaultValue = "1") Integer pageNum,
                                                    JiaoCaiInventory_detail jiaoCaiInventory_detail){
-        ServerResponse<List<JiaoCaiInventoryVo>> response = jiaoCaiInventoryService.selectInventoryDetailTotal(pageSize, pageNum, jiaoCaiInventory_detail);
-        return response.getData();
+        ServerResponse<PageInfo> response = jiaoCaiInventoryService.selectInventoryDetailTotal(pageSize, pageNum, jiaoCaiInventory_detail);
+        return response.getData().getList();
 
     }
 

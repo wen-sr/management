@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Author: wen-sir
  * Description:
@@ -53,7 +55,7 @@ public class JiaoCaiDistributionController {
     }
 
     @RequestMapping("/compute")
-    public ServerResponse compute(@RequestParam(value = "ids") Long[] ids,@RequestParam(value = "pack") Integer pack,@RequestParam(value = "bundle") Integer bundle){
+    public ServerResponse compute(@RequestParam(value = "ids[]") List<Long> ids, @RequestParam(value = "pack") Integer pack, @RequestParam(value = "bundle") Integer bundle){
         return jiaoCaiDistributeService.compute(ids, pack, bundle);
     }
 
