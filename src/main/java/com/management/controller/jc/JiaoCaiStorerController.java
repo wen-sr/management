@@ -2,7 +2,6 @@ package com.management.controller.jc;
 
 import com.github.pagehelper.PageInfo;
 import com.management.common.EasyuiTableResponse;
-import com.management.common.RequestHolder;
 import com.management.common.ServerResponse;
 import com.management.pojo.jc.JiaoCaiStorer;
 import com.management.service.jc.IJiaoCaiStorerService;
@@ -34,7 +33,6 @@ public class JiaoCaiStorerController {
     public EasyuiTableResponse info(@RequestParam(value = "rows", defaultValue = "10") Integer pageSize,
                                     @RequestParam(value = "page", defaultValue = "1") Integer pageNum,
                                     JiaoCaiStorer jiaoCaiStorer){
-        logger.info("*******************" + RequestHolder.getCurrentUser().getId() + "*******************");
         ServerResponse response = jiaoCaiStorerService.getInfo(pageSize, pageNum, jiaoCaiStorer);
         return response.parseToEasyuiTableResponse(response);
     }

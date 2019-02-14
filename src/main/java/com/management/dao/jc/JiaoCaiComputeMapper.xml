@@ -448,6 +448,15 @@
   <select id="getComputeNo" parameterType="map" statementType="CALLABLE">
       {CALL JiaoCaiGetComputeno(#{computeNo,jdbcType=VARCHAR,mode=OUT})}
   </select>
+  <select id="getBatchno" parameterType="map" statementType="CALLABLE">
+      {CALL JiaoCaiGetBatchno(#{batchno,jdbcType=VARCHAR,mode=OUT})}
+  </select>
+  <select id="getShipno" parameterType="map" statementType="CALLABLE">
+      {CALL JiaoCaiGetShipno(#{shipno,jdbcType=VARCHAR,mode=OUT})}
+  </select>
+  <select id="getPickno" parameterType="map" statementType="CALLABLE">
+      {CALL JiaoCaiGetPickno(#{pickno,jdbcType=VARCHAR,mode=OUT})}
+  </select>
   <select id="findAll" resultType="com.management.pojo.jc.JiaoCaiCompute">
     select <include refid="Base_Column_List"/>
     from JiaoCaiCompute
@@ -458,6 +467,9 @@
       <if test="issuenumber != null and issuenumber != '' " >
         and issuenumber = #{issuenumber}
       </if>
+      <if test="code != null" >
+        and code = #{code}
+      </if>
       <if test="subcode != null and subcode != '' " >
         and subcode = #{subcode}
       </if>
@@ -467,7 +479,7 @@
       <if test="type != null and type != '' " >
         and type = #{type}
       </if>
-      <if test="picktype != null and picktype != '' " >
+      <if test="picktype != null " >
         and picktype = #{picktype}
       </if>
       <if test="computeno != null and computeno != '' " >
@@ -482,7 +494,10 @@
       <if test="batchno != null and batchno != '' " >
         and batchno = #{batchno}
       </if>
-      <if test="status != null and status != '' " >
+      <if test="batchno != null and batchno != '' and shipno == null " >
+        and batchno = #{batchno} and shipno is null
+      </if>
+      <if test="status != null" >
         and status = #{status}
       </if>
       <if test="computedate != null and computedate != '' " >
@@ -492,4 +507,173 @@
     </where>
     order by computedate desc
   </select>
+  <select id="wholeShipInfoTotal" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+    select a.issuenumber,a.subcode,b.barcode, b.descr,b.price,c.storerkey,c.shortname publisher,sum(qtyallocated) qtyallocated
+    from JiaoCaiCompute a, JiaoCaiSku b, JiaoCaiStorer c
+    where a.issuenumber = b.issuenumber and a.subcode = b.subcode
+    and b.publisher = c.storerkey
+    <if test="issuenumber != null and issuenumber != '' " >
+      and a.issuenumber = #{issuenumber}
+    </if>
+    <if test="subcode != null and subcode != '' " >
+      and a.subcode = #{subcode}
+    </if>
+    <if test="computewho != null and computewho != '' " >
+      and computewho = #{computewho}
+    </if>
+    <if test="type != null and type != '' " >
+      and a.type = #{type}
+    </if>
+    <if test="picktype != null" >
+      and picktype = #{picktype}
+    </if>
+    <if test="computeno != null and computeno != '' " >
+      and computeno = #{computeno}
+    </if>
+    <if test="shipno != null and shipno != '' " >
+      and shipno = #{shipno}
+    </if>
+    <if test="pickno != null and pickno != '' " >
+      and pickno = #{pickno}
+    </if>
+    <if test="batchno != null and batchno != '' " >
+      and batchno = #{batchno}
+    </if>
+    <if test="status != null and status != '' " >
+      and a.status = #{status}
+    </if>
+    group by a.issuenumber,a.subcode,b.barcode,b.descr,b.price,c.storerkey,c.shortname
+    order by a.subcode
+  </select>
+  <select id="wholeShipInfo" parameterType="com.management.pojo.jc.JiaoCaiCompute" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+    select a.id,a.issuenumber,a.subcode,b.barcode, b.descr,b.price,c.storerkey,c.shortname publisher,a.batchno,a.shipno,a.caseqty,a.oddpack,a.odd,a.pack,a.code,a.shortname,a.qtyallocated,(a.qtyallocated*b.price) amt
+    from JiaoCaiCompute a, JiaoCaiSku b, JiaoCaiStorer c
+    where a.issuenumber = b.issuenumber and a.subcode = b.subcode
+    and b.publisher = c.storerkey
+    and a.status > 1
+    <if test="issuenumber != null and issuenumber != '' " >
+      and a.issuenumber = #{issuenumber}
+    </if>
+    <if test="subcode != null and subcode != '' " >
+      and a.subcode = #{subcode}
+    </if>
+    <if test="computewho != null and computewho != '' " >
+      and computewho = #{computewho}
+    </if>
+    <if test="type != null and type != '' " >
+      and a.type = #{type}
+    </if>
+    <if test="picktype != null" >
+      and a.picktype = #{picktype}
+    </if>
+    <if test="computeno != null and computeno != '' " >
+      and a.computeno = #{computeno}
+    </if>
+    <if test="shipno != null and shipno != '' " >
+      and a.shipno = #{shipno}
+    </if>
+    <if test="pickno != null and pickno != '' " >
+      and a.pickno = #{pickno}
+    </if>
+    <if test="batchno != null and batchno != '' " >
+      and batchno = #{batchno}
+    </if>
+    <if test="status != null and status != '' " >
+      and a.status = #{status}
+    </if>
+    order by a.batchno desc
+  </select>
+  <select id="pickInfoTotal" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+    select a.issuenumber,a.subcode,b.barcode, b.descr,b.price,c.storerkey,c.shortname publisher,sum(qtyallocated) qtyallocated,sum(a.qtyallocated*b.price) amt
+    from JiaoCaiCompute a, JiaoCaiSku b, JiaoCaiStorer c
+    where a.issuenumber = b.issuenumber and a.subcode = b.subcode
+    and b.publisher = c.storerkey
+    and a.status in ('6', '2')
+    <if test="issuenumber != null and issuenumber != '' " >
+      and a.issuenumber = #{issuenumber}
+    </if>
+    <if test="subcode != null and subcode != '' " >
+      and a.subcode = #{subcode}
+    </if>
+    <if test="computewho != null and computewho != '' " >
+      and computewho = #{computewho}
+    </if>
+    <if test="type != null and type != '' " >
+      and a.type = #{type}
+    </if>
+    <if test="picktype != null" >
+      and picktype = #{picktype}
+    </if>
+    <if test="computeno != null and computeno != '' " >
+      and computeno = #{computeno}
+    </if>
+    <if test="shipno != null and shipno != '' " >
+      and shipno = #{shipno}
+    </if>
+    <if test="pickno != null and pickno != '' " >
+      and pickno = #{pickno}
+    </if>
+    <if test="batchno != null and batchno != '' " >
+      and batchno = #{batchno}
+    </if>
+    <if test="status != null and status != '' " >
+      and a.status = #{status}
+    </if>
+    group by a.issuenumber,a.subcode,b.barcode,b.descr,b.price,c.storerkey,c.shortname
+    order by a.subcode
+  </select>
+  <select id="pickInfo" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+    select a.id,a.issuenumber,a.subcode,b.barcode, b.descr,b.price,c.storerkey,c.shortname publisher,a.batchno,
+    a.shipno,a.caseqty,a.oddpack,a.odd,a.pack,a.code,a.shortname,a.qtyallocated,(a.qtyallocated*b.price) amt,
+    a.loc,a.containerid,picktype,status,a.pickno
+    from JiaoCaiCompute a, JiaoCaiSku b, JiaoCaiStorer c
+    where a.issuenumber = b.issuenumber and a.subcode = b.subcode
+    and b.publisher = c.storerkey
+    and a.status in ('6', '2')
+    <if test="issuenumber != null and issuenumber != '' " >
+      and a.issuenumber = #{issuenumber}
+    </if>
+    <if test="subcode != null and subcode != '' " >
+      and a.subcode = #{subcode}
+    </if>
+    <if test="computewho != null and computewho != '' " >
+      and computewho = #{computewho}
+    </if>
+    <if test="type != null and type != '' " >
+      and a.type = #{type}
+    </if>
+    <if test="picktype != null" >
+      and a.picktype = #{picktype}
+    </if>
+    <if test="computeno != null and computeno != '' " >
+      and a.computeno = #{computeno}
+    </if>
+    <if test="shipno != null and shipno != '' " >
+      and a.shipno = #{shipno}
+    </if>
+    <if test="pickno != null and pickno != '' " >
+      and a.pickno = #{pickno}
+    </if>
+    <if test="batchno != null and batchno != '' " >
+      and batchno = #{batchno}
+    </if>
+    order by a.batchno desc
+  </select>
+  <select id="selectOddPackTips" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+    select distinct a.code,a.shortname
+    from JiaoCaiCompute a
+    where a.status in ('7', '3')
+    and a.picktype = 1
+  </select>
+  <update id="updateBatchnoByIds">
+    update JiaoCaiCompute
+    set batchno = #{batchno}
+    where id in
+    <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </update>
+  <update id="updateShipnoByBatchno">
+    update JiaoCaiCompute set shipno=#{shipno},status = '6' where batchno = #{batchno} and code = #{code} and shipno is null
+  </update>
 </mapper>

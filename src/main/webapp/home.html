@@ -220,6 +220,17 @@
                 },function(erro){
                     window.location.href = _util.getServerUrl('/login.html');
                 })
+            },
+            third : function() {
+                var formData = {
+                    loginSystemFlag : 9
+                }
+                _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
+                    $(".username").text(res.data.organizationName + ":" + res.data.user.name);
+                    InitLeftMenu(res.data.menuList);
+                },function(erro){
+                    window.location.href = _util.getServerUrl('/login.html');
+                })
             }
 
         }
@@ -255,6 +266,7 @@
             <li><a href="javascript:void(0);" onclick="transform_sys.jiao_cai();">教材手工</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.report();">报表系统</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.tech();">技术部</a></li>
+            <li><a href="javascript:void(0);" onclick="transform_sys.third();">三方业务</a></li>
         </ul>
     </div>
 </div>

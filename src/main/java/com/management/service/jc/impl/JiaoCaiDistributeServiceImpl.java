@@ -179,7 +179,7 @@ public class JiaoCaiDistributeServiceImpl implements IJiaoCaiDistributeService {
         return ServerResponse.createByErrorMessage("计算失败，请联系管理员");
     }
 
-    private String getComputeNo(){
+    private synchronized String getComputeNo(){
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         Map<String, Integer> map = new HashMap<>();
         jiaoCaiComputeMapper.getComputeNo(map);
@@ -187,7 +187,13 @@ public class JiaoCaiDistributeServiceImpl implements IJiaoCaiDistributeService {
     }
     private int computeDo(JiaoCaiDistribute jiaoCaiDistribute){
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
-        int i = 0;
+        int i = 0 ,flag = 0;
+        //当订单数大于捆扎时为整件
+        if(jiaoCaiDistribute.getQtyallocated() >= jiaoCaiDistribute.getPack() ){
+            flag = 0;
+        }else {
+            flag = 1;
+        }
         //库存分发，需占用库存
         //库存表头
         JiaoCaiInventory jiaoCaiInventory = jiaoCaiInventoryMapper.selectByIssuenumberAndSubcode(new JiaoCaiInventory(jiaoCaiDistribute.getIssuenumber(), jiaoCaiDistribute.getSubcode()));
@@ -211,7 +217,7 @@ public class JiaoCaiDistributeServiceImpl implements IJiaoCaiDistributeService {
             jiaoCaiInventory_detail.setQtyallocated(jiaoCaiInventory_detail.getQtyallocated() + jiaoCaiDistribute.getQtyallocated());
             i += jiaoCaiInventoryDetailMapper.updateByPrimaryKeySelective(jiaoCaiInventory_detail);
             //写入compute表
-            i += addCompute(jiaoCaiDistribute, jiaoCaiInventory_detail, null);
+            i += addCompute(jiaoCaiDistribute, jiaoCaiInventory_detail, flag);
         }else {
             //2.如果没有，则选择数量最大
             jiaoCaiInventoryDetailList = jiaoCaiInventoryDetailMapper.selectByQtyfree2(new JiaoCaiInventory_detail(jiaoCaiDistribute.getIssuenumber(), jiaoCaiDistribute.getSubcode(), jiaoCaiDistribute.getQtyallocated(), jiaoCaiDistribute.getPack()));
@@ -227,7 +233,7 @@ public class JiaoCaiDistributeServiceImpl implements IJiaoCaiDistributeService {
                 throw new MyException(-1, "库存在不可分配的储位上，请核实后将库存移至可分配储位");
             }
             for(JiaoCaiInventory_detail j : jiaoCaiInventoryDetailList){
-                //库存占数量
+                //库存占用数量
                 int qty1 = (j.getQtyfree() - qty > 0 ? j.getQtyfree() - qty : j.getQtyfree()),
                         //库存剩余数
                         qty2 = j.getQtyfree() - qty > 0 ? j.getQtyfree() - qty : 0;
@@ -238,7 +244,7 @@ public class JiaoCaiDistributeServiceImpl implements IJiaoCaiDistributeService {
                 i += jiaoCaiInventoryDetailMapper.updateByPrimaryKeySelective(j);
                 //写入compute表
                 jiaoCaiDistribute.setQtyallocated(qty1);
-                i += addCompute(jiaoCaiDistribute, j, 0);
+                i += addCompute(jiaoCaiDistribute, j, flag);
                 qty = qty - qty1;
                 jiaoCaiDistribute.setQtyallocated(qty);
                 if(qty <= 0){
@@ -260,7 +266,11 @@ public class JiaoCaiDistributeServiceImpl implements IJiaoCaiDistributeService {
         jiaoCaiCompute.setLoc(jiaoCaiInventory_detail.getLoc());
         jiaoCaiCompute.setPack(jiaoCaiDistribute.getPack());
         jiaoCaiCompute.setQtyallocated(jiaoCaiDistribute.getQtyallocated());
-        jiaoCaiCompute.setStatus("1");
+        if(flag == 1){
+            jiaoCaiCompute.setStatus("6");
+        }else {
+            jiaoCaiCompute.setStatus("1");
+        }
         jiaoCaiCompute.setCode(jiaoCaiDistribute.getCode());
         jiaoCaiCompute.setShortname(jiaoCaiDistribute.getShortname());
         jiaoCaiCompute.setComputewho(RequestHolder.getCurrentUser().getId());
@@ -273,14 +283,9 @@ public class JiaoCaiDistributeServiceImpl implements IJiaoCaiDistributeService {
         jiaoCaiCompute.setOdd(odd);
         jiaoCaiCompute.setOddpack(oddpack);
         //标识整件拣货或零件捡货
-        if(caseQty == 0 && oddpack == 0 && flag != 0){
-            jiaoCaiCompute.setPicktype(1);
-        }else {
-            jiaoCaiCompute.setPicktype(0);
-        }
+        jiaoCaiCompute.setPicktype(flag);
         return jiaoCaiComputeMapper.insertSelective(jiaoCaiCompute);
     }
-
 
     private List<JiaoCaiDistributeVo> parseToJiaoCaiDistributeVo(List<JiaoCaiDistribute> jiaoCaiDistributeList) {
         List<JiaoCaiDistributeVo> jiaoCaiDistributeVoList = new ArrayList<>();

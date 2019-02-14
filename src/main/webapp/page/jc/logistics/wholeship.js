@@ -2,10 +2,12 @@
  * 加载需整件发货的信息
  * @returns
  */
-function loadWaitShipData(){
+function loadWaitShipData(pageSize, method, formData){
 
 	$("#data").datagrid({
-		url:'jc/wholeShip_loadWaitShipDataTotal.action',
+		url:'/management/jc/compute/wholeShipInfoTotal',
+		method: method || 'GET',
+		queryParams:formData || '',
 		height:'auto',	
 		fitColumns: true,
 		striped:true,
@@ -13,8 +15,8 @@ function loadWaitShipData(){
 		border:true,
 		singleSelect:true,
 		pagination:true,
-        pageSize:20,
-        pageList:[10,15,20],
+        pageSize:pageSize || 20,
+        pageList:[10,20,50],
 		showFooter: true,
 		toolbar:'#tb',
 		columns:[[{
@@ -80,7 +82,7 @@ tool = {
 				$.messager.alert("操作提示","没有选中的记录","error");
 				return;
 			}
-		    $.messager.confirm("操作提示", "您确定要取消批次"+ row.batchno +"吗？", function (data) {  
+		    $.messager.confirm("操作提示", "您确定要取消发货吗？", function (data) {
 	            if (data) {  
 	            	remove_delivery();
 	            }  
@@ -114,14 +116,17 @@ function remove_delivery(){
 		var row = rows[i];
 		ids.push(row.id);
 	}
+	var formData = {
+		'ids'	: ids
+	};
 	$.ajax({
 		type:'post',
-		url:'jc/wholeShip_removeBatchno.action',
-		data:"id=" + ids,
+		url:'/management/jc/compute/cancel',
+		data:formData,
 		dataType:'json',
 		success:function (data){
 			if(data){
-				$.messager.alert("操作提示",data,"info",function(){
+				$.messager.alert("操作提示",data.msg,"info",function(){
 					$("#data").datagrid('reload');
 				});
 			}
@@ -130,7 +135,6 @@ function remove_delivery(){
 			$.messager.alert("提示","数据错误，联系管理员","info");
 		}
 	});
-	
 }
 
 /**
@@ -138,14 +142,7 @@ function remove_delivery(){
  * @returns
  */
 function addBatchno (){
-	var addwho = $("#userid").val();
-	if(addwho == ""){
-		$.messager.alert("提示","登录信息失效，请重新登录","info",function(){
-			getTopWinow().location.href = 'login.action';
-		});
-	}
 	var rows = $('#data_detail').datagrid('getSelections');
-	var currentType = $("#currentType").val();
 	if(!rows || rows.length == 0) {
 		$.messager.alert("操作提示","没有选中记录","error");
 		return;
@@ -157,13 +154,13 @@ function addBatchno (){
 	}
 	$.ajax({
 		type:'post',
-		url:'jc/wholeShip_addBatchno.action',
-		data:"id=" + ids + "&addwho=" + addwho,
+		url:'/management/jc/compute/addBatchno',
+		data:{"ids" : ids},
 		dataType:'json',
 		success:function (data){
 			if(data){
-				$("#t_batchno").textbox('setValue',data["batchno"]);
-				$.messager.alert("操作提示",data["msg"],"info",function(){
+				$("#t_batchno").textbox('setValue',data.data);
+				$.messager.alert("操作提示",data.msg,"info",function(){
 					delivery();
 				});
 			}
@@ -185,13 +182,9 @@ function delivery(){
 		return;
 	}
 	var row = $('#data').datagrid('getSelected');
-	$("#span_issuenumber").val(row.issuenumber);
-	$("#span_subcode").val(row.subcode);
-	$("#t_caseqty").textbox('setValue','');
-//	$("#t_batchno").textbox('setValue','');
-	
+	$("#w_detail").window("open");
 	$("#data_detail").datagrid({
-		url:'jc/wholeShip_loadWaitShipData.action?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode,
+		url:'/management/jc/compute/wholeShipInfo?issuenumber=' + row.issuenumber + "&subcode=" + row.subcode + "&status=1&picktype=0",
 		height:'auto',	
 		fitColumns: true,
 		fit: true,
@@ -201,7 +194,7 @@ function delivery(){
 		singleSelect:false,
 		pagination:true,
         pageSize:1000,
-        pageList:[1000],
+        pageList:[10,20,50,1000],
 		showFooter: true,
 		toolbar:'#tb3',
 		columns:[[{
@@ -238,14 +231,6 @@ function delivery(){
 			title:"包册数",
 		    width:30
 		},{
-			field:"storerkey",
-			title:"出版社代码",
-		    width:30
-		},{
-			field:"publisher",
-			title:"出版社",
-		    width:50
-		},{
 			field:"code",
 			title:"分发店代码",
 		    width:50
@@ -256,15 +241,31 @@ function delivery(){
 		},{
 			field:"qtyallocated",
 			title:"已分发数量",
-		    width:50
+			width:50
+		},{
+			field:"loc",
+			title:"分配储位",
+			width:50
+		},{
+			field:"containerid",
+			title:"容器号",
+			width:50
 		},{
 			field:"amt",
 			title:"总码洋",
-		    width:50
+			width:50
 		},{
 			field:"totalCase",
 			title:"总件数",
-		    width:50
+			width:30
+		},{
+			field:"computewho",
+			title:"配发人",
+			width:50
+		},{
+			field:"computedate",
+			title:"配发时间",
+			width:50
 		}]],
 		onSelect: function (index, row) {
 			var t_caseqty = 0;
@@ -299,7 +300,7 @@ function delivery(){
 			$("#t_caseqty").textbox('setValue',t_caseqty);
 		}
 	});
-	$("#w_detail").window("open");
+
 }
 
 /**
@@ -312,144 +313,28 @@ function go(){
 	var subcode = $("#subcode").textbox('getValue');
 	var barcode = $("#barcode").textbox('getValue');
 	var batchno = $("#batchno").textbox('getValue');
-	var param = "type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode;
-	if("0" == type ){
-		$("#data").datagrid({
-			url:"jc/wholeShip_loadWaitShipDataTotal.action?type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode,
-			height:'auto',	
-			fitColumns: true,
-			striped:true,
-			rownumbers:true,
-			border:true,
-			singleSelect:true,
-			pagination:true,
-	        pageSize:20,
-	        pageList:[10,15,20],
-			showFooter: true,
-			toolbar:'#tb',
-			columns:[[{
-				field:"id",
-			    title:"编号",
-			    checkbox:true,
-			    width:50
-			},{
-				field:"issuenumber",
-				title:"期号",
-			    width:50
-			},{
-				field:"subcode",
-				title:"征订代码",
-			    width:50
-			},{
-				field:"barcode",
-				title:"条码",
-			    width:50
-			},{
-				field:"descr",
-				title:"书名",
-			    width:50
-			},{
-				field:"price",
-				title:"定价",
-			    width:30
-			},{
-				field:"storerkey",
-				title:"出版社代码",
-			    width:40
-			},{
-				field:"publisher",
-				title:"出版社",
-			    width:40
-			},{
-				field:"qtyallocated",
-				title:"已分发数量",
-			    width:50
-			}]]
-		});
+	if("0" == type){
+		var param = {
+			"issuenumber" 		: issuenumber,
+			"subcode" 			: subcode,
+			"barcode" 			: barcode,
+			"batchno"			: batchno,
+			"picktype" 			: 0,
+			"status"			: "1"
+		};
+		loadWaitShipData(20, 'POST',param);
 	    $("#currentType").val("0");
 	    $('#remove_delivery').linkbutton('disable');
 	    $('#delivery').linkbutton('enable');
 	}else {
-		$("#data").datagrid({
-			url:"jc/wholeShip_loadShippedDataBySubcode.action?type=" + type + "&issuenumber=" + issuenumber + "&subcode=" + subcode + "&barcode=" + barcode + "&batchno=" + batchno,
-			height:'auto',	
-			fitColumns: true,
-			striped:true,
-			rownumbers:true,
-			border:true,
-			singleSelect:false,
-			pagination:true,
-	        pageSize:20,
-	        pageList:[10,15,20],
-			showFooter: true,
-			toolbar:'#tb',
-			columns:[[{
-				field:"id",
-			    title:"编号",
-			    checkbox:true,
-			    width:50
-			},{
-				field:"issuenumber",
-				title:"期号",
-			    width:50
-			},{
-				field:"subcode",
-				title:"征订代码",
-			    width:50
-			},{
-				field:"barcode",
-				title:"条码",
-			    width:50
-			},{
-				field:"descr",
-				title:"书名",
-			    width:50
-			},{
-				field:"price",
-				title:"定价",
-			    width:50
-			},{
-				field:"pack",
-				title:"包册数",
-			    width:30
-			},{
-				field:"storerkey",
-				title:"出版社代码",
-			    width:30
-			},{
-				field:"publisher",
-				title:"出版社",
-			    width:30
-			},{
-				field:"code",
-				title:"分发店代码",
-			    width:50
-			},{
-				field:"shortname",
-				title:"分发店",
-			    width:30
-			},{
-				field:"qtyallocated",
-				title:"已分发数量",
-			    width:50
-			},{
-				field:"totalCase",
-				title:"总件数",
-			    width:30
-			},{
-				field:"amt",
-				title:"总码洋",
-			    width:50
-			},{
-				field:"batchno",
-				title:"批次号",
-			    width:50
-			},{
-				field:"shipno",
-				title:"运号",
-			    width:50
-			}]]
-		});
+		var param = {
+			"issuenumber" 		: issuenumber,
+			"subcode" 			: subcode,
+			"barcode" 			: barcode,
+			"batchno"			: batchno,
+			"picktype" 			: 0
+		};
+		loadshippedData(20, 'POST',param);
 	    $("#currentType").val("1");
 	    $('#remove_delivery').linkbutton('enable');
 	    $('#delivery').linkbutton('disable');
@@ -461,10 +346,12 @@ function go(){
  * 加载已发信息
  * @returns
  */
-function loadshippedData(){
+function loadshippedData(pageSize, method, formData){
 
 	$("#data").datagrid({
-		url:'jc/wholeShip_loadShippedData.action',
+		url:'/management/jc/compute/wholeShipInfoEnd',
+		method: method || 'GET',
+		queryParams:formData || '',
 		height:'auto',	
 		fitColumns: true,
 		striped:true,
@@ -472,8 +359,8 @@ function loadshippedData(){
 		border:true,
 		singleSelect:false,
 		pagination:true,
-        pageSize:20,
-        pageList:[10,15,20],
+        pageSize:pageSize || 20,
+        pageList:[10,20,50],
 		showFooter: true,
 		toolbar:'#tb',
 		columns:[[{
@@ -563,9 +450,10 @@ function loadshippedData(){
 function chooseSubcode(){
 	var type = $("#type").combobox("getValue");
 	var issuenumber = $("#issuenumber").combobox("getValue");
+	$("#showSubcode").window("open");
 	if("0" == type) {
 		$("#c_subcode").datagrid({
-			url:'jc/wholeShip_loadWaitShipDataTotal.action?issuenumber=' + issuenumber,
+			url:'/management/jc/compute/wholeShipInfoTotalTips?issuenumber=' + issuenumber,
 			height:'auto',
 			fitColumns: true,
 			striped:true,
@@ -617,7 +505,7 @@ function chooseSubcode(){
 		
 	}else {
 		$("#c_subcode").datagrid({
-			url:'jc/wholeShip_loadshippedSubcodeByIssuenumber.action?issuenumber=' + issuenumber,
+			url:'/management/jc/compute/wholeShipInfoEndTips?issuenumber=' + issuenumber,
 			height:'auto',
 			fitColumns: true,
 			striped:true,
@@ -665,7 +553,6 @@ function chooseSubcode(){
 			    width:50
 			}]]
 		});
-		$("#showSubcode").window("open");
 	}
 }
 
@@ -716,5 +603,10 @@ function t_ticketList(){
 
 
 $(function(){
-	loadWaitShipData();
+	var formData = {
+		"picktype" 	: 0,
+		"status"	: "1"
+
+	};
+	loadWaitShipData(20, 'POST', formData);
 });

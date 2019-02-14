@@ -310,7 +310,7 @@
     and qtyfree &lt; #{qtyfree}
     and qtyfree &gt; 0
     and loc not in (select loc from JiaoCaiLoc where type in ('NONE') )
-    order by qtyfree desc
+    order by loc,qtyfree desc
   </select>
     <update id="addInventoryDetail" parameterType="com.management.pojo.jc.JiaoCaiInventory_detail">
     update JiaoCaiInventory_detail

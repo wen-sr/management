@@ -30,13 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 	<div align="center">
-		<h2 style="color:#0078CA">整件发货&nbsp;<span style="font-size:20px;color:#0078CA"><s:property value='#session.name'/></span></h2>
+		<h2 style="color:#0078CA">整件发货</h2>
 	</div>
-	<input type="hidden" value="<s:property value='#session.id'/>" id="userid"/>
-	<input type="hidden" value="<s:property value='#session.name'/>" id="username"/>
 	<input type="hidden" id="currentType" />
-	<input type="hidden" id="span_issuenumber" />
-	<input type="hidden" id="span_subcode" />
 	<div align="center">
 		<form id="f">
 			<select id="type" class="easyui-combobox" style="width:100px;">
@@ -44,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<option value="1">已发品种</option>
 			</select>
 			期号：<input type="text" id="issuenumber" class="easyui-combobox"
-				data-options="url:'jc/issuenumber_info.action',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:200" />
+				data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:200" />
 		<input class="easyui-textbox" id="subcode" style="width:150px" ><a class="easyui-linkbutton" id="choosesubcode"  onclick="chooseSubcode()">选择征订代码</a>
 		条码：<input class="easyui-textbox" id="barcode" style="width:150px" />
 		批次号：<input class="easyui-textbox" id="batchno" style="width:150px" />
@@ -66,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div id="tb" style="text-align: center">
 		<a class="easyui-linkbutton" iconCls="icon-edit" id="delivery" onclick="tool.delivery()">发货确认</a>
-		<a class="easyui-linkbutton" iconCls="icon-remove" id="remove_delivery" onclick="tool.remove_delivery()">取消批次</a>
+		<a class="easyui-linkbutton" iconCls="icon-remove" id="remove_delivery" onclick="tool.remove_delivery()">取消发货</a>
 	</div>
 	<div id="tb2" style="text-align: center">
 		<a class="easyui-linkbutton" iconCls="icon-edit" onclick="tool.yes()">确定</a>

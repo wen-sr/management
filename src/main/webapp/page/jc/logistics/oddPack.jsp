@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,8 +7,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
     <title>零件打包</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -23,21 +20,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jc/predistribution.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jc/base.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jc/oddpack.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/base.js"></script>
+	<script type="text/javascript" src="oddpack.js"></script>
 	
   </head>
   
   <body>
 	<div align="center">
-		<h2 style="color:#0078CA">零件打包&nbsp;<span style="font-size:20px;color:#0078CA"><s:property value='#session.name'/></span></h2>
+		<h2 style="color:#0078CA">零件打包</h2>
 	</div>
-	<input type="hidden" value="<s:property value='#session.id'/>" id="userid"/>
-	<input type="hidden" value="<s:property value='#session.name'/>" id="username"/>
 	<div align="center">
 		<table>
 			<tr>
@@ -46,14 +40,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</td>
 				<td>
 					<input type="text" id="issuenumber" class="easyui-combobox"
-						data-options="url:'jc/issuenumber_info.action',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:200" />
+						data-options="url:'/management/jc/issuenumber/tips',method:'get',valueField:'issuenumber',textField:'issuenumber',panelHeight:200" />
 				</td>
 				<td>
 					选择客户：
 				</td>
 				<td>
 					<input type="text" id="code" class="easyui-combobox"
-						data-options="url:'jc/oddPack_loadCustomer.action',method:'get',valueField:'storerkey',textField:'shortname',panelHeight:120" />
+						data-options="url:'/management/jc/compute/oddPackTips',method:'get',valueField:'code',textField:'shortname',panelHeight:120" />
 				</td>
 				<td><a class="easyui-linkbutton" id='beginPack' onclick="beginPack()">&nbsp;开始打包&nbsp;</a></td>
 			</tr>
@@ -83,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					出版社：
 				</td>
 				<td>
-					<input class="easyui-combobox" id="publisher" data-options="url:'jc/storer_getSupplier.action',method:'get',valueField:'storerkey',textField:'shortname',readonly:true"/>
+					<input class="easyui-combobox" id="publisher" data-options="url:'/management/jc/storer/tips?type=1',method:'get',valueField:'storerkey',textField:'shortname',readonly:true"/>
 				</td>
 				<td>
 					数量：
@@ -101,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<br/>
 	<!-- 未刷品种 -->
 	<table id="data1" class="easyui-datagrid" data-options="title:'未刷品种',toolbar:'#tb1'"></table>
-	<hr style="width:100%,height:5px;">
+	<hr style="width:100%;height:5px;">
 	<!-- 已刷品种 -->
 	<table id="data2" class="easyui-datagrid" data-options="title:'已刷品种',toolbar:'#tb'"></table>
 	<div id="tb" style="text-align: center">

@@ -37,6 +37,7 @@ public class Constant {
         String TECH = "6";
         String JIAO_CAI = "7";
         String CANG_GUAN = "8";
+        String THIRD = "9";
     }
 
 
@@ -374,11 +375,14 @@ public class Constant {
     public enum JiaoCaiDistributeStatus{
 
         UNSTART(0, "分发未配发"),
-        START(1, "已配发"),
-        PICK(2, "拣货"),
+        START(1, "已配发未拣货"),
+        PICK(2, "拣货中"),
         PACKING(3, "打包中"),
         PACKED(4, "完成"),
         ALLOWCANCEL(5, "可取消"),
+        ALLOWPICK(6, "可拣货"),
+        PICKED(7, "拣货完成"),
+        SHIPPED(9, "已发运")
         ;
 
         private Integer code;

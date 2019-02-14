@@ -396,6 +396,9 @@ public class UserServiceImpl implements UserService {
             case Constant.LoginSystemFlag.JIAO_CAI:
                 menuChild = accordionMapper.selectByFooId(id,1, 49);
                 break;
+            case Constant.LoginSystemFlag.THIRD:
+                menuChild = accordionMapper.selectByFooId(id,900, 999);
+                break;
             default:
                 menuChild = accordionMapper.selectByFooId(id,1, 999999999);
                 break;

@@ -17,8 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Author: wen-sir
@@ -114,6 +117,196 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
         }
     }
 
+    @Override
+    public ServerResponse pickInfo(Integer pageSize, Integer pageNum, JiaoCaiCompute jiaoCaiCompute) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        List<JiaoCaiComputeVo> jiaoCaiComputeVoList = null;
+        PageHelper.startPage(pageNum,pageSize);
+        jiaoCaiComputeVoList = jiaoCaiComputeMapper.pickInfo(jiaoCaiCompute);
+        if(jiaoCaiComputeVoList != null && jiaoCaiComputeVoList.size() > 0){
+            for(JiaoCaiComputeVo jiaoCaiComputeVo : jiaoCaiComputeVoList){
+                jiaoCaiComputeVo.setStatus(Constant.JiaoCaiDistributeStatus.codeOf(Integer.parseInt(jiaoCaiComputeVo.getStatus())).getMsg());
+                jiaoCaiComputeVo.setPicktype("0".equals(jiaoCaiComputeVo.getPicktype())?"整件拣货":"零件拣货");
+                if(jiaoCaiComputeVo.getCaseqty() == 0 && jiaoCaiComputeVo.getOddpack() == 0){
+                    jiaoCaiComputeVo.setTotalCase(1);
+                }else {
+                    jiaoCaiComputeVo.setTotalCase(jiaoCaiComputeVo.getCaseqty() + jiaoCaiComputeVo.getOddpack());
+                }
+            }
+        }
+        PageInfo pageInfo = new PageInfo(jiaoCaiComputeVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
+    @Override
+    public ServerResponse wholeShipInfo(Integer pageSize, Integer pageNum, JiaoCaiCompute jiaoCaiCompute) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        return getInfo(pageSize,pageNum, jiaoCaiCompute);
+    }
+    @Override
+    public ServerResponse<PageInfo<List<JiaoCaiComputeVo>>> wholeShipInfoEnd(Integer pageSize, Integer pageNum, JiaoCaiCompute jiaoCaiCompute) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        List<JiaoCaiComputeVo> jiaoCaiComputeVoList = null;
+        PageHelper.startPage(pageNum,pageSize);
+        jiaoCaiComputeVoList = jiaoCaiComputeMapper.wholeShipInfo(jiaoCaiCompute);
+        if(jiaoCaiComputeVoList != null && jiaoCaiComputeVoList.size() > 0){
+            for(JiaoCaiComputeVo jiaoCaiComputeVo : jiaoCaiComputeVoList){
+                if(jiaoCaiComputeVo.getCaseqty() == 0 && jiaoCaiComputeVo.getOddpack() == 0){
+                    jiaoCaiComputeVo.setTotalCase(1);
+                }else {
+                    jiaoCaiComputeVo.setTotalCase(jiaoCaiComputeVo.getCaseqty() + jiaoCaiComputeVo.getOddpack());
+                }
+            }
+        }
+        PageInfo pageInfo = new PageInfo(jiaoCaiComputeVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
+    @Override
+    public ServerResponse cancel(List<Long> ids) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        JiaoCaiCompute jiaoCaiCompute = null;
+        int i = 0;
+        for(long l : ids){
+            jiaoCaiCompute = jiaoCaiComputeMapper.selectByPrimaryKey(l);
+            jiaoCaiCompute.setShipno(null);
+            jiaoCaiCompute.setBatchno(null);
+            jiaoCaiCompute.setStatus("1");
+            i += jiaoCaiComputeMapper.updateByPrimaryKeySelective(jiaoCaiCompute);
+        }
+        if(i > 0){
+            return ServerResponse.createBySuccessMsg("取消成功");
+        }else {
+            return ServerResponse.createByErrorMessage("取消失败");
+        }
+    }
+
+    @Override
+    public ServerResponse pickInfoTotal(Integer pageSize, Integer pageNum, JiaoCaiCompute jiaoCaiCompute) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        List<JiaoCaiComputeVo> jiaoCaiComputeVoList = null;
+        PageHelper.startPage(pageNum,pageSize);
+        jiaoCaiComputeVoList = jiaoCaiComputeMapper.pickInfoTotal(jiaoCaiCompute);
+        PageInfo pageInfo = new PageInfo(jiaoCaiComputeVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
+    @Override
+    public ServerResponse startPick(List<Long> ids) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        JiaoCaiCompute jiaoCaiCompute = null;
+        String pickno = getPickNo();
+        for(Long l : ids){
+            jiaoCaiCompute = jiaoCaiComputeMapper.selectByPrimaryKey(l);
+            if(!Constant.JiaoCaiDistributeStatus.ALLOWPICK.getCode().toString().equals(jiaoCaiCompute.getStatus())){
+                throw new MyException(-1, "【"+ jiaoCaiCompute.getShortname() +"】的拣货任务不是可拣货状态，无法生成拣货流水号");
+            }
+            if(jiaoCaiCompute.getLoc().endsWith("SMART")){
+                //向立库发送出库任务
+                //判断是否整托出库
+                //todo
+            }
+            jiaoCaiCompute.setStatus(Constant.JiaoCaiDistributeStatus.PICK.getCode().toString());
+            jiaoCaiCompute.setPickno(pickno);
+            jiaoCaiComputeMapper.updateByPrimaryKeySelective(jiaoCaiCompute);
+        }
+        return ServerResponse.createBySuccess("启动拣货任务成功", pickno);
+    }
+
+    @Override
+    public ServerResponse confirmPick(List<Long> ids) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        JiaoCaiCompute jiaoCaiCompute = null;
+        for(Long l : ids){
+            jiaoCaiCompute = jiaoCaiComputeMapper.selectByPrimaryKey(l);
+            if(!Constant.JiaoCaiDistributeStatus.PICK.getCode().toString().equals(jiaoCaiCompute.getStatus())){
+                throw new MyException(-1, "【"+ jiaoCaiCompute.getShortname() +"】的拣货任务不是拣货中状态，无法确认拣货");
+            }
+            jiaoCaiCompute.setStatus(Constant.JiaoCaiDistributeStatus.PICKED.getCode().toString());
+            jiaoCaiComputeMapper.updateByPrimaryKeySelective(jiaoCaiCompute);
+            //扣库存
+            //todo
+        }
+        return ServerResponse.createBySuccessMsg("确认拣货成功");
+    }
+
+    @Override
+    public ServerResponse oddPackTips(JiaoCaiCompute jiaoCaiCompute) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        List<JiaoCaiComputeVo> jiaoCaiComputeVoList = jiaoCaiComputeMapper.selectOddPackTips(jiaoCaiCompute);
+        return ServerResponse.createBySuccess(jiaoCaiComputeVoList);
+    }
+
+    @Override
+    public ServerResponse oddPackInfo(Integer pageSize, Integer pageNum, JiaoCaiCompute jiaoCaiCompute) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        return getInfo(pageSize, pageNum, jiaoCaiCompute);
+    }
+
+    @Override
+    public ServerResponse wholeShipInfoTotal(Integer pageSize, Integer pageNum, JiaoCaiCompute jiaoCaiCompute) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        List<JiaoCaiComputeVo> jiaoCaiComputeVoList = null;
+        PageHelper.startPage(pageNum,pageSize);
+        jiaoCaiComputeVoList = jiaoCaiComputeMapper.wholeShipInfoTotal(jiaoCaiCompute);
+        PageInfo pageInfo = new PageInfo(jiaoCaiComputeVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
+    @Override
+    public ServerResponse addBatchno(List<Long> ids) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        //获得批次号
+        String batchno = getBatchnoNo();
+        int i = 0;
+        //根据id更新compute的批次号
+         i += jiaoCaiComputeMapper.updateBatchnoByIds(ids, batchno);
+        //判断是否需要获得shipno
+        List<JiaoCaiCompute> jiaoCaiComputeList = needShipno(batchno);
+        JiaoCaiCompute jiaoCaiCompute = null;
+        while (jiaoCaiComputeList != null && jiaoCaiComputeList.size() > 0){
+            jiaoCaiCompute = new JiaoCaiCompute();
+            jiaoCaiCompute.setBatchno(batchno);
+            jiaoCaiCompute.setCode(jiaoCaiComputeList.get(0).getCode());
+            //给shipno为null的第一个客户更新shipno
+            String shipno = getShipNo();
+            jiaoCaiCompute.setShipno(shipno);
+            i += jiaoCaiComputeMapper.updateShipnoByBatchno(jiaoCaiCompute);
+            jiaoCaiComputeList = needShipno(batchno);
+        }
+        if(i > 0 ){
+            return ServerResponse.createBySuccess("生成批次号和运号成功", batchno);
+        }else {
+            return ServerResponse.createByErrorMessage("生成批次号和运号失败，请联系管理员");
+        }
+    }
+
+    private List<JiaoCaiCompute> needShipno(String batchno) {
+        JiaoCaiCompute jiaoCaiCompute = new JiaoCaiCompute();
+        jiaoCaiCompute.setBatchno(batchno);
+        return jiaoCaiComputeMapper.findAll(jiaoCaiCompute);
+    }
+
+    private synchronized String getBatchnoNo(){
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        Map<String, Integer> map = new HashMap<>();
+        jiaoCaiComputeMapper.getBatchno(map);
+        return String.valueOf(map.get("batchno"));
+    }
+
+    private synchronized String getShipNo(){
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        Map<String, Integer> map = new HashMap<>();
+        jiaoCaiComputeMapper.getShipno(map);
+        return String.valueOf(map.get("shipno"));
+    }
+
+    private synchronized String getPickNo(){
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        Map<String, Integer> map = new HashMap<>();
+        jiaoCaiComputeMapper.getPickno(map);
+        return String.valueOf(map.get("pickno"));
+    }
     private List<JiaoCaiComputeVo> parseToJiaoCaiComputeVo(List<JiaoCaiCompute> jiaoCaiComputeList) {
         List<JiaoCaiComputeVo> jiaoCaiComputeVoList = new ArrayList<>();
         JiaoCaiComputeVo jiaoCaiComputeVo = null;
@@ -141,8 +334,11 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
             jiaoCaiComputeVo.setIssuenumber(d.getIssuenumber());
             jiaoCaiComputeVo.setOdd(d.getOdd());
             jiaoCaiComputeVo.setOddpack(d.getOddpack());
+            jiaoCaiComputeVo.setBundle(d.getBundle());
             jiaoCaiComputeVo.setPack(d.getPack());
             jiaoCaiComputeVo.setPackdate(DateTimeUtil.dateToStr(d.getPackdate()));
+            jiaoCaiComputeVo.setContainerid(d.getContainerid());
+            jiaoCaiComputeVo.setLoc(d.getLoc());
             jiaoCaiComputeVo.setCaseqty(d.getCaseqty());
             jiaoCaiComputeVo.setPickno(d.getPickno());
             jiaoCaiComputeVo.setQtyallocated(d.getQtyallocated());
@@ -151,6 +347,12 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
             jiaoCaiComputeVo.setStatus(Constant.JiaoCaiDistributeStatus.codeOf(Integer.parseInt(d.getStatus())).getMsg());
             jiaoCaiComputeVo.setSubcode(d.getSubcode());
             jiaoCaiComputeVo.setType(d.getType());
+            jiaoCaiComputeVo.setPicktype(d.getPicktype()==0?"整件拣货":"零件拣货");
+            if(d.getCaseqty() == 0 && d.getOddpack() == 0){
+                jiaoCaiComputeVo.setTotalCase(1);
+            }else {
+                jiaoCaiComputeVo.setTotalCase(d.getCaseqty() + d.getOddpack());
+            }
 
             JiaoCaiSkuKey jiaoCaiSkuKey = new JiaoCaiSkuKey();
             jiaoCaiSkuKey.setIssuenumber(d.getIssuenumber());
@@ -162,13 +364,13 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
                 jiaoCaiComputeVo.setBarcode(jiaoCaiSku.getBarcode());
                 jiaoCaiComputeVo.setDescr(jiaoCaiSku.getDescr());
                 jiaoCaiComputeVo.setPrice(jiaoCaiSku.getPrice());
+                jiaoCaiComputeVo.setAmt(new BigDecimal(d.getQtyallocated()).multiply(jiaoCaiSku.getPrice()));
                 JiaoCaiStorer jiaoCaiStorer = jiaoCaiStorerMapper.selectByStorerKey(jiaoCaiSku.getPublisher());
                 if(jiaoCaiStorer != null) {
                     jiaoCaiComputeVo.setPublisher(jiaoCaiStorer.getShortname());
                     jiaoCaiComputeVo.setStorerkey(jiaoCaiStorer.getStorerkey());
                 }
             }
-
             jiaoCaiComputeVoList.add(jiaoCaiComputeVo);
         }
         return jiaoCaiComputeVoList;

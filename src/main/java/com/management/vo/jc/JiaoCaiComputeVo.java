@@ -67,7 +67,7 @@ public class JiaoCaiComputeVo {
 
     private String loaddate;
 
-    private Integer picktype;
+    private String picktype;
 
     private Integer sendcode;
 
@@ -88,6 +88,26 @@ public class JiaoCaiComputeVo {
     private String publisher;
 
     private String storerkey;
+
+    private BigDecimal amt;
+
+    private Integer totalCase;
+
+    public Integer getTotalCase() {
+        return totalCase;
+    }
+
+    public void setTotalCase(Integer totalCase) {
+        this.totalCase = totalCase;
+    }
+
+    public BigDecimal getAmt() {
+        return amt;
+    }
+
+    public void setAmt(BigDecimal amt) {
+        this.amt = amt;
+    }
 
     public String getPublisher() {
         return publisher;
@@ -361,11 +381,11 @@ public class JiaoCaiComputeVo {
         this.loaddate = loaddate;
     }
 
-    public Integer getPicktype() {
+    public String getPicktype() {
         return picktype;
     }
 
-    public void setPicktype(Integer picktype) {
+    public void setPicktype(String picktype) {
         this.picktype = picktype;
     }
 
