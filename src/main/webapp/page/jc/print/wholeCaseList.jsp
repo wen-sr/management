@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*, java.text.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,8 +7,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
     <title>整件清单</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -20,14 +17,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jc/predistribution.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-migrate-1.4.1.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
-	<script language="javascript" src="${pageContext.request.contextPath}/js/jquery.jqprint.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jc/wholeCaseList.js"></script>
-	<style type="text/css">
+	<script language="javascript" src="${pageContext.request.contextPath}/js/util/getUrlParam.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.jqprint.js"></script>
+    <script type="text/javascript" src="wholeCaseList.js"></script>
+    <style type="text/css">
 		tr{
 			height:35px;
 		}
@@ -54,7 +51,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<input type="hidden" id="batchno" value="${batchno }" />
   	<div id="d" align="center" style="font-size:20px;">
 	    <div align="center">
 	    	<div align="center">
@@ -64,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	<div align="center" >
 	    		<table width='90%' style="border:0px;"  >
 	    			<tr>
-	    				<td colspan="5">调度批号：${ batchno }</td><td>列印时间：<%= dt %></td>
+	    				<td colspan="5">调度批号：<span id="batchno"></span></td><td>列印时间：<%= dt %></td>
 	    			</tr>
 	    		</table>
 	    		<table id="t1" width="90%" frame=hsides rules='rows'>

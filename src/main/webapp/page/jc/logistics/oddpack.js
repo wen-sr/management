@@ -338,7 +338,7 @@ function addBatchno(){
 function oddCaseList(){
 	var batchno = $("#batchno").textbox('getValue');
 	if(batchno != ''){
-		window.open('jc/print_oddCaseListMid.action?batchno='+batchno,'_blank');
+		window.open('/management/page/jc/print/oddCaseList.jsp?batchno='+batchno,'_blank');
 	}else{
 		$.messager.alert("操作提示","请先选择批次号","error");
 	}
@@ -349,7 +349,7 @@ function oddCaseList(){
 function oddTicketList(){
 	var batchno = $("#batchno").textbox('getValue');
 	if(batchno != ''){
-		window.open('jc/print_oddTicketList.action?batchno='+batchno,'_blank');
+		window.open('/management/page/jc/print/oddTicket.jsp?batchno='+batchno,'_blank');
 	}else{
 		$.messager.alert("操作提示","请先选择批次号","error");
 	}

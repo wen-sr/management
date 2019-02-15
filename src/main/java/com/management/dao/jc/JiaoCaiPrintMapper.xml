@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.dao.jc.JiaoCaiPrintMapper">
+
+  <select id="getWholeCaseListHead" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+    select a.issuenumber,a.subcode,b.descr,b.publisher storerkey,
+    (select shortname from jiaocaistorer c where b.publisher = c.storerkey) publisher,
+    b.price,SUM(a.qtyallocated) qtyallocated,a.pack,SUM(a.qtyallocated)/a.pack caseqty,SUM(a.qtyallocated)%a.pack odd
+    from JiaoCaiCompute a,JiaoCaiSku b where a.issuenumber=b.issuenumber and a.subcode=b.subcode and batchno=#{batchno} and (oddpack>0 or caseqty>0)
+    group by a.issuenumber,a.subcode,b.descr,b.publisher,b.price,b.bundle,a.pack
+  </select>
+  <select id="getWholeCaseListDetail" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+    select code,shortname,(select phone from JiaoCaiStorer where JiaoCaiCompute.code = JiaoCaiStorer.storerkey) phone,
+    (select contact from JiaoCaiStorer where JiaoCaiCompute.code = JiaoCaiStorer.storerkey) contact,
+    (select address1 from JiaoCaiStorer where JiaoCaiCompute.code = JiaoCaiStorer.storerkey) address1,shipno,qtyallocated,pack,
+    (case when oddpack=1 then caseqty+1 when oddpack=0 then caseqty end) caseqty
+    from JiaoCaiCompute
+    where batchno=#{batchno} and (oddpack>0 or caseqty>0);
+  </select>
+    <select id="getAllocationList" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+      select a.issuenumber,a.subcode,a.code,a.shortname,b.descr,b.publisher storerkey,
+      (select shortname from JiaoCaiStorer d where b.publisher=d.storerkey ) publisher,
+      b.price,SUM(qtyallocated) qtyallocated,(case when oddpack=1 then caseqty+1 when oddpack=0 then caseqty end) caseqty,
+      a.pack,a.oddpack,a.odd,a.shipno,b.barcode
+      from JiaoCaiCompute a,JiaoCaiSku b
+      where a.issuenumber=b.issuenumber and a.subcode = b.subcode and a.batchno = #{batchno}
+      group by a.issuenumber,a.subcode,a.code,a.shortname,b.descr,b.publisher,b.price,caseqty,oddpack,odd,b.barcode,a.pack,a.shipno
+    </select>
+    <select id="getS_ticketList" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+      select a.issuenumber,a.batchno,a.subcode,b.descr,a.shortname,(case when oddpack=1 then caseqty+1 when oddpack=0 then caseqty end) caseqty,shipno
+      from JiaoCaiCompute a,JiaoCaiSku b
+      where a.issuenumber = b.issuenumber and a.subcode = b.subcode and (a.caseqty > 0 or a.oddpack > 0)
+      and a.batchno = #{batchno}
+    </select>
+    <select id="getPickListHead" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+      select distinct a.issuenumber,a.subcode,b.barcode,b.publisher storerkey,(select shortname from jiaocaistorer c where b.publisher = c.storerkey) publisher,b.price,b.descr,a.pickno
+      from JiaoCaiCompute a,JiaoCaiSku b
+      where a.issuenumber=b.issuenumber and a.subcode=b.subcode
+      and a.pickno=#{pickno}
+    </select>
+  <select id="getPickListDetail" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+    select a.code,a.shortname,a.qtyallocated,a.pack,a.pickno
+    from JiaoCaiCompute a,JiaoCaiSku b
+    where a.issuenumber=b.issuenumber and a.subcode=b.subcode
+    and a.pickno=#{pickno}
+  </select>
+    <select id="getOddCaseList" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+      select a.issuenumber,a.subcode,b.descr,b.publisher storerkey,(select shortname from jiaocaistorer c where b.publisher = c.storerkey) publisher,
+      price,SUM(a.qtyallocated) qtyallocated,max(a.pack) pack
+      from JiaoCaiCompute a,JiaoCaiSku b
+      where a.issuenumber=b.issuenumber and a.subcode=b.subcode and oddpack=0 and caseqty=0
+      and batchno = #{batchno}
+      group by a.issuenumber,a.subcode,b.descr,b.publisher,b.price
+    </select>
+  <select id="getOddCaseListHead" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+    select issuenumber,code,shortname,batchno,shipno,(select phone from JiaoCaiStorer where JiaoCaiCompute.code = JiaoCaiStorer.storerkey) phone,
+    (select contact from JiaoCaiStorer where JiaoCaiCompute.code = JiaoCaiStorer.storerkey) contact,
+    (select address1 from JiaoCaiStorer where JiaoCaiCompute.code = JiaoCaiStorer.storerkey) address1,SUM(qtyallocated) qtyallocated,pack
+    from JiaoCaiCompute
+    where caseqty = 0 and oddpack = 0
+    and batchno = #{batchno}
+    group by issuenumber,code,shortname,batchno,shipno,pack
+  </select>
+    <select id="loadBatchno" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+      select distinct top 5 batchno from JiaoCaiCompute where batchno is not null order by batchno desc
+    </select>
+  <select id="loadPickno" resultType="com.management.vo.jc.JiaoCaiComputeVo">
+    select distinct top 5 pickno from JiaoCaiCompute where pickno is not null order by pickno desc
+  </select>
+</mapper>

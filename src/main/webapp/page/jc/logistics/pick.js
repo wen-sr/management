@@ -249,7 +249,7 @@ function pickList(){
 		$.messager.alert("操作提示","请先选择拣货流水号","error");
 		return;
 	}
-	window.open('jc/print_pickMid.action?pickno='+pickno,'_blank');
+	window.open('/management/page/jc/print/pickList.jsp?pickno='+pickno,'_blank');
 }
 
 

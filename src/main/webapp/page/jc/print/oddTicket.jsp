@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,8 +7,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
     <title>票签</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -20,7 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jc/predistribution.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-migrate-1.4.1.min.js"></script>
@@ -44,16 +40,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<table>
     		<tr><td style="font-size:30px;font-weight:bold;"align='center'>中小学教材<td></tr>
     		<tr>
-    			<td class='f' style="font-size:22px;font-weight:bold;">批次号：${ d.batchno }</td>
+    			<td class='f' style="font-size:22px;font-weight:bold;">批次号：<span id="batchno"></span></td>
     		<tr/>
     		<tr>	
-    			<td class='f' style="font-size:22px;font-weight:bold;">运输号：${ d.shipno }</td>
+    			<td class='f' style="font-size:22px;font-weight:bold;">运输号：<span id="shipno"></span></td>
     		<tr/>
     		<tr>	
-    			<td style="font-family:Code39QuarterInchTT-Regular;font-size:50px">${ d.shipno }</td>
+    			<td style="font-family:Code39QuarterInchTT-Regular;font-size:50px"><span id="shipno_1"></span></td>
     		<tr/>
     		<tr>	
-    			<td class='f' style="font-size:30px;font-weight:bold;">收件方：${ d.shortname }</td>
+    			<td class='f' style="font-size:30px;font-weight:bold;">收件方：<span id="shortname"></span></td>
     		<tr/>
     		<tr>
     			<td class='f' style="font-size:22px;font-weight:bold;">包件数：1 / 1 &nbsp;&nbsp;&nbsp;

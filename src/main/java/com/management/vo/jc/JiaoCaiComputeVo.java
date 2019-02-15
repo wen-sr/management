@@ -93,6 +93,36 @@ public class JiaoCaiComputeVo {
 
     private Integer totalCase;
 
+    private String phone;
+
+    private String contact;
+
+    private String address1;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getAddress1() {
+        return address1;
+    }
+
+    public void setAddress1(String address1) {
+        this.address1 = address1;
+    }
+
     public Integer getTotalCase() {
         return totalCase;
     }

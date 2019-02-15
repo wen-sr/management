@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*, java.text.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,8 +7,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
     <title>调拨单</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -20,14 +17,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jc/predistribution.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jc/allocationList.css">
+	<link rel="stylesheet" type="text/css" href="allocationList.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-migrate-1.4.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js"></script>
 	<script language="javascript" src="${pageContext.request.contextPath}/js/jquery.jqprint.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jc/allocationList.js"></script>
+	  <script language="javascript" src="${pageContext.request.contextPath}/js/util/getUrlParam.js"></script>
+	<script type="text/javascript" src="allocationList.js"></script>
 	
   </head>
   	
@@ -37,7 +34,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日"); 
   		String dt = df.format(d);  
 	 %>
-	<input type="hidden" id="batchno" value="${batchno }" />
 	<a class="easyui-linkbutton" style="margin: 0px 20%;" data-options="iconCls:'icon-print',size:'small'" onclick="doJqprint()">打印</a>
 	<div id="d" style="width:24.4cm">
     </div>
