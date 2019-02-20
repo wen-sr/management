@@ -61,7 +61,7 @@ public class MsgHandler extends AbstractHandler {
       Map<String, Object> context, WxMpService wxMpService,
             WxSessionManager sessionManager)    {
 
-        WeixinService weixinService = (WeixinService) wxMpService;
+        WeixinService   weixinService = (WeixinService) wxMpService;
         //组装回复消息
         String content = "";
         if (!wxMessage.getMsgType().equals(WxConsts.XmlMsgType.EVENT)) {

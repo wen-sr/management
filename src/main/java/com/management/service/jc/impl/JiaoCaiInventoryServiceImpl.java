@@ -11,14 +11,18 @@ import com.management.exception.MyException;
 import com.management.pojo.jc.*;
 import com.management.service.jc.IJiaoCaiInventoryService;
 import com.management.util.DataSourceContextHolder;
+import com.management.util.DateTimeUtil;
+import com.management.util.XmlUtils;
 import com.management.vo.jc.JiaoCaiInventoryVo;
+import com.management.ws.server.pallet.RecWMSServer;
+import com.management.ws.server.pallet.RecWMSServerService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Author: wen-sir
@@ -53,6 +57,12 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
 
     @Autowired
     TaskViewMapper taskViewMapper;
+
+    @Autowired
+    JiaoCaiComputeMapper jiaoCaiComputeMapper;
+
+    @Autowired
+    JiaoCaiTaskMapper jiaoCaiTaskMapper;
 
     @Override
     public int add(JiaoCaiInventory jiaoCaiInventory, JiaoCaiInventory_detail jiaoCaiInventory_detail) {
@@ -148,10 +158,39 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
             if(StringUtils.isBlank(jiaoCaiInventoryVo.getToContainerId())){
                 return ServerResponse.createByErrorMessage("移动到智能仓库目的容器号不能为空");
             }
+            String warehouseId = "";
+            if(jiaoCaiInventoryVo.getToLoc().startsWith("32")){
+                warehouseId = "w5";
+            }else if(jiaoCaiInventoryVo.getToLoc().startsWith("42")){
+                warehouseId = "w2";
+            }
+
             jiaoCaiInventoryVo.setToLoc("REP");
             i += moveFromAndTo(jiaoCaiInventoryVo);
             //3.生成入库任务
-            //todo
+            String taskno = getTaskno();
+            JiaoCaiTask jiaoCaiTask = new JiaoCaiTask();
+            jiaoCaiTask.setAddwho(RequestHolder.getCurrentUser().getId());
+            jiaoCaiTask.setDistrictid("A");
+            jiaoCaiTask.setInfid("PALLET");
+            jiaoCaiTask.setMethod("1");
+            jiaoCaiTask.setNeedwinding("N");
+            jiaoCaiTask.setWarehouseid(warehouseId);
+            jiaoCaiTask.setOrderid(jiaoCaiInventoryVo.getSubcode());
+            jiaoCaiTask.setTraycodes(jiaoCaiInventoryVo.getToContainerId());
+            String reply = sendToPallet(jiaoCaiTask);
+            String retCode = XmlUtils.getNodeValue("//RetCode", reply);
+            String retTime = XmlUtils.getNodeValue("//RetTime", reply);
+            String MessageId = XmlUtils.getNodeValue("//MessageId", reply);
+            String RetInfo = XmlUtils.getNodeValue("//RetInfo", reply);
+            if("SUCCESS".equals(retCode)){
+                jiaoCaiTask.setSendcode("1");
+            }else if("ERROR".equals(retCode)){
+                jiaoCaiTask.setSendcode("2");
+            }
+            jiaoCaiTask.setRetmsg(RetInfo);
+            jiaoCaiTask.setRettime(DateTimeUtil.strToDate(retTime));
+            jiaoCaiTaskMapper.insertSelective(jiaoCaiTask);
         }
         if(i > 0){
             return ServerResponse.createBySuccessMsg("移库成功");
@@ -159,6 +198,34 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
             return ServerResponse.createByErrorMessage("移库失败，请联系管理员");
         }
 
+    }
+
+    private String sendToPallet(JiaoCaiTask jiaoCaiTask) {
+        JaxWsProxyFactoryBean factoryBean = new JaxWsProxyFactoryBean();
+        factoryBean.setServiceClass(RecWMSServerService.class);
+        factoryBean.setAddress("http://141.168.1.108:8081/ncsmwcs/ws/recWMSInfo");
+        RecWMSServer recWMSServer = factoryBean.create(RecWMSServer.class);
+        String data = "<Message>" +
+                    "     <InTask_Info>" +
+                        "     <TaskId>"+ jiaoCaiTask.getTrkNo() +"</TaskId>" +
+                        "     <InType>instock</InType>" +
+                        "     <WarehouseId>"+ jiaoCaiTask.getWarehouseid() +"</WarehouseId>" +
+                        "     <DistrictId>"+ jiaoCaiTask.getDistrictid() +"</DistrictId>" +
+                        "     <TrayCode>"+ jiaoCaiTask.getTraycodes() +"</TrayCode>" +
+                        "     <OrderId>"+ jiaoCaiTask.getOrderid() +"</OrderId>" +
+                        "     <GroupId>"+ jiaoCaiTask.getOrderid() +"</GroupId>" +
+                        "     <NeedWinding>"+ jiaoCaiTask.getNeedwinding() +"</NeedWinding>" +
+                        "     <Time>"+ DateTimeUtil.dateToStr(new Date()) +"</Time>" +
+                    "     </InTask_Info>" +
+                    "  </Message>";
+        return recWMSServer.recWMSHandleInfo(data);
+    }
+
+    private String getTaskno() {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        Map<String, Integer> map = new HashMap<>();
+        jiaoCaiComputeMapper.getTaskno(map);
+        return String.valueOf(map.get("batchno"));
     }
 
     private int moveFromAndTo(JiaoCaiInventoryVo jiaoCaiInventoryVo) {

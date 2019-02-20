@@ -127,7 +127,7 @@
       <if test="rettime != null" >
         rettime,
       </if>
-      <if test="adddate != null" >
+      <if test="0 != 1" >
         adddate,
       </if>
       <if test="addwho != null" >
@@ -201,8 +201,8 @@
       <if test="rettime != null" >
         #{rettime,jdbcType=TIMESTAMP},
       </if>
-      <if test="adddate != null" >
-        #{adddate,jdbcType=TIMESTAMP},
+      <if test="0 != 1" >
+        getdate(),
       </if>
       <if test="addwho != null" >
         #{addwho,jdbcType=NVARCHAR},

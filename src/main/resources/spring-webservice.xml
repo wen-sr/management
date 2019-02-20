@@ -18,4 +18,8 @@
     <!-- jax-ws endpoint定义  -->
     <!--发布webservice-->
     <jaxws:endpoint implementor="com.management.ws.WebServiceTest" address="/webSerciceTest" ></jaxws:endpoint>
+
+    <bean id="receivePalletReply" class="com.management.ws.ReceiveReplyImpl" />
+    <jaxws:endpoint implementor="com.management.ws.ReceiveReplyImpl" address="/receiveReply" ></jaxws:endpoint>
+
 </beans>
