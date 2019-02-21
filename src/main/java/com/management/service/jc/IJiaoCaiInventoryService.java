@@ -23,4 +23,5 @@ public interface IJiaoCaiInventoryService {
 
     ServerResponse selectInventoryDetailTotal(Integer pageSize, Integer pageNum, JiaoCaiInventory_detail jiaoCaiInventory_detail);
 
+    void executeTask(String task_no);
 }

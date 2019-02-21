@@ -64,6 +64,9 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
     @Autowired
     JiaoCaiTaskMapper jiaoCaiTaskMapper;
 
+    @Autowired
+    JiaoCaiTaskDetailMapper jiaoCaiTaskDetailMapper;
+
     @Override
     public int add(JiaoCaiInventory jiaoCaiInventory, JiaoCaiInventory_detail jiaoCaiInventory_detail) {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
@@ -110,6 +113,32 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
+    @Override
+    public void executeTask(String task_no) {
+        JiaoCaiTask jiaoCaiTask = new JiaoCaiTask();
+        jiaoCaiTask.setTrkNo(task_no);
+        List<JiaoCaiTask> jiaoCaiTaskList = jiaoCaiTaskMapper.selectAll(jiaoCaiTask);
+        JiaoCaiTaskDetail jiaoCaiTaskDetail = null;
+        JiaoCaiInventoryVo jiaoCaiInventoryVo = null;
+        for(JiaoCaiTask jiaoCaiTask1 : jiaoCaiTaskList){
+            jiaoCaiTaskDetail = new JiaoCaiTaskDetail();
+            jiaoCaiTaskDetail.setTaskid(jiaoCaiTask1.getOrderid());
+            List<JiaoCaiTaskDetail> jiaoCaiTaskDetailList = jiaoCaiTaskDetailMapper.selectAll(jiaoCaiTaskDetail);
+            for(JiaoCaiTaskDetail j : jiaoCaiTaskDetailList){
+                jiaoCaiInventoryVo = new JiaoCaiInventoryVo();
+                jiaoCaiInventoryVo.setIssuenumber(j.getIssuenumber());
+                jiaoCaiInventoryVo.setSubcode(j.getSubcode());
+                jiaoCaiInventoryVo.setContainerId(j.getFromid());
+                jiaoCaiInventoryVo.setLoc(j.getFromloc());
+                jiaoCaiInventoryVo.setToContainerId(j.getToid());
+                jiaoCaiInventoryVo.setToLoc(j.getToloc());
+                jiaoCaiInventoryVo.setQtyallocated(j.getQty());
+                jiaoCaiInventoryVo.setPack(j.getPack());
+                moveFromAndTo(jiaoCaiInventoryVo);
+            }
+        }
+    }
+
 
     @Override
     public ServerResponse selectInventory(Integer pageSize, Integer pageNum, JiaoCaiInventory jiaoCaiInventory) {
@@ -154,34 +183,50 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
             }
             i += moveFromAndTo(jiaoCaiInventoryVo);
         }else {
-            //2.如果是移动到智能仓库，则先移动要REP储位
             if(StringUtils.isBlank(jiaoCaiInventoryVo.getToContainerId())){
                 return ServerResponse.createByErrorMessage("移动到智能仓库目的容器号不能为空");
             }
+            //2.生成从REP移动到储位的任务
+            String taskid = getTaskid();
+            JiaoCaiTaskDetail jiaoCaiTaskDetail = new JiaoCaiTaskDetail();
+            jiaoCaiTaskDetail.setAddwho(RequestHolder.getCurrentUser().getId());
+            jiaoCaiTaskDetail.setFromid(jiaoCaiInventoryVo.getContainerId());
+            jiaoCaiTaskDetail.setFromloc("REP");
+            jiaoCaiTaskDetail.setToid(jiaoCaiInventoryVo.getToContainerId());
+            jiaoCaiTaskDetail.setToloc(jiaoCaiInventoryVo.getToLoc());
+            jiaoCaiTaskDetail.setIssuenumber(jiaoCaiInventoryVo.getIssuenumber());
+            jiaoCaiTaskDetail.setQty(jiaoCaiInventoryVo.getQtyallocated());
+            jiaoCaiTaskDetail.setStatus("0");
+            jiaoCaiTaskDetail.setTaskid(taskid);
+            jiaoCaiTaskDetail.setTaskType("MV");
+            jiaoCaiTaskDetail.setPack(jiaoCaiInventoryVo.getPack());
+            jiaoCaiTaskDetailMapper.insertSelective(jiaoCaiTaskDetail);
+            //3.移动到REP储位
             String warehouseId = "";
             if(jiaoCaiInventoryVo.getToLoc().startsWith("32")){
                 warehouseId = "w5";
             }else if(jiaoCaiInventoryVo.getToLoc().startsWith("42")){
                 warehouseId = "w2";
             }
-
+            //库存移动到REP储位
             jiaoCaiInventoryVo.setToLoc("REP");
             i += moveFromAndTo(jiaoCaiInventoryVo);
             //3.生成入库任务
             String taskno = getTaskno();
             JiaoCaiTask jiaoCaiTask = new JiaoCaiTask();
+            jiaoCaiTask.setTrkNo(taskno);
             jiaoCaiTask.setAddwho(RequestHolder.getCurrentUser().getId());
             jiaoCaiTask.setDistrictid("A");
             jiaoCaiTask.setInfid("PALLET");
             jiaoCaiTask.setMethod("1");
             jiaoCaiTask.setNeedwinding("N");
+            jiaoCaiTask.setOrderid(taskid);
             jiaoCaiTask.setWarehouseid(warehouseId);
             jiaoCaiTask.setOrderid(jiaoCaiInventoryVo.getSubcode());
             jiaoCaiTask.setTraycodes(jiaoCaiInventoryVo.getToContainerId());
             String reply = sendToPallet(jiaoCaiTask);
             String retCode = XmlUtils.getNodeValue("//RetCode", reply);
             String retTime = XmlUtils.getNodeValue("//RetTime", reply);
-            String MessageId = XmlUtils.getNodeValue("//MessageId", reply);
             String RetInfo = XmlUtils.getNodeValue("//RetInfo", reply);
             if("SUCCESS".equals(retCode)){
                 jiaoCaiTask.setSendcode("1");
@@ -216,6 +261,7 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
                         "     <GroupId>"+ jiaoCaiTask.getOrderid() +"</GroupId>" +
                         "     <NeedWinding>"+ jiaoCaiTask.getNeedwinding() +"</NeedWinding>" +
                         "     <Time>"+ DateTimeUtil.dateToStr(new Date()) +"</Time>" +
+                        "     <dataFrom>MyWMS</dataFrom>" +
                     "     </InTask_Info>" +
                     "  </Message>";
         return recWMSServer.recWMSHandleInfo(data);
@@ -225,7 +271,13 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         Map<String, Integer> map = new HashMap<>();
         jiaoCaiComputeMapper.getTaskno(map);
-        return String.valueOf(map.get("batchno"));
+        return String.valueOf(map.get("taskno"));
+    }
+    private String getTaskid() {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        Map<String, Integer> map = new HashMap<>();
+        jiaoCaiComputeMapper.getTaskid(map);
+        return String.valueOf(map.get("taskid"));
     }
 
     private int moveFromAndTo(JiaoCaiInventoryVo jiaoCaiInventoryVo) {

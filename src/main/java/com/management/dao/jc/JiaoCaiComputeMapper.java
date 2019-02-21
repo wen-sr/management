@@ -45,4 +45,6 @@ public interface JiaoCaiComputeMapper {
     List<JiaoCaiComputeVo> selectOddPackTips(JiaoCaiCompute jiaoCaiCompute);
 
     void getTaskno(Map<String, Integer> map);
+
+    void getTaskid(Map<String, Integer> map);
 }

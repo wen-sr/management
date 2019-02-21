@@ -460,6 +460,9 @@
   <select id="getTaskno">
       {CALL JiaoCaiGetTaskno(#{taskno,jdbcType=VARCHAR,mode=OUT})}
   </select>
+  <select id="getTaskid">
+      {CALL JiaoCaiGetTaskid(#{taskid,jdbcType=VARCHAR,mode=OUT})}
+  </select>
   <select id="findAll" resultType="com.management.pojo.jc.JiaoCaiCompute">
     select <include refid="Base_Column_List"/>
     from JiaoCaiCompute
@@ -668,7 +671,7 @@
     where a.status in ('7', '3')
     and a.picktype = 1
   </select>
-    <update id="updateBatchnoByIds">
+  <update id="updateBatchnoByIds">
     update JiaoCaiCompute
     set batchno = #{batchno}
     where id in
