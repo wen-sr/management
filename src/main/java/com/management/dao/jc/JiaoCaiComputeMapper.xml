@@ -457,10 +457,10 @@
   <select id="getPickno" parameterType="map" statementType="CALLABLE">
       {CALL JiaoCaiGetPickno(#{pickno,jdbcType=VARCHAR,mode=OUT})}
   </select>
-  <select id="getTaskno">
+  <select id="getTaskno" parameterType="map" statementType="CALLABLE">
       {CALL JiaoCaiGetTaskno(#{taskno,jdbcType=VARCHAR,mode=OUT})}
   </select>
-  <select id="getTaskid">
+  <select id="getTaskid" parameterType="map" statementType="CALLABLE">
       {CALL JiaoCaiGetTaskid(#{taskid,jdbcType=VARCHAR,mode=OUT})}
   </select>
   <select id="findAll" resultType="com.management.pojo.jc.JiaoCaiCompute">

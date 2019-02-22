@@ -2,6 +2,7 @@ package com.management.service.jc.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.management.common.Constant;
 import com.management.common.RequestHolder;
 import com.management.common.ServerResponse;
 import com.management.dao.jc.*;
@@ -195,6 +196,7 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
             jiaoCaiTaskDetail.setToid(jiaoCaiInventoryVo.getToContainerId());
             jiaoCaiTaskDetail.setToloc(jiaoCaiInventoryVo.getToLoc());
             jiaoCaiTaskDetail.setIssuenumber(jiaoCaiInventoryVo.getIssuenumber());
+            jiaoCaiTaskDetail.setSubcode(jiaoCaiInventoryVo.getSubcode());
             jiaoCaiTaskDetail.setQty(jiaoCaiInventoryVo.getQtyallocated());
             jiaoCaiTaskDetail.setStatus("0");
             jiaoCaiTaskDetail.setTaskid(taskid);
@@ -222,7 +224,7 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
             jiaoCaiTask.setNeedwinding("N");
             jiaoCaiTask.setOrderid(taskid);
             jiaoCaiTask.setWarehouseid(warehouseId);
-            jiaoCaiTask.setOrderid(jiaoCaiInventoryVo.getSubcode());
+            jiaoCaiTask.setBk1(jiaoCaiInventoryVo.getSubcode());
             jiaoCaiTask.setTraycodes(jiaoCaiInventoryVo.getToContainerId());
             String reply = sendToPallet(jiaoCaiTask);
             String retCode = XmlUtils.getNodeValue("//RetCode", reply);
@@ -251,18 +253,18 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
         factoryBean.setAddress("http://141.168.1.108:8081/ncsmwcs/ws/recWMSInfo");
         RecWMSServer recWMSServer = factoryBean.create(RecWMSServer.class);
         String data = "<Message>" +
-                    "     <InTask_Info>" +
+                        "  <InTask_Info>" +
                         "     <TaskId>"+ jiaoCaiTask.getTrkNo() +"</TaskId>" +
                         "     <InType>instock</InType>" +
                         "     <WarehouseId>"+ jiaoCaiTask.getWarehouseid() +"</WarehouseId>" +
                         "     <DistrictId>"+ jiaoCaiTask.getDistrictid() +"</DistrictId>" +
                         "     <TrayCode>"+ jiaoCaiTask.getTraycodes() +"</TrayCode>" +
                         "     <OrderId>"+ jiaoCaiTask.getOrderid() +"</OrderId>" +
-                        "     <GroupId>"+ jiaoCaiTask.getOrderid() +"</GroupId>" +
+                        "     <GroupId>"+ jiaoCaiTask.getBk1() +"</GroupId>" +
                         "     <NeedWinding>"+ jiaoCaiTask.getNeedwinding() +"</NeedWinding>" +
                         "     <Time>"+ DateTimeUtil.dateToStr(new Date()) +"</Time>" +
-                        "     <dataFrom>MyWMS</dataFrom>" +
-                    "     </InTask_Info>" +
+                        "     <dataFrom>"+ Constant.DATA_FROM +"</dataFrom>" +
+                        " </InTask_Info>" +
                     "  </Message>";
         return recWMSServer.recWMSHandleInfo(data);
     }
