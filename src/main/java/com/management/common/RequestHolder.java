@@ -20,6 +20,9 @@ public class RequestHolder {
     }
 
     public static Login getCurrentUser() {
+        if(userHolder == null){
+            return new Login("SYS", "SYS");
+        }
         return userHolder.get();
     }
 

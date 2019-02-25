@@ -2,7 +2,6 @@ package com.management.service.jc.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.management.common.Constant;
 import com.management.common.RequestHolder;
 import com.management.common.ServerResponse;
 import com.management.dao.jc.*;
@@ -11,19 +10,20 @@ import com.management.dao.prd1.TaskViewMapper;
 import com.management.exception.MyException;
 import com.management.pojo.jc.*;
 import com.management.service.jc.IJiaoCaiInventoryService;
+import com.management.service.jc.IPalletService;
 import com.management.util.DataSourceContextHolder;
 import com.management.util.DateTimeUtil;
 import com.management.util.XmlUtils;
 import com.management.vo.jc.JiaoCaiInventoryVo;
-import com.management.ws.server.pallet.RecWMSServer;
-import com.management.ws.server.pallet.RecWMSServerService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Author: wen-sir
@@ -67,6 +67,9 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
 
     @Autowired
     JiaoCaiTaskDetailMapper jiaoCaiTaskDetailMapper;
+
+    @Autowired
+    IPalletService palletService;
 
     @Override
     public int add(JiaoCaiInventory jiaoCaiInventory, JiaoCaiInventory_detail jiaoCaiInventory_detail) {
@@ -116,6 +119,7 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
 
     @Override
     public void executeTask(String task_no) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         JiaoCaiTask jiaoCaiTask = new JiaoCaiTask();
         jiaoCaiTask.setTrkNo(task_no);
         List<JiaoCaiTask> jiaoCaiTaskList = jiaoCaiTaskMapper.selectAll(jiaoCaiTask);
@@ -135,7 +139,10 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
                 jiaoCaiInventoryVo.setToLoc(j.getToloc());
                 jiaoCaiInventoryVo.setQtyallocated(j.getQty());
                 jiaoCaiInventoryVo.setPack(j.getPack());
+                jiaoCaiInventoryVo.setQtyfree(j.getQty());
                 moveFromAndTo(jiaoCaiInventoryVo);
+                j.setStatus("1");
+                jiaoCaiTaskDetailMapper.updateByPrimaryKeySelective(j);
             }
         }
     }
@@ -193,11 +200,12 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
             jiaoCaiTaskDetail.setAddwho(RequestHolder.getCurrentUser().getId());
             jiaoCaiTaskDetail.setFromid(jiaoCaiInventoryVo.getContainerId());
             jiaoCaiTaskDetail.setFromloc("REP");
+            jiaoCaiTaskDetail.setFromid(jiaoCaiInventoryVo.getToContainerId());
             jiaoCaiTaskDetail.setToid(jiaoCaiInventoryVo.getToContainerId());
             jiaoCaiTaskDetail.setToloc(jiaoCaiInventoryVo.getToLoc());
             jiaoCaiTaskDetail.setIssuenumber(jiaoCaiInventoryVo.getIssuenumber());
             jiaoCaiTaskDetail.setSubcode(jiaoCaiInventoryVo.getSubcode());
-            jiaoCaiTaskDetail.setQty(jiaoCaiInventoryVo.getQtyallocated());
+            jiaoCaiTaskDetail.setQty(jiaoCaiInventoryVo.getQtyfree());
             jiaoCaiTaskDetail.setStatus("0");
             jiaoCaiTaskDetail.setTaskid(taskid);
             jiaoCaiTaskDetail.setTaskType("MV");
@@ -226,7 +234,8 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
             jiaoCaiTask.setWarehouseid(warehouseId);
             jiaoCaiTask.setBk1(jiaoCaiInventoryVo.getSubcode());
             jiaoCaiTask.setTraycodes(jiaoCaiInventoryVo.getToContainerId());
-            String reply = sendToPallet(jiaoCaiTask);
+            jiaoCaiTask.setTasktype("Normal");
+            String reply = palletService.sendToPallet(jiaoCaiTask);
             String retCode = XmlUtils.getNodeValue("//RetCode", reply);
             String retTime = XmlUtils.getNodeValue("//RetTime", reply);
             String RetInfo = XmlUtils.getNodeValue("//RetInfo", reply);
@@ -245,28 +254,6 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
             return ServerResponse.createByErrorMessage("移库失败，请联系管理员");
         }
 
-    }
-
-    private String sendToPallet(JiaoCaiTask jiaoCaiTask) {
-        JaxWsProxyFactoryBean factoryBean = new JaxWsProxyFactoryBean();
-        factoryBean.setServiceClass(RecWMSServerService.class);
-        factoryBean.setAddress("http://141.168.1.108:8081/ncsmwcs/ws/recWMSInfo");
-        RecWMSServer recWMSServer = factoryBean.create(RecWMSServer.class);
-        String data = "<Message>" +
-                        "  <InTask_Info>" +
-                        "     <TaskId>"+ jiaoCaiTask.getTrkNo() +"</TaskId>" +
-                        "     <InType>instock</InType>" +
-                        "     <WarehouseId>"+ jiaoCaiTask.getWarehouseid() +"</WarehouseId>" +
-                        "     <DistrictId>"+ jiaoCaiTask.getDistrictid() +"</DistrictId>" +
-                        "     <TrayCode>"+ jiaoCaiTask.getTraycodes() +"</TrayCode>" +
-                        "     <OrderId>"+ jiaoCaiTask.getOrderid() +"</OrderId>" +
-                        "     <GroupId>"+ jiaoCaiTask.getBk1() +"</GroupId>" +
-                        "     <NeedWinding>"+ jiaoCaiTask.getNeedwinding() +"</NeedWinding>" +
-                        "     <Time>"+ DateTimeUtil.dateToStr(new Date()) +"</Time>" +
-                        "     <dataFrom>"+ Constant.DATA_FROM +"</dataFrom>" +
-                        " </InTask_Info>" +
-                    "  </Message>";
-        return recWMSServer.recWMSHandleInfo(data);
     }
 
     private String getTaskno() {
@@ -289,14 +276,16 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
         jiaoCaiInventory_detail.setSubcode(jiaoCaiInventoryVo.getSubcode());
         jiaoCaiInventory_detail.setIssuenumber(jiaoCaiInventoryVo.getIssuenumber());
         jiaoCaiInventory_detail.setPack(jiaoCaiInventoryVo.getPack());
-        jiaoCaiInventory_detail.setQtyreceipt(jiaoCaiInventoryVo.getQtyfree());
-        jiaoCaiInventory_detail.setQtyfree(jiaoCaiInventoryVo.getQtyfree());
+        //jiaoCaiInventory_detail.setQtyreceipt(jiaoCaiInventoryVo.getQtyfree());
+        //jiaoCaiInventory_detail.setQtyfree(jiaoCaiInventoryVo.getQtyfree());
         jiaoCaiInventory_detail.setContainerId(jiaoCaiInventoryVo.getToContainerId());
         JiaoCaiInventory_detail j = jiaoCaiInventoryDetailMapper.selectByIssuenumberAndSubcodeAndPack(jiaoCaiInventory_detail);
         int i = 0,qtyreceipt = 0,qtyfree = 0;
         //1.目的储位添加库存
         if(j == null){
-//            如果没有则插入一条该储位的记录
+            //如果没有则插入一条该储位的记录
+            jiaoCaiInventory_detail.setQtyfree(jiaoCaiInventoryVo.getQtyfree());
+            jiaoCaiInventory_detail.setQtyreceipt(jiaoCaiInventoryVo.getQtyfree());
             i += jiaoCaiInventoryDetailMapper.insertSelective(jiaoCaiInventory_detail);
         }else {
 //            如果有则在原来的库存上加上此次移动的数量

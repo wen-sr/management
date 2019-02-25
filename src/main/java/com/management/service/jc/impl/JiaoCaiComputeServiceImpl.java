@@ -3,6 +3,7 @@ package com.management.service.jc.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.management.common.Constant;
+import com.management.common.RequestHolder;
 import com.management.common.ServerResponse;
 import com.management.dao.jc.*;
 import com.management.dao.login.LoginMapper;
@@ -10,8 +11,10 @@ import com.management.exception.MyException;
 import com.management.pojo.jc.*;
 import com.management.pojo.login.Login;
 import com.management.service.jc.IJiaoCaiComputeService;
+import com.management.service.jc.IPalletService;
 import com.management.util.DataSourceContextHolder;
 import com.management.util.DateTimeUtil;
+import com.management.util.XmlUtils;
 import com.management.vo.jc.JiaoCaiComputeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +56,12 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
 
     @Autowired
     JiaoCaiDistributeMapper jiaoCaiDistributeMapper;
+
+    @Autowired
+    IPalletService palletService;
+
+    @Autowired
+    JiaoCaiTaskMapper jiaoCaiTaskMapper;
 
     @Override
     public ServerResponse getInfo(Integer pageSize, Integer pageNum, JiaoCaiCompute jiaoCaiCompute) {
@@ -204,13 +213,50 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
             if(jiaoCaiCompute.getLoc().endsWith("SMART")){
                 //向立库发送出库任务
                 //判断是否整托出库
-                //todo
+                JiaoCaiInventory_detail jiaoCaiInventoryDetail = jiaoCaiInventoryDetailMapper.selectByIssuenumberAndSubcodeAndPack(
+                        new JiaoCaiInventory_detail(jiaoCaiCompute.getIssuenumber(),jiaoCaiCompute.getSubcode(),jiaoCaiCompute.getPack(),jiaoCaiCompute.getLoc(),jiaoCaiCompute.getContainerid()));
+                JiaoCaiTask jiaoCaiTask = new JiaoCaiTask();
+                String taskno = getTaskno();
+                jiaoCaiTask.setTrkNo(taskno);
+                jiaoCaiTask.setAddwho(RequestHolder.getCurrentUser().getId());
+                //jiaoCaiTask.setDistrictid("A");
+                jiaoCaiTask.setInfid("PALLET");
+                jiaoCaiTask.setMethod("2");
+                jiaoCaiTask.setNeedwinding("N");
+                //jiaoCaiTask.setOrderid(taskid);
+                if(jiaoCaiInventoryDetail.getLoc().startsWith("32")){
+                    jiaoCaiTask.setWarehouseid("w5");
+                }else if(jiaoCaiInventoryDetail.getLoc().startsWith("42")){
+                    jiaoCaiTask.setWarehouseid("w2");
+                }
+                jiaoCaiTask.setBk1(jiaoCaiInventoryDetail.getSubcode());
+                jiaoCaiTask.setTraycodes(jiaoCaiInventoryDetail.getContainerId());
+                //判断是否整托出库
+                if(jiaoCaiInventoryDetail.getQtyfree() == 0 ){
+                    jiaoCaiTask.setTasktype("Total");
+                }else {
+                    jiaoCaiTask.setTasktype("Select");
+                    jiaoCaiTask.setNeedwinding("Y");
+                }
+                String reply = palletService.sendToPallet(jiaoCaiTask);
+                String retCode = XmlUtils.getNodeValue("//RetCode", reply);
+                String retTime = XmlUtils.getNodeValue("//RetTime", reply);
+                String RetInfo = XmlUtils.getNodeValue("//RetInfo", reply);
+                if("SUCCESS".equals(retCode)){
+                    jiaoCaiTask.setSendcode("1");
+                }else if("ERROR".equals(retCode)){
+                    jiaoCaiTask.setSendcode("2");
+                }
+                jiaoCaiTask.setRetmsg(RetInfo);
+                jiaoCaiTask.setRettime(DateTimeUtil.strToDate(retTime));
+                jiaoCaiTaskMapper.insertSelective(jiaoCaiTask);
+
             }
             jiaoCaiCompute.setStatus(Constant.JiaoCaiDistributeStatus.PICK.getCode().toString());
             jiaoCaiCompute.setPickno(pickno);
             jiaoCaiComputeMapper.updateByPrimaryKeySelective(jiaoCaiCompute);
         }
-        return ServerResponse.createBySuccess("启动拣货任务成功", pickno);
+        return ServerResponse.createBySuccess("启动拣货任务成功，数据已发给托盘库，等待托盘调出", pickno);
     }
 
     @Override
@@ -241,6 +287,62 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
     public ServerResponse oddPackInfo(Integer pageSize, Integer pageNum, JiaoCaiCompute jiaoCaiCompute) {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
         return getInfo(pageSize, pageNum, jiaoCaiCompute);
+    }
+
+    @Override
+    public ServerResponse containeridBack(JiaoCaiCompute jiaoCaiCompute) {
+        JiaoCaiTask jiaoCaiTask = new JiaoCaiTask();
+        String taskno = getTaskno();
+        jiaoCaiTask.setTrkNo(taskno);
+        jiaoCaiTask.setTasktype("TrayBack");
+        jiaoCaiTask.setTraycodes(jiaoCaiCompute.getContainerid());
+        if(jiaoCaiCompute.getLoc().startsWith("32")){
+            jiaoCaiTask.setWarehouseid("w5");
+        }else if(jiaoCaiCompute.getLoc().startsWith("42")){
+            jiaoCaiTask.setWarehouseid("w2");
+        }
+        jiaoCaiTask.setNeedwinding("N");
+        String reply = palletService.sendToPallet(jiaoCaiTask);
+        String retCode = XmlUtils.getNodeValue("//RetCode", reply);
+        String retTime = XmlUtils.getNodeValue("//RetTime", reply);
+        String RetInfo = XmlUtils.getNodeValue("//RetInfo", reply);
+        if("SUCCESS".equals(retCode)){
+            jiaoCaiTask.setSendcode("1");
+        }else if("ERROR".equals(retCode)){
+            jiaoCaiTask.setSendcode("2");
+        }
+        jiaoCaiTask.setRetmsg(RetInfo);
+        jiaoCaiTask.setRettime(DateTimeUtil.strToDate(retTime));
+        jiaoCaiTaskMapper.insertSelective(jiaoCaiTask);
+        return ServerResponse.createBySuccessMsg("任务已成功发送至托盘库，请等待");
+    }
+
+    @Override
+    public ServerResponse containeridMove(JiaoCaiCompute jiaoCaiCompute) {
+        JiaoCaiTask jiaoCaiTask = new JiaoCaiTask();
+        String taskno = getTaskno();
+        jiaoCaiTask.setTrkNo(taskno);
+        jiaoCaiTask.setTasktype("Move");
+        jiaoCaiTask.setTraycodes(jiaoCaiCompute.getContainerid());
+        if(jiaoCaiCompute.getLoc().startsWith("32")){
+            jiaoCaiTask.setWarehouseid("w5");
+        }else if(jiaoCaiCompute.getLoc().startsWith("42")){
+            jiaoCaiTask.setWarehouseid("w2");
+        }
+        jiaoCaiTask.setNeedwinding("N");
+        String reply = palletService.sendToPallet(jiaoCaiTask);
+        String retCode = XmlUtils.getNodeValue("//RetCode", reply);
+        String retTime = XmlUtils.getNodeValue("//RetTime", reply);
+        String RetInfo = XmlUtils.getNodeValue("//RetInfo", reply);
+        if("SUCCESS".equals(retCode)){
+            jiaoCaiTask.setSendcode("1");
+        }else if("ERROR".equals(retCode)){
+            jiaoCaiTask.setSendcode("2");
+        }
+        jiaoCaiTask.setRetmsg(RetInfo);
+        jiaoCaiTask.setRettime(DateTimeUtil.strToDate(retTime));
+        jiaoCaiTaskMapper.insertSelective(jiaoCaiTask);
+        return ServerResponse.createBySuccessMsg("任务已成功发送至托盘库，请等待");
     }
 
     @Override
@@ -279,6 +381,13 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
         }else {
             return ServerResponse.createByErrorMessage("生成批次号和运号失败，请联系管理员");
         }
+    }
+
+    private String getTaskno() {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WMS);
+        Map<String, Integer> map = new HashMap<>();
+        jiaoCaiComputeMapper.getTaskno(map);
+        return String.valueOf(map.get("taskno"));
     }
 
     private List<JiaoCaiCompute> needShipno(String batchno) {

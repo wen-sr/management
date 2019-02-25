@@ -227,40 +227,40 @@
     from JiaoCaiTaskDetail
     <where>
       <if test="taskType != null">
-        and task_type = #{taskType,jdbcType=NVARCHAR},
+        and task_type = #{taskType,jdbcType=NVARCHAR}
       </if>
       <if test="issuenumber != null">
-        and issuenumber = #{issuenumber,jdbcType=NVARCHAR},
+        and issuenumber = #{issuenumber,jdbcType=NVARCHAR}
       </if>
       <if test="subcode != null">
-        and subcode = #{subcode,jdbcType=NVARCHAR},
+        and subcode = #{subcode,jdbcType=NVARCHAR}
       </if>
       <if test="qty != null">
-        and qty = #{qty,jdbcType=INTEGER},
+        and qty = #{qty,jdbcType=INTEGER}
       </if>
       <if test="fromloc != null">
-        and fromloc = #{fromloc,jdbcType=NVARCHAR},
+        and fromloc = #{fromloc,jdbcType=NVARCHAR}
       </if>
       <if test="fromid != null">
-        and fromid = #{fromid,jdbcType=NVARCHAR},
+        and fromid = #{fromid,jdbcType=NVARCHAR}
       </if>
       <if test="toloc != null">
-        and toloc = #{toloc,jdbcType=NVARCHAR},
+        and toloc = #{toloc,jdbcType=NVARCHAR}
       </if>
       <if test="toid != null">
-        and toid = #{toid,jdbcType=NVARCHAR},
+        and toid = #{toid,jdbcType=NVARCHAR}
       </if>
       <if test="taskid != null">
-        and taskid = #{taskid,jdbcType=NVARCHAR},
+        and taskid = #{taskid,jdbcType=NVARCHAR}
       </if>
       <if test="addwho != null">
-        and addwho = #{addwho,jdbcType=NVARCHAR},
+        and addwho = #{addwho,jdbcType=NVARCHAR}
       </if>
       <if test="status != null">
-        and status = #{status,jdbcType=NVARCHAR},
+        and status = #{status,jdbcType=NVARCHAR}
       </if>
       <if test="editwho != null">
-        and editwho = #{editwho,jdbcType=NVARCHAR},
+        and editwho = #{editwho,jdbcType=NVARCHAR}
       </if>
     </where>
   </select>

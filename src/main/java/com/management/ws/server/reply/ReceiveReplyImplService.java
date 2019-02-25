@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "ReceiveReplyImplService", targetNamespace = "http://ws.management.com/", wsdlLocation = "http://localhost:8080/management/ws/receiveReply?wsdl")
+@WebServiceClient(name = "ReceiveReplyImplService", targetNamespace = "http://ws.management.com/", wsdlLocation = "http://141.168.1.178:8080/management/ws/receiveReply?wsdl")
 public class ReceiveReplyImplService
     extends Service
 {
@@ -30,7 +30,7 @@ public class ReceiveReplyImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8080/management/ws/receiveReply?wsdl");
+            url = new URL("http://141.168.1.178:8080/management/ws/receiveReply?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

@@ -50,7 +50,7 @@
   </wsdl:binding>
   <wsdl:service name="ReceiveReplyImplService">
     <wsdl:port binding="tns:ReceiveReplyImplServiceSoapBinding" name="ReceiveReplyImplPort">
-      <soap:address location="http://localhost:8080/management/ws/receiveReply"/>
+      <soap:address location="http://141.168.1.178:8080/management/ws/receiveReply"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -1,7 +1,10 @@
 package com.management.ws;
 
+import com.management.aspect.HttpAspect;
 import com.management.service.jc.IJiaoCaiInventoryService;
 import com.management.util.XmlUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebService;
@@ -14,12 +17,12 @@ import javax.jws.WebService;
  */
 @WebService(endpointInterface = "com.management.ws.IReceiveReply")
 public class ReceiveReplyImpl implements IReceiveReply {
-
+    private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
     @Autowired
     IJiaoCaiInventoryService jiaoCaiInventoryService;
     @Override
     public String pallectReply(String msg) {
-
+        logger.info("接收托盘库回告：" + msg);
         String task_no = XmlUtils.getNodeValue("//TASK_NO", msg);
         //String infid = XmlUtils.getNodeValue("//INFID", msg);
         //String result = XmlUtils.getNodeValue("//Result", msg);

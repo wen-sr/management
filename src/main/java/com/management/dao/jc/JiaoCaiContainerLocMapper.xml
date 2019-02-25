@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jc.JiaoCaiContainerLocMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jc.JiaoCaiContainerLoc" >
+    <constructor >
+      <idArg column="container_id" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="loc" jdbcType="NCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    container_id, loc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from JiaoCaiContainerLoc
+    where container_id = #{containerId,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from JiaoCaiContainerLoc
+    where container_id = #{containerId,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiContainerLoc" >
+    insert into JiaoCaiContainerLoc (container_id, loc)
+    values (#{containerId,jdbcType=NVARCHAR}, #{loc,jdbcType=NCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiContainerLoc" >
+    insert into JiaoCaiContainerLoc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="containerId != null" >
+        container_id,
+      </if>
+      <if test="loc != null" >
+        loc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="containerId != null" >
+        #{containerId,jdbcType=NVARCHAR},
+      </if>
+      <if test="loc != null" >
+        #{loc,jdbcType=NCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jc.JiaoCaiContainerLoc" >
+    update JiaoCaiContainerLoc
+    <set >
+      <if test="loc != null" >
+        loc = #{loc,jdbcType=NCHAR},
+      </if>
+    </set>
+    where container_id = #{containerId,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.jc.JiaoCaiContainerLoc" >
+    update JiaoCaiContainerLoc
+    set loc = #{loc,jdbcType=NCHAR}
+    where container_id = #{containerId,jdbcType=NVARCHAR}
+  </update>
+</mapper>

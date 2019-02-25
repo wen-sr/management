@@ -291,26 +291,28 @@
     order by issuenumber, subcode
   </select>
   <select id="selectByQtyfree" resultType="com.management.pojo.jc.JiaoCaiInventory_detail">
-    select <include refid="Base_Column_List" />
-    from JiaoCaiInventory_detail
-    where issuenumber = #{issuenumber}
+    select a.id, issuenumber, subcode, qtyreceipt, qtyallocated, qtyshipped, qtyfree, pack, a.loc, containerId, b.BK1, a.BK2, a.BK3, a.BK4, a.BK5
+    from JiaoCaiInventory_detail a, JiaoCaiLoc b
+    where a.loc = b.loc
+    and issuenumber = #{issuenumber}
     and subcode = #{subcode}
     and pack = #{pack}
     and qtyfree &gt;= #{qtyfree}
     and qtyfree &gt; 0
-    and loc not in (select loc from JiaoCaiLoc where type in ('NONE') )
-    order by qtyfree
+    and b.type not in ('NONE')
+    order by qtyfree,b.bk1
   </select>
   <select id="selectByQtyfree2" resultType="com.management.pojo.jc.JiaoCaiInventory_detail">
-    select <include refid="Base_Column_List" />
-    from JiaoCaiInventory_detail
-    where issuenumber = #{issuenumber}
+    select a.id, issuenumber, subcode, qtyreceipt, qtyallocated, qtyshipped, qtyfree, pack, a.loc, containerId, b.BK1, a.BK2, a.BK3, a.BK4, a.BK5
+    from JiaoCaiInventory_detail a, JiaoCaiLoc b
+    where a.loc = b.loc
+    and issuenumber = #{issuenumber}
     and subcode = #{subcode}
     and pack = #{pack}
     and qtyfree &lt; #{qtyfree}
     and qtyfree &gt; 0
-    and loc not in (select loc from JiaoCaiLoc where type in ('NONE') )
-    order by loc,qtyfree desc
+    and b.type not in ('NONE')
+    order by qtyfree,b.bk1
   </select>
     <update id="addInventoryDetail" parameterType="com.management.pojo.jc.JiaoCaiInventory_detail">
     update JiaoCaiInventory_detail
@@ -322,6 +324,9 @@
     and loc = #{loc,jdbcType=NVARCHAR}
     <if test="containerId != null and containerId != '' ">
       and containerId = #{containerId}
+    </if>
+    <if test="containerId == null or containerId == '' ">
+      and (containerId = '' or containerId is null )
     </if>
   </update>
 </mapper>

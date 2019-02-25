@@ -114,6 +114,16 @@ public class JiaoCaiComputeController {
         return jiaoCaiComputeService.confirmPick(ids);
     }
 
+    @RequestMapping("/containeridBack")
+    public ServerResponse containeridBack(JiaoCaiCompute jiaoCaiCompute){
+        return jiaoCaiComputeService.containeridBack(jiaoCaiCompute);
+    }
+
+    @RequestMapping("/containeridMove")
+    public ServerResponse containeridMove(JiaoCaiCompute jiaoCaiCompute){
+        return jiaoCaiComputeService.containeridMove(jiaoCaiCompute);
+    }
+
     @RequestMapping("/oddPackInfo")
     public EasyuiTableResponse oddPackInfo(@RequestParam(value = "rows", defaultValue = "10") Integer pageSize,
                                       @RequestParam(value = "page", defaultValue = "1") Integer pageNum,

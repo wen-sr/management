@@ -37,4 +37,8 @@ public interface IJiaoCaiComputeService {
     ServerResponse oddPackTips(JiaoCaiCompute jiaoCaiCompute);
 
     ServerResponse oddPackInfo(Integer pageSize, Integer pageNum, JiaoCaiCompute jiaoCaiCompute);
+
+    ServerResponse containeridBack(JiaoCaiCompute containerid);
+
+    ServerResponse containeridMove(JiaoCaiCompute jiaoCaiCompute);
 }

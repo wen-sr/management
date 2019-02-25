@@ -170,9 +170,42 @@ function detail(){
 			field:"status",
 			title:"状态",
 			width:50
-		}]]
+		}]],
+		onSelect : function (index, row) {
+			var t_sumQty = 0;
+			var rows = $('#data_detail').datagrid('getSelections');
+			for(var i in rows ){
+				t_sumQty += parseInt(rows[i].qtyallocated);
+			}
+			$("#t_sumQty").textbox('setValue', t_sumQty);
+		},
+		onUnselect : function (index, row) {
+			var t_sumQty = 0;
+			var rows = $('#data_detail').datagrid('getSelections');
+			for(var i in rows ){
+				t_sumQty += parseInt(rows[i].qtyallocated);
+			}
+			$("#t_sumQty").textbox('setValue', t_sumQty);
+		},
+		onSelectAll : function (row){
+			var t_sumQty = 0;
+			var rows = $('#data_detail').datagrid('getSelections');
+			for(var i in rows ){
+				t_sumQty += parseInt(rows[i].qtyallocated);
+			}
+			$("#t_sumQty").textbox('setValue', t_sumQty);
+		},
+		onUnselectAll : function (row){
+			var t_sumQty = 0;
+			var rows = $('#data_detail').datagrid('getSelections');
+			for(var i in rows ){
+				t_sumQty += parseInt(rows[i].qtyallocated);
+			}
+			$("#t_sumQty").textbox('setValue', t_sumQty);
+		}
 	});
 	$("#w_detail").window("open");
+
 }
 
 /**
@@ -236,6 +269,46 @@ function pick(){
 		},
 		error:function(){
 			$.messager.alert("提示","数据错误，联系管理员","info");
+		}
+	});
+}
+function backTo() {
+	$.messager.prompt('确认框', '请扫描容器号', function(containerid){
+		if (containerid){
+			$.ajax({
+				type:'post',
+				url:'/management/jc/compute/containeridBack',
+				data:{containerid : containerid},
+				dataType:'json',
+				success:function (data){
+					if(data){
+						$.messager.alert("操作提示",data.msg,"info");
+					}
+				},
+				error:function(){
+					$.messager.alert("提示","数据错误，联系管理员","info");
+				}
+			});
+		}
+	});
+}
+function moveTo() {
+	$.messager.prompt('确认框', '请扫描容器号', function(containerid){
+		if (containerid){
+			$.ajax({
+				type:'post',
+				url:'/management/jc/compute/containeridMove',
+				data:{containerid : containerid},
+				dataType:'json',
+				success:function (data){
+					if(data){
+						$.messager.alert("操作提示",data.msg,"info");
+					}
+				},
+				error:function(){
+					$.messager.alert("提示","数据错误，联系管理员","info");
+				}
+			});
 		}
 	});
 }

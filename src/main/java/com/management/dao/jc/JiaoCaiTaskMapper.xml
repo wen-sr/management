@@ -317,75 +317,75 @@
       bk2 = #{bk2,jdbcType=NVARCHAR}
     where id = #{id,jdbcType=NUMERIC}
   </update>
-  <select id="selectAll" resultType="com.management.pojo.jc.JiaoCaiTask">
+  <select id="selectAll" resultType="com.management.pojo.jc.JiaoCaiTask" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
     from JiaoCaiTask
     <where>
       <if test="infid != null" >
-        and infid = #{infid,jdbcType=NVARCHAR},
+        and infid = #{infid,jdbcType=NVARCHAR}
       </if>
       <if test="method != null" >
-        and method = #{method,jdbcType=NVARCHAR},
+        and method = #{method,jdbcType=NVARCHAR}
       </if>
       <if test="trkNo != null" >
-        and trk_no = #{trkNo,jdbcType=NVARCHAR},
+        and trk_no = #{trkNo,jdbcType=NVARCHAR}
       </if>
       <if test="tasktype != null" >
-        and tasktype = #{tasktype,jdbcType=NVARCHAR},
+        and tasktype = #{tasktype,jdbcType=NVARCHAR}
       </if>
       <if test="trkDesc != null" >
-        and trk_desc = #{trkDesc,jdbcType=NVARCHAR},
+        and trk_desc = #{trkDesc,jdbcType=NVARCHAR}
       </if>
       <if test="trkPrty != null" >
-        and trk_prty = #{trkPrty,jdbcType=NVARCHAR},
+        and trk_prty = #{trkPrty,jdbcType=NVARCHAR}
       </if>
       <if test="orderid != null" >
-        and orderId = #{orderid,jdbcType=NVARCHAR},
+        and orderId = #{orderid,jdbcType=NVARCHAR}
       </if>
       <if test="warehouseid != null" >
-        and warehouseId = #{warehouseid,jdbcType=NVARCHAR},
+        and warehouseId = #{warehouseid,jdbcType=NVARCHAR}
       </if>
       <if test="districtid != null" >
-        and districtid = #{districtid,jdbcType=NVARCHAR},
+        and districtid = #{districtid,jdbcType=NVARCHAR}
       </if>
       <if test="isback != null" >
-        and  isback = #{isback,jdbcType=NVARCHAR},
+        and  isback = #{isback,jdbcType=NVARCHAR}
       </if>
       <if test="trkSt != null" >
-        and trk_st = #{trkSt,jdbcType=NVARCHAR},
+        and trk_st = #{trkSt,jdbcType=NVARCHAR}
       </if>
       <if test="traycodes != null" >
-        and traycodes = #{traycodes,jdbcType=NVARCHAR},
+        and traycodes = #{traycodes,jdbcType=NVARCHAR}
       </if>
       <if test="needwinding != null" >
-        and needwinding = #{needwinding,jdbcType=NVARCHAR},
+        and needwinding = #{needwinding,jdbcType=NVARCHAR}
       </if>
       <if test="storetype != null" >
-        and storetype = #{storetype,jdbcType=NVARCHAR},
+        and storetype = #{storetype,jdbcType=NVARCHAR}
       </if>
       <if test="sendcode != null" >
-        and sendcode = #{sendcode,jdbcType=NVARCHAR},
+        and sendcode = #{sendcode,jdbcType=NVARCHAR}
       </if>
       <if test="sendmsg != null" >
-        and sendmsg = #{sendmsg,jdbcType=NVARCHAR},
+        and sendmsg = #{sendmsg,jdbcType=NVARCHAR}
       </if>
       <if test="retcode != null" >
-        and retcode = #{retcode,jdbcType=NVARCHAR},
+        and retcode = #{retcode,jdbcType=NVARCHAR}
       </if>
       <if test="retmsg != null" >
-        and retmsg = #{retmsg,jdbcType=NVARCHAR},
+        and retmsg = #{retmsg,jdbcType=NVARCHAR}
       </if>
       <if test="rettime != null" >
-        and rettime = #{rettime,jdbcType=TIMESTAMP},
+        and rettime = #{rettime,jdbcType=TIMESTAMP}
       </if>
       <if test="addwho != null" >
-        and addwho = #{addwho,jdbcType=NVARCHAR},
+        and addwho = #{addwho,jdbcType=NVARCHAR}
       </if>
       <if test="bk1 != null" >
-        and bk1 = #{bk1,jdbcType=NVARCHAR},
+        and bk1 = #{bk1,jdbcType=NVARCHAR}
       </if>
       <if test="bk2 != null" >
-        and bk2 = #{bk2,jdbcType=NVARCHAR},
+        and bk2 = #{bk2,jdbcType=NVARCHAR}
       </if>
     </where>
   </select>
