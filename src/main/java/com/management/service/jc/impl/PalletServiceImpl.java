@@ -45,5 +45,30 @@ public class PalletServiceImpl implements IPalletService {
 
     }
 
+    public String sendToPalletOut(JiaoCaiTask jiaoCaiTask) {
+        JaxWsProxyFactoryBean factoryBean = new JaxWsProxyFactoryBean();
+        factoryBean.setServiceClass(RecWMSServerService.class);
+        factoryBean.setAddress("http://141.168.1.108:8081/ncsmwcs/ws/recWMSInfo");
+        RecWMSServer recWMSServer = factoryBean.create(RecWMSServer.class);
+        String data = "<Message>" +
+                "  <OutTask_Info>" +
+                "     <TaskId>"+ jiaoCaiTask.getTrkNo() +"</TaskId>" +
+                "     <OutType>"+ jiaoCaiTask.getTasktype() +"</OutType>" +
+                "     <TrayCode>"+ jiaoCaiTask.getTraycodes() +"</TrayCode>" +
+                "     <OrderId>"+ jiaoCaiTask.getOrderid() +"</OrderId>" +
+                "     <EndLocation></EndLocation>" +
+                "     <IsBack>"+ jiaoCaiTask.getIsback() +"</IsBack>" +
+                "     <Priority>10</Priority>" +
+                "     <WarehouseId>"+ jiaoCaiTask.getWarehouseid() +"</WarehouseId>" +
+                "     <Time>"+ DateTimeUtil.dateToStr(new Date()) +"</Time>" +
+                "     <dataFrom>"+ Constant.DATA_FROM +"</dataFrom>" +
+                " </OutTask_Info>" +
+                "  </Message>";
+        return recWMSServer.recWMSHandleInfo(data);
+
+
+
+    }
+
 
 }

@@ -10,4 +10,5 @@ import com.management.pojo.jc.JiaoCaiTask;
  */
 public interface IPalletService {
     public String sendToPallet(JiaoCaiTask jiaoCaiTask);
+    public String sendToPalletOut(JiaoCaiTask jiaoCaiTask);
 }

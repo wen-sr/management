@@ -11,6 +11,7 @@ import com.management.exception.MyException;
 import com.management.pojo.jc.*;
 import com.management.pojo.login.Login;
 import com.management.service.jc.IJiaoCaiComputeService;
+import com.management.service.jc.IJiaoCaiContainerLocService;
 import com.management.service.jc.IPalletService;
 import com.management.util.DataSourceContextHolder;
 import com.management.util.DateTimeUtil;
@@ -62,6 +63,9 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
 
     @Autowired
     JiaoCaiTaskMapper jiaoCaiTaskMapper;
+
+    @Autowired
+    IJiaoCaiContainerLocService jiaoCaiContainerLocService;
 
     @Override
     public ServerResponse getInfo(Integer pageSize, Integer pageNum, JiaoCaiCompute jiaoCaiCompute) {
@@ -226,8 +230,10 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
                 //jiaoCaiTask.setOrderid(taskid);
                 if(jiaoCaiInventoryDetail.getLoc().startsWith("32")){
                     jiaoCaiTask.setWarehouseid("w5");
+                    jiaoCaiContainerLocService.setLoc(jiaoCaiInventoryDetail.getContainerId(),"w5");
                 }else if(jiaoCaiInventoryDetail.getLoc().startsWith("42")){
                     jiaoCaiTask.setWarehouseid("w2");
+                    jiaoCaiContainerLocService.setLoc(jiaoCaiInventoryDetail.getContainerId(),"w2");
                 }
                 jiaoCaiTask.setBk1(jiaoCaiInventoryDetail.getSubcode());
                 jiaoCaiTask.setTraycodes(jiaoCaiInventoryDetail.getContainerId());
@@ -236,9 +242,9 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
                     jiaoCaiTask.setTasktype("Total");
                 }else {
                     jiaoCaiTask.setTasktype("Select");
-                    jiaoCaiTask.setNeedwinding("Y");
+                    jiaoCaiTask.setIsback("Y");
                 }
-                String reply = palletService.sendToPallet(jiaoCaiTask);
+                String reply = palletService.sendToPalletOut(jiaoCaiTask);
                 String retCode = XmlUtils.getNodeValue("//RetCode", reply);
                 String retTime = XmlUtils.getNodeValue("//RetTime", reply);
                 String RetInfo = XmlUtils.getNodeValue("//RetInfo", reply);
@@ -296,11 +302,7 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
         jiaoCaiTask.setTrkNo(taskno);
         jiaoCaiTask.setTasktype("TrayBack");
         jiaoCaiTask.setTraycodes(jiaoCaiCompute.getContainerid());
-        if(jiaoCaiCompute.getLoc().startsWith("32")){
-            jiaoCaiTask.setWarehouseid("w5");
-        }else if(jiaoCaiCompute.getLoc().startsWith("42")){
-            jiaoCaiTask.setWarehouseid("w2");
-        }
+        jiaoCaiTask.setWarehouseid(jiaoCaiContainerLocService.getLoc(jiaoCaiCompute.getContainerid()).getLoc());
         jiaoCaiTask.setNeedwinding("N");
         String reply = palletService.sendToPallet(jiaoCaiTask);
         String retCode = XmlUtils.getNodeValue("//RetCode", reply);
@@ -324,11 +326,7 @@ public class JiaoCaiComputeServiceImpl implements IJiaoCaiComputeService {
         jiaoCaiTask.setTrkNo(taskno);
         jiaoCaiTask.setTasktype("Move");
         jiaoCaiTask.setTraycodes(jiaoCaiCompute.getContainerid());
-        if(jiaoCaiCompute.getLoc().startsWith("32")){
-            jiaoCaiTask.setWarehouseid("w5");
-        }else if(jiaoCaiCompute.getLoc().startsWith("42")){
-            jiaoCaiTask.setWarehouseid("w2");
-        }
+        jiaoCaiTask.setWarehouseid(jiaoCaiContainerLocService.getLoc(jiaoCaiCompute.getContainerid()).getLoc());
         jiaoCaiTask.setNeedwinding("N");
         String reply = palletService.sendToPallet(jiaoCaiTask);
         String retCode = XmlUtils.getNodeValue("//RetCode", reply);

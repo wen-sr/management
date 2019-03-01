@@ -126,24 +126,30 @@ public class JiaoCaiInventoryServiceImpl implements IJiaoCaiInventoryService {
         JiaoCaiTaskDetail jiaoCaiTaskDetail = null;
         JiaoCaiInventoryVo jiaoCaiInventoryVo = null;
         for(JiaoCaiTask jiaoCaiTask1 : jiaoCaiTaskList){
-            jiaoCaiTaskDetail = new JiaoCaiTaskDetail();
-            jiaoCaiTaskDetail.setTaskid(jiaoCaiTask1.getOrderid());
-            List<JiaoCaiTaskDetail> jiaoCaiTaskDetailList = jiaoCaiTaskDetailMapper.selectAll(jiaoCaiTaskDetail);
-            for(JiaoCaiTaskDetail j : jiaoCaiTaskDetailList){
-                jiaoCaiInventoryVo = new JiaoCaiInventoryVo();
-                jiaoCaiInventoryVo.setIssuenumber(j.getIssuenumber());
-                jiaoCaiInventoryVo.setSubcode(j.getSubcode());
-                jiaoCaiInventoryVo.setContainerId(j.getFromid());
-                jiaoCaiInventoryVo.setLoc(j.getFromloc());
-                jiaoCaiInventoryVo.setToContainerId(j.getToid());
-                jiaoCaiInventoryVo.setToLoc(j.getToloc());
-                jiaoCaiInventoryVo.setQtyallocated(j.getQty());
-                jiaoCaiInventoryVo.setPack(j.getPack());
-                jiaoCaiInventoryVo.setQtyfree(j.getQty());
-                moveFromAndTo(jiaoCaiInventoryVo);
-                j.setStatus("1");
-                jiaoCaiTaskDetailMapper.updateByPrimaryKeySelective(j);
+            if(jiaoCaiTask1.getOrderid() != null){
+                jiaoCaiTaskDetail = new JiaoCaiTaskDetail();
+                jiaoCaiTaskDetail.setTaskid(jiaoCaiTask1.getOrderid());
+                List<JiaoCaiTaskDetail> jiaoCaiTaskDetailList = jiaoCaiTaskDetailMapper.selectAll(jiaoCaiTaskDetail);
+                if(jiaoCaiTaskDetailList != null && jiaoCaiTaskDetailList.size() > 0){
+                    for(JiaoCaiTaskDetail j : jiaoCaiTaskDetailList){
+                        jiaoCaiInventoryVo = new JiaoCaiInventoryVo();
+                        jiaoCaiInventoryVo.setIssuenumber(j.getIssuenumber());
+                        jiaoCaiInventoryVo.setSubcode(j.getSubcode());
+                        jiaoCaiInventoryVo.setContainerId(j.getFromid());
+                        jiaoCaiInventoryVo.setLoc(j.getFromloc());
+                        jiaoCaiInventoryVo.setToContainerId(j.getToid());
+                        jiaoCaiInventoryVo.setToLoc(j.getToloc());
+                        jiaoCaiInventoryVo.setQtyallocated(j.getQty());
+                        jiaoCaiInventoryVo.setPack(j.getPack());
+                        jiaoCaiInventoryVo.setQtyfree(j.getQty());
+                        moveFromAndTo(jiaoCaiInventoryVo);
+                        j.setStatus("1");
+                        jiaoCaiTaskDetailMapper.updateByPrimaryKeySelective(j);
+                    }
+                }
             }
+            jiaoCaiTask1.setSendcode("3");
+            jiaoCaiTaskMapper.updateByPrimaryKeySelective(jiaoCaiTask1);
         }
     }
 

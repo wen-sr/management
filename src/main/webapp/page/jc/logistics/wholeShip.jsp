@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="tb3" style="text-align: center;display:none">
 		总件数：<input class="easyui-textbox" id="t_caseqty" style="width:80px" data-options="readonly:true" />
 		<a class="easyui-linkbutton" iconCls="icon-edit" onclick="addBatchno()">生成批次</a>
-		<input class="easyui-textbox" id="t_batchno" style="width:100px" />
+		<input class="easyui-textbox" id="t_batchno" style="width:120px" />
 		<a class="easyui-linkbutton" iconCls="icon-print" onclick="wholeCaseList()">清单</a>
 		<a class="easyui-linkbutton" iconCls="icon-print" onclick="allocationList()">调拨单</a>
 		<a class="easyui-linkbutton" iconCls="icon-print" onclick="s_ticketList()">票签</a>

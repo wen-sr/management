@@ -69,8 +69,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		选中总册数：<input class="easyui-textbox" id="t_sumQty" style="width:80px" />
 		<a class="easyui-linkbutton" iconCls="icon-edit" onclick="addPickno()">开始拣货</a>
 		<a class="easyui-linkbutton" iconCls="icon-edit" onclick="pick()">拣货确认</a>
-		<a class="easyui-linkbutton" iconCls="icon-edit" onclick="backTo()">拣货确认</a>
-		<a class="easyui-linkbutton" iconCls="icon-edit" onclick="moveTo()">拣货确认</a>
+		<a class="easyui-linkbutton" iconCls="icon-edit" onclick="backTo()">托盘反库</a>
+		<a class="easyui-linkbutton" iconCls="icon-edit" onclick="moveTo()">托盘移至出口</a>
 		拣货流水号：<input class="easyui-textbox" id="t_pickno" style="width:120px" />
 		<a class="easyui-linkbutton" iconCls="icon-print" onclick="pickList()">打印</a>
 	</div>
