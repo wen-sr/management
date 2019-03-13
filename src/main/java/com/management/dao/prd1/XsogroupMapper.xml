@@ -433,6 +433,24 @@
   <select id="selectStorerById" resultType="java.lang.String">
     select description from storer where storerkey = #{id}
   </select>
+    <select id="receiptQuery" resultType="com.management.vo.prd1.ReceiptVo">
+      select from_vendor storerkey,b.description shortname,a.ship_no shipno,receive_qty caseQty, to_char(a.adddate, 'yyyy-mm-dd') receiveDate
+      from xsogroup a, storer b
+      where a.from_vendor = b.storerkey
+      <if test="begin != null">
+        and to_char(a.adddate, 'yyyy-mm-dd') &gt;= #{begin}
+      </if>
+      <if test="end != null">
+        and to_char(a.adddate, 'yyyy-mm-dd') &lt;= #{end}
+      </if>
+      <if test="shipno != null">
+        and a.ship_no = #{shipno}
+      </if>
+      <if test="storerkey != null">
+        and a.from_vendor = #{storerkey}
+      </if>
+      order by to_char(a.adddate, 'yyyy-mm-dd')
+    </select>
 
 
 </mapper>

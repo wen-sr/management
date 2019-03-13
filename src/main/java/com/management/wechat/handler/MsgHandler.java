@@ -16,7 +16,7 @@ import com.management.util.ApacheHttpUtils;
 import com.management.vo.login.UserVo;
 import com.management.wechat.builder.TextBuilder;
 import me.chanjar.weixin.common.api.WxConsts;
-import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
@@ -24,6 +24,8 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +39,7 @@ import java.util.Map;
  */
 @Component
 public class MsgHandler extends AbstractHandler {
+    private final static Logger logger = LoggerFactory.getLogger(MsgHandler.class);
 
     @Autowired
     UserInfoMapper userInfoMapper;
@@ -61,13 +64,15 @@ public class MsgHandler extends AbstractHandler {
       Map<String, Object> context, WxMpService wxMpService,
             WxSessionManager sessionManager)    {
 
+        logger.info("%%%收到微信消息"+ wxMessage.getContent() +"%%%,开始处理：");
+
         WeixinService   weixinService = (WeixinService) wxMpService;
         //组装回复消息
         String content = "";
         if (!wxMessage.getMsgType().equals(WxConsts.XmlMsgType.EVENT)) {
             //可以选择将消息保存到本地
-
             if(wxMessage.getContent().contains("@")){
+                logger.info("%%%开始处理绑定工号");
                 content = "绑定工号中。。。";
                 String[] strArray = wxMessage.getContent().split("@");
                 if(strArray.length != 2 || "".equals(strArray[0]) || "".equals(strArray[1]) || "LH".equals(strArray[0].subSequence(0, 1))) {
@@ -134,7 +139,7 @@ public class MsgHandler extends AbstractHandler {
         }
 
         //当用户输入关键词如“你好”,“客服”等,并且有客服在线时,把消息转发给在线客服
-        if (StringUtils.startsWithAny(wxMessage.getContent(), "发送产量", "新华物流产量", "产量")) {
+        if (StringUtils.startsWithAny(wxMessage.getContent(), "发送产量", "新华物流产量", "产量", "发产量")) {
             ApacheHttpUtils.sendHttpPost("http://141.168.1.188:8080/jxxhwl/wx/wXFunction_sendChanLiang.action");
         }
         if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服")
@@ -145,7 +150,7 @@ public class MsgHandler extends AbstractHandler {
         }
 
         if (StringUtils.startsWithAny(wxMessage.getContent(), "B", "b")) {
-
+            logger.info("%%%开始处理箱号任务查询");
             //小车任务
             String car = "";
             List<TaskCar> taskCarList = taskCarService.selectByContainerCode(wxMessage.getContent().substring(1));

@@ -1,0 +1,10 @@
+.demos-header{
+    display: flex;
+    flex-direction: column;
+}
+
+.demos-header img{
+    width: 205px;
+    height: 50px;
+    margin: 0 auto;
+}

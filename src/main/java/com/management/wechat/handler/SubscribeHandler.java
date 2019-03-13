@@ -1,10 +1,10 @@
 package com.management.wechat.handler;
 
-import com.management.wechat.builder.TextBuilder;
 import com.management.dao.wechat.UserInfoMapper;
 import com.management.pojo.wechat.UserInfo;
 import com.management.service.wechat.WeixinService;
-import me.chanjar.weixin.common.exception.WxErrorException;
+import com.management.wechat.builder.TextBuilder;
+import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
@@ -56,7 +56,7 @@ public class SubscribeHandler extends AbstractHandler {
         userInfo.setOpenid(userWxInfo.getOpenId());
         userInfo.setProvince(userWxInfo.getProvince());
         userInfo.setRemark(userWxInfo.getRemark());
-        userInfo.setSex(userWxInfo.getSexId());
+        userInfo.setSex(userWxInfo.getSex());
         userInfo.setSubscribe(1);
         userInfo.setSubscribetime(userWxInfo.getSubscribeTime());
         userInfoMapper.insertSelective(userInfo);

@@ -58,7 +58,7 @@ public class HttpAspect {
                     }
                 }
                 if(login == null ){
-                    response.sendRedirect("/management/login.html");
+                    response.sendRedirect("/management/login_old.html");
                 }
             }
             return;

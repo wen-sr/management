@@ -5,7 +5,7 @@ import com.management.pojo.info.InforError;
 import com.management.pojo.login.Login;
 import com.management.service.info.InforErrorService;
 import com.management.util.FileUploadUtil;
-import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

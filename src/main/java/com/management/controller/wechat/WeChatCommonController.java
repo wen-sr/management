@@ -64,7 +64,7 @@ public class WeChatCommonController {
                     }
                 }
                 if(user == null ){
-                    return "/page/wechat/login.html";
+                    return "/page/wechat/login_old.html";
                 }
             }else{
                 return "/page/wechat/customerQuery.html";

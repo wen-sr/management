@@ -7,7 +7,7 @@ public class Constant {
     public static final String EMAIL                        = "email";
     public static final String OPENID                       = "openId";
 //    public static final String WECHATDOMAIN     = "http://wensr.mynatapp.cc";
-    public static final String WECHATDOMAIN                 = "http://www.jxlh56.com";
+    public static final String WECHATDOMAIN                 = "http://www.jxxh56.com";
     public static final String WXMPOAUTH2ACCESSTOKEN        = "wxMpOAuth2AccessToken";
     public static final String DEFAULTPASSWORD              = "123456";
     //public static final String FTPURL                       = "ftp://141.168.1.188/img";
@@ -16,7 +16,7 @@ public class Constant {
     public static final String PERFORMANCE                  = "performance";
     public static final String URL_PALLET                   = "http://141.168.1.108:8081/ncsmwcs/addCookie";
     public static final String URL_JIAOCAI                  = "http://141.168.1.188:8080/jxxhwl/user_addCookie";
-    public static final String URL_JIAOCAI_2                = "http://www.jxlh56.com/jxxhwl/user_addCookie";
+    public static final String URL_JIAOCAI_2                = "http://www.jxxh56.com/jxxhwl/user_addCookie";
     public static final String URL_CANG_GUAN                = "http://141.168.1.137:8022/addCookie.ashx";
     public static final String URL_TMS                      = "http://141.168.40.54:8080/LanHaiCenter/GetOtherSysInFo.go";
     public static final String DATA_FROM                    = "MyWMS";

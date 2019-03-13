@@ -10,7 +10,7 @@ import com.management.pojo.wechat.UserInfo;
 import com.management.service.oa.IPerformanceService;
 import com.management.util.DataSourceContextHolder;
 import com.management.util.MD5Util;
-import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
@@ -176,7 +176,7 @@ public class PerformanceServiceImpl implements IPerformanceService {
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                 .toUser(openId)
                 .templateId("092HZD99REA_V0-LvrKr6y93LpH2w5Qgu9agJzmUltk")
-                .url("http://www.jxlh56.com/management/oa/wechat/auth?returnUrl=/page/lhwl/performanceWeChat.html")
+                .url("http://www.jxxh56.com/management/oa/wechat/auth?returnUrl=/page/lhwl/performanceWeChat.html")
                 .build();
         templateMessage.getData().add(new WxMpTemplateData("first", first, "#284177"));
         templateMessage.getData().add(new WxMpTemplateData("keyword1", keyword1, "#0044BB"));

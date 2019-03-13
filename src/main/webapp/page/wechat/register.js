@@ -1,54 +1,75 @@
 $(function(){
+    $("#businessType").select({
+        title: "选择业务类型",
+        items: [{
+            title: "一般图书",
+            value: 1
+        },{
+            title: "教材",
+            value: 2
+        }]
+    });
+    $("#customerType").select({
+        title: "选择客户类型",
+        items: [{
+            title: "门市店",
+            value: 66
+        },{
+            title: "出版社",
+            value: 65
+        }]
+    });
+
 });
 
 function register() {
-    var id = $.trim($("#id").textbox('getValue'));
-    var pwd = $.trim($("#pwd").textbox('getValue'));
-    var pwd_2 = $.trim($("#pwd_2").textbox('getValue'));
-    var organization_id = $.trim($("#organization_id").textbox('getValue'));
+    var id = $.trim($("#id").val());
+    var pwd = $.trim($("#password").val());
+    var pwd_2 = $.trim($("#password_confirm").val());
+    var organization_id = $('#organization_id').data("values");
+    var businessType = $('#businessType').data("values");
     if(id == ''){
-        $.messager.alert("操作提示","客户代码不能为空！","error");
+        $.toast("请先输入客户代码", "forbidden");
         return;
     }
     if(organization_id == ''){
-        $.messager.alert("操作提示","请选择客户类型！","error");
+        $.toast("请选择客户类型", "forbidden");
+        return;
+    }
+    if(businessType == ''){
+        $.toast("请选择业务类型", "forbidden");
         return;
     }
     if(pwd == ''){
-        $.messager.alert("操作提示","密码不能为空！","error");
+        $.toast("密码不能为空", "forbidden");
         return;
     }
     if(pwd_2 == ''){
-        $.messager.alert("操作提示","第二次输入的密码不能为空！","error");
+        $.toast("确认密码不能为空", "forbidden");
         return;
     }
     if(pwd != pwd_2){
-        $.messager.alert("操作提示","两次次输入的密码不相同！","error");
+        $.toast("两次次输入的密码不相同", "forbidden");
         return;
     }
     var formData = {
         id                  : id,
         pwd                 : pwd,
-        organization_id     :   organization_id
+        organization_id     : organization_id,
+        bk5                 : businessType
     }
 
-    $.ajax({
-        type:'Post',
-        url:'/management/wechat/common/register',
-        data:formData,
-        dataType:'json',
-        success:function(res){
-            if(res != null){
-                if(res.status == 0){
-                    window.location.href="http://www.baidu.com";
-                }else if(res.status == 1){
-                    $.messager.alert("提示",res.msg,"error");
+    tools.request({
+        url     :   '/management/wechat/common/register',
+        data    :   formData,
+        success:function(data, msg){
+            $.alert({
+                title: '提示',
+                text: msg,
+                onOK: function () {
+                    window.open("login.html", "_self");
                 }
-
-            }
-        },
-        error:function(){
-            $.messager.alert("提示","数据错误，联系管理员","error");
+            });
         }
     });
 }

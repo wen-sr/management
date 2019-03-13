@@ -3,7 +3,7 @@ package com.management.controller.prd1;
 
 import com.management.common.ServerResponse;
 import com.management.service.prd1.XsogroupService;
-import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;

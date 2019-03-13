@@ -17,7 +17,7 @@ import com.management.util.FTPUtil;
 import com.management.vo.info.InforErrorVo;
 import com.management.vo.login.UserVo;
 import com.management.vo.oa.OrganizationVo;
-import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;

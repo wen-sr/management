@@ -3,50 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <title>客户通道</title>
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <style type="text/css">
-        .container{
-            background-color: white;
-            font-size: 15px;
-            font-family: "Adobe 宋体 Std L";
-        }
-        .row{
-            background-color: #8a8a8a0d;
-            height: 23px;
-            line-height: 23px;
-            padding: 10px;
-            margin: 2px;
-        }
-        a{
-            text-decoration: none;
-        }
-        .row-left{
-            float: left;
-            color: black;
-        }
-        .row-right{
-            float: right;
-            color: #0050d6;
-            font-size: 15px;
-        }
-
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/weui-index.css">
+    <link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="customerIndex.css"/>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <a href="/management/page/error/wechatWaiting.html" style="display: block">
-                <div class="row-left">客户注册</div>
-                <div class="row-right"><i class="fa fa-share" aria-hidden="true"></i></div>
-            </a>
+<header class='demos-header'>
+    <img src="../../image/logo.png"/>
+</header>
+
+<div class="container">
+    <div>当前用户：<span>未登录</span></div>
+</div>
+
+<div class="weui-grids">
+    <a href="" class="weui-grid js_grid">
+        <div class="weui-grid__icon">
+            <i class="fa fa-bullhorn" aria-hidden="true"></i>
         </div>
-        <div class="row">
-            <a href="customerQuery.html" style="display: block">
-                <div class="row-left">客户查询</div>
-                <div class="row-right"><i class="fa fa-share" aria-hidden="true"></i></div>
-            </a>
+        <p class="weui-grid__label">
+            公告
+        </p>
+    </a>
+    <a href="login.html" class="weui-grid js_grid">
+        <div class="weui-grid__icon">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
         </div>
-    </div>
+        <p class="weui-grid__label">
+            登录
+        </p>
+    </a>
+    <a href="register.html" class="weui-grid js_grid">
+        <div class="weui-grid__icon">
+            <i class="fa fa-eercast" aria-hidden="true"></i>
+        </div>
+        <p class="weui-grid__label">
+            注册
+        </p>
+    </a>
+    <a href="customer/customerQuery.html" class="weui-grid js_grid">
+        <div class="weui-grid__icon">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+        <p class="weui-grid__label">
+            信息查询
+        </p>
+    </a>
+    <a href="customer/receiptQuery.html" class="weui-grid js_grid">
+        <div class="weui-grid__icon">
+            <i class="fa fa-truck" aria-hidden="true"></i>
+        </div>
+        <p class="weui-grid__label">
+            物流收货
+        </p>
+    </a>
+    <a href="customer/customerQuery.html" class="weui-grid js_grid">
+        <div class="weui-grid__icon">
+            <i class="fa fa-truck" aria-hidden="true"></i>
+        </div>
+        <p class="weui-grid__label">
+            物流发货
+        </p>
+    </a>
+    <a href="" class="weui-grid js_grid">
+        <div class="weui-grid__icon">
+            <i class="fa fa-bank" aria-hidden="true"></i>
+        </div>
+        <p class="weui-grid__label">
+            业务办理
+        </p>
+    </a>
+    <a href="" class="weui-grid js_grid">
+        <div class="weui-grid__icon">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+        </div>
+        <p class="weui-grid__label">
+            修改密码
+        </p>
+    </a>
+</div>
+
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../weui/js/jquery-weui.min.js"></script>
+<!--<script type="text/javascript" src="../../js/fastclick.js"></script>-->
+<script type="text/javascript" src="../../js/hogan.js"></script>
+<script type="text/javascript" src="../../js/util.js"></script>
+<script type="text/javascript" src="customerIndex.js"></script>
 </body>
 </html>

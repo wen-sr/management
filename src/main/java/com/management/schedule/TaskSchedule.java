@@ -6,7 +6,7 @@ import com.management.pojo.wechat.UserInfo;
 import com.management.service.prd1.IWmsErrorMsgService;
 import com.management.service.wechat.IUserInfoService;
 import com.management.util.DataSourceContextHolder;
-import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;

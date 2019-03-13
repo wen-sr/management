@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>物流收货查询</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../../weui/css/weui-index.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/font-awesome.min.css"/>
+
+</head>
+<body>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="begin" class="weui-label">开始日期</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="begin" placeholder="请选择开始日期" />
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="end" class="weui-label">结束日期</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="end" placeholder="请选择开始日期" />
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="shipno" class="weui-label">运号</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="shipno" placeholder="请输入日期" />
+        </div>
+    </div>
+    <div class="weui-cell" >
+        <a class="weui-btn weui-btn_primary" href="javascript:" style="width:100%;margin-bottom: 13px;"  onclick="go()">查询</a>
+    </div>
+    <div style='width:100%'>
+        <div class='detail'>
+            <div class="weui-cells"  id="list">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../../weui/js/jquery-weui.min.js"></script>
+<!--<script type="text/javascript" src="../../js/fastclick.js"></script>-->
+<script type="text/javascript" src="../../../js/hogan.js"></script>
+<script type="text/javascript" src="../../../js/util.js"></script>
+<script type="text/javascript" src="receiptQuery.js"></script>
+</body>
+</html>

@@ -43,7 +43,7 @@ function checkUserLogin(){
         });
         InitLeftMenu(res.data.menuList);
     },function(erro){
-        window.location.href = _util.getServerUrl('/login.html');
+        window.location.href = _util.getServerUrl('/login_old.html');
     })
 }
 

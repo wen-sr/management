@@ -3,6 +3,7 @@ package com.management.dao.prd1;
 import com.management.pojo.prd1.Xsogroup;
 import com.management.vo.prd1.LogisticsQueryVo;
 import com.management.vo.prd1.ReceiptDto;
+import com.management.vo.prd1.ReceiptVo;
 import com.management.vo.prd1.RecordSkuDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,4 +31,6 @@ public interface XsogroupMapper {
     List<LogisticsQueryVo> bookShip(LogisticsQueryVo logisticsQueryVo);
 
     String selectStorerById(String id);
+
+    List<ReceiptVo> receiptQuery(ReceiptVo receiptVo);
 }
