@@ -32,4 +32,25 @@ public class LogisticsQueryServiceImpl implements ILogisticsQueryService {
         List<ReceiptVo> receiptVoList = xsogroupMapper.receiptQuery(receiptVo);
         return ServerResponse.createBySuccess(receiptVoList);
     }
+
+    @Override
+    public ServerResponse registerDetail(ReceiptVo receiptVo) {
+        DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
+        List<ReceiptVo> receiptVoList = xsogroupMapper.registerDetail(receiptVo);
+        return ServerResponse.createBySuccess(receiptVoList);
+    }
+
+    @Override
+    public ServerResponse differenceDetail(ReceiptVo receiptVo) {
+        DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
+        List<ReceiptVo> receiptVoList = xsogroupMapper.differenceDetail(receiptVo);
+        return ServerResponse.createBySuccess(receiptVoList);
+    }
+
+    @Override
+    public ServerResponse rejectDetail(ReceiptVo receiptVo) {
+        DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
+        List<ReceiptVo> receiptVoList = xsogroupMapper.rejectDetail(receiptVo);
+        return ServerResponse.createBySuccess(receiptVoList);
+    }
 }

@@ -8,4 +8,10 @@ public interface ILogisticsQueryService {
     ServerResponse bookShipQuery(LogisticsQueryVo logisticsQueryVo);
 
     ServerResponse receiptQuery(ReceiptVo receiptVo);
+
+    ServerResponse registerDetail(ReceiptVo receiptVo);
+
+    ServerResponse differenceDetail(ReceiptVo receiptVo);
+
+    ServerResponse rejectDetail(ReceiptVo receiptVo);
 }

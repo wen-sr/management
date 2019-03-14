@@ -28,7 +28,24 @@ public class LogisticsQueryController {
     @RequestMapping(value = "/receiptQuery", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public ServerResponse receiptQuery(ReceiptVo receiptVo) {
-        ServerResponse response = logisticsQueryService.receiptQuery(receiptVo);
-        return response;
+        return logisticsQueryService.receiptQuery(receiptVo);
+    }
+
+    @RequestMapping(value = "/registerDetail", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse registerDetail(ReceiptVo receiptVo) {
+        return logisticsQueryService.registerDetail(receiptVo);
+    }
+
+    @RequestMapping(value = "/differenceDetail", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse differenceDetail(ReceiptVo receiptVo) {
+        return logisticsQueryService.differenceDetail(receiptVo);
+    }
+
+    @RequestMapping(value = "/rejectDetail", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse rejectDetail(ReceiptVo receiptVo) {
+        return logisticsQueryService.rejectDetail(receiptVo);
     }
 }

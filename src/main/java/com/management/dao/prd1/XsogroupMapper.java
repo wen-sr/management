@@ -33,4 +33,10 @@ public interface XsogroupMapper {
     String selectStorerById(String id);
 
     List<ReceiptVo> receiptQuery(ReceiptVo receiptVo);
+
+    List<ReceiptVo> registerDetail(ReceiptVo receiptVo);
+
+    List<ReceiptVo> differenceDetail(ReceiptVo receiptVo);
+
+    List<ReceiptVo> rejectDetail(ReceiptVo receiptVo);
 }

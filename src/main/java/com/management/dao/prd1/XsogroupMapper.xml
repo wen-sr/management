@@ -434,7 +434,7 @@
     select description from storer where storerkey = #{id}
   </select>
     <select id="receiptQuery" resultType="com.management.vo.prd1.ReceiptVo">
-      select from_vendor storerkey,b.description shortname,a.ship_no shipno,receive_qty caseQty, to_char(a.adddate, 'yyyy-mm-dd') receiveDate
+      select a.xsogroupkey register,from_vendor storerkey,b.description shortname,a.ship_no shipno,receive_qty caseQty, to_char(a.adddate, 'yyyy-mm-dd') receiveDate
       from xsogroup a, storer b
       where a.from_vendor = b.storerkey
       <if test="begin != null">
@@ -451,6 +451,22 @@
       </if>
       order by to_char(a.adddate, 'yyyy-mm-dd')
     </select>
-
+  <select id="registerDetail" resultType="com.management.vo.prd1.ReceiptVo">
+    select b.doc_company,b.doc_compname,a.xsogroupkey register,a.receive_qty caseQty,b.doc_number,(case when b.status ='11' then '作业完成' when b.status in ('1','2','5') then '作业中' else '未作业'end) status,sum(c.doc_eqty) doc_eqty, sum(doc_cqty + doc_aqty + nvl(doc_zqty,0)) doc_aqty
+    from xsogroup a left join jobs_xso b on a.xsogroupkey = b.doc_register
+    left join jobscontext_xso c on b.doc_number = c.doc_number
+    where b.doc_register = #{register}
+    group by b.doc_company,b.doc_compname,a.xsogroupkey,a.receive_qty,b.doc_number,b.status
+  </select>
+  <select id="differenceDetail" resultType="com.management.vo.prd1.ReceiptVo">
+    select c.barcode,c.descr,b.doc_price price,doc_eqty - (doc_cqty + doc_aqty + nvl(doc_zqty,0)) diffQty from jobs_xso a, jobscontext_xso b,sku c where a.doc_number = b.doc_number and b.doc_sku = c.sku and a.doc_storerkey = c.storerkey
+    and a.status = '11' and doc_eqty - (doc_cqty + doc_aqty + nvl(doc_zqty,0)) > 0
+    and a.doc_number = #{doc_number}
+  </select>
+  <select id="rejectDetail" resultType="com.management.vo.prd1.ReceiptVo">
+    select b.barcode,b.descr,b.price,a.qty diffQty,a.reason from jobs_xso_rej a, jobs_xso c, sku b
+    where a.sku = b.sku and a.doc_number = c.doc_number and c.doc_storerkey = b.storerkey
+    and a.doc_number = #{doc_number}
+  </select>
 
 </mapper>

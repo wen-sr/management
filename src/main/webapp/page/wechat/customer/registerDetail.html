@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>物流收货查询</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../../weui/css/weui-index.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/font-awesome.min.css"/>
+
+</head>
+<body>
+<input type="hidden" id="doc_number">
+<div style='width:100%'>
+    <div class='detail'>
+        <div class="weui-cells" id="list">
+
+        </div>
+    </div>
+    <div>
+        <a href="javascript:;" onclick="diff()" class="weui-btn weui-btn_primary" style="width: 80%">查看差异品种</a>
+        <a href="javascript:;" onclick="rej()" class="weui-btn weui-btn_primary" style="width: 80%">查看拒收品种</a>
+    </div>
+</div>
+<script type="text/javascript" src="../../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../../weui/js/jquery-weui.min.js"></script>
+<!--<script type="text/javascript" src="../../js/fastclick.js"></script>-->
+<script type="text/javascript" src="../../../js/hogan.js"></script>
+<script type="text/javascript" src="../../../js/util.js"></script>
+<script type="text/javascript" src="registerDetail.js"></script>
+</body>
+</html>
