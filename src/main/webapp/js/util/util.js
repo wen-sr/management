@@ -72,7 +72,7 @@ var _util = {
     // 统一登录处理
     doLogin : function(){
         // window.location.href = './user/login_old.html?redirect=' + encodeURIComponent(window.location.href);
-        window.top.location = _util.getServerUrl('/login_old.html?redirect=' + encodeURIComponent(window.location.href));
+        window.top.location = _util.getServerUrl('/login.html?redirect=' + encodeURIComponent(window.location.href));
     },
     goHome : function(){
         window.location.href = '/home.html';

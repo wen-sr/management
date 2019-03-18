@@ -19,7 +19,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +41,7 @@ public class UserController extends BaseCotroller {
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
     @ResponseBody
-    public ServerResponse login(Login user, HttpSession session, HttpServletResponse  response) throws UnsupportedEncodingException {
+    public ServerResponse login(Login user, HttpSession session, HttpServletResponse  response) {
         ServerResponse<List> responseData = userService.login(user);
         if(responseData.isSuccess()){
             user = (Login) responseData.getData().get(0);
