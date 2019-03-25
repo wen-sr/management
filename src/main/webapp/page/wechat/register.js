@@ -67,7 +67,7 @@ function register() {
                 title: '提示',
                 text: msg,
                 onOK: function () {
-                    window.open("login.html", "_self");
+                    window.open("customerIndex.html", "_self");
                 }
             });
         }

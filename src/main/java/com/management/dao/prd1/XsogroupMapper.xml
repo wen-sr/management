@@ -468,5 +468,8 @@
     where a.sku = b.sku and a.doc_number = c.doc_number and c.doc_storerkey = b.storerkey
     and a.doc_number = #{doc_number}
   </select>
+  <select id="selectJiaoCaiStorerById" resultType="java.lang.String">
+    select company from storer_jc where storerkey = #{id}
+  </select>
 
 </mapper>

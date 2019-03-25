@@ -36,6 +36,8 @@ public class Login {
         this.name = name;
     }
 
+
+
     public Login(String id, String name, String post, String pwd, String postid, String py, String pyname, String idOld, String status, Integer organizationId, String bk1, String bk2, String bk3, String bk4, String bk5) {
         this.id = id;
         this.name = name;

@@ -35,7 +35,9 @@ public class HttpAspect {
 
 
 //    @Pointcut("execution(public * com.management.controller.login.UserController.*(..))")
-    @Pointcut("execution(public * com.management.controller..*.*(..)) && !execution(public * com.management.controller.wechat..*.*(..)) && !execution(public * com.management.controller.login.UserController.login(..))")
+    @Pointcut("execution(public * com.management.controller..*.*(..)) " +
+            "&& !execution(public * com.management.controller.wechat..*.*(..)) " +
+            "&& !execution(public * com.management.controller.login.UserController.login(..))")
     public void log() {
     }
 
@@ -54,6 +56,7 @@ public class HttpAspect {
                         login = userService.getUserInfoById(cookie.getValue());
                         login.setPwd("");
                         session.setAttribute(Constant.CURRENT_USER, login);
+                        RequestHolder.add(login);
                         break;
                     }
                 }

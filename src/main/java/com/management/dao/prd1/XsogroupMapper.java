@@ -32,6 +32,8 @@ public interface XsogroupMapper {
 
     String selectStorerById(String id);
 
+    String selectJiaoCaiStorerById(String id);
+
     List<ReceiptVo> receiptQuery(ReceiptVo receiptVo);
 
     List<ReceiptVo> registerDetail(ReceiptVo receiptVo);

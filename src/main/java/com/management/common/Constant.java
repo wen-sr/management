@@ -38,7 +38,9 @@ public class Constant {
         String TECH = "6";
         String JIAO_CAI = "7";
         String CANG_GUAN = "8";
+        String YUN_GUAN = "10";
         String THIRD = "9";
+        String WEBSITE = "11";
     }
 
 

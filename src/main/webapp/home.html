@@ -221,6 +221,28 @@
                     window.location.href = _util.getServerUrl('/login.html');
                 })
             },
+            yun_guan : function() {
+                var formData = {
+                    loginSystemFlag : 10
+                }
+                _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
+                    $(".username").text(res.data.organizationName + ":" + res.data.user.name);
+                    InitLeftMenu(res.data.menuList);
+                },function(erro){
+                    window.location.href = _util.getServerUrl('/login.html');
+                })
+            },
+            website : function() {
+                var formData = {
+                    loginSystemFlag : 11
+                }
+                _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
+                    $(".username").text(res.data.organizationName + ":" + res.data.user.name);
+                    InitLeftMenu(res.data.menuList);
+                },function(erro){
+                    window.location.href = _util.getServerUrl('/login.html');
+                })
+            },
             third : function() {
                 var formData = {
                     loginSystemFlag : 9
@@ -260,6 +282,7 @@
             <li><a href="javascript:void(0);" onclick="transform_sys.home();" class='home'>主页</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.xin_hua();">新华物流</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.cang_guan();">仓管中心</a></li>
+            <li><a href="javascript:void(0);" onclick="transform_sys.yun_guan();">运输中心</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.wcs();">WCS系统</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.pallet();">托盘库系统</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.tms();">TMS系统</a></li>
@@ -267,6 +290,7 @@
             <li><a href="javascript:void(0);" onclick="transform_sys.report();">报表系统</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.tech();">技术部</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.third();">三方业务</a></li>
+            <li><a href="javascript:void(0);" onclick="transform_sys.website();">三方业务</a></li>
         </ul>
     </div>
 </div>

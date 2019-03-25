@@ -4,3 +4,7 @@ $(function(){
         items: ["一般图书", "教材教辅"]
     });
 });
+
+function go() {
+
+}

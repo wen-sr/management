@@ -390,6 +390,12 @@ public class UserServiceImpl implements UserService {
             case Constant.LoginSystemFlag.CANG_GUAN:
                 menuChild = accordionMapper.selectByFooId(id,600, 699);
                 break;
+            case Constant.LoginSystemFlag.YUN_GUAN:
+                menuChild = accordionMapper.selectByFooId(id,700, 799);
+                break;
+            case Constant.LoginSystemFlag.WEBSITE:
+                menuChild = accordionMapper.selectByFooId(id,800, 899);
+                break;
             case Constant.LoginSystemFlag.TECH:
                 menuChild = accordionMapper.selectByFooId(id,99, 199);
                 break;
