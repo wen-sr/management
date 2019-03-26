@@ -1,5 +1,6 @@
 package com.management.service.prd1.impl;
 
+import com.management.common.RequestHolder;
 import com.management.common.ServerResponse;
 import com.management.dao.prd1.XsogroupMapper;
 import com.management.service.prd1.ILogisticsQueryService;
@@ -28,7 +29,7 @@ public class LogisticsQueryServiceImpl implements ILogisticsQueryService {
     @Override
     public ServerResponse receiptQuery(ReceiptVo receiptVo) {
         DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
-        receiptVo.setStorerkey("g01260");
+        receiptVo.setStorerkey(RequestHolder.getCurrentUser().getId());
         List<ReceiptVo> receiptVoList = xsogroupMapper.receiptQuery(receiptVo);
         return ServerResponse.createBySuccess(receiptVoList);
     }

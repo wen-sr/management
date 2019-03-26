@@ -225,6 +225,9 @@
             <if test="id != null ">
                 id = #{id,jdbcType=NVARCHAR}
             </if>
+            <if test="pwd != null ">
+              and pwd = #{pwd,jdbcType=NVARCHAR}
+            </if>
             <if test="status != null" >
                 and STATUS = #{status,jdbcType=INTEGER}
             </if>
@@ -239,6 +242,21 @@
             </if>
             <if test="pyname != null" >
                 and pyname = #{pyname,jdbcType=INTEGER}
+            </if>
+            <if test="bk1 != null" >
+              and BK1 = #{bk1,jdbcType=NVARCHAR}
+            </if>
+            <if test="bk2 != null" >
+              and BK2 = #{bk2,jdbcType=NVARCHAR}
+            </if>
+            <if test="bk3 != null" >
+              and BK3 = #{bk3,jdbcType=NVARCHAR}
+            </if>
+            <if test="bk4 != null" >
+              and BK4 = #{bk4,jdbcType=NVARCHAR}
+            </if>
+            <if test="bk5 != null" >
+              and BK5 = #{bk5,jdbcType=NVARCHAR}
             </if>
         </where>
         order by id

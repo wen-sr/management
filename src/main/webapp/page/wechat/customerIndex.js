@@ -10,3 +10,12 @@ function checkLogin() {
 $(function () {
     checkLogin();
 })
+
+function logout(){
+    tools.request({
+        url     :   "/management/wechat/common/logout",
+        success :   function (data) {
+            $("#name").html("未登录");
+        }
+    })
+}

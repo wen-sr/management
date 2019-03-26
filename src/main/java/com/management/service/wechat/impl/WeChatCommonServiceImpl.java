@@ -48,7 +48,7 @@ public class WeChatCommonServiceImpl implements IWeChatCommonService {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         int i = loginMapper.insertSelective(login);
         if(i > 0){
-            return ServerResponse.createBySuccess(login);
+            return ServerResponse.createBySuccess("注册成功", login);
         }
         return ServerResponse.createByErrorMessage("数据库操作失败，请联系管理员");
     }
@@ -91,7 +91,7 @@ public class WeChatCommonServiceImpl implements IWeChatCommonService {
         login.setId(id);
         login.setBk5(businessType);
         List<Login> loginList = loginMapper.findAll(new Login(id, businessType));
-        if(loginList != null && loginList.size() >= 0){
+        if(loginList != null && loginList.size() > 0){
             return true;
         }
         return false;

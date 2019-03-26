@@ -2,6 +2,7 @@ package com.management.aspect;
 
 import com.management.common.Constant;
 import com.management.common.RequestHolder;
+import com.management.exception.MyException;
 import com.management.pojo.login.Login;
 import com.management.service.login.UserService;
 import com.management.util.IpUtil;
@@ -61,7 +62,7 @@ public class HttpAspect {
                     }
                 }
                 if(login == null ){
-                    //response.sendRedirect("/management/login.html");
+                    throw  new MyException(10, "需登录");
                 }
             }
             return;

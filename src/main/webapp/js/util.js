@@ -1,5 +1,5 @@
 var conf = {
-    serverHost : '/rongshun'
+    serverHost : '/management'
 };
 var tools = {
     // 网络请求
@@ -75,6 +75,6 @@ var tools = {
         top.location.href='/management/page/wechat/login.html';
     },
     goHome : function(){
-        top.location.href='/rongshun/page/wechat/hello.html';
+        top.location.href='/management/page/wechat/customerIndex.html';
     }
 };
