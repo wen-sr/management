@@ -14,7 +14,7 @@
     insert into WMS_ERROR_MSG (IF_NAME, IF_KEY, IF_MESSAGE, 
       ADDDATE, FLAG)
     values (#{ifName,jdbcType=OTHER}, #{ifKey,jdbcType=OTHER}, #{ifMessage,jdbcType=OTHER}, 
-      #{adddate,jdbcType=VARCHAR}, #{flag,jdbcType=DECIMAL})
+      #{addDate,jdbcType=VARCHAR}, #{flag,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.management.pojo.prd1.WmsErrorMsg">
     insert into WMS_ERROR_MSG
@@ -28,7 +28,7 @@
       <if test="ifMessage != null">
         IF_MESSAGE,
       </if>
-      <if test="adddate != null">
+      <if test="addDate != null">
         ADDDATE,
       </if>
       <if test="flag != null">
@@ -45,8 +45,8 @@
       <if test="ifMessage != null">
         #{ifMessage,jdbcType=OTHER},
       </if>
-      <if test="adddate != null">
-        #{adddate,jdbcType=VARCHAR},
+      <if test="addDate != null">
+        #{addDate,jdbcType=VARCHAR},
       </if>
       <if test="flag != null">
         #{flag,jdbcType=DECIMAL},
@@ -58,7 +58,7 @@
       where if_key = #{ifKey}
     </update>
     <select id="selectAll" resultType="com.management.pojo.prd1.WmsErrorMsg">
-      select IF_NAME ifName,IF_KEY ifKey, IF_MESSAGE ifMessage, ADDDATE adddate,FLAG flag
+      select IF_NAME ifName,IF_KEY ifKey, IF_MESSAGE ifMessage, ADDDATE addDate,FLAG flag
       from WMS_ERROR_MSG
       where flag = 0
     </select>

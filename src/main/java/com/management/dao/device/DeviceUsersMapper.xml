@@ -65,8 +65,8 @@
       <if test="deviceUserName != null" >
         DEVICE_USER_NAME = #{deviceUserName,jdbcType=NVARCHAR},
       </if>
-      <if test="adddate != null" >
-        ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      <if test="addDate != null" >
+        ADDDATE = #{addDate,jdbcType=TIMESTAMP},
       </if>
       <if test="1 == 1" >
         EDITDATE =getdate(),
@@ -77,7 +77,7 @@
   <update id="updateByPrimaryKey" parameterType="com.management.pojo.device.DeviceUsers" >
     update DEVICE_USERS
     set DEVICE_USER_NAME = #{deviceUserName,jdbcType=NVARCHAR},
-      ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      ADDDATE = #{addDate,jdbcType=TIMESTAMP},
       EDITDATE = getdate()
     where DEVICE_USER_ID = #{deviceUserId,jdbcType=INTEGER}
   </update>

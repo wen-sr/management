@@ -3,8 +3,11 @@ package com.management.service.prd1.impl;
 import com.management.common.RequestHolder;
 import com.management.common.ServerResponse;
 import com.management.dao.prd1.XsogroupMapper;
+import com.management.exception.MyException;
+import com.management.pojo.login.Login;
 import com.management.service.prd1.ILogisticsQueryService;
 import com.management.util.DataSourceContextHolder;
+import com.management.vo.prd1.DeliveryVo;
 import com.management.vo.prd1.LogisticsQueryVo;
 import com.management.vo.prd1.ReceiptVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,11 @@ public class LogisticsQueryServiceImpl implements ILogisticsQueryService {
     @Override
     public ServerResponse receiptQuery(ReceiptVo receiptVo) {
         DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
-        receiptVo.setStorerkey(RequestHolder.getCurrentUser().getId());
+        Login login = RequestHolder.getCurrentUser();
+        if(login == null) {
+            throw new MyException(10, "未登录");
+        }
+        receiptVo.setStorerkey(login.getId());
         List<ReceiptVo> receiptVoList = xsogroupMapper.receiptQuery(receiptVo);
         return ServerResponse.createBySuccess(receiptVoList);
     }
@@ -53,5 +60,17 @@ public class LogisticsQueryServiceImpl implements ILogisticsQueryService {
         DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
         List<ReceiptVo> receiptVoList = xsogroupMapper.rejectDetail(receiptVo);
         return ServerResponse.createBySuccess(receiptVoList);
+    }
+
+    @Override
+    public ServerResponse deliveryQuery(DeliveryVo deliveryVo) {
+        DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
+        Login login = RequestHolder.getCurrentUser();
+        if(login == null) {
+            throw new MyException(10, "未登录");
+        }
+        deliveryVo.setStorerkey(login.getId());
+        List<DeliveryVo> deliveryVoList = xsogroupMapper.deliveryQuery(deliveryVo);
+        return ServerResponse.createBySuccess(deliveryVoList);
     }
 }

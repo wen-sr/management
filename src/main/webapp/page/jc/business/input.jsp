@@ -122,7 +122,7 @@
 						<th data-options="field:'addwho',width:50">
 							收货/分发人
 						</th>
-						<th data-options="field:'adddate',width:50">
+						<th data-options="field:'addDate',width:50">
 							收货/分发时间
 						</th>
 					</tr>

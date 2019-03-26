@@ -68,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th data-options="field:'oddpack',width:30">零捆</th>
 					<th data-options="field:'odd',width:30">零册</th>
 					<th data-options="field:'addwho',width:30">分发/配发人</th>
-					<th data-options="field:'adddate',width:30">分发/配发时间</th>
+					<th data-options="field:'addDate',width:30">分发/配发时间</th>
 				</tr>
 			</thead>
 		</table>

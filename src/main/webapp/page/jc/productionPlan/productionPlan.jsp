@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th data-options="field:'status',width:30">状态</th>
 					<th data-options="field:'remark',width:30">备注</th>
 					<th data-options="field:'addwho',width:50">添加人</th>
-					<th data-options="field:'adddate',width:50">添加时间</th>
+					<th data-options="field:'addDate',width:50">添加时间</th>
 				</tr>
 			</thead>
 		</table>

@@ -12,7 +12,7 @@
       <arg column="oldpack" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="qtyallocated" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="status" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="addDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="caseqty" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="oddpack" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -29,7 +29,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, issuenumber, subcode, code, shortname, pack, oldpack, qtyallocated, status, adddate, 
+    id, issuenumber, subcode, code, shortname, pack, oldpack, qtyallocated, status, addDate,
     addwho, caseqty, oddpack, odd, type, batchno, shipno, pickno, editwho, editdate, 
     packwho, packdate, computeno
   </sql>
@@ -47,7 +47,7 @@
     insert into JiaoCaiDistribute (id, issuenumber, subcode, 
       code, shortname, pack, 
       oldpack, qtyallocated, status, 
-      adddate, addwho, caseqty, 
+      addDate, addwho, caseqty,
       oddpack, odd, type, 
       batchno, shipno, pickno, 
       editwho, editdate, packwho, 
@@ -55,7 +55,7 @@
     values (#{id,jdbcType=NUMERIC}, #{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, 
       #{code,jdbcType=NVARCHAR}, #{shortname,jdbcType=NVARCHAR}, #{pack,jdbcType=INTEGER}, 
       #{oldpack,jdbcType=INTEGER}, #{qtyallocated,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
-      #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=NVARCHAR}, #{caseqty,jdbcType=INTEGER}, 
+      #{addDate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=NVARCHAR}, #{caseqty,jdbcType=INTEGER},
       #{oddpack,jdbcType=INTEGER}, #{odd,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
       #{batchno,jdbcType=VARCHAR}, #{shipno,jdbcType=VARCHAR}, #{pickno,jdbcType=VARCHAR}, 
       #{editwho,jdbcType=VARCHAR}, #{editdate,jdbcType=TIMESTAMP}, #{packwho,jdbcType=VARCHAR}, 
@@ -92,7 +92,7 @@
         status,
       </if>
       <if test="1 == 1" >
-        adddate,
+        addDate,
       </if>
       <if test="addwho != null" >
         addwho,
@@ -233,8 +233,8 @@
       <if test="status != null" >
         status = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="adddate != null" >
-        adddate = #{adddate,jdbcType=TIMESTAMP},
+      <if test="addDate != null" >
+        addDate = #{addDate,jdbcType=TIMESTAMP},
       </if>
       <if test="addwho != null" >
         addwho = #{addwho,jdbcType=NVARCHAR},
@@ -288,7 +288,7 @@
       oldpack = #{oldpack,jdbcType=INTEGER},
       qtyallocated = #{qtyallocated,jdbcType=INTEGER},
       status = #{status,jdbcType=VARCHAR},
-      adddate = #{adddate,jdbcType=TIMESTAMP},
+      addDate = #{addDate,jdbcType=TIMESTAMP},
       addwho = #{addwho,jdbcType=NVARCHAR},
       caseqty = #{caseqty,jdbcType=INTEGER},
       oddpack = #{oddpack,jdbcType=INTEGER},
@@ -338,12 +338,12 @@
       <if test="status != null and status != '' " >
         and status = #{status}
       </if>
-      <if test="adddate != null and adddate != '' " >
-        <bind name="adddate" value="'%' + adddate + '%'" />
-        and convert(varchar(20),adddate,20) like #{adddate}
+      <if test="addDate != null and addDate != '' " >
+        <bind name="addDate" value="'%' + addDate + '%'" />
+        and convert(varchar(20),addDate,20) like #{addDate}
       </if>
     </where>
-    order by adddate desc
+    order by addDate desc
   </select>
     <select id="loadWaitComputeData" resultType="com.management.vo.jc.JiaoCaiDistributeVo">
       select a.issuenumber,a.subcode,b.barcode,b.descr,b.price,SUM(a.qtyallocated) qtyallocated,(select SUM(qtyfree) from JiaoCaiInventory_detail c where a.issuenumber=c.issuenumber and a.subcode=c.subcode) qtyfree,sum(b.price*a.qtyallocated) amt
@@ -382,9 +382,9 @@
       <if test="status != null and status != '' " >
         and a.status = #{status}
       </if>
-      <if test="adddate != null and adddate != '' " >
-        <bind name="adddate" value="'%' + adddate + '%'" />
-        and convert(varchar(20),a.adddate,20) like #{adddate}
+      <if test="addDate != null and addDate != '' " >
+        <bind name="addDate" value="'%' + addDate + '%'" />
+        and convert(varchar(20),a.addDate,20) like #{addDate}
       </if>
       group by a.issuenumber,a.subcode,b.barcode,b.descr,b.price
       order by a.issuenumber,b.barcode

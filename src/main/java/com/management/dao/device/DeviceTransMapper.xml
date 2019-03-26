@@ -41,7 +41,7 @@
       BK5)
     values (#{id,jdbcType=NUMERIC}, #{deviceId,jdbcType=NVARCHAR}, #{organizationId,jdbcType=INTEGER}, 
       #{organizationId,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}, #{addwho,jdbcType=NVARCHAR},
-      #{adddate,jdbcType=TIMESTAMP}, #{editwho,jdbcType=NVARCHAR}, #{editdate,jdbcType=TIMESTAMP}, 
+      #{addDate,jdbcType=TIMESTAMP}, #{editwho,jdbcType=NVARCHAR}, #{editdate,jdbcType=TIMESTAMP},
       #{bk1,jdbcType=NVARCHAR}, #{bk2,jdbcType=NVARCHAR}, #{bk3,jdbcType=NVARCHAR}, #{bk4,jdbcType=NVARCHAR}, 
       #{bk5,jdbcType=NVARCHAR})
   </insert>
@@ -154,8 +154,8 @@
       <if test="addwho != null">
         ADDWHO = #{addwho,jdbcType=NVARCHAR},
       </if>
-      <if test="adddate != null">
-        ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      <if test="addDate != null">
+        ADDDATE = #{addDate,jdbcType=TIMESTAMP},
       </if>
       <if test="editwho != null">
         EDITWHO = #{editwho,jdbcType=NVARCHAR},
@@ -188,7 +188,7 @@
       USER_ID = #{organizationId,jdbcType=NVARCHAR},
       STATUS = #{status,jdbcType=NVARCHAR},
       ADDWHO = #{addwho,jdbcType=NVARCHAR},
-      ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      ADDDATE = #{addDate,jdbcType=TIMESTAMP},
       EDITWHO = #{editwho,jdbcType=NVARCHAR},
       EDITDATE = #{editdate,jdbcType=TIMESTAMP},
       BK1 = #{bk1,jdbcType=NVARCHAR},

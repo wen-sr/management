@@ -2,6 +2,7 @@ package com.management.controller.prd1;
 
 import com.management.common.ServerResponse;
 import com.management.service.prd1.ILogisticsQueryService;
+import com.management.vo.prd1.DeliveryVo;
 import com.management.vo.prd1.LogisticsQueryVo;
 import com.management.vo.prd1.ReceiptVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +49,12 @@ public class LogisticsQueryController {
     public ServerResponse rejectDetail(ReceiptVo receiptVo) {
         return logisticsQueryService.rejectDetail(receiptVo);
     }
+
+    @RequestMapping(value = "/deliveryQuery", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse deliveryQuery(DeliveryVo deliveryVo) {
+        return logisticsQueryService.deliveryQuery(deliveryVo);
+    }
+
+
 }

@@ -8,14 +8,14 @@
       <arg column="subcode" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="orderqty" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="addwho" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="adddate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="addDate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="editwho" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="editdate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="orderNumber" javaType="java.lang.String" jdbcType="NVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, issuenumber, subcode, orderqty, addwho, adddate, editwho, editdate, orderNumber
+    id, issuenumber, subcode, orderqty, addwho, addDate, editwho, editdate, orderNumber
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -29,7 +29,7 @@
   </delete>
   <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiOrders">
     insert into JiaoCaiOrders (id, issuenumber, subcode, 
-      orderqty, addwho, adddate, 
+      orderqty, addwho, addDate,
       editwho, editdate, orderNumber
       )
     values (#{id,jdbcType=BIGINT}, #{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, 
@@ -56,7 +56,7 @@
         addwho,
       </if>
       <if test="1 ==1">
-        adddate,
+        addDate,
       </if>
       <if test="editwho != null">
         editwho,
@@ -113,8 +113,8 @@
       <if test="addwho != null">
         addwho = #{addwho,jdbcType=NVARCHAR},
       </if>
-      <if test="adddate != null">
-        adddate = #{adddate,jdbcType=TIMESTAMP},
+      <if test="addDate != null">
+        addDate = #{addDate,jdbcType=TIMESTAMP},
       </if>
       <if test="editwho != null">
         editwho = #{editwho,jdbcType=NVARCHAR},
@@ -134,7 +134,7 @@
       subcode = #{subcode,jdbcType=NVARCHAR},
       orderqty = #{orderqty,jdbcType=INTEGER},
       addwho = #{addwho,jdbcType=NVARCHAR},
-      adddate = #{adddate,jdbcType=TIMESTAMP},
+      addDate = #{addDate,jdbcType=TIMESTAMP},
       editwho = #{editwho,jdbcType=NVARCHAR},
       editdate = getdate(),
       orderNumber = #{ordernumber,jdbcType=NVARCHAR}
@@ -154,6 +154,6 @@
         and subcode = #{subcode}
       </if>
     </where>
-    order by adddate desc
+    order by addDate desc
   </select>
 </mapper>

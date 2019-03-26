@@ -52,7 +52,7 @@
     values (#{id,jdbcType=NUMERIC}, #{deviceId,jdbcType=NVARCHAR}, #{deviceTypeId,jdbcType=INTEGER}, 
       #{deviceTypeName,jdbcType=NVARCHAR}, #{deviceUserId,jdbcType=NVARCHAR}, #{deviceUserName,jdbcType=NVARCHAR},
       #{status,jdbcType=INTEGER}, #{cause,jdbcType=NVARCHAR}, #{bakup,jdbcType=NVARCHAR}, 
-      #{adddate,jdbcType=TIMESTAMP}, #{editdate,jdbcType=TIMESTAMP}, #{questionDescription,jdbcType=NVARCHAR}, 
+      #{addDate,jdbcType=TIMESTAMP}, #{editdate,jdbcType=TIMESTAMP}, #{questionDescription,jdbcType=NVARCHAR},
       #{repairUserId,jdbcType=NVARCHAR}, #{component,jdbcType=NVARCHAR}, #{cost,jdbcType=NUMERIC}, 
       #{result,jdbcType=NVARCHAR}, #{bk1,jdbcType=NVARCHAR}, #{bk2,jdbcType=NVARCHAR}, 
       #{bk3,jdbcType=NVARCHAR}, #{bk4,jdbcType=NVARCHAR}, #{bk5,jdbcType=NVARCHAR})
@@ -217,8 +217,8 @@
       <if test="bakup != null" >
         BAKUP = #{bakup,jdbcType=NVARCHAR},
       </if>
-      <if test="adddate != null" >
-        ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      <if test="addDate != null" >
+        ADDDATE = #{addDate,jdbcType=TIMESTAMP},
       </if>
       <if test="true" >
         EDITDATE = getdate(),
@@ -266,7 +266,7 @@
       STATUS = #{status,jdbcType=INTEGER},
       CAUSE = #{cause,jdbcType=NVARCHAR},
       BAKUP = #{bakup,jdbcType=NVARCHAR},
-      ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      ADDDATE = #{addDate,jdbcType=TIMESTAMP},
       EDITDATE = getdate(),
       question_description = #{questionDescription,jdbcType=NVARCHAR},
       repair_user_id = #{repairUserId,jdbcType=NVARCHAR},

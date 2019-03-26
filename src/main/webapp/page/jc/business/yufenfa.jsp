@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<th data-options="field:'qtyfree',width:80">可用库存 </th>
 						<th data-options="field:'customer',width:50">客户 </th>
 						<th data-options="field:'addwho',width:50">分发人 </th>
-						<th data-options="field:'adddate',width:50">分发时间</th>
+						<th data-options="field:'addDate',width:50">分发时间</th>
 					</tr>
 				</thead>
 			</table>

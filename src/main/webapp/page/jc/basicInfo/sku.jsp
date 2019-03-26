@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th data-options="field:'publisher',width:80">出版社代码</th>
 					<th data-options="field:'shortname',width:80">出版社</th>
 					<th data-options="field:'addwho',width:50">添加人</th>
-					<th data-options="field:'adddate',width:80">添加时间</th>
+					<th data-options="field:'addDate',width:80">添加时间</th>
 					<th data-options="field:'editwho',width:50">修订人</th>
 					<th data-options="field:'editdate',width:80">修订时间</th>
 				</tr>
