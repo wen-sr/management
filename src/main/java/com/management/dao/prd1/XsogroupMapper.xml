@@ -481,31 +481,30 @@
     consk storerkey,
     shortname,
     (case
-    when status in ('-1', '0', '2', '5') then
-    '包装完成'
     when status in ('8') then
     '已装车'
     when status in ('9', '11') then
     '运输中'
     when status in ('12') then
-    '客户已签收'
+    '已签收'
     when status in ('15') then
-    '回单已回'
+    '已回单'
     else
     '其他'
     end) status,
     nvl(susr1, 1) caseQty,
     qty,
-    to_char(load_date, 'yyyy-mm-dd') loadDate,
-    to_char(ship_date, 'yyyy-mm-dd') shipDate,
-    to_char(ship_date, 'yyyy-mm-dd') addDate
+    to_char(load_date, 'yyyy-mm-dd hh24:mi:ss') loadDate,
+    to_char(ship_date, 'yyyy-mm-dd hh24:mi:ss') shipDate,
+    to_char(adddate, 'yyyy-mm-dd hh24:mi:ss') addDate
     from caseid
     <where>
+      status not in ('-1', '0', '1', '2', '5')
       <if test="begin != null">
-        and to_char(addDate, 'yyyy-mm-dd') &gt;= #{begin}
+        and to_char(load_date, 'yyyy-mm-dd') &gt;= #{begin}
       </if>
       <if test="end != null">
-        and to_char(addDate, 'yyyy-mm-dd') &lt;= #{end}
+        and to_char(load_date, 'yyyy-mm-dd') &lt;= #{end}
       </if>
       <if test="shipno != null">
         and (caseid = #{shipno} or shipkey = #{shipno})

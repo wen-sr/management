@@ -12,7 +12,7 @@ $(function () {
                     '{{#list}}' +
                     '<a class="weui-cell weui-cell_access" href="caseDetail.html?caseid={{caseid}}" >' +
                     '<div class="weui-cell__bd">' +
-                    '<p>运号：{{shipno}},状态：{{status}}</p>' +
+                    '<p>货主：{{ownerName}}，状态：<span style="color:#E61414;font-weight: bold;">{{status}}</span></p>' +
                     '<p>包件号：{{caseid}}，件数：{{caseQty}}，册数{{qty}}</p>' +
                     '</div>' +
                     '<div class="weui-cell__ft" style="margin-right: 10px;">'+

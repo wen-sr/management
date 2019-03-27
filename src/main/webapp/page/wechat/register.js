@@ -5,6 +5,9 @@ $(function(){
             title: "一般图书",
             value: 1
         },{
+            title: "大中专",
+            value: 3
+        },{
             title: "教材",
             value: 2
         }]
@@ -55,7 +58,7 @@ function register() {
     var formData = {
         id                  : id,
         pwd                 : pwd,
-        organization_id     : organization_id,
+        organizationId      : organization_id,
         bk5                 : businessType
     }
 
