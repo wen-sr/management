@@ -38,6 +38,7 @@ public class TaskSchedule {
     public void wmsErrorMsg(){
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
         logger.info("<<<---------查询WMS系统报错信息的定时任务开始--------->>>");
+        wmsErrorMsgService.updateHis();
         List<WmsErrorMsg>  wmsErrorMsgList = wmsErrorMsgService.selectAll();
         if(wmsErrorMsgList != null && wmsErrorMsgList.size() > 0){
             List<UserInfo> userInfoList = findByroleId(Constant.Role.ROLE_ADMIN);

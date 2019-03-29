@@ -1,62 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.management.dao.prd1.WmsErrorMsgMapper">
-  <resultMap id="BaseResultMap" type="com.management.pojo.prd1.WmsErrorMsg">
-    <constructor>
-      <arg column="IF_NAME" javaType="java.lang.Object" jdbcType="OTHER" />
-      <arg column="IF_KEY" javaType="java.lang.Object" jdbcType="OTHER" />
-      <arg column="IF_MESSAGE" javaType="java.lang.Object" jdbcType="OTHER" />
-      <arg column="ADDDATE" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="FLAG" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
-    </constructor>
-  </resultMap>
-  <insert id="insert" parameterType="com.management.pojo.prd1.WmsErrorMsg">
+    <resultMap id="BaseResultMap" type="com.management.pojo.prd1.WmsErrorMsg">
+        <constructor>
+            <arg column="IF_NAME" javaType="java.lang.Object" jdbcType="OTHER"/>
+            <arg column="IF_KEY" javaType="java.lang.Object" jdbcType="OTHER"/>
+            <arg column="IF_MESSAGE" javaType="java.lang.Object" jdbcType="OTHER"/>
+            <arg column="ADDDATE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="FLAG" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+        </constructor>
+    </resultMap>
+    <insert id="insert" parameterType="com.management.pojo.prd1.WmsErrorMsg">
     insert into WMS_ERROR_MSG (IF_NAME, IF_KEY, IF_MESSAGE, 
       ADDDATE, FLAG)
     values (#{ifName,jdbcType=OTHER}, #{ifKey,jdbcType=OTHER}, #{ifMessage,jdbcType=OTHER}, 
       #{addDate,jdbcType=VARCHAR}, #{flag,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.management.pojo.prd1.WmsErrorMsg">
-    insert into WMS_ERROR_MSG
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="ifName != null">
-        IF_NAME,
-      </if>
-      <if test="ifKey != null">
-        IF_KEY,
-      </if>
-      <if test="ifMessage != null">
-        IF_MESSAGE,
-      </if>
-      <if test="addDate != null">
-        ADDDATE,
-      </if>
-      <if test="flag != null">
-        FLAG,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="ifName != null">
-        #{ifName,jdbcType=OTHER},
-      </if>
-      <if test="ifKey != null">
-        #{ifKey,jdbcType=OTHER},
-      </if>
-      <if test="ifMessage != null">
-        #{ifMessage,jdbcType=OTHER},
-      </if>
-      <if test="addDate != null">
-        #{addDate,jdbcType=VARCHAR},
-      </if>
-      <if test="flag != null">
-        #{flag,jdbcType=DECIMAL},
-      </if>
-    </trim>
-  </insert>
+    <insert id="insertSelective" parameterType="com.management.pojo.prd1.WmsErrorMsg">
+        insert into WMS_ERROR_MSG
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ifName != null">
+                IF_NAME,
+            </if>
+            <if test="ifKey != null">
+                IF_KEY,
+            </if>
+            <if test="ifMessage != null">
+                IF_MESSAGE,
+            </if>
+            <if test="addDate != null">
+                ADDDATE,
+            </if>
+            <if test="flag != null">
+                FLAG,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ifName != null">
+                #{ifName,jdbcType=OTHER},
+            </if>
+            <if test="ifKey != null">
+                #{ifKey,jdbcType=OTHER},
+            </if>
+            <if test="ifMessage != null">
+                #{ifMessage,jdbcType=OTHER},
+            </if>
+            <if test="addDate != null">
+                #{addDate,jdbcType=VARCHAR},
+            </if>
+            <if test="flag != null">
+                #{flag,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
     <update id="updateFlage">
       update wmslog.process_message set flag = 1
       where if_key = #{ifKey}
     </update>
+    <update id="updateHis">
+    update wmslog.process_message
+   set flag = 1
+ where if_key in (select distinct IF_KEY
+                    from wmslog.process_message
+                   where if_type = 'E'
+                     AND IF_ADDDATE >= TO_dATE('2018-12-18', 'YYYY-MM-DD')
+                     AND IF_KEY IS NOT NULL
+                     AND IF_MESSAGE IS NOT NULL
+                     and flag = 1)
+   and flag = 0
+   and if_type = 'E'
+   AND IF_ADDDATE >= TO_dATE('2018-12-18', 'YYYY-MM-DD')
+   AND IF_KEY IS NOT NULL
+   AND IF_MESSAGE IS NOT NULL
+  </update>
     <select id="selectAll" resultType="com.management.pojo.prd1.WmsErrorMsg">
       select IF_NAME ifName,IF_KEY ifKey, IF_MESSAGE ifMessage, ADDDATE addDate,FLAG flag
       from WMS_ERROR_MSG

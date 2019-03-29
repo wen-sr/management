@@ -481,6 +481,8 @@
     consk storerkey,
     shortname,
     (case
+    when status in ('-1', '0', '1', '2', '5') then
+    '作业中'
     when status in ('8') then
     '已装车'
     when status in ('9', '11') then

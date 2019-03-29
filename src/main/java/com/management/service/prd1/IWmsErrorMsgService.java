@@ -8,4 +8,7 @@ public interface IWmsErrorMsgService {
     List<WmsErrorMsg> selectAll();
 
     void updateFlage(WmsErrorMsg wmsErrorMsg);
+
+    void updateHis();
+
 }

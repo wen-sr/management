@@ -12,4 +12,7 @@ public interface WmsErrorMsgMapper {
     List<WmsErrorMsg> selectAll();
 
     int updateFlage(WmsErrorMsg wmsErrorMsg);
+
+    int updateHis();
+
 }

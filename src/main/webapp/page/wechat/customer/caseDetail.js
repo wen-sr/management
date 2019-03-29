@@ -40,14 +40,14 @@ $(function () {
 
                         // state// 0:新增；1：装车；2：运输；
                         var img_sta_1 = '<img src="../../../image/wechat/sta_1_gray.png">';
-                        var em_1 = '已包装';
+                        var em_1 = '作业中';
                         var img_sta_2 = '<img src="../../../image/wechat/sta_2_gray.png">';
                         var em_2 = '已装车';
                         var img_sta_3 = '<img src="../../../image/wechat/sta_3_gray.png">';
                         var em_3 = '运输中';
                         var img_sta_4 = '<img src="../../../image/wechat/sta_4_gray.png">';
                         var em_4 = '已签收';
-                        var img_sta_5 = '<img src="../../../image/wechat/sta_4_gray.png">';
+                        var img_sta_5 = '<img src="../../../image/wechat/sta_5_gray.jpg">';
                         var em_5 = '已回单';
 
                         var detile_th = ''; //当所输入查询信息为专线快运
@@ -55,7 +55,7 @@ $(function () {
                         if (status != null) {
                             if (status === '运输中') { // 运输中
                                 img_sta_3 = '<img src="../../../image/wechat/sta_3_orange.png">';
-                                em_1 = '已包装';
+                                em_1 = '作业中';
                                 em_2 = '已装车';
                                 em_3 = '运输中';
                                 detile_th = '<tr class="over ">' +
@@ -71,17 +71,17 @@ $(function () {
                                     '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_2 + ' <br> ' +
                                     '<em class="tx_1">' + loaddate + '</em>' +
                                     '</th>' +
+                                    '</tr>'+
+                                    '<tr class="over ">' +
+                                    '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
+                                    '<th width="60%"><em class="detail_item green">' +
+                                    '【' + shortname + '】</span>的<span class="red">包件【' + caseid + '】</span>' + em_1 + '<br>' +
+                                    '<em class="tx_1">' + adddate + '</em></em>' +
+                                    '</th>' +
                                     '</tr>';
-                                    // '<tr class="over ">' +
-                                    // '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
-                                    // '<th width="60%"><em class="detail_item green">' +
-                                    // '【' + shortname + '】</span>的<span class="red">包件【' + caseid + '】</span>' + em_1 + '<br>' +
-                                    // '<em class="tx_1">' + adddate + '</em></em>' +
-                                    // '</th>' +
-                                    // '</tr>';
                             }else if (status === '已签收') { // 已签收
                                 img_sta_4 = '<img src="../../../image/wechat/sta_4_orange.png">';
-                                em_1 = '已包装';
+                                em_1 = '作业中';
                                 em_2 = '已装车';
                                 em_3 = '运输中';
                                 em_4 = '已签收';
@@ -106,17 +106,17 @@ $(function () {
                                     '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_2 + ' <br> ' +
                                     '<em class="tx_1">' + loaddate + '</em>' +
                                     '</th>' +
+                                    '</tr>'+
+                                    '<tr class="over ">' +
+                                    '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
+                                    '<th width="60%"><em class="detail_item green">' +
+                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_1 + '<br>' +
+                                    '<em class="tx_1">' + adddate + '</em></em>' +
+                                    '</th>' +
                                     '</tr>';
-                                    // '<tr class="over ">' +
-                                    // '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
-                                    // '<th width="60%"><em class="detail_item green">' +
-                                    // '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_1 + '<br>' +
-                                    // '<em class="tx_1">' + adddate + '</em></em>' +
-                                    // '</th>' +
-                                    // '</tr>';
                             }else if (status === '已回单') { // 已回单
                                 img_sta_5 = '<img src="../../../image/wechat/sta_5_orange.png">';
-                                em_1 = '已包装';
+                                em_1 = '作业中';
                                 em_2 = '已装车';
                                 em_3 = '运输中';
                                 em_4 = '已签收';
@@ -148,18 +148,18 @@ $(function () {
                                     '<th width="60%"><em class="detail_item green">' +
                                     '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_2 + ' <br> ' +
                                     '<em class="tx_1">' + loaddate + '</em>' +
-                                    '</th>';
-                                    // '</tr>' +
-                                    // '<tr class="over ">' +
-                                    // '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
-                                    // '<th width="60%"><em class="detail_item green">' +
-                                    // '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_1 + '<br>' +
-                                    // '<em class="tx_1">' + adddate + '</em></em>' +
-                                    // '</th>' +
-                                    // '</tr>';
+                                    '</th>'+
+                                    '</tr>' +
+                                    '<tr class="over ">' +
+                                    '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
+                                    '<th width="60%"><em class="detail_item green">' +
+                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_1 + '<br>' +
+                                    '<em class="tx_1">' + adddate + '</em></em>' +
+                                    '</th>' +
+                                    '</tr>';
                             } else if (status === '已装车') { // 装车中
                                 img_sta_2 = '<img src="../../../image/wechat/sta_2_orange.png">';
-                                em_1 = '已新增';
+                                em_1 = '作业中';
                                 em_2 = '已装车';
                                 detile_th = '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
@@ -167,17 +167,17 @@ $(function () {
                                     '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_2 + ' <br>' +
                                     ' <em class="tx_1">' + loaddate + '</em></em>' +
                                     '</th>' +
+                                    '</tr>'+
+                                    '<tr class="over ">' +
+                                    '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
+                                    '<th width="60%"><em class="detail_item green">' +
+                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_1 + ' <br>' +
+                                    '<em class="tx_1">' + adddate + '</em></em>' +
+                                    '</th>' +
                                     '</tr>';
-                                    // '<tr class="over ">' +
-                                    // '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
-                                    // '<th width="60%"><em class="detail_item green">' +
-                                    // '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_1 + ' <br>' +
-                                    // '<em class="tx_1">' + adddate + '</em></em>' +
-                                    // '</th>' +
-                                    // '</tr>';
-                            } else if (status === '已包装') { //新增中
+                            } else if (status === '作业中') { //新增中
                                 img_sta_1 = '<img src="../../../image/wechat/sta_1_orange.png">';
-                                em_1 = '已包装';
+                                em_1 = '作业中';
                                 detile_th = '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
@@ -196,10 +196,10 @@ $(function () {
 
                         var in_state =
                             '<div class="in_state" align="center" >' +
-                            // '<div class="sta_item">' +
-                            // '<i class="ck"></i> <span class="state-icon">' + img_sta_1 + ' </span> <em class="state-line"></em>' +
-                            // '<em class="state-text">' + em_1 + '</em>' +
-                            // '</div>' +
+                            '<div class="sta_item">' +
+                            '<i class="ck"></i> <span class="state-icon">' + img_sta_1 + ' </span> <em class="state-line"></em>' +
+                            '<em class="state-text">' + em_1 + '</em>' +
+                            '</div>' +
                             '<div class="sta_item ">' +
                             '<i class="ck"></i> <span class="icon">' + img_sta_2 + ' </span> <em class="state-line"></em>' +
                             '<em class="state-text">' + em_2 + '</em>' +

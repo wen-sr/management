@@ -169,4 +169,10 @@ public class WeChatCommonController {
         }
         return ServerResponse.createBySuccess();
     }
+
+    @RequestMapping("/modifyPassword")
+    @ResponseBody
+    public ServerResponse modifyPassword(String id, String password_old, String password) {
+        return userService.modifyPwd(id, password_old, password);
+    }
 }
