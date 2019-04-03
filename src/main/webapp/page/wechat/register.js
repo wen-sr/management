@@ -5,8 +5,11 @@ $(function(){
             title: "一般图书",
             value: 1
         },{
+            title: "农家书屋",
+            value: 1
+        },{
             title: "大中专",
-            value: 3
+            value: 1
         },{
             title: "教材",
             value: 2

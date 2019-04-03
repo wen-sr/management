@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jxlh56.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jxlh56.News" >
+    <constructor >
+      <arg column="ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUBTITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TYPE" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ADDTIME" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="SYSDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DATASTATUS" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ADDUSERID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RELEASETIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="RELEASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICTUREFLIE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RELEASEUSERID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ISNOTPICTURES" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="SOURCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AUTHOR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ISTOCHART" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.management.pojo.jxlh56.News" >
+    <constructor >
+      <arg column="ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUBTITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TYPE" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ADDTIME" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="SYSDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DATASTATUS" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ADDUSERID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RELEASETIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="RELEASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICTUREFLIE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RELEASEUSERID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ISNOTPICTURES" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="SOURCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AUTHOR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ISTOCHART" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="NEWSCONTENT" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    NEWSCONTENT
+  </sql>
+  <insert id="insert" parameterType="com.management.pojo.jxlh56.News" >
+    insert into NEWS (ID, TITLE, SUBTITLE, 
+      TYPE, ADDTIME, SYSDATE, 
+      DATASTATUS, ADDUSERID, RELEASETIME, 
+      RELEASEID, PICTUREFLIE, RELEASEUSERID, 
+      ISNOTPICTURES, SOURCE, AUTHOR, 
+      ISTOCHART, NEWSCONTENT)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{addtime,jdbcType=NVARCHAR}, #{sysdate,jdbcType=TIMESTAMP}, 
+      #{datastatus,jdbcType=INTEGER}, #{adduserid,jdbcType=VARCHAR}, #{releasetime,jdbcType=TIMESTAMP}, 
+      #{releaseid,jdbcType=VARCHAR}, #{pictureflie,jdbcType=VARCHAR}, #{releaseuserid,jdbcType=INTEGER}, 
+      #{isnotpictures,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{istochart,jdbcType=INTEGER}, #{newscontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jxlh56.News" >
+    insert into NEWS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="subtitle != null" >
+        SUBTITLE,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="addtime != null" >
+        ADDTIME,
+      </if>
+      <if test="sysdate != null" >
+        SYSDATE,
+      </if>
+      <if test="datastatus != null" >
+        DATASTATUS,
+      </if>
+      <if test="adduserid != null" >
+        ADDUSERID,
+      </if>
+      <if test="releasetime != null" >
+        RELEASETIME,
+      </if>
+      <if test="releaseid != null" >
+        RELEASEID,
+      </if>
+      <if test="pictureflie != null" >
+        PICTUREFLIE,
+      </if>
+      <if test="releaseuserid != null" >
+        RELEASEUSERID,
+      </if>
+      <if test="isnotpictures != null" >
+        ISNOTPICTURES,
+      </if>
+      <if test="source != null" >
+        SOURCE,
+      </if>
+      <if test="author != null" >
+        AUTHOR,
+      </if>
+      <if test="istochart != null" >
+        ISTOCHART,
+      </if>
+      <if test="newscontent != null" >
+        NEWSCONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysdate != null" >
+        #{sysdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datastatus != null" >
+        #{datastatus,jdbcType=INTEGER},
+      </if>
+      <if test="adduserid != null" >
+        #{adduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null" >
+        #{releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseid != null" >
+        #{releaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureflie != null" >
+        #{pictureflie,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseuserid != null" >
+        #{releaseuserid,jdbcType=INTEGER},
+      </if>
+      <if test="isnotpictures != null" >
+        #{isnotpictures,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="istochart != null" >
+        #{istochart,jdbcType=INTEGER},
+      </if>
+      <if test="newscontent != null" >
+        #{newscontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

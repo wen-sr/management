@@ -22,7 +22,7 @@
         <jdbcConnection
                 driverClass="${db.driverClassName}"
                 connectionURL="${db.url}"
-                organizationId="${db.username}"
+                userId="${db.username}"
                 password="${db.password}">
         </jdbcConnection>
 

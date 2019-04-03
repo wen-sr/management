@@ -1,5 +1,8 @@
 package com.management.service.wechat.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.management.aspect.HttpAspect;
 import com.management.common.ServerResponse;
 import com.management.dao.login.LoginMapper;
 import com.management.dao.prd1.XsogroupMapper;
@@ -9,14 +12,41 @@ import com.management.pojo.login.Login;
 import com.management.service.wechat.IWeChatCommonService;
 import com.management.util.DataSourceContextHolder;
 import com.management.util.MD5Util;
+import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
+import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.bean.WxMpMassNews;
+import me.chanjar.weixin.mp.bean.WxMpMassOpenIdsMessage;
+import me.chanjar.weixin.mp.bean.material.WxMediaImgUploadResult;
+import me.chanjar.weixin.mp.bean.result.WxMpMassSendResult;
+import me.chanjar.weixin.mp.bean.result.WxMpMassUploadResult;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class WeChatCommonServiceImpl implements IWeChatCommonService {
+    private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
 
     @Autowired
     LoginMapper loginMapper;
@@ -27,6 +57,8 @@ public class WeChatCommonServiceImpl implements IWeChatCommonService {
     @Autowired
     XsogroupMapper xsogroupMapper;
 
+    @Autowired
+    WxMpService wxMpService;
 
     @Override
     public ServerResponse register(Login login) {
@@ -96,4 +128,91 @@ public class WeChatCommonServiceImpl implements IWeChatCommonService {
         }
         return false;
     }
+
+
+    @Override
+    public void test() throws Exception {
+        String imgPath = "http://img.jxlh56.com/01/3be84b36-ba3e-4d6b-89ef-b05a66438ee2.jpg";
+
+        String mediaId = getMediaIdFromUrl(imgPath, "jpg");
+
+// 上传图文消息的正文图片(返回的url拼在正文的<img>标签中)
+        WxMpMassNews news = new WxMpMassNews();
+        WxMpMassNews.WxMpMassNewsArticle article1 = new WxMpMassNews.WxMpMassNewsArticle();
+        article1.setTitle("标题1");
+        article1.setContent("内容1");
+        article1.setThumbMediaId(mediaId);
+        news.addArticle(article1);
+
+
+
+        String imgPath2 = "http://img.jxlh56.com/01/7a9b4090-b720-45f2-80bc-7ebf82533dd2.jpg";
+        String mediaId2 = getMediaIdFromUrl(imgPath2, "jpg");
+        WxMpMassNews.WxMpMassNewsArticle article2 = new WxMpMassNews.WxMpMassNewsArticle();
+        article2.setTitle("标题2");
+        article2.setContent("内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2");
+        article2.setThumbMediaId(mediaId2);
+        article2.setShowCoverPic(true);
+        article2.setAuthor("作者2");
+        //article2.setContentSourceUrl("www.baidu.com");
+        article2.setDigest("摘要2");
+        news.addArticle(article2);
+
+        WxMpMassUploadResult massUploadResult = wxMpService.getMassMessageService().massNewsUpload(news);
+
+        WxMpMassOpenIdsMessage massMessage = new WxMpMassOpenIdsMessage();
+        massMessage.setMsgType(WxConsts.MassMsgType.MPNEWS);
+        massMessage.setMediaId(massUploadResult.getMediaId());
+        List<String> list = new ArrayList<>();
+        //list.add("ogodE5zVenVrCCm04Cn79HgmbaQk");
+        list.add("oPOAgvx1Utuu0Mg25QTPs5yqDUyw");
+        list.add("oPOAgvx1Utuu0Mg25QTPs5yqDUyw");
+        massMessage.setToUsers(list);
+        //massMessage.getToUsers().add("ogodE5zVenVrCCm04Cn79HgmbaQk");
+        //massMessage.getToUsers().add("ogodE5zVenVrCCm04Cn79HgmbaQk");
+
+        try {
+            WxMpMassSendResult massResult = wxMpService.getMassMessageService().massOpenIdsMessageSend(massMessage);
+        } catch (WxErrorException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public String getMediaIdFromUrl(String urlPath, String fileType) throws Exception {
+
+        InputStream is = getInputStreamByUrl(urlPath);
+
+        WxMediaUploadResult res = wxMpService.getMaterialService().mediaUpload(WxConsts.MediaFileType.IMAGE, fileType, is);
+        res.getType();
+        res.getCreatedAt();
+        res.getMediaId();
+        res.getThumbMediaId();
+        return res.getMediaId();
+    }
+
+    public static InputStream getInputStreamByUrl(String strUrl){
+        HttpURLConnection conn = null;
+        try {
+            URL url = new URL(strUrl);
+            conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(20 * 1000);
+            final ByteArrayOutputStream output = new ByteArrayOutputStream();
+            IOUtils.copy(conn.getInputStream(),output);
+            return  new ByteArrayInputStream(output.toByteArray());
+        } catch (Exception e) {
+            logger.error(e+"");
+        }finally {
+            try{
+                if (conn != null) {
+                    conn.disconnect();
+                }
+            }catch (Exception e){
+                logger.error(e+"");
+            }
+        }
+        return null;
+    }
+
 }
