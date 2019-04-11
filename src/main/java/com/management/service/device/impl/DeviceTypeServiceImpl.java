@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(value = "transactionManager_xh",readOnly = false)
 public class DeviceTypeServiceImpl implements IDeviceTypeService {
 
     @Autowired

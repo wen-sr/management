@@ -9,7 +9,7 @@
       <arg column="fromLoc" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="toLoc" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="addDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="qty" jdbcType="NUMERIC" javaType="java.lang.Long" />
       <arg column="sourceId" jdbcType="NUMERIC" javaType="java.lang.Long" />
       <arg column="fromId" jdbcType="NVARCHAR" javaType="java.lang.String" />
@@ -25,7 +25,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, issuenumber, subcode, fromLoc, toLoc, addwho, addDate, qty, sourceId, fromId,
+    id, issuenumber, subcode, fromLoc, toLoc, addwho, adddate, qty, sourceId, fromId,
     toId, type, pack, bk1, bk2, bk3, bk4, bk5, fromtable
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -41,7 +41,7 @@
   <insert id="insert" parameterType="com.management.pojo.jc.JiaoCaiItrn" >
     insert into JiaoCaiItrn (id, issuenumber, subcode, 
       fromLoc, toLoc, addwho, 
-      addDate, qty, sourceId,
+      adddate, qty, sourceId,
       fromId, toId, type, 
       pack, bk1, bk2, bk3, 
       bk4, bk5, fromtable
@@ -76,7 +76,7 @@
         addwho,
       </if>
       <if test="1 == 1" >
-        addDate,
+        adddate,
       </if>
       <if test="qty != null" >
         qty,
@@ -193,8 +193,8 @@
       <if test="addwho != null" >
         addwho = #{addwho,jdbcType=NVARCHAR},
       </if>
-      <if test="addDate != null" >
-        addDate = #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="qty != null" >
         qty = #{qty,jdbcType=NUMERIC},
@@ -242,7 +242,7 @@
       fromLoc = #{fromloc,jdbcType=NVARCHAR},
       toLoc = #{toloc,jdbcType=NVARCHAR},
       addwho = #{addwho,jdbcType=NVARCHAR},
-      addDate = #{addDate,jdbcType=TIMESTAMP},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
       qty = #{qty,jdbcType=NUMERIC},
       sourceId = #{sourceid,jdbcType=NUMERIC},
       fromId = #{fromid,jdbcType=NVARCHAR},

@@ -23,7 +23,7 @@
       <arg column="retcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="retmsg" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="rettime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="addDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="bk1" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="bk2" jdbcType="NVARCHAR" javaType="java.lang.String" />
@@ -32,7 +32,7 @@
   <sql id="Base_Column_List" >
     id, infid, method, trk_no, tasktype, trk_desc, trk_prty, orderId, warehouseId, districtid, 
     isback, trk_st, traycodes, needwinding, storetype, sendcode, sendmsg, retcode, retmsg, 
-    rettime, addDate, addwho, bk1, bk2
+    rettime, adddate, addwho, bk1, bk2
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -51,7 +51,7 @@
       districtid, isback, trk_st, 
       traycodes, needwinding, storetype, 
       sendcode, sendmsg, retcode, 
-      retmsg, rettime, addDate,
+      retmsg, rettime, adddate,
       addwho, bk1, bk2
       )
     values (#{id,jdbcType=NUMERIC}, #{infid,jdbcType=NVARCHAR}, #{method,jdbcType=NVARCHAR}, 
@@ -60,7 +60,7 @@
       #{districtid,jdbcType=NVARCHAR}, #{isback,jdbcType=NVARCHAR}, #{trkSt,jdbcType=NVARCHAR}, 
       #{traycodes,jdbcType=NVARCHAR}, #{needwinding,jdbcType=NVARCHAR}, #{storetype,jdbcType=NVARCHAR}, 
       #{sendcode,jdbcType=NVARCHAR}, #{sendmsg,jdbcType=NVARCHAR}, #{retcode,jdbcType=NVARCHAR}, 
-      #{retmsg,jdbcType=NVARCHAR}, #{rettime,jdbcType=TIMESTAMP}, #{addDate,jdbcType=TIMESTAMP},
+      #{retmsg,jdbcType=NVARCHAR}, #{rettime,jdbcType=TIMESTAMP}, #{adddate,jdbcType=TIMESTAMP},
       #{addwho,jdbcType=NVARCHAR}, #{bk1,jdbcType=NVARCHAR}, #{bk2,jdbcType=NVARCHAR}
       )
   </insert>
@@ -128,7 +128,7 @@
         rettime,
       </if>
       <if test="0 != 1" >
-        addDate,
+        adddate,
       </if>
       <if test="addwho != null" >
         addwho,
@@ -275,8 +275,8 @@
       <if test="rettime != null" >
         rettime = #{rettime,jdbcType=TIMESTAMP},
       </if>
-      <if test="addDate != null" >
-        addDate = #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="addwho != null" >
         addwho = #{addwho,jdbcType=NVARCHAR},
@@ -311,7 +311,7 @@
       retcode = #{retcode,jdbcType=NVARCHAR},
       retmsg = #{retmsg,jdbcType=NVARCHAR},
       rettime = #{rettime,jdbcType=TIMESTAMP},
-      addDate = #{addDate,jdbcType=TIMESTAMP},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
       addwho = #{addwho,jdbcType=NVARCHAR},
       bk1 = #{bk1,jdbcType=NVARCHAR},
       bk2 = #{bk2,jdbcType=NVARCHAR}

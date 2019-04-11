@@ -168,4 +168,17 @@
       </if>
     </trim>
   </insert>
+    <select id="findAll" resultType="com.management.pojo.jxlh56.News">
+      select id,title,newscontent
+      from news
+      where istochart = '1'
+    </select>
+  <select id="findByIds" parameterType="java.util.List" resultType="com.management.pojo.jxlh56.News">
+    select id,title,newscontent,author
+      from news
+      where id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+       #{item}
+    </foreach>
+  </select>
 </mapper>

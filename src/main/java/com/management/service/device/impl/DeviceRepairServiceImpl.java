@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@Transactional
+@Transactional(value = "transactionManager_xh",readOnly = false)
 public class DeviceRepairServiceImpl
         implements IDeviceRepairService
 {
@@ -156,10 +156,10 @@ public class DeviceRepairServiceImpl
             return ServerResponse.createByErrorMessage("该设备已维修完成，不能再修改");
         }
         int i = 0;
-        if ((deviceRepair.getStatus() == Constant.DeviceRepairEnum.REPAIRED.getCode()) &&
-                (!StringUtils.equals(deviceRepair.getRepairUserId(), deviceRepair1.getDeviceUserId()))) {
-            return ServerResponse.createByErrorMessage("维修完成智能由报修人提交");
-        }
+        //if ((deviceRepair.getStatus() == Constant.DeviceRepairEnum.REPAIRED.getCode()) &&
+        //        (!StringUtils.equals(deviceRepair.getRepairUserId(), deviceRepair1.getDeviceUserId()))) {
+        //    return ServerResponse.createByErrorMessage("维修完成智能由报修人提交");
+        //}
         DeviceTrans deviceTrans = this.deviceTransMapper.selectByDeviceId(deviceRepair1.getDeviceId(), Constant.DeviceRepairEnum.REPAIRING.getCode().toString());
         if (deviceTrans != null)
         {

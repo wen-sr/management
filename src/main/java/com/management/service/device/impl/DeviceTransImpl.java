@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(value = "transactionManager_xh",readOnly = false)
 public class DeviceTransImpl implements IDeviceTransService {
 
 

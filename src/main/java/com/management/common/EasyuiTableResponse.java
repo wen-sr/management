@@ -9,6 +9,15 @@ public class EasyuiTableResponse<T> implements Serializable {
     private T rows;
     private long total;
     private long count;
+    private T footer;
+
+    public T getFooter() {
+        return footer;
+    }
+
+    public void setFooter(T footer) {
+        this.footer = footer;
+    }
 
     public int getCode() {
         return code;

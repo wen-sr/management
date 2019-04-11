@@ -5,12 +5,12 @@
     <constructor >
       <idArg column="DEVICE_USER_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="DEVICE_USER_NAME" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    DEVICE_USER_ID, DEVICE_USER_NAME, ADDDATE, EDITDATE
+    DEVICE_USER_ID, DEVICE_USER_NAME, adddate, EDITDATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,7 +23,7 @@
     where DEVICE_USER_ID = #{deviceUserId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.management.pojo.device.DeviceUsers" >
-    insert into DEVICE_USERS (DEVICE_USER_ID, DEVICE_USER_NAME, ADDDATE, 
+    insert into DEVICE_USERS (DEVICE_USER_ID, DEVICE_USER_NAME, adddate,
       EDITDATE)
     values (#{deviceUserId,jdbcType=INTEGER}, #{deviceUserName,jdbcType=NVARCHAR}, getdate(),
       getdate())
@@ -38,7 +38,7 @@
         DEVICE_USER_NAME,
       </if>
       <if test="1 == 1" >
-        ADDDATE,
+        adddate,
       </if>
       <if test="1 == 1" >
         EDITDATE,
@@ -65,8 +65,8 @@
       <if test="deviceUserName != null" >
         DEVICE_USER_NAME = #{deviceUserName,jdbcType=NVARCHAR},
       </if>
-      <if test="addDate != null" >
-        ADDDATE = #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="1 == 1" >
         EDITDATE =getdate(),
@@ -77,7 +77,7 @@
   <update id="updateByPrimaryKey" parameterType="com.management.pojo.device.DeviceUsers" >
     update DEVICE_USERS
     set DEVICE_USER_NAME = #{deviceUserName,jdbcType=NVARCHAR},
-      ADDDATE = #{addDate,jdbcType=TIMESTAMP},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
       EDITDATE = getdate()
     where DEVICE_USER_ID = #{deviceUserId,jdbcType=INTEGER}
   </update>

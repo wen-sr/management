@@ -18,14 +18,14 @@
       <arg column="sendcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="senddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="addDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="pickwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="pickdate" jdbcType="NVARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, distributeId, issuenumber, subcode, qty, qtyPicked, status, loc, containerId, 
-    pack, batchno, pickno, sendcode, senddate, addwho, addDate, pickwho, pickdate
+    pack, batchno, pickno, sendcode, senddate, addwho, adddate, pickwho, pickdate
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -43,14 +43,14 @@
       status, loc, containerId, 
       pack, batchno, pickno, 
       sendcode, senddate, addwho, 
-      addDate, pickwho, pickdate
+      adddate, pickwho, pickdate
       )
     values (#{id,jdbcType=NUMERIC}, #{distributeid,jdbcType=NUMERIC}, #{issuenumber,jdbcType=NVARCHAR}, 
       #{subcode,jdbcType=NVARCHAR}, #{qty,jdbcType=INTEGER}, #{qtypicked,jdbcType=INTEGER}, 
       #{status,jdbcType=NVARCHAR}, #{loc,jdbcType=NVARCHAR}, #{containerid,jdbcType=NVARCHAR}, 
       #{pack,jdbcType=INTEGER}, #{batchno,jdbcType=NVARCHAR}, #{pickno,jdbcType=NVARCHAR}, 
       #{sendcode,jdbcType=NVARCHAR}, #{senddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=NVARCHAR}, 
-      #{addDate,jdbcType=TIMESTAMP}, #{pickwho,jdbcType=NVARCHAR}, #{pickdate,jdbcType=NVARCHAR}
+      #{adddate,jdbcType=TIMESTAMP}, #{pickwho,jdbcType=NVARCHAR}, #{pickdate,jdbcType=NVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiPick" >
@@ -101,8 +101,8 @@
       <if test="addwho != null" >
         addwho,
       </if>
-      <if test="addDate != null" >
-        addDate,
+      <if test="adddate != null" >
+        adddate,
       </if>
       <if test="pickwho != null" >
         pickwho,
@@ -157,8 +157,8 @@
       <if test="addwho != null" >
         #{addwho,jdbcType=NVARCHAR},
       </if>
-      <if test="addDate != null" >
-        #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="pickwho != null" >
         #{pickwho,jdbcType=NVARCHAR},
@@ -213,8 +213,8 @@
       <if test="addwho != null" >
         addwho = #{addwho,jdbcType=NVARCHAR},
       </if>
-      <if test="addDate != null" >
-        addDate = #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="pickwho != null" >
         pickwho = #{pickwho,jdbcType=NVARCHAR},
@@ -241,7 +241,7 @@
       sendcode = #{sendcode,jdbcType=NVARCHAR},
       senddate = #{senddate,jdbcType=TIMESTAMP},
       addwho = #{addwho,jdbcType=NVARCHAR},
-      addDate = #{addDate,jdbcType=TIMESTAMP},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
       pickwho = #{pickwho,jdbcType=NVARCHAR},
       pickdate = #{pickdate,jdbcType=NVARCHAR}
     where id = #{id,jdbcType=NUMERIC}

@@ -32,10 +32,6 @@ function loadData(pageSize, method, formData){
             title:"作者",
             width:50
         },{
-            field:"newscontent",
-            title:"内容",
-            width:50,
-        },{
             field:"sysdate",
             title:"发布时间",
             width:50
@@ -67,24 +63,30 @@ function formatSendcode(val,row,index){
         return val;
     }
 }
-function queryInfo() {
-    var createDate = $("#createDate").datebox('getValue');
-    var contNo = $("#contNo").textbox('getValue');
-    var zt = $("#zt").combobox('getValue');
-    if(createDate == ''){
-        createDate = undefined;
+function go() {
+    var rows = $("#data").datagrid('getSelections');
+    if(rows == null || rows.length === 0 ){
+        return;
     }
-    if(contNo == ''){
-        contNo = undefined;
+    var ids = [];
+    for(var i=0; i<rows.length; i++){
+        var row = rows[i];
+        ids.push(row.id);
     }
     var formData = {
-        createDate  : createDate,
-        contNo      : contNo,
-        zt          : zt
-    };
-    loadData(1,'POST', formData);
+        'ids' : ids
+    }
+    tools.request({
+        url         : '/management/jxlh56/news/sendToWechat',
+        data        : formData,
+        success     : function (data, msg) {
+
+        }
+    });
+
+
 }
 
 $(function(){
-    loadData(1, 'POST', {zt : "0"});
+    loadData(1, 'POST', '');
 });

@@ -5,7 +5,7 @@
     <constructor >
       <idArg column="DEVICE_ID" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="DEVICE_TYPE_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="ADDWHO" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="STATUS" jdbcType="NCHAR" javaType="java.lang.String" />
@@ -17,7 +17,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    DEVICE_ID, DEVICE_TYPE_ID, ADDDATE, EDITDATE, ADDWHO, STATUS, BK1, BK2, BK3, BK4, 
+    DEVICE_ID, DEVICE_TYPE_ID, adddate, EDITDATE, ADDWHO, STATUS, BK1, BK2, BK3, BK4, 
     BK5
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -31,11 +31,11 @@
     where DEVICE_ID = #{deviceId,jdbcType=NVARCHAR}
   </delete>
   <insert id="insert" parameterType="com.management.pojo.device.DeviceList" >
-    insert into DEVICE_LIST (DEVICE_ID, DEVICE_TYPE_ID, ADDDATE, 
+    insert into DEVICE_LIST (DEVICE_ID, DEVICE_TYPE_ID, adddate, 
       EDITDATE, ADDWHO, STATUS, 
       BK1, BK2, BK3, BK4, 
       BK5)
-    values (#{deviceId,jdbcType=NVARCHAR}, #{deviceTypeId,jdbcType=INTEGER}, #{addDate,jdbcType=TIMESTAMP},
+    values (#{deviceId,jdbcType=NVARCHAR}, #{deviceTypeId,jdbcType=INTEGER}, #{adddate,jdbcType=TIMESTAMP},
       #{editdate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=NVARCHAR}, #{status,jdbcType=NCHAR}, 
       #{bk1,jdbcType=NVARCHAR}, #{bk2,jdbcType=NVARCHAR}, #{bk3,jdbcType=NVARCHAR}, #{bk4,jdbcType=NVARCHAR}, 
       #{bk5,jdbcType=NVARCHAR})
@@ -50,7 +50,7 @@
         DEVICE_TYPE_ID,
       </if>
       <if test="true" >
-        ADDDATE,
+        adddate,
       </if>
       <if test="true" >
         EDITDATE,
@@ -119,8 +119,8 @@
       <if test="deviceTypeId != null" >
         DEVICE_TYPE_ID = #{deviceTypeId,jdbcType=INTEGER},
       </if>
-      <if test="addDate != null" >
-        ADDDATE = #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="true" >
         EDITDATE = getdate(),
@@ -152,7 +152,7 @@
   <update id="updateByPrimaryKey" parameterType="com.management.pojo.device.DeviceList" >
     update DEVICE_LIST
     set DEVICE_TYPE_ID = #{deviceTypeId,jdbcType=INTEGER},
-      ADDDATE = #{addDate,jdbcType=TIMESTAMP},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
       EDITDATE = getdate(),
       ADDWHO = #{addwho,jdbcType=NVARCHAR},
       STATUS = #{status,jdbcType=NCHAR},

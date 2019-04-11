@@ -30,6 +30,9 @@ var _util = {
                 // 请求数据错误
                 else if(1 === res.status){
                     typeof param.error === 'function' && param.error(res.msg);
+                }else {
+                    console.log(res.msg);
+                    alert("操作失败，请重试");
                 }
             },
             error       : function(err){

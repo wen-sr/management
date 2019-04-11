@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.xhwl.JiaoCaiPlanDataMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.xhwl.JiaoCaiPlanData" >
+    <constructor >
+      <idArg column="id" jdbcType="NUMERIC" javaType="java.lang.Long" />
+      <arg column="issueNumber" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="plantingName" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="subcode" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="descr" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="publisher" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="qtyPerItem" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="qtyDeliver" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="qtyCase" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="batchno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="deliverDate" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="handBagDate" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="type" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="status" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="remark" jdbcType="NVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, issueNumber, plantingName, subcode, price, descr, publisher, qtyPerItem, qtyDeliver, 
+    qtyCase, batchno, deliverDate, handBagDate, type, addwho, adddate, status, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from JiaoCaiPlanData
+    where id = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from JiaoCaiPlanData
+    where id = #{id,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByIssuenumber">
+    delete from JiaoCaiPlanData where issueNumber = #{issuenumber}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.xhwl.JiaoCaiPlanData" >
+    insert into JiaoCaiPlanData (id, issueNumber, plantingName, 
+      subcode, price, descr, 
+      publisher, qtyPerItem, qtyDeliver, 
+      qtyCase, batchno, deliverDate, 
+      handBagDate, type, addwho, 
+      adddate, status, remark
+      )
+    values (#{id,jdbcType=NUMERIC}, #{issuenumber,jdbcType=NVARCHAR}, #{plantingname,jdbcType=NVARCHAR}, 
+      #{subcode,jdbcType=NVARCHAR}, #{price,jdbcType=DOUBLE}, #{descr,jdbcType=NVARCHAR}, 
+      #{publisher,jdbcType=NVARCHAR}, #{qtyperitem,jdbcType=INTEGER}, #{qtydeliver,jdbcType=INTEGER}, 
+      #{qtycase,jdbcType=INTEGER}, #{batchno,jdbcType=VARCHAR}, #{deliverdate,jdbcType=NVARCHAR}, 
+      #{handbagdate,jdbcType=NVARCHAR}, #{type,jdbcType=NVARCHAR}, #{addwho,jdbcType=NVARCHAR}, 
+      #{adddate,jdbcType=TIMESTAMP}, #{status,jdbcType=NVARCHAR}, #{remark,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.xhwl.JiaoCaiPlanData" >
+    insert into JiaoCaiPlanData
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="issuenumber != null" >
+        issueNumber,
+      </if>
+      <if test="plantingname != null" >
+        plantingName,
+      </if>
+      <if test="subcode != null" >
+        subcode,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="descr != null" >
+        descr,
+      </if>
+      <if test="publisher != null" >
+        publisher,
+      </if>
+      <if test="qtyperitem != null" >
+        qtyPerItem,
+      </if>
+      <if test="qtydeliver != null" >
+        qtyDeliver,
+      </if>
+      <if test="qtycase != null" >
+        qtyCase,
+      </if>
+      <if test="batchno != null" >
+        batchno,
+      </if>
+      <if test="deliverdate != null" >
+        deliverDate,
+      </if>
+      <if test="handbagdate != null" >
+        handBagDate,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="addwho != null" >
+        addwho,
+      </if>
+      <if test="1 != 2" >
+        adddate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="issuenumber != null" >
+        #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="plantingname != null" >
+        #{plantingname,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="descr != null" >
+        #{descr,jdbcType=NVARCHAR},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=NVARCHAR},
+      </if>
+      <if test="qtyperitem != null" >
+        #{qtyperitem,jdbcType=INTEGER},
+      </if>
+      <if test="qtydeliver != null" >
+        #{qtydeliver,jdbcType=INTEGER},
+      </if>
+      <if test="qtycase != null" >
+        #{qtycase,jdbcType=INTEGER},
+      </if>
+      <if test="batchno != null" >
+        #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverdate != null" >
+        #{deliverdate,jdbcType=NVARCHAR},
+      </if>
+      <if test="handbagdate != null" >
+        #{handbagdate,jdbcType=NVARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=NVARCHAR},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="1 != 2" >
+        getdate(),
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.xhwl.JiaoCaiPlanData" >
+    update JiaoCaiPlanData
+    <set >
+      <if test="issuenumber != null" >
+        issueNumber = #{issuenumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="plantingname != null" >
+        plantingName = #{plantingname,jdbcType=NVARCHAR},
+      </if>
+      <if test="subcode != null" >
+        subcode = #{subcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="descr != null" >
+        descr = #{descr,jdbcType=NVARCHAR},
+      </if>
+      <if test="publisher != null" >
+        publisher = #{publisher,jdbcType=NVARCHAR},
+      </if>
+      <if test="qtyperitem != null" >
+        qtyPerItem = #{qtyperitem,jdbcType=INTEGER},
+      </if>
+      <if test="qtydeliver != null" >
+        qtyDeliver = #{qtydeliver,jdbcType=INTEGER},
+      </if>
+      <if test="qtycase != null" >
+        qtyCase = #{qtycase,jdbcType=INTEGER},
+      </if>
+      <if test="batchno != null" >
+        batchno = #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverdate != null" >
+        deliverDate = #{deliverdate,jdbcType=NVARCHAR},
+      </if>
+      <if test="handbagdate != null" >
+        handBagDate = #{handbagdate,jdbcType=NVARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=NVARCHAR},
+      </if>
+      <if test="addwho != null" >
+        addwho = #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.xhwl.JiaoCaiPlanData" >
+    update JiaoCaiPlanData
+    set issueNumber = #{issuenumber,jdbcType=NVARCHAR},
+      plantingName = #{plantingname,jdbcType=NVARCHAR},
+      subcode = #{subcode,jdbcType=NVARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      descr = #{descr,jdbcType=NVARCHAR},
+      publisher = #{publisher,jdbcType=NVARCHAR},
+      qtyPerItem = #{qtyperitem,jdbcType=INTEGER},
+      qtyDeliver = #{qtydeliver,jdbcType=INTEGER},
+      qtyCase = #{qtycase,jdbcType=INTEGER},
+      batchno = #{batchno,jdbcType=VARCHAR},
+      deliverDate = #{deliverdate,jdbcType=NVARCHAR},
+      handBagDate = #{handbagdate,jdbcType=NVARCHAR},
+      type = #{type,jdbcType=NVARCHAR},
+      addwho = #{addwho,jdbcType=NVARCHAR},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=NVARCHAR},
+      remark = #{remark,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+  <select id="findAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from JiaoCaiPlanData
+    <where>
+      <if test="issuenumber != null" >
+        and issueNumber = #{issuenumber,jdbcType=NVARCHAR}
+      </if>
+      <if test="plantingname != null" >
+        and plantingName = #{plantingname,jdbcType=NVARCHAR}
+      </if>
+      <if test="subcode != null" >
+        and subcode = #{subcode,jdbcType=NVARCHAR}
+      </if>
+      <if test="handbagdate != null" >
+        and handBagDate &gt;= #{handbagdate,jdbcType=NVARCHAR}
+      </if>
+      <if test="handbagdateEnd != null" >
+        and handBagDate &lt;= #{handbagdateEnd,jdbcType=NVARCHAR}
+      </if>
+      <if test="type != null" >
+        and type = #{type,jdbcType=NVARCHAR}
+      </if>
+      <if test="flag != null and 'true'.toString() == flag.toString()">
+        and (handBagDate is null or handBagDate = '' )
+      </if>
+    </where>
+    order by adddate desc
+  </select>
+  <select id="issueNumberTips" resultType="com.management.vo.xhwl.JiaoCaiPlanDataVo">
+    select distinct issuenumber from JiaoCaiPlanData
+  </select>
+  <select id="plantingnameTips" resultType="com.management.vo.xhwl.JiaoCaiPlanDataVo">
+    select distinct plantingname from JiaoCaiPlanData
+  </select>
+  <select id="subcodeTips" resultType="com.management.vo.xhwl.JiaoCaiPlanDataVo">
+    select distinct subcode from JiaoCaiPlanData
+  </select>
+  <select id="typeTips" resultType="com.management.vo.xhwl.JiaoCaiPlanDataVo">
+    select distinct type from JiaoCaiPlanData
+  </select>
+
+</mapper>

@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@Transactional
+@Transactional(value = "transactionManager_xh",readOnly = false)
 public class DeviceListServiceImpl implements IDeviceListService {
 
     @Autowired

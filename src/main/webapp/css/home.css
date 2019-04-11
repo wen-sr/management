@@ -100,8 +100,11 @@ a:hover {
 /* ul li以横排显示 */
 
 .menu_t{
-    float: left;
-    margin: 5px 20px;
+    /*float: left;*/
+    margin: 5px 10px;
+    height:60px;
+    /*overflow-x: scroll;*/
+    /*overflow-y: hidden;*/
 }
 /* 所有class为menu的div中的ul样式 */
 div.menu_t ul
@@ -110,6 +113,9 @@ div.menu_t ul
     margin: 0px; /* 与外界元素的距离为0 */
     padding: 0px; /* 与内部元素的距离为0 */
     width: auto; /* 宽度根据元素内容调整 */
+    /*height:60px;*/
+    /*overflow: hidden;*/
+    /*overflow-x: scroll;*/
 }
 /* 所有class为menu的div中的ul中的li样式 */
 div.menu_t ul li
@@ -129,6 +135,7 @@ div.menu_t ul li a /*, div.menu_t ul li a:visited*/
     text-decoration: none; /* 不显示超链接下划线 */
     white-space: nowrap; /* 对于文本内的空白处，不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。 */
     font-size: 18px;
+    /*height: 50px;*/
 }
 /* 所有class为menu的div中的ul中的a样式(鼠标移动到元素中的样式) */
 div.menu_t ul li a:hover

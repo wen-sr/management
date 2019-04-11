@@ -15,7 +15,7 @@
       <arg column="toid" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="taskid" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="addwho" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="addDate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="adddate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="status" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="editwho" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="editdate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -23,7 +23,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, task_type, issuenumber, subcode, pack, qty, fromloc, fromid, toloc, toid, taskid, 
-    addwho, addDate, status, editwho, editdate
+    addwho, adddate, status, editwho, editdate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -40,13 +40,13 @@
       subcode, pack, qty, 
       fromloc, fromid, toloc, 
       toid, taskid, addwho, 
-      addDate, status, editwho,
+      adddate, status, editwho,
       editdate)
     values (#{id,jdbcType=INTEGER}, #{taskType,jdbcType=NVARCHAR}, #{issuenumber,jdbcType=NVARCHAR}, 
       #{subcode,jdbcType=NVARCHAR}, #{pack,jdbcType=INTEGER}, #{qty,jdbcType=INTEGER}, 
       #{fromloc,jdbcType=NVARCHAR}, #{fromid,jdbcType=NVARCHAR}, #{toloc,jdbcType=NVARCHAR}, 
       #{toid,jdbcType=NVARCHAR}, #{taskid,jdbcType=NVARCHAR}, #{addwho,jdbcType=NVARCHAR}, 
-      #{addDate,jdbcType=TIMESTAMP}, #{status,jdbcType=NVARCHAR}, #{editwho,jdbcType=NVARCHAR},
+      #{adddate,jdbcType=TIMESTAMP}, #{status,jdbcType=NVARCHAR}, #{editwho,jdbcType=NVARCHAR},
       #{editdate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.management.pojo.jc.JiaoCaiTaskDetail">
@@ -88,8 +88,8 @@
       <if test="addwho != null">
         addwho,
       </if>
-      <if test="addDate != null">
-        addDate,
+      <if test="adddate != null">
+        adddate,
       </if>
       <if test="status != null">
         status,
@@ -138,8 +138,8 @@
       <if test="addwho != null">
         #{addwho,jdbcType=NVARCHAR},
       </if>
-      <if test="addDate != null">
-        #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null">
+        #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         #{status,jdbcType=NVARCHAR},
@@ -188,8 +188,8 @@
       <if test="addwho != null">
         addwho = #{addwho,jdbcType=NVARCHAR},
       </if>
-      <if test="addDate != null">
-        addDate = #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null">
+        adddate = #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=NVARCHAR},
@@ -216,7 +216,7 @@
       toid = #{toid,jdbcType=NVARCHAR},
       taskid = #{taskid,jdbcType=NVARCHAR},
       addwho = #{addwho,jdbcType=NVARCHAR},
-      addDate = #{addDate,jdbcType=TIMESTAMP},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=NVARCHAR},
       editwho = #{editwho,jdbcType=NVARCHAR},
       editdate = #{editdate,jdbcType=TIMESTAMP}

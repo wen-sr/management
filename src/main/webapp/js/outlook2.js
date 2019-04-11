@@ -2,6 +2,7 @@
 	// InitLeftMenu();
 	tabClose();
 	tabCloseEven();
+	// homePage();
 });
 
 //初始化左侧
@@ -178,4 +179,14 @@ function tabCloseEven()
 //弹出信息窗口 title:标题 msgString:提示信息 msgType:信息类型 [error,info,question,warning]
 function msgShow(title, msgString, msgType) {
 	$.messager.alert(title, msgString, msgType);
+}
+
+
+function homePage() {
+	$('#tabs').tabs('add',{
+		title:"系统菜单",
+		content:createFrame("/management/homePage.html"),
+		closable:false,
+		icon: 'fa fa-home'
+	});
 }

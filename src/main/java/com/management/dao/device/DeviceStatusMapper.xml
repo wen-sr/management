@@ -9,13 +9,13 @@
       <arg column="DEVICE_USER_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="DEVICE_USER_NAME" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="STATUS" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     DEVICE_ID, DEVICE_TYPE_ID, DEVICE_TYPE_NAME, DEVICE_USER_ID, DEVICE_USER_NAME, STATUS, 
-    ADDDATE, EDITDATE
+    adddate, EDITDATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -30,7 +30,7 @@
   <insert id="insert" parameterType="com.management.pojo.device.DeviceStatus" >
     insert into DEVICE_STATUS (DEVICE_ID, DEVICE_TYPE_ID, DEVICE_TYPE_NAME, 
       DEVICE_USER_ID, DEVICE_USER_NAME, STATUS, 
-      ADDDATE, EDITDATE)
+      adddate, EDITDATE)
     values (#{deviceId,jdbcType=NVARCHAR}, #{deviceTypeId,jdbcType=INTEGER}, #{deviceTypeName,jdbcType=NVARCHAR}, 
       #{deviceUserId,jdbcType=INTEGER}, #{deviceUserName,jdbcType=NVARCHAR}, #{status,jdbcType=INTEGER}, 
       getdate(), getdate())
@@ -57,7 +57,7 @@
         STATUS,
       </if>
       <if test="1 == 1" >
-        ADDDATE,
+        adddate,
       </if>
       <if test="1 == 1" >
         EDITDATE,
@@ -108,8 +108,8 @@
       <if test="status != null" >
         STATUS = #{status,jdbcType=INTEGER},
       </if>
-      <if test="addDate != null" >
-        ADDDATE = #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="1 == 1" >
         EDITDATE = getdate(),
@@ -124,7 +124,7 @@
       DEVICE_USER_ID = #{deviceUserId,jdbcType=INTEGER},
       DEVICE_USER_NAME = #{deviceUserName,jdbcType=NVARCHAR},
       STATUS = #{status,jdbcType=INTEGER},
-      ADDDATE = #{addDate,jdbcType=TIMESTAMP},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
       EDITDATE = getdate()
     where DEVICE_ID = #{deviceId,jdbcType=NVARCHAR}
   </update>

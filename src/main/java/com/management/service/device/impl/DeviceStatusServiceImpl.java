@@ -24,7 +24,7 @@ import java.util.List;
  * Date: 2017-09-20  14:09
  */
 @Service
-@Transactional
+@Transactional(value = "transactionManager_xh",readOnly = false)
 public class DeviceStatusServiceImpl implements DeviceStatusService {
 
     @Autowired

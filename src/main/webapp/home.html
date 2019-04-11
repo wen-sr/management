@@ -24,6 +24,60 @@
         frame{
             display: none;
         }
+        .xttblog {
+            width: 1200px;
+            height: 170px;
+            margin-top: 50px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .box {
+            margin-left: 5px;
+            margin-top: 5px;
+            list-style-type: none;
+            font-size: 30px;
+            font-family: "Microsoft YaHei", "微软雅黑", "宋体", Arial, Helvetica, sans-serif;
+            color: #00436B;
+        }
+
+        .box:after {
+            content: ".";
+            display: block;
+            line-height: 0;
+            width: 0;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+            overflow: hidden;
+        }
+
+        .box li {
+            float: left;
+            line-height: 230px;
+        }
+        .box a {
+            font-size: 30px;
+            color: #00436B;
+        }
+        .box li a, .box li a:visited {
+            display: block;
+            border: 5px solid #ccc;
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            margin-left: -5px;
+            margin-top: -5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .box li a:hover {
+            border-color: #f00;
+            background-color: #E0ECFF;
+            font-weight: 600;
+            z-index: 2;
+        }
     </style>
     <script type="text/javascript">
 
@@ -286,11 +340,11 @@
             <li><a href="javascript:void(0);" onclick="transform_sys.wcs();">WCS系统</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.pallet();">托盘库系统</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.tms();">TMS系统</a></li>
-            <li><a href="javascript:void(0);" onclick="transform_sys.jiao_cai();">教材手工</a></li>
+            <li><a href="javascript:void(0);" onclick="transform_sys.jiao_cai();">教材</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.report();">报表系统</a></li>
             <li><a href="javascript:void(0);" onclick="transform_sys.tech();">技术部</a></li>
-            <li><a href="javascript:void(0);" onclick="transform_sys.third();">三方业务</a></li>
-            <li><a href="javascript:void(0);" onclick="transform_sys.website();">三方业务</a></li>
+            <li><a href="javascript:void(0);" onclick="transform_sys.third();">业务部</a></li>
+            <li><a href="javascript:void(0);" onclick="transform_sys.website();">官网后台</a></li>
         </ul>
     </div>
 </div>
@@ -309,12 +363,28 @@
 </div>
 <div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
     <div id="tabs" class="easyui-tabs" fit="true" border="false">
-        <div title="欢迎使用" style="margin:0 auto;overflow:hidden; color:red;">
-            <!--<div style="width: 1024px; height: 800px; margin: 200px auto">-->
-                <!--<a href="javascript:void(0);"><div style="width: 200px; height: 300px; background: #e2e2e2;float: left;margin: 0 10px;text-align: center;line-height: 300px;"><span style="font-size: 30px;text-align: center">技术部</span></div></a>-->
-                <!--<a href="javascript:void(0);"><div style="width: 200px; height: 300px; background: #e4b9c0;float: left;margin: 0 10px;text-align: center;line-height: 300px;"><span style="font-size: 30px;">TMS系统</span></div></a>-->
-                <!--<a href="javascript:void(0);"><div style="width: 200px; height: 300px; background: #e4b9c0;float: left;margin: 0 10px;text-align: center;line-height: 300px;"><span style="font-size: 30px;">托盘库WMS</span></div></a>-->
-            <!--</div>-->
+        <div title="系统菜单" style="margin:0 auto;overflow:scroll;" data-options="iconCls:'fa fa-home',closable:false">
+            <div class="container">
+                <div>
+                    <h1 align="center" style="color: #00436B;font-family: 华文行楷;font-size: 45px">江西蓝海物流管理信息系统</h1>
+                </div>
+                <div class="xttblog">
+                    <ul class="box">
+                        <li><a href="javascript:void(0);" onclick="transform_sys.home();" class='home'>主页</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.xin_hua();">新华物流</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.cang_guan();">仓管中心</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.yun_guan();">运输中心</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.wcs();">WCS系统</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.pallet();">托盘库系统</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.tms();">TMS系统</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.jiao_cai();">教材</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.report();">报表系统</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.tech();">技术部</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.third();">业务部</a></li>
+                        <li><a href="javascript:void(0);" onclick="transform_sys.website();">官网后台</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -360,7 +430,6 @@
     <div class="menu-sep"></div>
     <div id="mm-exit">退出</div>
 </div>
-
 
 </body>
 </html>

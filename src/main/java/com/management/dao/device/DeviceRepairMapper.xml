@@ -12,7 +12,7 @@
       <arg column="STATUS" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="CAUSE" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="BAKUP" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="question_description" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="repair_user_id" jdbcType="NVARCHAR" javaType="java.lang.String" />
@@ -28,7 +28,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     ID, DEVICE_ID, DEVICE_TYPE_ID, DEVICE_TYPE_NAME, DEVICE_USER_ID, DEVICE_USER_NAME, 
-    STATUS, CAUSE, BAKUP, ADDDATE, EDITDATE, question_description, repair_user_id, Component, 
+    STATUS, CAUSE, BAKUP, adddate, EDITDATE, question_description, repair_user_id, Component,
     cost, result, bk1, bk2, bk3, bk4, bk5
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -45,14 +45,14 @@
     insert into DEVICE_REPAIR (ID, DEVICE_ID, DEVICE_TYPE_ID, 
       DEVICE_TYPE_NAME, DEVICE_USER_ID, DEVICE_USER_NAME, 
       STATUS, CAUSE, BAKUP, 
-      ADDDATE, EDITDATE, question_description, 
+      adddate, EDITDATE, question_description,
       repair_user_id, Component, cost, 
       result, bk1, bk2, 
       bk3, bk4, bk5)
     values (#{id,jdbcType=NUMERIC}, #{deviceId,jdbcType=NVARCHAR}, #{deviceTypeId,jdbcType=INTEGER}, 
       #{deviceTypeName,jdbcType=NVARCHAR}, #{deviceUserId,jdbcType=NVARCHAR}, #{deviceUserName,jdbcType=NVARCHAR},
       #{status,jdbcType=INTEGER}, #{cause,jdbcType=NVARCHAR}, #{bakup,jdbcType=NVARCHAR}, 
-      #{addDate,jdbcType=TIMESTAMP}, #{editdate,jdbcType=TIMESTAMP}, #{questionDescription,jdbcType=NVARCHAR},
+      #{adddate,jdbcType=TIMESTAMP}, #{editdate,jdbcType=TIMESTAMP}, #{questionDescription,jdbcType=NVARCHAR},
       #{repairUserId,jdbcType=NVARCHAR}, #{component,jdbcType=NVARCHAR}, #{cost,jdbcType=NUMERIC}, 
       #{result,jdbcType=NVARCHAR}, #{bk1,jdbcType=NVARCHAR}, #{bk2,jdbcType=NVARCHAR}, 
       #{bk3,jdbcType=NVARCHAR}, #{bk4,jdbcType=NVARCHAR}, #{bk5,jdbcType=NVARCHAR})
@@ -88,7 +88,7 @@
         BAKUP,
       </if>
       <if test="true" >
-        ADDDATE,
+        adddate,
       </if>
       <if test="true" >
         EDITDATE,
@@ -217,8 +217,8 @@
       <if test="bakup != null" >
         BAKUP = #{bakup,jdbcType=NVARCHAR},
       </if>
-      <if test="addDate != null" >
-        ADDDATE = #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="true" >
         EDITDATE = getdate(),
@@ -266,7 +266,7 @@
       STATUS = #{status,jdbcType=INTEGER},
       CAUSE = #{cause,jdbcType=NVARCHAR},
       BAKUP = #{bakup,jdbcType=NVARCHAR},
-      ADDDATE = #{addDate,jdbcType=TIMESTAMP},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
       EDITDATE = getdate(),
       question_description = #{questionDescription,jdbcType=NVARCHAR},
       repair_user_id = #{repairUserId,jdbcType=NVARCHAR},

@@ -18,7 +18,8 @@ public class Constant {
     public static final String URL_JIAOCAI                  = "http://141.168.1.188:8080/jxxhwl/user_addCookie";
     public static final String URL_JIAOCAI_2                = "http://www.jxxh56.com/jxxhwl/user_addCookie";
     public static final String URL_CANG_GUAN                = "http://141.168.1.137:8022/addCookie.ashx";
-    public static final String URL_TMS                      = "http://141.168.40.54:8080/LanHaiCenter/GetOtherSysInFo.go";
+    public static final String URL_TMS                      = "http://141.168.1.139:8080/LanHaiCenter/GetOtherSysInFo.go";
+    public static final String URL_WEBSITE                  = "http://141.168.1.139:8010/admin/Handler/addCookie.ashx";
     public static final String DATA_FROM                    = "MyWMS";
 
     public interface Role{

@@ -26,7 +26,7 @@
       <arg column="NOTE" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="GROUPKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="ADDDATE" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="adddate" jdbcType="DATE" javaType="java.util.Date" />
       <arg column="ADDWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="EDITDATE" jdbcType="DATE" javaType="java.util.Date" />
       <arg column="EDITWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -37,7 +37,7 @@
     XSOGROUPKEY, ARRIVE_DATE, TYPE, FROM_STATION, FROM_VENDOR, CARRIER_NO, SHIP_NO, FLAG,
     EXPECT_QTY, RECEIVE_QTY, ERROR_FLAG, ERROR_QTY, TRANSPORT, SHIP_TYPE, SHIP_USER,
     SHIP_DATE, RECEIVE_USER, RECEIVE_DATE, SEND_USER, SEND_DATE, NOTE, GROUPKEY, STATUS,
-    ADDDATE, ADDWHO, EDITDATE, EDITWHO, WORKGROUP_DATE
+    adddate, ADDWHO, EDITDATE, EDITWHO, WORKGROUP_DATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
@@ -57,7 +57,7 @@
       TRANSPORT, SHIP_TYPE, SHIP_USER,
       SHIP_DATE, RECEIVE_USER, RECEIVE_DATE,
       SEND_USER, SEND_DATE, NOTE,
-      GROUPKEY, STATUS, ADDDATE,
+      GROUPKEY, STATUS, adddate,
       ADDWHO, EDITDATE, EDITWHO,
       WORKGROUP_DATE)
     values (#{xsogroupkey,jdbcType=VARCHAR}, #{arriveDate,jdbcType=DATE}, #{type,jdbcType=VARCHAR},
@@ -67,7 +67,7 @@
       #{transport,jdbcType=VARCHAR}, #{shipType,jdbcType=VARCHAR}, #{shipUser,jdbcType=VARCHAR},
       #{shipDate,jdbcType=DATE}, #{receiveUser,jdbcType=VARCHAR}, #{receiveDate,jdbcType=DATE},
       #{sendUser,jdbcType=VARCHAR}, #{sendDate,jdbcType=DATE}, #{note,jdbcType=VARCHAR},
-      #{groupkey,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{addDate,jdbcType=DATE},
+      #{groupkey,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{adddate,jdbcType=DATE},
       #{addwho,jdbcType=VARCHAR}, #{editdate,jdbcType=DATE}, #{editwho,jdbcType=VARCHAR},
       #{workgroupDate,jdbcType=DATE})
   </insert>
@@ -143,8 +143,8 @@
       <if test="status != null" >
         STATUS,
       </if>
-      <if test="addDate != null" >
-        ADDDATE,
+      <if test="adddate != null" >
+        adddate,
       </if>
       <if test="addwho != null" >
         ADDWHO,
@@ -229,8 +229,8 @@
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="addDate != null" >
-        #{addDate,jdbcType=DATE},
+      <if test="adddate != null" >
+        #{adddate,jdbcType=DATE},
       </if>
       <if test="addwho != null" >
         #{addwho,jdbcType=VARCHAR},
@@ -315,8 +315,8 @@
       <if test="status != null" >
         STATUS = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="addDate != null" >
-        ADDDATE = #{addDate,jdbcType=DATE},
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=DATE},
       </if>
       <if test="addwho != null" >
         ADDWHO = #{addwho,jdbcType=VARCHAR},
@@ -357,7 +357,7 @@
       NOTE = #{note,jdbcType=VARCHAR},
       GROUPKEY = #{groupkey,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=VARCHAR},
-      ADDDATE = #{addDate,jdbcType=DATE},
+      adddate = #{adddate,jdbcType=DATE},
       ADDWHO = #{addwho,jdbcType=VARCHAR},
       EDITDATE = #{editdate,jdbcType=DATE},
       EDITWHO = #{editwho,jdbcType=VARCHAR},
@@ -368,7 +368,7 @@
   <select id="getReceiptToday" resultType="com.management.vo.prd1.ReceiptDto">
     SELECT (case when type=0 and ship_type='01' then '01' when type=0 and ship_type='02' then '02' when type=0 and ship_type='03' then '03' when type=0 and ship_type='04' then '04' when type=0 and ship_type='05' then '05' when type=1 and ship_type='01' then '06' when type=1 and ship_type='02' then '07' else '08' end) type,sum(receive_qty) qty
     from xsogroup
-    where to_char(addDate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')
+    where to_char(adddate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')
     group by type,ship_type
   </select>
   <select id="getReceipt" parameterType="string" resultMap="BaseResultMap">
@@ -376,13 +376,13 @@
     from xsogroup
     <where>
       <if test="end == null">
-        and to_char(addDate, 'yyyymmddd') = #{begin,jdbcType=VARCHAR}
+        and to_char(adddate, 'yyyymmddd') = #{begin,jdbcType=VARCHAR}
       </if>
       <if test="begin == null">
-        and to_char(addDate, 'yyyymmddd') = #{end,jdbcType=VARCHAR}
+        and to_char(adddate, 'yyyymmddd') = #{end,jdbcType=VARCHAR}
       </if>
       <if test="begin != null and end != null">
-        and to_char(addDate, 'yyyymmddd') between #{begin,jdbcType=VARCHAR} and  #{end,jdbcType=VARCHAR}
+        and to_char(adddate, 'yyyymmddd') between #{begin,jdbcType=VARCHAR} and  #{end,jdbcType=VARCHAR}
       </if>
     </where>
   </select>
@@ -394,7 +394,7 @@
   </select>
 
   <select id="bookShip" resultType="com.management.vo.prd1.LogisticsQueryVo">
-    select shipkey,caseid,doc_storerkey as "storerkey",consk,shortname,status,to_char(addDate,'yyyy/mm/dd') addDate,( case when caseintime is null then to_char(addDate,'yyyy/mm/dd') else to_char(caseintime,'yyyy/mm/dd') end )  caseintime,
+    select shipkey,caseid,doc_storerkey as "storerkey",consk,shortname,status,to_char(adddate,'yyyy/mm/dd') adddate,( case when caseintime is null then to_char(adddate,'yyyy/mm/dd') else to_char(caseintime,'yyyy/mm/dd') end )  caseintime,
     to_char(load_date, 'yyyy/mm/dd') loaddate, to_char(ship_date, 'yyyy/mm/dd') shipdate
     from caseid
     <where>
@@ -413,11 +413,11 @@
       <if test="shortname != null">
         and shortname = #{shortname}
       </if>
-      <if test="addDate != null">
-        and to_char(addDate, 'yyyy-mm-dd') between #{addDate} and #{adddateEnd}
+      <if test="adddate != null">
+        and to_char(adddate, 'yyyy-mm-dd') between #{adddate} and #{adddateEnd}
       </if>
       <if test="caseintime != null">
-        and (to_char(caseintime, 'yyyy-mm-dd') between #{caseintime} and  #{caseintimeEnd} or to_char(addDate, 'yyyy-mm-dd') between #{caseintime} and  #{caseintimeEnd})
+        and (to_char(caseintime, 'yyyy-mm-dd') between #{caseintime} and  #{caseintimeEnd} or to_char(adddate, 'yyyy-mm-dd') between #{caseintime} and  #{caseintimeEnd})
       </if>
       <if test="loaddate != null">
         and to_char(loaddate, 'yyyy-mm-dd') between #{loaddate} and #{loaddateEnd}
@@ -434,14 +434,14 @@
     select description from storer where storerkey = #{id}
   </select>
   <select id="receiptQuery" resultType="com.management.vo.prd1.ReceiptVo">
-    select a.xsogroupkey register,from_vendor storerkey,b.description shortname,a.ship_no shipno,receive_qty caseQty, to_char(a.addDate, 'yyyy-mm-dd') receiveDate
+    select a.xsogroupkey register,from_vendor storerkey,b.description shortname,a.ship_no shipno,receive_qty caseQty, to_char(a.adddate, 'yyyy-mm-dd') receiveDate
     from xsogroup a, storer b
     where a.from_vendor = b.storerkey
     <if test="begin != null">
-      and to_char(a.addDate, 'yyyy-mm-dd') &gt;= #{begin}
+      and to_char(a.adddate, 'yyyy-mm-dd') &gt;= #{begin}
     </if>
     <if test="end != null">
-      and to_char(a.addDate, 'yyyy-mm-dd') &lt;= #{end}
+      and to_char(a.adddate, 'yyyy-mm-dd') &lt;= #{end}
     </if>
     <if test="shipno != null">
       and a.ship_no = #{shipno}
@@ -449,7 +449,7 @@
     <if test="storerkey != null">
       and a.from_vendor = #{storerkey}
     </if>
-    order by to_char(a.addDate, 'yyyy-mm-dd')
+    order by to_char(a.adddate, 'yyyy-mm-dd')
   </select>
   <select id="registerDetail" resultType="com.management.vo.prd1.ReceiptVo">
     select b.doc_company,b.doc_compname,a.xsogroupkey register,a.receive_qty caseQty,b.doc_number,(case when b.status ='11' then '作业完成' when b.status in ('1','2','5') then '作业中' else '未作业'end) status,sum(c.doc_eqty) doc_eqty, sum(doc_cqty + doc_aqty + nvl(doc_zqty,0)) doc_aqty
@@ -498,7 +498,7 @@
     qty,
     to_char(load_date, 'yyyy-mm-dd hh24:mi:ss') loadDate,
     to_char(ship_date, 'yyyy-mm-dd hh24:mi:ss') shipDate,
-    to_char(adddate, 'yyyy-mm-dd hh24:mi:ss') addDate
+    to_char(adddate, 'yyyy-mm-dd hh24:mi:ss') adddate
     from caseid
     <where>
       status not in ('-1', '0', '1', '2', '5')
@@ -515,6 +515,6 @@
         and consk = #{storerkey}
       </if>
     </where>
-    order by addDate
+    order by adddate
   </select>
 </mapper>

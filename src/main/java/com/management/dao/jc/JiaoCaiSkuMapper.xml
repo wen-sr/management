@@ -13,14 +13,14 @@
       <arg column="publisher" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
       <arg column="editwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="addDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="editdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="bundle" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     issuenumber, subcode, id, barcode, descr, price, pack, publisher, addwho, editwho, 
-    addDate, editdate, bundle
+    adddate, editdate, bundle
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.management.pojo.jc.JiaoCaiSkuKey" >
     select 
@@ -38,7 +38,7 @@
     insert into JiaoCaiSku (issuenumber, subcode, id, 
       barcode, descr, price, 
       pack, publisher, addwho, 
-      editwho, addDate, editdate,
+      editwho, adddate, editdate,
       bundle)
     values (#{issuenumber,jdbcType=NVARCHAR}, #{subcode,jdbcType=NVARCHAR}, #{id,jdbcType=NUMERIC}, 
       #{barcode,jdbcType=NVARCHAR}, #{descr,jdbcType=NVARCHAR}, #{price,jdbcType=NUMERIC}, 
@@ -80,7 +80,7 @@
         editwho,
       </if>
       <if test="1 == 1" >
-        addDate,
+        adddate,
       </if>
       <if test="1 == 1" >
         editdate,
@@ -155,8 +155,8 @@
       <if test="editwho != null" >
         editwho = #{editwho,jdbcType=NVARCHAR},
       </if>
-      <if test="addDate != null" >
-        addDate = #{addDate,jdbcType=TIMESTAMP},
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
       </if>
       <if test="1 == 1" >
         editdate = getdate(),
@@ -178,7 +178,7 @@
       publisher = #{publisher,jdbcType=NVARCHAR},
       addwho = #{addwho,jdbcType=NVARCHAR},
       editwho = #{editwho,jdbcType=NVARCHAR},
-      addDate = #{addDate,jdbcType=TIMESTAMP},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
       editdate = getdate(),
       bundle = #{bundle,jdbcType=INTEGER}
     where issuenumber = #{issuenumber,jdbcType=NVARCHAR}
@@ -211,12 +211,12 @@
       <if test="addwho != null and addwho != '' " >
         and addwho = #{addwho}
       </if>
-      <if test="addDate != null and addDate != '' " >
-        <bind name="addDate" value="'%' + addDate + '%'" />
-        and convert(varchar(20),addDate,20) like #{addDate}
+      <if test="adddate != null and adddate != '' " >
+        <bind name="adddate" value="'%' + adddate + '%'" />
+        and convert(varchar(20),adddate,20) like #{adddate}
       </if>
     </where>
-  order by addDate desc
+  order by adddate desc
   </select>
 
 </mapper>

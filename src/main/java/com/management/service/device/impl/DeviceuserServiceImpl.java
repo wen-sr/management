@@ -17,7 +17,7 @@ import java.util.List;
  * Date: 2017-09-27  8:47
  */
 @Service
-@Transactional
+@Transactional(value = "transactionManager_xh",readOnly = false)
 public class DeviceuserServiceImpl implements IDeviceUserService {
 
     @Autowired
