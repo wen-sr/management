@@ -17,4 +17,9 @@ public interface ILogisticsQueryService {
     ServerResponse rejectDetail(ReceiptVo receiptVo);
 
     ServerResponse deliveryQuery(DeliveryVo deliveryVo);
+
+    ServerResponse orderCaseQuery(DeliveryVo deliveryVo);
+
+    ServerResponse caseidQuery(DeliveryVo deliveryVo);
+
 }

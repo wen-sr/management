@@ -73,4 +73,28 @@ public class LogisticsQueryServiceImpl implements ILogisticsQueryService {
         List<DeliveryVo> deliveryVoList = xsogroupMapper.deliveryQuery(deliveryVo);
         return ServerResponse.createBySuccess(deliveryVoList);
     }
+
+    @Override
+    public ServerResponse orderCaseQuery(DeliveryVo deliveryVo) {
+        DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
+        Login login = RequestHolder.getCurrentUser();
+        if(login == null) {
+            throw new MyException(10, "未登录");
+        }
+        deliveryVo.setStorerkey(login.getId());
+        List<DeliveryVo> deliveryVoList = xsogroupMapper.orderCaseQuery(deliveryVo);
+        return ServerResponse.createBySuccess(deliveryVoList);
+    }
+
+    @Override
+    public ServerResponse caseidQuery(DeliveryVo deliveryVo) {
+        DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
+        Login login = RequestHolder.getCurrentUser();
+        if(login == null) {
+            throw new MyException(10, "未登录");
+        }
+        deliveryVo.setStorerkey(login.getId());
+        List<DeliveryVo> deliveryVoList = xsogroupMapper.caseidQuery(deliveryVo);
+        return ServerResponse.createBySuccess(deliveryVoList);
+    }
 }

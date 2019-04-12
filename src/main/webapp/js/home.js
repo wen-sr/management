@@ -32,16 +32,16 @@ $(function(){
 })
 
 function checkUserLogin(){
-    _util.loadUserInfo(function(res){
-        $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-        var targetCookies = res.data.targetCookies;
+    _util.loadUserInfo(function(data, msg){
+        $(".username").text(data.organizationName + ":" + data.user.name);
+        var targetCookies = data.targetCookies;
         $.each(targetCookies,function(i,targetCookie){
             var targetUrl = targetCookie.targetUrl;
             var cookieName = targetCookie.cookieName;
             var cookieValue = targetCookie.cookieValue;
             creat(targetUrl,cookieName,cookieValue);
         });
-        InitLeftMenu(res.data.menuList);
+        InitLeftMenu(data.menuList);
     },function(erro){
         window.location.href = _util.getServerUrl('/login.html');
     })

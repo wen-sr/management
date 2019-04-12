@@ -55,6 +55,16 @@ public class LogisticsQueryController {
     public ServerResponse deliveryQuery(DeliveryVo deliveryVo) {
         return logisticsQueryService.deliveryQuery(deliveryVo);
     }
+    @RequestMapping(value = "/orderCaseQuery", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse orderCaseQuery(DeliveryVo deliveryVo) {
+        return logisticsQueryService.orderCaseQuery(deliveryVo);
+    }
+    @RequestMapping(value = "/caseidQuery", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse caseidQuery(DeliveryVo deliveryVo) {
+        return logisticsQueryService.caseidQuery(deliveryVo);
+    }
 
 
 }

@@ -13,9 +13,9 @@ function loadData(pageSize, method, formData){
         rownumbers:true,
         border:true,
         singleSelect:false,
-        // pagination:true,
-        // pageSize: pageSize || 15,
-        // pageList:[10,15,20,50,pageSize || 0],
+        pagination:true,
+        pageSize: pageSize || 20,
+        pageList:[10,20,50,pageSize || 0],
         showFooter: true,
         toolbar:'#tb',
         columns:[[{
@@ -68,6 +68,10 @@ function go() {
     if(rows == null || rows.length === 0 ){
         return;
     }
+    if(rows.length > 8 ){
+        alert("一次发布的新闻条数不能超过8条");
+        return;
+    }
     var ids = [];
     for(var i=0; i<rows.length; i++){
         var row = rows[i];
@@ -76,17 +80,21 @@ function go() {
     var formData = {
         'ids' : ids
     }
-    tools.request({
+    $("#tips").window("open");
+    _util.request({
         url         : '/management/jxlh56/news/sendToWechat',
         data        : formData,
         success     : function (data, msg) {
-
+            $("#tips").window("close");
+            alert(msg);
         }
     });
-
-
+}
+function query() {
+    var istochart = $("#istochart").combobox('getValue');
+    loadData(20, 'POST', {istochart : istochart});
 }
 
 $(function(){
-    loadData(1, 'POST', '');
+    loadData(20, 'POST', {istochart : '1'});
 });

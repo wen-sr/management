@@ -13,7 +13,11 @@ import java.util.List;
  * Modified By：
  */
 public interface INewsService {
-    EasyuiTableResponse queryInfo(News news);
+    EasyuiTableResponse queryInfo(Integer pageSize, Integer pageNum, News news);
 
     ServerResponse sendToWechat(List<Integer> ids);
+
+    ServerResponse queryInfo2(int i, int i1, News news);
+
+    ServerResponse queryById(News news);
 }

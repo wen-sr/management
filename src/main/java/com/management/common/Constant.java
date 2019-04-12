@@ -21,6 +21,7 @@ public class Constant {
     public static final String URL_TMS                      = "http://141.168.1.139:8080/LanHaiCenter/GetOtherSysInFo.go";
     public static final String URL_WEBSITE                  = "http://141.168.1.139:8010/admin/Handler/addCookie.ashx";
     public static final String DATA_FROM                    = "MyWMS";
+    public static final String WEBSITE_PIC                  = "http://img.jxlh56.com/website/";
 
     public interface Role{
         int ROLE_CUSTOMER = 0; //普通用户

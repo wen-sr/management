@@ -2,7 +2,7 @@ $(function () {
     var caseid = tools.getUrlParam("caseid");
     $('#list').html('');
     tools.request({
-        url     : "/management/logisticsQuery/deliveryQuery",
+        url     : "/management/logisticsQuery/caseidQuery",
         data    : {shipno: caseid},
         success : function (res) {
             var check_zy_results_data = $('#check_zy_results_data');

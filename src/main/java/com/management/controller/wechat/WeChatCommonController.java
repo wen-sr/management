@@ -90,9 +90,7 @@ public class WeChatCommonController {
     @RequestMapping("/checkLogin")
     @ResponseBody
     public ServerResponse checkLogin(HttpServletRequest request, HttpSession session) {
-        Login login = RequestHolder.getCurrentUser();
-        if (login == null) {
-            login = (Login) session.getAttribute(Constant.CURRENT_USER);
+            Login login = (Login) session.getAttribute(Constant.CURRENT_USER);
             if (login == null) {
                 Cookie[] cookies = request.getCookies();
                 if (null != cookies) {
@@ -107,7 +105,6 @@ public class WeChatCommonController {
                     }
                 }
             }
-        }
         if (login == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(), "未登录");
         }
@@ -118,9 +115,7 @@ public class WeChatCommonController {
     @RequestMapping("/needLogin")
     @ResponseBody
     public ServerResponse needLogin(HttpServletRequest request, HttpSession session) {
-        Login login = RequestHolder.getCurrentUser();
-        if (login == null) {
-            login = (Login) session.getAttribute(Constant.CURRENT_USER);
+            Login login = (Login) session.getAttribute(Constant.CURRENT_USER);
             if (login == null) {
                 Cookie[] cookies = request.getCookies();
                 if (null != cookies) {
@@ -135,7 +130,6 @@ public class WeChatCommonController {
                     }
                 }
             }
-        }
         if (login == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录");
         }

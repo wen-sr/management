@@ -21,7 +21,7 @@ var _util = {
             success     : function(res){
                 // 请求成功
                 if(0 === res.status){
-                    typeof param.success === 'function' && param.success(res);
+                    typeof param.success === 'function' && param.success(res.data, res.msg);
                 }
                 // 没有登录状态，需要强制登录
                 else if(10 === res.status){

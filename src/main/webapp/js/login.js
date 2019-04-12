@@ -63,9 +63,9 @@ function login(){
     var validateResult = formValidate(formData);
     if(validateResult.status){
         formError.hide();
-        submit(formData, function(res){
+        submit(formData, function(data, msg){
             // 登录成功
-            var targetCookies = res.data[1];
+            var targetCookies = data[1];
 
             // 向服务器发出添加cookie请求
             // $.each(targetCookies,function(i,targetCookie){

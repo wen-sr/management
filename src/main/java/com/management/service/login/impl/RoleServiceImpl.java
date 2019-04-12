@@ -33,6 +33,7 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public ServerResponse findAll(Role role) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         List<Role> roleList = roleMapper.findAll(role);
         return ServerResponse.createBySuccess(roleList);
     }

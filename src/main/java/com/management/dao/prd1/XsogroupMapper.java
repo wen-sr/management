@@ -40,4 +40,8 @@ public interface XsogroupMapper {
     List<ReceiptVo> rejectDetail(ReceiptVo receiptVo);
 
     List<DeliveryVo> deliveryQuery(DeliveryVo deliveryVo);
+
+    List<DeliveryVo> orderCaseQuery(DeliveryVo deliveryVo);
+
+    List<DeliveryVo> caseidQuery(DeliveryVo deliveryVo);
 }

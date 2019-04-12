@@ -472,6 +472,52 @@
     select company from storer_jc where storerkey = #{id}
   </select>
   <select id="deliveryQuery" resultType="com.management.vo.prd1.DeliveryVo">
+    select (case when type='0' then '主配' when type = '1' then '退货' when type = '2' then '请配' else '其他' end) type ,storerkey,shortname,orderId,owner,ownerName,status,associationOrderId,adddate
+    from orderStatus
+    where storerkey = #{storerkey}
+    <if test="begin != null">
+      and adddate &gt;= #{begin}
+    </if>
+    <if test="end != null">
+      and adddate &lt;= #{end}
+    </if>
+    <if test="orderId != null">
+      and (orderId = #{orderId} or associationOrderId = #{orderId})
+    </if>
+  </select>
+  <select id="orderCaseQuery" resultType="com.management.vo.prd1.DeliveryVo">
+    select distinct shipkey shipno,
+    a.caseid,
+    doc_storerkey owner,
+    (select description
+    from storer
+    where storer.storerkey = a.doc_storerkey) ownerName,
+    consk storerkey,
+    shortname,
+    (case
+    when status in ('-1', '0', '1', '2', '5') then
+    '作业中'
+    when status in ('8') then
+    '已装车'
+    when status in ('9', '11') then
+    '运输中'
+    when status in ('12') then
+    '已签收'
+    when status in ('15') then
+    '已回单'
+    else
+    '其他'
+    end) status,
+    nvl(a.susr1, 1) caseQty,
+    a.qty,
+    to_char(load_date, 'yyyy-mm-dd hh24:mi:ss') loadDate,
+    to_char(ship_date, 'yyyy-mm-dd hh24:mi:ss') shipDate,
+    to_char(a.adddate, 'yyyy-mm-dd hh24:mi:ss') adddate
+    from caseid a,casedetail b
+    where a.caseid = b.caseid and a.caseid_bak = b.caseid_bak
+    and b.doc_number = #{orderId}
+  </select>
+  <select id="caseidQuery" resultType="com.management.vo.prd1.DeliveryVo">
     select shipkey shipno,
     caseid,
     doc_storerkey owner,

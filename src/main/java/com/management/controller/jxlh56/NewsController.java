@@ -25,8 +25,19 @@ public class NewsController {
     INewsService newsService;
 
     @RequestMapping("/queryInfo")
-    public EasyuiTableResponse queryInfo(News news) {
-        return newsService.queryInfo(news);
+    public EasyuiTableResponse queryInfo(@RequestParam(value = "rows", defaultValue = "10") Integer pageSize,
+                                         @RequestParam(value = "page", defaultValue = "1") Integer pageNum,
+                                         News news) {
+        return newsService.queryInfo(pageSize, pageNum, news);
+    }
+
+    @RequestMapping("/queryInfo2")
+    public ServerResponse queryInfo2(News news) {
+        return newsService.queryInfo2(50, 1, news);
+    }
+    @RequestMapping("/queryById")
+    public ServerResponse queryById(News news) {
+        return newsService.queryById(news);
     }
 
 

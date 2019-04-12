@@ -9,7 +9,13 @@ public interface NewsMapper {
 
     int insertSelective(News record);
 
-    List<News> findAll();
+    List<News> findAll(News news);
 
     List<News> findByIds(List<Integer> ids);
+
+    void updateStatus(List<Integer> ids);
+
+    List<News> findAll2();
+
+    News queryById(Integer id);
 }

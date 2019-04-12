@@ -16,7 +16,7 @@ $(function () {
 function go() {
     var begin = $("#begin").val();
     var end = $("#end").val();
-    var shipno = $("#shipno").val();
+    var orderId = $("#orderId").val();
     var dateBegin = new Date(begin.replace(/-/g, "/")); //begintime 为开始时间
 
     var dateEnd = new Date(end.replace(/-/g, "/"));   // endtime 为结束时间
@@ -33,5 +33,5 @@ function go() {
         $.toast("只能查询1年内的数据", "forbidden");
         return;
     }
-    window.open("deliveryDetail.html?begin=" + begin + "&end=" + end + "&shipno=" + shipno, "_self");
+    window.open("deliveryDetail.html?begin=" + begin + "&end=" + end + "&orderId=" + orderId, "_self");
 }

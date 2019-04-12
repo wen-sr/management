@@ -8,7 +8,7 @@ function loadData(pageSize, method, formData){
         method: method || 'GET',
         queryParams:formData || '',
         fitColumns: true,
-        fit:false,
+        fit:true,
         striped:true,
         rownumbers:true,
         border:true,

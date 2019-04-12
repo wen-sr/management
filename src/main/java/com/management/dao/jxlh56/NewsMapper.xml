@@ -168,17 +168,47 @@
       </if>
     </trim>
   </insert>
-    <select id="findAll" resultType="com.management.pojo.jxlh56.News">
+  <update id="updateStatus">
+    update news set istochart = '2'
+    where id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </update>
+  <select id="findAll" resultType="com.management.pojo.jxlh56.News">
       select id,title,newscontent
       from news
-      where istochart = '1'
+      <where>
+      <if test="istochart != null">
+        istochart = #{istochart}
+      </if>
+      </where>
+      order by id
     </select>
   <select id="findByIds" parameterType="java.util.List" resultType="com.management.pojo.jxlh56.News">
-    select id,title,newscontent,author
+    select id,title,newscontent,author,pictureflie
       from news
       where id in
     <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
        #{item}
     </foreach>
+  </select>
+  <select id="findAll2" resultType="com.management.pojo.jxlh56.News">
+    select top 50 id,title,newscontent
+    from (
+    select ID,TITLE ,NEWSCONTENT from NEWS
+    union all
+    select ID,TITLE,NOTICECONTENT  as NEWSCONTENT from NOTICE
+    ) a
+    order by ID desc
+  </select>
+  <select id="queryById" resultType="com.management.pojo.jxlh56.News">
+    select id,title,newscontent,author
+    from news
+    where id = #{id}
+    union all
+    select id,title,noticecontent  as newscontent
+    from notice
+    where id = #{id}
   </select>
 </mapper>

@@ -143,7 +143,7 @@
   <select id="selectById" resultType="com.management.pojo.login.AuthorityMid" parameterType="integer">
     select a.accordion_id,a.accordion_name,a.foo_id,b.role_id
     from accordion a left join (select * from role_accordion a,Role b where a.role_id=b.id and b.id = #{id} ) b on a.accordion_id = b.accordion_id
-    where accordion_flag = 1 and a.accordion_group >=50
+    where accordion_flag = 1
   </select>
   <select id="selectByName" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>

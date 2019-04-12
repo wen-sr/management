@@ -21,6 +21,33 @@ public class DeliveryVo {
     private String ownerName;
     private String owner;
     private String status;
+    private String orderId;
+    private String type;
+    private String associationOrderId;
+
+    public String getAssociationOrderId() {
+        return associationOrderId;
+    }
+
+    public void setAssociationOrderId(String associationOrderId) {
+        this.associationOrderId = associationOrderId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
 
     public String getStatus() {
         return status;

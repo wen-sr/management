@@ -178,9 +178,9 @@
                 var formData = {
                     loginSystemFlag : 0
                 }
-                _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                    $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                    InitLeftMenu(res.data.menuList);
+                _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                    $(".username").text(data.organizationName + ":" + data.user.name);
+                    InitLeftMenu(data.menuList);
                     $(".home").addClass("currentActive");
                 },function(erro){
                     window.location.href = _util.getServerUrl('/login.html');
@@ -190,9 +190,9 @@
                 var formData = {
                     loginSystemFlag : 3
                 }
-                _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                    $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                    InitLeftMenu(res.data.menuList);
+                _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                    $(".username").text(data.organizationName + ":" + data.user.name);
+                    InitLeftMenu(data.menuList);
                     $(".menu_t ul li:eq(4) a").addClass("currentActive");
                 },function(erro){
                     window.location.href = _util.getServerUrl('/login.html');
@@ -202,9 +202,9 @@
                  var formData = {
                      loginSystemFlag : 1
                  }
-                 _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                     $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                     InitLeftMenu(res.data.menuList);
+                 _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                     $(".username").text(data.organizationName + ":" + data.user.name);
+                     InitLeftMenu(data.menuList);
                  },function(erro){
                      window.location.href = _util.getServerUrl('/login.html');
                  })
@@ -213,9 +213,9 @@
                  var formData = {
                      loginSystemFlag : 2
                  }
-                 _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                     $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                     InitLeftMenu(res.data.menuList);
+                 _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                     $(".username").text(data.organizationName + ":" + data.user.name);
+                     InitLeftMenu(data.menuList);
                  },function(erro){
                      window.location.href = _util.getServerUrl('/login.html');
                  })
@@ -224,9 +224,9 @@
                  var formData = {
                      loginSystemFlag : 4
                  }
-                 _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                     $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                     InitLeftMenu(res.data.menuList);
+                 _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                     $(".username").text(data.organizationName + ":" + data.user.name);
+                     InitLeftMenu(data.menuList);
                  },function(erro){
                      window.location.href = _util.getServerUrl('/login.html');
                  })
@@ -235,9 +235,9 @@
                  var formData = {
                      loginSystemFlag : 5
                  }
-                 _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                     $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                     InitLeftMenu(res.data.menuList);
+                 _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                     $(".username").text(data.organizationName + ":" + data.user.name);
+                     InitLeftMenu(data.menuList);
                  },function(erro){
                      window.location.href = _util.getServerUrl('/login.html');
                  })
@@ -246,9 +246,9 @@
                  var formData = {
                      loginSystemFlag : 6
                  }
-                 _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                     $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                     InitLeftMenu(res.data.menuList);
+                 _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                     $(".username").text(data.organizationName + ":" + data.user.name);
+                     InitLeftMenu(data.menuList);
                  },function(erro){
                      window.location.href = _util.getServerUrl('/login.html');
                  })
@@ -257,9 +257,9 @@
                  var formData = {
                      loginSystemFlag : 7
                  }
-                 _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                     $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                     InitLeftMenu(res.data.menuList);
+                 _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                     $(".username").text(data.organizationName + ":" + data.user.name);
+                     InitLeftMenu(data.menuList);
                  },function(erro){
                      window.location.href = _util.getServerUrl('/login.html');
                  })
@@ -268,9 +268,9 @@
                 var formData = {
                     loginSystemFlag : 8
                 }
-                _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                    $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                    InitLeftMenu(res.data.menuList);
+                _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                    $(".username").text(data.organizationName + ":" + data.user.name);
+                    InitLeftMenu(data.menuList);
                 },function(erro){
                     window.location.href = _util.getServerUrl('/login.html');
                 })
@@ -279,9 +279,9 @@
                 var formData = {
                     loginSystemFlag : 10
                 }
-                _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                    $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                    InitLeftMenu(res.data.menuList);
+                _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                    $(".username").text(data.organizationName + ":" + data.user.name);
+                    InitLeftMenu(data.menuList);
                 },function(erro){
                     window.location.href = _util.getServerUrl('/login.html');
                 })
@@ -290,9 +290,9 @@
                 var formData = {
                     loginSystemFlag : 11
                 }
-                _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                    $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                    InitLeftMenu(res.data.menuList);
+                _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                    $(".username").text(data.organizationName + ":" + data.user.name);
+                    InitLeftMenu(data.menuList);
                 },function(erro){
                     window.location.href = _util.getServerUrl('/login.html');
                 })
@@ -301,9 +301,9 @@
                 var formData = {
                     loginSystemFlag : 9
                 }
-                _util.submitGo("/user/getUserInfo", "POST",formData, function(res){
-                    $(".username").text(res.data.organizationName + ":" + res.data.user.name);
-                    InitLeftMenu(res.data.menuList);
+                _util.submitGo("/user/getUserInfo", "POST",formData, function(data, msg){
+                    $(".username").text(data.organizationName + ":" + data.user.name);
+                    InitLeftMenu(data.menuList);
                 },function(erro){
                     window.location.href = _util.getServerUrl('/login.html');
                 })
