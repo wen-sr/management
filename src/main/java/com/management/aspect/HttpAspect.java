@@ -38,6 +38,7 @@ public class HttpAspect {
 //    @Pointcut("execution(public * com.management.controller.login.UserController.*(..))")
     @Pointcut("execution(public * com.management.controller..*.*(..)) " +
             "&& !execution(public * com.management.controller.wechat..*.*(..)) " +
+            "&& !execution(public * com.management.controller.busi.BusiMessageWxController.queryInfo2(..)) " +
             "&& !execution(public * com.management.controller.login.UserController.login(..))")
     public void log() {
     }

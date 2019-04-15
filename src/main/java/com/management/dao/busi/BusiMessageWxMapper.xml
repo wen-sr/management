@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.dao.busi.BusiMessageWxMapper">
+  <resultMap id="BaseResultMap" type="com.management.pojo.busi.BusiMessageWx">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="NUMERIC" />
+      <arg column="qty_receipt_mouth" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="qty_delivery_mouth" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="qty_delivery_day" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="qty_stock" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="qty_receipt_day" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="dd" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="adddate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="addwho" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="remark" javaType="java.lang.String" jdbcType="NVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, qty_receipt_mouth, qty_delivery_mouth, qty_delivery_day, qty_stock, qty_receipt_day, 
+    dd, adddate, addwho, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from busi_message_wx
+    where id = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from busi_message_wx
+    where id = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.busi.BusiMessageWx">
+    insert into busi_message_wx (id, qty_receipt_mouth, qty_delivery_mouth, 
+      qty_delivery_day, qty_stock, qty_receipt_day, 
+      dd, adddate, addwho, 
+      remark)
+    values (#{id,jdbcType=NUMERIC}, #{qtyReceiptMouth,jdbcType=INTEGER}, #{qtyDeliveryMouth,jdbcType=INTEGER}, 
+      #{qtyDeliveryDay,jdbcType=INTEGER}, #{qtyStock,jdbcType=INTEGER}, #{qtyReceiptDay,jdbcType=INTEGER}, 
+      #{dd,jdbcType=NVARCHAR}, #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=NVARCHAR}, 
+      #{remark,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.busi.BusiMessageWx" useGeneratedKeys="true" keyProperty="id">
+    insert into busi_message_wx
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="qtyReceiptMouth != null">
+        qty_receipt_mouth,
+      </if>
+      <if test="qtyDeliveryMouth != null">
+        qty_delivery_mouth,
+      </if>
+      <if test="qtyDeliveryDay != null">
+        qty_delivery_day,
+      </if>
+      <if test="qtyStock != null">
+        qty_stock,
+      </if>
+      <if test="qtyReceiptDay != null">
+        qty_receipt_day,
+      </if>
+      <if test="dd != null">
+        dd,
+      </if>
+      <if test="1 != 2">
+        adddate,
+      </if>
+      <if test="addwho != null">
+        addwho,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="qtyReceiptMouth != null">
+        #{qtyReceiptMouth,jdbcType=INTEGER},
+      </if>
+      <if test="qtyDeliveryMouth != null">
+        #{qtyDeliveryMouth,jdbcType=INTEGER},
+      </if>
+      <if test="qtyDeliveryDay != null">
+        #{qtyDeliveryDay,jdbcType=INTEGER},
+      </if>
+      <if test="qtyStock != null">
+        #{qtyStock,jdbcType=INTEGER},
+      </if>
+      <if test="qtyReceiptDay != null">
+        #{qtyReceiptDay,jdbcType=INTEGER},
+      </if>
+      <if test="dd != null">
+        #{dd,jdbcType=NVARCHAR},
+      </if>
+      <if test="1 != 2">
+        getdate(),
+      </if>
+      <if test="addwho != null">
+        #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.busi.BusiMessageWx">
+    update busi_message_wx
+    <set>
+      <if test="qtyReceiptMouth != null">
+        qty_receipt_mouth = #{qtyReceiptMouth,jdbcType=INTEGER},
+      </if>
+      <if test="qtyDeliveryMouth != null">
+        qty_delivery_mouth = #{qtyDeliveryMouth,jdbcType=INTEGER},
+      </if>
+      <if test="qtyDeliveryDay != null">
+        qty_delivery_day = #{qtyDeliveryDay,jdbcType=INTEGER},
+      </if>
+      <if test="qtyStock != null">
+        qty_stock = #{qtyStock,jdbcType=INTEGER},
+      </if>
+      <if test="qtyReceiptDay != null">
+        qty_receipt_day = #{qtyReceiptDay,jdbcType=INTEGER},
+      </if>
+      <if test="dd != null">
+        dd = #{dd,jdbcType=NVARCHAR},
+      </if>
+      <if test="adddate != null">
+        adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null">
+        addwho = #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.busi.BusiMessageWx">
+    update busi_message_wx
+    set qty_receipt_mouth = #{qtyReceiptMouth,jdbcType=INTEGER},
+      qty_delivery_mouth = #{qtyDeliveryMouth,jdbcType=INTEGER},
+      qty_delivery_day = #{qtyDeliveryDay,jdbcType=INTEGER},
+      qty_stock = #{qtyStock,jdbcType=INTEGER},
+      qty_receipt_day = #{qtyReceiptDay,jdbcType=INTEGER},
+      dd = #{dd,jdbcType=NVARCHAR},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
+      addwho = #{addwho,jdbcType=NVARCHAR},
+      remark = #{remark,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=NUMERIC}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from busi_message_wx
+    <where>
+      <if test="dd != null">
+        and dd = #{dd}
+      </if>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+    </where>
+    order by adddate desc
+  </select>
+</mapper>

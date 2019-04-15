@@ -338,6 +338,8 @@
                                             com.management.dao.wcs;
                                             com.management.dao.jc;
                                             com.management.dao.jxlh56;
+                                            com.management.dao.busi;
+
                                                             "/>
     </bean>
 
