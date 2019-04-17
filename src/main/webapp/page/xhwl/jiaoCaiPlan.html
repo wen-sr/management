@@ -75,9 +75,55 @@
                                 ,panelHeight: '300' "/>
     <input class="easyui-checkbox" labelPosition="after" checked value="1" id="flag"  label="未交包">
     <a class="easyui-linkbutton" iconCls="icon-search" onclick="queryInfo()">查询</a>
+    <a class="easyui-linkbutton" iconCls="icon-search" onclick="edit()">修改</a>
+    <a class="easyui-linkbutton" iconCls="icon-search" onclick="editType()">修改类型</a>
 </div>
 <div id="tips" class="easyui-window" title="提示" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false,draggable:false,closable:false" style="width:200px;height:100px;padding:10px;">
     导入文件中，请勿操作
+</div>
+<!-- 添加信息窗口 -->
+<div id="w-editInfo" class="easyui-window" title="修改信息"
+     data-options="modal:false,closed:true,iconCls:'icon-edit'"
+     style="width: 700px; height: 300px; padding: 0px;">
+    <form align="center" style="text-align:center;margin: 10px;line-height: 41px;">
+        <h2>修改信息</h2>
+        <input type="hidden" id="oldId_2">
+        <table border="0px" align="center" cellpadding='2'width="100%">
+            <tr>
+                <td>期号：</td><td><input class="easyui-textbox" type="text" id="edit_issueNumber"  data-options="readonly:true"/></td>
+                <td>批次号：</td><td><input class="easyui-textbox" type="text" id="edit_batchno" data-options="readonly:true"/></td>
+            </tr>
+            <tr>
+                <td>征订代码:</td><td><input class="easyui-textbox" id="add_dd" data-options="readonly:true" /></td>
+                <td>书名：</td><td><input class="easyui-textbox" type="text" id="add_qtyReceiptDay"  data-options="required:true"/></td>
+            </tr>
+            <tr>
+                <td>交包日期：</td><td><input class="easyui-datebox" type="text" id="add_qtyReceiptMouth"  data-options="required:true"/></td>
+                <td>类型：</td><td><select class="easyui-combobox" name="state" >
+                                        <option>成品</option>
+                                        <option>成品（市店半）</option>
+                                        <option>成品（市店捆）</option>
+                                        <option>半成品</option>
+                                        <option>半成品（市店）</option>
+                                        <option>捆扎</option>
+                                        <option>捆扎（市店）</option>
+                                        <option>教参</option>
+                                        <option>印刷厂直送</option>
+                                        <option>出版社直发</option>
+                                        <option>教材经营公司直发</option>
+                                        <option>库存</option>
+                                    </select></td>
+            </tr>
+            <tr>
+                <td>备注：</td><td><input class="easyui-textbox" type="text" id="add_remark" data-options=""/></td>
+            </tr>
+            <tr>
+                <td colspan='4' align="center">&nbsp;&nbsp;&nbsp;
+                    <a class="easyui-linkbutton" onclick="addInfo()">提交</a>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 <script type="text/javascript" src="jiaoCaiPlan.js"></script>
 </body>

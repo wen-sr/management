@@ -33,7 +33,7 @@ public class JiaoCaiPlanDataServiceImpl implements IJiaoCaiPlanDataService {
     public ServerResponse saveRecords(List<List<Object>> listob) {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         JiaoCaiPlanData jiaoCaiPlanData = null;
-        jiaoCaiPlanDataMapper.deleteByIssuenumber(listob.get(0).toString());
+        //jiaoCaiPlanDataMapper.deleteByIssuenumber(listob.get(0).toString());
         if(listob != null && listob.size() > 0){
             for(List<Object> list : listob) {
                 jiaoCaiPlanData = new JiaoCaiPlanData();

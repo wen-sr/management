@@ -183,7 +183,7 @@
         istochart = #{istochart}
       </if>
       </where>
-      order by id
+      order by id desc
     </select>
   <select id="findByIds" parameterType="java.util.List" resultType="com.management.pojo.jxlh56.News">
     select id,title,newscontent,author,pictureflie
@@ -194,21 +194,12 @@
     </foreach>
   </select>
   <select id="findAll2" resultType="com.management.pojo.jxlh56.News">
-    select top 50 id,title,newscontent
-    from (
-    select ID,TITLE ,NEWSCONTENT from NEWS
-    union all
-    select ID,TITLE,NOTICECONTENT  as NEWSCONTENT from NOTICE
-    ) a
-    order by ID desc
+    select top 50 id,title ,newscontent from NEWS
+    order by id desc
   </select>
   <select id="queryById" resultType="com.management.pojo.jxlh56.News">
     select id,title,newscontent,author
     from news
-    where id = #{id}
-    union all
-    select id,title,noticecontent  as newscontent
-    from notice
     where id = #{id}
   </select>
 </mapper>

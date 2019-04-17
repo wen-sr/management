@@ -77,6 +77,7 @@ public class BusiMessageWxServiceImpl implements IBusiMessageWxService {
 
     @Override
     public ServerResponse queryInfo2(BusiMessageWx busiMessageWx) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         List<BusiMessageWx> busiMessageWxList = busiMessageWxMapper.selectAll(busiMessageWx);
         return ServerResponse.createBySuccess(busiMessageWxList);
     }
@@ -85,8 +86,8 @@ public class BusiMessageWxServiceImpl implements IBusiMessageWxService {
         if(busiMessageWx == null ){
             return;
         }
-        String msg = "业务部南昌仓电商发货今日产量：今日收货："+ busiMessageWx.getQtyReceiptDay() +"；累计收货：" + busiMessageWx.getQtyReceiptMouth() + "；累计发货：" + busiMessageWx.getQtyDeliveryMouth() +
-                "；今日发货：" + busiMessageWx.getQtyDeliveryDay() + "；库存：" + busiMessageWx.getQtyStock();
+        String msg = "业务部南昌仓电商发货今日产量：今日收货："+ busiMessageWx.getQtyReceiptDay() +"；累计收货：" + busiMessageWx.getQtyReceiptMouth() +
+                "；今日发货：" + busiMessageWx.getQtyDeliveryDay() + "；累计发货：" + busiMessageWx.getQtyDeliveryMouth() + "；库存：" + busiMessageWx.getQtyStock();
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                 .toUser(openid)
                 .templateId("j3uSiEeYMGG1UrMmU_AZlIJ_xwdTChiCGkKCpbTr2sk").build();

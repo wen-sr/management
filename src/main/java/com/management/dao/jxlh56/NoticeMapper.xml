@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.jxlh56.NoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.jxlh56.Notice" >
+    <constructor >
+      <arg column="ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CHANNELID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUBTITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TYPE" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ADDTIME" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="SYSDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DATASTATUS" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ADDNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RELEASETIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="RELEASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICTUREFLIE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDUSERID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ISNOTPICTURES" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="SOURCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AUTHOR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ISTOCHART" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="REVOKESUBMITID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REVOKESUBMITTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.management.pojo.jxlh56.Notice" >
+    <constructor >
+      <arg column="ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CHANNELID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUBTITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TYPE" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ADDTIME" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="SYSDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DATASTATUS" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ADDNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RELEASETIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="RELEASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICTUREFLIE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDUSERID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ISNOTPICTURES" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="SOURCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AUTHOR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ISTOCHART" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="REVOKESUBMITID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REVOKESUBMITTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="NOTICECONTENT" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    NOTICECONTENT
+  </sql>
+  <insert id="insert" parameterType="com.management.pojo.jxlh56.Notice" >
+    insert into NOTICE (ID, CHANNELID, TITLE, 
+      SUBTITLE, TYPE, ADDTIME, 
+      SYSDATE, DATASTATUS, ADDNAME, 
+      RELEASETIME, RELEASEID, PICTUREFLIE, 
+      ADDUSERID, ISNOTPICTURES, SOURCE, 
+      AUTHOR, ISTOCHART, REVOKESUBMITID, 
+      REVOKESUBMITTIME, NOTICECONTENT)
+    values (#{id,jdbcType=INTEGER}, #{channelid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{addtime,jdbcType=NVARCHAR}, 
+      #{sysdate,jdbcType=TIMESTAMP}, #{datastatus,jdbcType=INTEGER}, #{addname,jdbcType=VARCHAR}, 
+      #{releasetime,jdbcType=TIMESTAMP}, #{releaseid,jdbcType=VARCHAR}, #{pictureflie,jdbcType=VARCHAR}, 
+      #{adduserid,jdbcType=VARCHAR}, #{isnotpictures,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{istochart,jdbcType=INTEGER}, #{revokesubmitid,jdbcType=VARCHAR}, 
+      #{revokesubmittime,jdbcType=TIMESTAMP}, #{noticecontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.jxlh56.Notice" >
+    insert into NOTICE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="channelid != null" >
+        CHANNELID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="subtitle != null" >
+        SUBTITLE,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="addtime != null" >
+        ADDTIME,
+      </if>
+      <if test="sysdate != null" >
+        SYSDATE,
+      </if>
+      <if test="datastatus != null" >
+        DATASTATUS,
+      </if>
+      <if test="addname != null" >
+        ADDNAME,
+      </if>
+      <if test="releasetime != null" >
+        RELEASETIME,
+      </if>
+      <if test="releaseid != null" >
+        RELEASEID,
+      </if>
+      <if test="pictureflie != null" >
+        PICTUREFLIE,
+      </if>
+      <if test="adduserid != null" >
+        ADDUSERID,
+      </if>
+      <if test="isnotpictures != null" >
+        ISNOTPICTURES,
+      </if>
+      <if test="source != null" >
+        SOURCE,
+      </if>
+      <if test="author != null" >
+        AUTHOR,
+      </if>
+      <if test="istochart != null" >
+        ISTOCHART,
+      </if>
+      <if test="revokesubmitid != null" >
+        REVOKESUBMITID,
+      </if>
+      <if test="revokesubmittime != null" >
+        REVOKESUBMITTIME,
+      </if>
+      <if test="noticecontent != null" >
+        NOTICECONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysdate != null" >
+        #{sysdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datastatus != null" >
+        #{datastatus,jdbcType=INTEGER},
+      </if>
+      <if test="addname != null" >
+        #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null" >
+        #{releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseid != null" >
+        #{releaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureflie != null" >
+        #{pictureflie,jdbcType=VARCHAR},
+      </if>
+      <if test="adduserid != null" >
+        #{adduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotpictures != null" >
+        #{isnotpictures,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="istochart != null" >
+        #{istochart,jdbcType=INTEGER},
+      </if>
+      <if test="revokesubmitid != null" >
+        #{revokesubmitid,jdbcType=VARCHAR},
+      </if>
+      <if test="revokesubmittime != null" >
+        #{revokesubmittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noticecontent != null" >
+        #{noticecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateStatus">
+    update notice set istochart = '2'
+    where id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </update>
+  <select id="findAll" resultType="com.management.pojo.jxlh56.News">
+      select id,title,noticecontent as newscontent
+      from notice
+      <where>
+        <if test="istochart != null">
+          istochart = #{istochart}
+        </if>
+      </where>
+      order by id desc
+    </select>
+  <select id="findAll2" resultType="com.management.pojo.jxlh56.News">
+    select id,title,noticecontent  as newscontent from NOTICE order by id desc
+  </select>
+  <select id="queryById" resultType="com.management.pojo.jxlh56.News">
+    select id,title,noticecontent  as newscontent
+    from notice
+    where id = #{id}
+  </select>
+</mapper>

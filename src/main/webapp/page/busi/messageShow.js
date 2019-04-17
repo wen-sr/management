@@ -18,7 +18,7 @@ function getData(id) {
                         '{{#list}}' +
                         '<div class="weui-cell">' +
                         '<div class="weui-cell__bd">' +
-                        '<p>今日收货：{{qtyReceiptMouth}}</p>' +
+                        '<p>今日收货：{{qtyReceiptDay}}</p>' +
                         '<p>累计收货：{{qtyReceiptMouth}}</p>' +
                         '<p>今日发货：{{qtyDeliveryDay}}</p>' +
                         '<p>累计发货：{{qtyDeliveryMouth}}</p>' +

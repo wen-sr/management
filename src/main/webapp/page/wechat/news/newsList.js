@@ -43,6 +43,51 @@ function loadData(pageSize, method, formData){
 
     });
 }
+/**
+ * 加载数据
+ */
+function loadDataNotice(pageSize, method, formData){
+    $("#data").datagrid({
+        url:'/management/jxlh56/notice/queryInfo',
+        method: method || 'GET',
+        queryParams:formData || '',
+        height:'auto',
+        fit:true,
+        fitColumns: true,
+        striped:true,
+        rownumbers:true,
+        border:true,
+        singleSelect:false,
+        pagination:true,
+        pageSize: pageSize || 20,
+        pageList:[10,20,50,pageSize || 0],
+        showFooter: true,
+        toolbar:'#tb',
+        columns:[[{
+            field:"id",
+            title:"任务编号",
+            width:50,
+            checkbox:true
+        },{
+            field:"title",
+            title:"标题",
+            width:50
+        },{
+            field:"author",
+            title:"作者",
+            width:50
+        },{
+            field:"sysdate",
+            title:"发布时间",
+            width:50
+        },{
+            field:"releaseuserid",
+            title:"发布人",
+            width:50
+        }]]
+
+    });
+}
 function formatZt(val,row,index){
     if (val == "1"){
         return '<span style="color:green;">已回告</span>';
@@ -65,6 +110,7 @@ function formatSendcode(val,row,index){
 }
 function go() {
     var rows = $("#data").datagrid('getSelections');
+    var type = $("#type").combobox('getValue');
     if(rows == null || rows.length === 0 ){
         return;
     }
@@ -81,18 +127,38 @@ function go() {
         'ids' : ids
     }
     $("#tips").window("open");
-    _util.request({
-        url         : '/management/jxlh56/news/sendToWechat',
-        data        : formData,
-        success     : function (data, msg) {
-            $("#tips").window("close");
-            alert(msg);
-        }
-    });
+    if(type === "1"){
+        _util.request({
+            url         : '/management/jxlh56/news/sendToWechat',
+            data        : formData,
+            success     : function (data, msg) {
+                $("#tips").window("close");
+                $("#data").datagrid('reload');
+                alert(msg);
+            }
+        });
+    }else if(type === "2"){
+        _util.request({
+            url         : '/management/jxlh56/notice/sendToWechat',
+            data        : formData,
+            success     : function (data, msg) {
+                $("#tips").window("close");
+                $("#data").datagrid('reload');
+                alert(msg);
+            }
+        });
+    }
+
 }
 function query() {
     var istochart = $("#istochart").combobox('getValue');
-    loadData(20, 'POST', {istochart : istochart});
+    var type = $("#type").combobox('getValue');
+    if(type === "1"){
+        loadData(20, 'POST', {istochart : istochart});
+    }
+    if(type === "2"){
+        loadDataNotice(20, 'POST', {istochart : istochart});
+    }
 }
 
 $(function(){
