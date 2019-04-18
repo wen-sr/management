@@ -94,7 +94,15 @@ public class JiaoCaiPlanDataController {
         return jiaoCaiPlanDataService.typeTips();
     }
 
+    @RequestMapping("/editInfo")
+    public ServerResponse editInfo(JiaoCaiPlanData jiaoCaiPlanData) {
+        return jiaoCaiPlanDataService.editInfo(jiaoCaiPlanData);
+    }
 
+    @RequestMapping("/remove")
+    public ServerResponse remove(JiaoCaiPlanData jiaoCaiPlanData) {
+        return jiaoCaiPlanDataService.remove(jiaoCaiPlanData.getId());
+    }
 
 
 }

@@ -2,6 +2,7 @@ package com.management.service.xhwl;
 
 import com.management.common.EasyuiTableResponse;
 import com.management.common.ServerResponse;
+import com.management.pojo.xhwl.JiaoCaiPlanData;
 import com.management.vo.xhwl.JiaoCaiPlanDataVo;
 
 import java.util.List;
@@ -25,4 +26,7 @@ public interface IJiaoCaiPlanDataService {
 
     List<JiaoCaiPlanDataVo> typeTips();
 
+    ServerResponse editInfo(JiaoCaiPlanData jiaoCaiPlanData);
+
+    ServerResponse remove(Long id);
 }

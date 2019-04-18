@@ -8,6 +8,7 @@ import com.management.pojo.xhwl.JiaoCaiPlanData;
 import com.management.service.xhwl.IJiaoCaiPlanDataService;
 import com.management.util.DataSourceContextHolder;
 import com.management.vo.xhwl.JiaoCaiPlanDataVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -106,5 +107,35 @@ public class JiaoCaiPlanDataServiceImpl implements IJiaoCaiPlanDataService {
     public List<JiaoCaiPlanDataVo> typeTips() {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         return jiaoCaiPlanDataMapper.typeTips();
+    }
+
+    @Override
+    public ServerResponse editInfo(JiaoCaiPlanData jiaoCaiPlanData) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        JiaoCaiPlanDataVo jo = new JiaoCaiPlanDataVo();
+        jo.setIssuenumber(jiaoCaiPlanData.getIssuenumber());
+        jo.setBatchno(jiaoCaiPlanData.getBatchno());
+        List<JiaoCaiPlanData> jiaoCaiPlanDataList = jiaoCaiPlanDataMapper.findAll(jo);
+        if(StringUtils.isNotBlank(jiaoCaiPlanData.getType())){
+            if(!(jiaoCaiPlanData.getType().equals(jiaoCaiPlanDataList.get(0).getType()))){
+                if(!(RequestHolder.getCurrentUser().getId().equals("LH07003")) && !(RequestHolder.getCurrentUser().getId().equals("LH07001"))){
+                    return ServerResponse.createByErrorMessage("修改失败，您没有权限修改【交包类型】");
+                }
+            }
+        }
+        for(JiaoCaiPlanData j : jiaoCaiPlanDataList){
+            j.setHandbagdate(jiaoCaiPlanData.getHandbagdate());
+            j.setType(jiaoCaiPlanData.getType());
+            j.setRemark(jiaoCaiPlanData.getRemark());
+            jiaoCaiPlanDataMapper.updateByPrimaryKeySelective(j);
+        }
+        return ServerResponse.createBySuccessMsg("修改成功");
+    }
+
+    @Override
+    public ServerResponse remove(Long id) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        jiaoCaiPlanDataMapper.deleteByPrimaryKey(id);
+        return ServerResponse.createBySuccessMsg("删除成功");
     }
 }

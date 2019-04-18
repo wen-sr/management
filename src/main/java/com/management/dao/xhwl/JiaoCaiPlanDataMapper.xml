@@ -262,6 +262,9 @@
       <if test="subcode != null" >
         and subcode = #{subcode,jdbcType=NVARCHAR}
       </if>
+      <if test="batchno != null" >
+        and batchno = #{batchno,jdbcType=NVARCHAR}
+      </if>
       <if test="handbagdate != null" >
         and handBagDate &gt;= #{handbagdate,jdbcType=NVARCHAR}
       </if>

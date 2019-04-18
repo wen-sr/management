@@ -137,6 +137,44 @@ function queryInfo(){
 }
 
 
+function editInfo(){
+    var issuenumber = $("#edit_issueNumber").textbox('getValue');
+    var batchno = $("#edit_batchno").textbox('getValue');
+    var handbagdate = $("#edit_handbagdate").datebox('getValue');
+    var type = $("#edit_type").textbox('getValue');
+    var remark = $("#edit_remark").textbox('getValue');
+    var formData = {
+        issuenumber         : issuenumber,
+        batchno             : batchno,
+        handbagdate         : handbagdate,
+        type                : type,
+        remark              : remark
+    }
+    _util.request({
+        url         : '/management/jiaoCaiPlan/editInfo',
+        data        : formData,
+        success     : function (data, msg) {
+            $.messager.alert("操作提示",msg,"info", function () {
+                $("#data").datagrid('reload');
+                $("#w-editInfo").window("close");
+            });
+        }
+    })
+
+}
+
+function removeInfo(){
+    var row = $('#data').datagrid('getSelected');
+    _util.request({
+        url         : '/management/jiaoCaiPlan/remove',
+        data        : {id   : row.id},
+        success     : function (data, msg) {
+            $("#data").datagrid('reload');
+            $.messager.alert("操作提示",msg,"info");
+        }
+    })
+}
+
 /**
  * 操作工具
  */
@@ -153,19 +191,12 @@ tool = {
             $.messager.alert("操作提示","没有选中记录","error");
             return;
         }
-        if(row.status == "已维修" || row.status == "已报废" ){
-            $.messager.alert("操作提示","已维修完成或已报废的记录不能修改","error");
-            return;
-        }
 
-        $("#edit_id").val(row.id);
-        $("#edit_deviceTypeId").combobox('setValue', row.deviceTypeId);
-        $("#edit_deviceId").textbox('setValue', row.deviceId);
-        $("#edit_cause").textbox('setValue', row.cause);
-        $("#edit_component").textbox('setValue', row.component);
-        $("#edit_cost").textbox('setValue', row.cost);
-        $("#edit_result").textbox('setValue', row.result);
-
+        $("#edit_issueNumber").textbox('setValue', row.issuenumber);
+        $("#edit_batchno").textbox('setValue', row.batchno);
+        $("#edit_handbagdate").datebox('setValue', row.handbagdate);
+        $("#edit_type").combobox('setValue', row.type);
+        $("#edit_remark").textbox('setValue', row.remark);
         $("#w-editInfo").window("open");
     },
     remove : function(){

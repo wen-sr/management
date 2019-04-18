@@ -77,13 +77,19 @@ public class NewsServiceImpl implements INewsService {
         RequestConfig config = RequestConfig.custom().setConnectionRequestTimeout(2000000000).setConnectTimeout(2000000000).setSocketTimeout(2000000000)
                 .build();
         WxMpMassNews.WxMpMassNewsArticle article1 = null;
-        for(News n : newsList) {
+        News n = null;
+        for(int i = 0; i < newsList.size(); i++) {
+            n = newsList.get(i);
             //String imgPath = "http://img.jxlh56.com/01/00000000-0000-0000-0000-000000000000.png";
             String imgPath = "";
             if(StringUtils.isNotBlank(n.getPictureflie())){
                 imgPath = Constant.WEBSITE_PIC + n.getPictureflie();
             }else {
-                imgPath = "http://img.jxlh56.com/01/00000000-0000-0000-0000-000000000000.png";
+                if(i == 0) {
+                    imgPath = "http://img.jxlh56.com/01/00000000-0000-0000-0000-000000000000.png";
+                }else {
+                    imgPath = "http://img.jxlh56.com/01/00000000-0000-0000-0000-000000000001.png";
+                }
             }
 
             String fileExtensionName = imgPath.substring(imgPath.lastIndexOf(".")+1);
