@@ -74,7 +74,7 @@
    AND IF_MESSAGE IS NOT NULL
   </update>
     <select id="selectAll" resultType="com.management.pojo.prd1.WmsErrorMsg">
-      select IF_NAME ifName,IF_KEY ifKey, IF_MESSAGE ifMessage, adddate adddate,FLAG flag
+      select distinct IF_NAME ifName,IF_KEY ifKey, IF_MESSAGE ifMessage,FLAG flag
       from WMS_ERROR_MSG
       where flag = 0
     </select>

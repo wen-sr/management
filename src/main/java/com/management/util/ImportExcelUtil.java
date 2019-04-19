@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 public class ImportExcelUtil {
@@ -63,6 +64,7 @@ public class ImportExcelUtil {
                 List<Object> li = new ArrayList<Object>();
                 for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
                     cell = row.getCell(y);
+                    //System.out.println(cell);
                     li.add(this.getCellValue(cell));
                 }
                 list.add(li);
