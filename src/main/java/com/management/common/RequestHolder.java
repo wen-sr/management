@@ -20,9 +20,7 @@ public class RequestHolder {
     }
 
     public static Login getCurrentUser() {
-        if(userHolder == null){
-            return new Login("SYS", "SYS");
-        }
+        System.out.println( "当前线程：" + Thread.currentThread().getName() );
         return userHolder.get();
     }
 

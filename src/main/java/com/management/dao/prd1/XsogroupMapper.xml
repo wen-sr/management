@@ -547,7 +547,6 @@
     to_char(adddate, 'yyyy-mm-dd hh24:mi:ss') adddate
     from caseid
     <where>
-      status not in ('-1', '0', '1', '2', '5')
       <if test="begin != null">
         and to_char(load_date, 'yyyy-mm-dd') &gt;= #{begin}
       </if>

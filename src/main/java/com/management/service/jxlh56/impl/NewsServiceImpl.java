@@ -91,7 +91,6 @@ public class NewsServiceImpl implements INewsService {
                     imgPath = "http://img.jxlh56.com/01/00000000-0000-0000-0000-000000000001.png";
                 }
             }
-
             String fileExtensionName = imgPath.substring(imgPath.lastIndexOf(".")+1);
             String mediaId = null;
             try {
@@ -125,10 +124,11 @@ public class NewsServiceImpl implements INewsService {
         //for(UserInfo u : userInfoList) {
         //    list.add(u.getOpenid());
         //}
-        //list.add("ogodE5zVenVrCCm04Cn79HgmbaQk");
         list.add("oPOAgvx1Utuu0Mg25QTPs5yqDUyw");
-        //list.add("oPOAgvzZ8PNdl59hjHVNxwVi6S6c");
-        //list.add("oPOAgv1q-glXrkcypnMmPv1iVcVA");
+        list.add("oPOAgv82SmlT-lk3IKZIFj8JyfoM");
+        list.add("oPOAgvzZ8PNdl59hjHVNxwVi6S6c");
+        list.add("oPOAgv1q-glXrkcypnMmPv1iVcVA");
+        list.add("oPOAgvxpLfRbjBc8zQMOoHU1OloI");
         massMessage.setToUsers(list);
 
         try {
