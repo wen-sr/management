@@ -66,5 +66,11 @@ public class LogisticsQueryController {
         return logisticsQueryService.caseidQuery(deliveryVo);
     }
 
+    @RequestMapping(value = "/caseSkuDetail", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse caseSkuDetail(DeliveryVo deliveryVo) {
+        return logisticsQueryService.caseSkuDetail(deliveryVo);
+    }
+
 
 }

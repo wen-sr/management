@@ -1,5 +1,6 @@
 package com.management.service.oa.impl;
 
+import com.management.aspect.HttpAspect;
 import com.management.common.ServerResponse;
 import com.management.dao.login.LoginMapper;
 import com.management.dao.oa.PerformanceMapper;
@@ -14,6 +15,8 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +29,9 @@ import java.util.List;
 @Service
 @Transactional
 public class PerformanceServiceImpl implements IPerformanceService {
+
+    private final static Logger logger = LoggerFactory.getLogger(PerformanceServiceImpl.class);
+
 
     @Autowired
     PerformanceMapper performanceMapper;
@@ -103,9 +109,9 @@ public class PerformanceServiceImpl implements IPerformanceService {
         BASE64Decoder decoder = new BASE64Decoder();
 
         //验证工号与口令
-        Login u = loginMapper.selectUserByIdAndPwd(id, pwd);
+        Login u = loginMapper.selectUserByIdAndBk3(id, pwd);
         if(u == null){
-            u = loginMapper.selectUserByIdAndPwd(id, MD5Util.MD5EncodeUtf8(pwd));
+            u = loginMapper.selectUserByIdAndBk3(id, MD5Util.MD5EncodeUtf8(pwd));
         }
 
         if(u != null){
@@ -138,9 +144,10 @@ public class PerformanceServiceImpl implements IPerformanceService {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         UserInfo userInfo = null;
         BASE64Decoder decoder = new BASE64Decoder();
+        logger.info(new String(decoder.decodeBuffer(p.getName())));
         userInfo = userInfoMapper.selectUserByName(new String(decoder.decodeBuffer(p.getName())));
-
-        if(userInfo != null && userInfo.getOpenid() != null ) {
+        if(userInfo!= null && userInfo.getOpenid() != null ) {
+            logger.info(userInfo.toString());
             try {
                 String info = "岗位工资:" + new String(decoder.decodeBuffer(p.getPostbonus())) + ";" + 
                         "年功工资:" + new String(decoder.decodeBuffer(p.getYearsbonus())) + ";" + 
@@ -164,9 +171,10 @@ public class PerformanceServiceImpl implements IPerformanceService {
                 String first = "您的工资条已下发，具体到账时间以银行到账时间为准";
                 String keyword1 = p.getDd();
                 String keyword3 = "江西蓝海物流科技有限公司";
-
+                logger.info(userInfo.getOpenid());
                 this.sendMsg(userInfo.getOpenid(), first, keyword1, info, keyword3);
             } catch (Exception e) {
+                logger.error(e.getMessage());
             }
         }
 
@@ -186,7 +194,7 @@ public class PerformanceServiceImpl implements IPerformanceService {
         try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
         } catch (WxErrorException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 

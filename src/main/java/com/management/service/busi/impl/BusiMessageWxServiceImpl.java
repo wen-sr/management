@@ -86,15 +86,15 @@ public class BusiMessageWxServiceImpl implements IBusiMessageWxService {
         if(busiMessageWx == null ){
             return;
         }
-        String msg = "业务部南昌仓电商发货今日产量：今日收货："+ busiMessageWx.getQtyReceiptDay() +"；累计收货：" + busiMessageWx.getQtyReceiptMouth() +
+        String msg = "业务部南昌仓电商"+ busiMessageWx.getDd() +"产量：今日收货："+ busiMessageWx.getQtyReceiptDay() +"；累计收货：" + busiMessageWx.getQtyReceiptMouth() +
                 "；今日发货：" + busiMessageWx.getQtyDeliveryDay() + "；累计发货：" + busiMessageWx.getQtyDeliveryMouth() + "；库存：" + busiMessageWx.getQtyStock();
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                 .toUser(openid)
                 .templateId("j3uSiEeYMGG1UrMmU_AZlIJ_xwdTChiCGkKCpbTr2sk").build();
-        templateMessage.getData().add(new WxMpTemplateData("first", msg, "#FF3333"));
-        templateMessage.getData().add(new WxMpTemplateData("keyword1", "业务部", "#0044BB"));
-        templateMessage.getData().add(new WxMpTemplateData("keyword2", DateTimeUtil.dateToStr(new Date()), "#0044BB"));
-        templateMessage.getData().add(new WxMpTemplateData("remark", "江西蓝海物流", "#AAAAAA"));
+        templateMessage.getData().add(new WxMpTemplateData("first", msg, "#51316C"));
+        templateMessage.getData().add(new WxMpTemplateData("keyword1", "业务部", "#51316C"));
+        templateMessage.getData().add(new WxMpTemplateData("keyword2", DateTimeUtil.dateToStr(new Date()), "#51316C"));
+        templateMessage.getData().add(new WxMpTemplateData("remark", "江西蓝海物流科技有限公司", "#AAAAAA"));
         templateMessage.setUrl("http://www.jxxh56.com/management/page/busi/messageShow.html?id=" + busiMessageWx.getId());
         try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);

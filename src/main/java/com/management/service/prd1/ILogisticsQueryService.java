@@ -22,4 +22,5 @@ public interface ILogisticsQueryService {
 
     ServerResponse caseidQuery(DeliveryVo deliveryVo);
 
+    ServerResponse caseSkuDetail(DeliveryVo deliveryVo);
 }

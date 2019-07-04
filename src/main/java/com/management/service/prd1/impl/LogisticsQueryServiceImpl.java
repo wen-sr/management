@@ -97,4 +97,11 @@ public class LogisticsQueryServiceImpl implements ILogisticsQueryService {
         List<DeliveryVo> deliveryVoList = xsogroupMapper.caseidQuery(deliveryVo);
         return ServerResponse.createBySuccess(deliveryVoList);
     }
+
+    @Override
+    public ServerResponse caseSkuDetail(DeliveryVo deliveryVo) {
+        DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
+        List<DeliveryVo> deliveryVoList = xsogroupMapper.caseSkuDetail(deliveryVo);
+        return ServerResponse.createBySuccess(deliveryVoList);
+    }
 }

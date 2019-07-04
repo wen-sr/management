@@ -161,4 +161,14 @@ public class UserInfo {
     public void setLoginId(String loginId) {
         this.loginId = loginId == null ? null : loginId.trim();
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", openid='" + openid + '\'' +
+                ", remark='" + remark + '\'' +
+                ", loginId='" + loginId + '\'' +
+                '}';
+    }
 }

@@ -61,21 +61,21 @@ $(function () {
                                 detile_th = '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png" alt="" /></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_3 + ' <br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_3 + ' <br>' +
                                     ' <em class="tx_1">' + shipdate + '</em></em>' +
                                     '</th>' +
                                     '</tr>' +
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_2 + ' <br> ' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_2 + ' <br> ' +
                                     '<em class="tx_1">' + loaddate + '</em>' +
                                     '</th>' +
                                     '</tr>'+
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的<span class="red">包件【' + caseid + '】</span>' + em_1 + '<br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_1 + '<br>' +
                                     '<em class="tx_1">' + adddate + '</em></em>' +
                                     '</th>' +
                                     '</tr>';
@@ -89,28 +89,28 @@ $(function () {
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png" alt="" /></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_4 + ' <br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_4 + ' <br>' +
                                     ' <em class="tx_1">' + shipdate + '</em></em>' +
                                     '</th>' +
                                     '</tr>' +
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png" alt="" /></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_3 + ' <br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_3 + ' <br>' +
                                     ' <em class="tx_1">' + shipdate + '</em></em>' +
                                     '</th>' +
                                     '</tr>' +
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_2 + ' <br> ' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_2 + ' <br> ' +
                                     '<em class="tx_1">' + loaddate + '</em>' +
                                     '</th>' +
                                     '</tr>'+
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_1 + '<br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_1 + '<br>' +
                                     '<em class="tx_1">' + adddate + '</em></em>' +
                                     '</th>' +
                                     '</tr>';
@@ -125,35 +125,35 @@ $(function () {
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png" alt="" /></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_5 + ' <br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_5 + ' <br>' +
                                     ' <em class="tx_1">' + shipdate + '</em></em>' +
                                     '</th>' +
                                     '</tr>' +
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png" alt="" /></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_4 + ' <br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_4 + ' <br>' +
                                     ' <em class="tx_1">' + shipdate + '</em></em>' +
                                     '</th>' +
                                     '</tr>' +
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png" alt="" /></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_3 + ' <br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_3 + ' <br>' +
                                     ' <em class="tx_1">' + shipdate + '</em></em>' +
                                     '</th>' +
                                     '</tr>' +
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_2 + ' <br> ' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_2 + ' <br> ' +
                                     '<em class="tx_1">' + loaddate + '</em>' +
                                     '</th>'+
                                     '</tr>' +
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_1 + '<br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_1 + '<br>' +
                                     '<em class="tx_1">' + adddate + '</em></em>' +
                                     '</th>' +
                                     '</tr>';
@@ -164,14 +164,14 @@ $(function () {
                                 detile_th = '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_2 + ' <br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_2 + ' <br>' +
                                     ' <em class="tx_1">' + loaddate + '</em></em>' +
                                     '</th>' +
                                     '</tr>'+
                                     '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_1 + ' <br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_1 + ' <br>' +
                                     '<em class="tx_1">' + adddate + '</em></em>' +
                                     '</th>' +
                                     '</tr>';
@@ -181,7 +181,7 @@ $(function () {
                                 detile_th = '<tr class="over ">' +
                                     '<td width="10%" class="img0 over"><p><img src="../../../image/wechat/right_icon.png"></p></td>' +
                                     '<th width="60%"><em class="detail_item green">' +
-                                    '【' + shortname + '】</span>的包件<span class="red">【' + caseid + '】</span>' + em_1 + ' <br>' +
+                                    '【' + shortname + '】</span>的包件<span class="red"><a href="performanceShow.html?caseid='+ caseid + '">【' + caseid + '】</a></span>' + em_1 + ' <br>' +
                                     ' <em class="tx_1">' + adddate + '</em></em>' +
                                     '</th>' +
                                     '</tr>';

@@ -48,7 +48,7 @@ public class WxMenuController implements WxMpMenuService {
     WxMenuButton menuButton1 = new WxMenuButton();
     menuButton1.setName("客户通道");
     menuButton1.setType("view");
-    menuButton1.setUrl("http://www.jxlh56.com/management/page/wechat/customerIndex.html");
+    menuButton1.setUrl("http://www.jxxh56.com/management/page/wechat/customerIndex.html");
 
     WxMenuButton menuButton2 = new WxMenuButton();
     menuButton2.setName("员工通道");
@@ -57,10 +57,10 @@ public class WxMenuController implements WxMpMenuService {
 
     WxMenuButton menuButton3 = new WxMenuButton();
     menuButton3.setName("联系我们");
-    WxMenuButton lx = new WxMenuButton();
-    lx.setName("关于新华物流");
-    lx.setType("view");
-    lx.setUrl("http://www.jx56.com/jxxhwl/index_layui.html");
+    //WxMenuButton lx = new WxMenuButton();
+    //lx.setName("关于新华物流");
+    //lx.setType("view");
+    //lx.setUrl("http://www.jx56.com/jxxhwl/index_layui.html");
     WxMenuButton lx2 = new WxMenuButton();
     lx2.setName("园区信息");
     lx2.setType("view");
@@ -73,15 +73,15 @@ public class WxMenuController implements WxMpMenuService {
     lx1.setName("工号绑定");
     lx1.setType("click");
     lx1.setKey("jobNumberBinding");
-    WxMenuButton lx4 = new WxMenuButton();
-    lx4.setName("意见反馈");
-    lx4.setType("view");
-    lx4.setUrl("http://www.jx56.com/jxxhwl/wx/advice.controller");
-    menuButton3.getSubButtons().add(lx);
+    //WxMenuButton lx4 = new WxMenuButton();
+    //lx4.setName("意见反馈");
+    //lx4.setType("view");
+    //lx4.setUrl("http://www.jx56.com/jxxhwl/wx/advice.controller");
+    //menuButton3.getSubButtons().add(lx);
     menuButton3.getSubButtons().add(lx1);
     menuButton3.getSubButtons().add(lx2);
     menuButton3.getSubButtons().add(lx3);
-    menuButton3.getSubButtons().add(lx4);
+    //menuButton3.getSubButtons().add(lx4);
     menu.getButtons().add(menuButton1);
     menu.getButtons().add(menuButton2);
     menu.getButtons().add(menuButton3);

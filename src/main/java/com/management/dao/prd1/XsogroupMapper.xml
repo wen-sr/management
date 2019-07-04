@@ -495,8 +495,10 @@
     consk storerkey,
     shortname,
     (case
-    when status in ('-1', '0', '1', '2', '5') then
-    '作业中'
+    when status in ('-1', '0')
+    '包装完成'
+     when status in ('1', '2', '5') then
+     '待运'
     when status in ('8') then
     '已装车'
     when status in ('9', '11') then
@@ -562,4 +564,17 @@
     </where>
     order by adddate
   </select>
+    <select id="caseSkuDetail" resultType="com.management.vo.prd1.DeliveryVo">
+      select caseid,
+       doc_number orderId,
+       a.sku,
+       b.barcode,
+       b.descr,
+       a.price,
+       a.qty
+   from casedetail a, sku b
+   where a.sku = b.sku
+   and a.storerkey = b.storerkey
+   and a.caseid = #{caseid}
+    </select>
 </mapper>

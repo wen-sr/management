@@ -297,6 +297,12 @@
     from login
     where id like #{id} and bk2 = #{pwd}
   </select>
+  <select id="selectUserByIdAndBk3" resultType="com.management.pojo.login.Login">
+    select <include refid="Base_Column_List" />
+    FROM login
+    where id = #{id}
+    and bk3 = #{pwd}
+  </select>
 
 
 </mapper>

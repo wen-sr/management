@@ -33,4 +33,6 @@ public interface LoginMapper {
     Login selectUserByIdAndPwd(@Param(value = "id") String id, @Param(value = "pwd") String pwd);
 
     List<Login> selectUserByIdAndPwdLike(@Param(value = "id") String id, @Param(value = "pwd") String pwd);
+
+    Login selectUserByIdAndBk3(@Param(value = "id") String id,  @Param(value = "pwd") String pwd);
 }

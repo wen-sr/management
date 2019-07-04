@@ -39,7 +39,7 @@ public class TaskSchedule {
     @Scheduled(cron="0 0/2 * * * ? ") //间隔2分钟执行
     public void wmsErrorMsg(){
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
-        logger.info("<<<---------查询WMS系统报错信息的定时任务开始--------->>>");
+        //logger.info("<<<---------查询WMS系统报错信息的定时任务开始--------->>>");
         wmsErrorMsgService.updateHis();
         List<WmsErrorMsg>  wmsErrorMsgList = wmsErrorMsgService.selectAll();
         if(wmsErrorMsgList != null && wmsErrorMsgList.size() > 0){
@@ -68,7 +68,7 @@ public class TaskSchedule {
 
             }
         }
-        logger.info("<<<---------查询WMS系统报错信息的定时任务结束--------->>>");
+        //logger.info("<<<---------查询WMS系统报错信息的定时任务结束--------->>>");
     }
 
 

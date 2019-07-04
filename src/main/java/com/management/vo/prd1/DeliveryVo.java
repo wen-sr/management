@@ -24,6 +24,42 @@ public class DeliveryVo {
     private String orderId;
     private String type;
     private String associationOrderId;
+    private String sku;
+    private String barcode;
+    private String descr;
+    private Double price;
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
     public String getAssociationOrderId() {
         return associationOrderId;

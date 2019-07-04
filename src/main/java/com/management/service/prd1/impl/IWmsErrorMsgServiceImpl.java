@@ -28,7 +28,7 @@ public class IWmsErrorMsgServiceImpl implements IWmsErrorMsgService {
     public void updateFlage(WmsErrorMsg wmsErrorMsg) {
         int i = wmsErrorMsgMapper.updateFlage(wmsErrorMsg);
         if(i > 0 ){
-            logger.info("=============成功修改if_key="+ wmsErrorMsg.getIfKey() + "报错信息的flag为1,修改的记录条数为："+ i +"==============");
+            //logger.info("=============成功修改if_key="+ wmsErrorMsg.getIfKey() + "报错信息的flag为1,修改的记录条数为："+ i +"==============");
         }
     }
 
@@ -36,7 +36,7 @@ public class IWmsErrorMsgServiceImpl implements IWmsErrorMsgService {
     public void updateHis() {
         int i = wmsErrorMsgMapper.updateHis();
         if(i > 0 ){
-            logger.info("=============成功修改历史任务报错信息的flag为1,修改的记录条数为："+ i +"==============");
+            //logger.info("=============成功修改历史任务报错信息的flag为1,修改的记录条数为："+ i +"==============");
         }
     }
 }

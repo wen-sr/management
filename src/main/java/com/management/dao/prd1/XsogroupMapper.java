@@ -44,4 +44,6 @@ public interface XsogroupMapper {
     List<DeliveryVo> orderCaseQuery(DeliveryVo deliveryVo);
 
     List<DeliveryVo> caseidQuery(DeliveryVo deliveryVo);
+
+    List<DeliveryVo> caseSkuDetail(DeliveryVo deliveryVo);
 }
