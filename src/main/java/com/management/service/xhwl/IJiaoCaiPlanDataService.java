@@ -29,4 +29,7 @@ public interface IJiaoCaiPlanDataService {
     ServerResponse editInfo(JiaoCaiPlanData jiaoCaiPlanData);
 
     ServerResponse remove(Long id);
+
+    List<JiaoCaiPlanDataVo> partmentTips();
+
 }

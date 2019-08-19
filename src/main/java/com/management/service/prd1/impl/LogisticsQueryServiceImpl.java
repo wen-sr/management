@@ -9,6 +9,7 @@ import com.management.service.prd1.ILogisticsQueryService;
 import com.management.util.DataSourceContextHolder;
 import com.management.vo.prd1.DeliveryVo;
 import com.management.vo.prd1.LogisticsQueryVo;
+import com.management.vo.prd1.ReceiptDto;
 import com.management.vo.prd1.ReceiptVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -103,5 +104,16 @@ public class LogisticsQueryServiceImpl implements ILogisticsQueryService {
         DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
         List<DeliveryVo> deliveryVoList = xsogroupMapper.caseSkuDetail(deliveryVo);
         return ServerResponse.createBySuccess(deliveryVoList);
+    }
+
+    @Override
+    public Integer ReceiptQty() {
+        DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
+        List<ReceiptDto> receiptDtoList = xsogroupMapper.getReceiptToday();
+        Integer qty = 0 ;
+        for(ReceiptDto r : receiptDtoList) {
+            qty += r.getQty();
+        }
+        return qty;
     }
 }

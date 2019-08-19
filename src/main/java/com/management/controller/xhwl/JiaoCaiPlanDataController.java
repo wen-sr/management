@@ -88,6 +88,11 @@ public class JiaoCaiPlanDataController {
         return jiaoCaiPlanDataService.subcodeTips();
     }
 
+    @RequestMapping("/partmentTips")
+    public List<JiaoCaiPlanDataVo> partmentTips() {
+        return jiaoCaiPlanDataService.partmentTips();
+    }
+
 
     @RequestMapping("/typeTips")
     public List<JiaoCaiPlanDataVo> typeTips() {

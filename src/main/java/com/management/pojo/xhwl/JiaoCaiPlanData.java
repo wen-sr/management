@@ -7,6 +7,8 @@ public class JiaoCaiPlanData {
 
     private String issuenumber;
 
+    private String partment;
+
     private String plantingname;
 
     private String subcode;
@@ -39,9 +41,10 @@ public class JiaoCaiPlanData {
 
     private String remark;
 
-    public JiaoCaiPlanData(Long id, String issuenumber, String plantingname, String subcode, Double price, String descr, String publisher, Integer qtyperitem, Integer qtydeliver, Integer qtycase, String batchno, String deliverdate, String handbagdate, String type, String addwho, Date adddate, String status, String remark) {
+    public JiaoCaiPlanData(Long id, String issuenumber, String partment, String plantingname, String subcode, Double price, String descr, String publisher, Integer qtyperitem, Integer qtydeliver, Integer qtycase, String batchno, String deliverdate, String handbagdate, String type, String addwho, Date adddate, String status, String remark) {
         this.id = id;
         this.issuenumber = issuenumber;
+        this.partment = partment;
         this.plantingname = plantingname;
         this.subcode = subcode;
         this.price = price;
@@ -78,6 +81,14 @@ public class JiaoCaiPlanData {
 
     public void setIssuenumber(String issuenumber) {
         this.issuenumber = issuenumber == null ? null : issuenumber.trim();
+    }
+
+    public String getPartment() {
+        return partment;
+    }
+
+    public void setPartment(String partment) {
+        this.partment = partment == null ? null : partment.trim();
     }
 
     public String getPlantingname() {

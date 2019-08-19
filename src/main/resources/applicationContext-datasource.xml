@@ -194,6 +194,39 @@
         <property name="validationQuery" value="SELECT getdate()"/>
     </bean>
 
+    <bean id="dataSource_liku" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${liku.driverClassName}"/>
+        <property name="url" value="${liku.url}"/>
+        <property name="username" value="${liku.username}"/>
+        <property name="password" value="${liku.password}"/>
+        <!-- 连接池启动时的初始值 -->
+        <property name="initialSize" value="${db.initialSize}"/>
+        <!-- 连接池的最大值 -->
+        <property name="maxActive" value="${db.maxActive}"/>
+        <!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 -->
+        <property name="maxIdle" value="${db.maxIdle}"/>
+        <!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
+        <property name="minIdle" value="${db.minIdle}"/>
+        <!-- 最大建立连接等待时间。如果超过此时间将接到异常。设为－1表示无限制 -->
+        <property name="maxWait" value="${db.maxWait}"/>
+        <!--#给出一条简单的sql语句进行验证 -->
+        <!--<property name="validationQuery" value="select getdate()" />-->
+        <property name="defaultAutoCommit" value="${db.defaultAutoCommit}"/>
+        <!--回收被遗弃的（一般是忘了释放的）数据库连接到连接池中-->
+        <property name="removeAbandoned" value="true" />
+        <!--数据库连接过多长时间不用将被视为被遗弃而收回连接池中-->
+        <property name="removeAbandonedTimeout" value="120" />
+        <!-- #连接的超时时间，默认为半小时。 -->
+        <property name="minEvictableIdleTimeMillis" value="${db.minEvictableIdleTimeMillis}"/>
+
+        <!--# 失效检查线程运行时间间隔，要小于MySQL默认-->
+        <property name="timeBetweenEvictionRunsMillis" value="40000"/>
+        <!--# 检查连接是否有效-->
+        <property name="testWhileIdle" value="true"/>
+        <!--# 检查连接有效性的SQL语句-->
+        <property name="validationQuery" value="SELECT 1"/>
+    </bean>
+
     <bean id ="dataSource" class= "com.management.util.DynamicDataSource" >
         <property name ="targetDataSources">
             <map key-type ="java.lang.String">
@@ -202,6 +235,7 @@
                 <entry value-ref ="dataSource_wcs" key= "dataSource_wcs"/>
                 <entry value-ref ="dataSource_wms" key= "dataSource_wms"/>
                 <entry value-ref ="dataSource_jxlh56" key= "dataSource_jxlh56"/>
+                <entry value-ref ="dataSource_liku" key= "dataSource_liku"/>
             </map >
         </property >
         <property name ="defaultTargetDataSource" ref= "dataSource_xh"/>      <!-- 默认使用ds1的数据源 -->
@@ -308,6 +342,26 @@
         </property>
     </bean>
 
+    <bean id="sqlSessionFactory_liku" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource_liku"/>
+        <!-- 指定mybatis 的配置文件 -->
+        <!--<property name ="configLocation" value= "classpath:mybatis-config.xml" />-->
+        <property name="mapperLocations" value="classpath*:com/management/dao/**/*Mapper.xml"/>
+
+        <!-- 分页插件 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
 
     <!-- 配置自定义的SqlSessionTemplate模板，注入相关配置 -->
     <bean id="sqlSessionTemplate" class="com.management.util.CustomSqlSessionTemplate">
@@ -319,6 +373,7 @@
                 <entry value-ref="sqlSessionFactory_wcs" key="wcs"/>
                 <entry value-ref="sqlSessionFactory_wms" key="wms"/>
                 <entry value-ref="sqlSessionFactory_jxlh56" key="jxlh56"/>
+                <entry value-ref="sqlSessionFactory_liku" key="liku"/>
             </map>
         </property>
     </bean>
@@ -339,7 +394,7 @@
                                             com.management.dao.jc;
                                             com.management.dao.jxlh56;
                                             com.management.dao.busi;
-
+                                            com.management.dao.liku;
                                                             "/>
     </bean>
 
@@ -379,6 +434,12 @@
     <tx:annotation-driven transaction-manager="transactionManager_prd1" proxy-target-class="true" />
     <bean id="transactionManager_xh" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource_xh"/>
+        <property name="rollbackOnCommitFailure" value="true"/>
+    </bean>
+    <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->
+    <tx:annotation-driven transaction-manager="transactionManager_liku" proxy-target-class="true" />
+    <bean id="transactionManager_liku" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource_liku"/>
         <property name="rollbackOnCommitFailure" value="true"/>
     </bean>
     <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->

@@ -4,6 +4,7 @@ import com.management.common.*;
 import com.management.pojo.info.InforError;
 import com.management.pojo.login.Login;
 import com.management.service.info.InforErrorService;
+import com.management.service.liku.ILikuService;
 import com.management.util.FileUploadUtil;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -36,6 +37,9 @@ public class InfoErrorController extends BaseCotroller {
 
     @Autowired
     InforErrorService inforErrorService;
+
+    @Autowired
+    ILikuService likuService;
 
     /**
      * 系统报修wx
@@ -222,6 +226,14 @@ public class InfoErrorController extends BaseCotroller {
 
 
         return response.parseToEasyuiTableResponse(response);
+    }
+
+
+
+    @RequestMapping("/likuError")
+    @ResponseBody
+    public ServerResponse likuError(){
+        return likuService.getErrorMsg();
     }
 
 

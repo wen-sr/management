@@ -78,4 +78,7 @@
       from WMS_ERROR_MSG
       where flag = 0
     </select>
+    <select id="getJiaoCaiChanLiang" resultType="com.management.pojo.jc.ChanLiang">
+        select heJi,daiFa,issue,jiaobao from JiaoCaiChanLiang where dd = CONVERT(varchar(100), GETDATE(), 23)
+    </select>
 </mapper>

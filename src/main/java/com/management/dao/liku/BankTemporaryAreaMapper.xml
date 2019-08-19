@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.liku.BankTemporaryAreaMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.liku.BankTemporaryArea" >
+    <constructor >
+      <idArg column="ID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="GUID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Number" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Note" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Way" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="BankNumber" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GUID, Name, Number, Status, Note, Way, BankNumber
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from banktemporaryarea
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from banktemporaryarea
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.liku.BankTemporaryArea" >
+    insert into banktemporaryarea (ID, GUID, Name, 
+      Number, Status, Note, 
+      Way, BankNumber)
+    values (#{id,jdbcType=BIGINT}, #{guid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, 
+      #{way,jdbcType=INTEGER}, #{banknumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.liku.BankTemporaryArea" >
+    insert into banktemporaryarea
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="guid != null" >
+        GUID,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="number != null" >
+        Number,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="way != null" >
+        Way,
+      </if>
+      <if test="banknumber != null" >
+        BankNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="guid != null" >
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="way != null" >
+        #{way,jdbcType=INTEGER},
+      </if>
+      <if test="banknumber != null" >
+        #{banknumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.liku.BankTemporaryArea" >
+    update banktemporaryarea
+    <set >
+      <if test="guid != null" >
+        GUID = #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        Number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="way != null" >
+        Way = #{way,jdbcType=INTEGER},
+      </if>
+      <if test="banknumber != null" >
+        BankNumber = #{banknumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.liku.BankTemporaryArea" >
+    update banktemporaryarea
+    set GUID = #{guid,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      Number = #{number,jdbcType=INTEGER},
+      Status = #{status,jdbcType=INTEGER},
+      Note = #{note,jdbcType=VARCHAR},
+      Way = #{way,jdbcType=INTEGER},
+      BankNumber = #{banknumber,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

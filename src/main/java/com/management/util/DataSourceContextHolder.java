@@ -8,6 +8,7 @@ public class DataSourceContextHolder {
     public final static String SESSION_FACTORY_WCS = "wcs";
     public final static String SESSION_FACTORY_WMS = "wms";
     public final static String SESSION_FACTORY_JXLH56 = "jxlh56";
+    public final static String SESSION_FACTORY_LIKU = "liku";
 
 
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>();

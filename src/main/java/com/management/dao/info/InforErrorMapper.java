@@ -20,4 +20,6 @@ public interface InforErrorMapper {
     int updateByPrimaryKey(InforError record);
 
     List<InforError> findAll(@Param(value = "inforError") InforError inforError, @Param(value = "ids") Set<Integer> ids);
+
+    Integer getChuHuoQty();
 }

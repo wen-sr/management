@@ -29,6 +29,7 @@ public class Constant {
         int ROLE_TECHNOLOGY = 2;
         int ROLE_DEVICE = 3;
         int ROLE_INFOR = 24;
+        int ROLE_JSY = 43;
     }
     public interface LoginSystemFlag{
         String DEFAULT = "0";

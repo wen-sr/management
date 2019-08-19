@@ -28,5 +28,7 @@ public interface JiaoCaiPlanDataMapper {
 
     List<JiaoCaiPlanDataVo> typeTips();
 
-    void deleteByIssuenumber(String issuenumber);
+    //void deleteByIssuenumber(String issuenumber);
+
+    List<JiaoCaiPlanDataVo> partmentTips();
 }

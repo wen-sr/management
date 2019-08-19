@@ -39,19 +39,20 @@ public class JiaoCaiPlanDataServiceImpl implements IJiaoCaiPlanDataService {
             for(List<Object> list : listob) {
                 jiaoCaiPlanData = new JiaoCaiPlanData();
                 jiaoCaiPlanData.setIssuenumber(list.get(0).toString());
-                jiaoCaiPlanData.setPlantingname(list.get(1).toString());
-                jiaoCaiPlanData.setSubcode(list.get(2).toString());
-                jiaoCaiPlanData.setPrice(Double.parseDouble(list.get(3).toString()));
-                jiaoCaiPlanData.setDescr(list.get(4).toString());
-                jiaoCaiPlanData.setPublisher(list.get(5).toString());
-                jiaoCaiPlanData.setQtyperitem(Integer.parseInt(list.get(6).toString()));
-                jiaoCaiPlanData.setQtydeliver(Integer.parseInt(list.get(7).toString()));
-                jiaoCaiPlanData.setQtycase(Integer.parseInt(list.get(8).toString()));
-                jiaoCaiPlanData.setBatchno(list.get(9).toString());
-                jiaoCaiPlanData.setDeliverdate(list.get(10).toString());
-                jiaoCaiPlanData.setHandbagdate(list.get(11).toString());
-                jiaoCaiPlanData.setType(list.get(12).toString());
-                jiaoCaiPlanData.setRemark(list.get(13).toString());
+                jiaoCaiPlanData.setPartment(list.get(1).toString());
+                jiaoCaiPlanData.setPlantingname(list.get(2).toString());
+                jiaoCaiPlanData.setSubcode(list.get(3).toString());
+                jiaoCaiPlanData.setPrice(Double.parseDouble(list.get(4).toString()));
+                jiaoCaiPlanData.setDescr(list.get(5).toString());
+                jiaoCaiPlanData.setPublisher(list.get(6).toString());
+                jiaoCaiPlanData.setQtyperitem(Integer.parseInt(list.get(7).toString()));
+                jiaoCaiPlanData.setQtydeliver(Integer.parseInt(list.get(8).toString()));
+                jiaoCaiPlanData.setQtycase(Integer.parseInt(list.get(9).toString()));
+                jiaoCaiPlanData.setBatchno(list.get(10).toString());
+                jiaoCaiPlanData.setDeliverdate(list.get(11).toString());
+                jiaoCaiPlanData.setHandbagdate(list.get(12).toString());
+                jiaoCaiPlanData.setType(list.get(13).toString());
+                jiaoCaiPlanData.setRemark(list.get(14).toString());
                 jiaoCaiPlanData.setAddwho(RequestHolder.getCurrentUser().getId());
                 jiaoCaiPlanDataMapper.insertSelective(jiaoCaiPlanData);
             }
@@ -104,6 +105,12 @@ public class JiaoCaiPlanDataServiceImpl implements IJiaoCaiPlanDataService {
     }
 
     @Override
+    public List<JiaoCaiPlanDataVo> partmentTips() {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        return jiaoCaiPlanDataMapper.partmentTips();
+    }
+
+    @Override
     public List<JiaoCaiPlanDataVo> typeTips() {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         return jiaoCaiPlanDataMapper.typeTips();
@@ -118,7 +125,7 @@ public class JiaoCaiPlanDataServiceImpl implements IJiaoCaiPlanDataService {
         List<JiaoCaiPlanData> jiaoCaiPlanDataList = jiaoCaiPlanDataMapper.findAll(jo);
         if(StringUtils.isNotBlank(jiaoCaiPlanData.getType())){
             if(!(jiaoCaiPlanData.getType().equals(jiaoCaiPlanDataList.get(0).getType()))){
-                if(!(RequestHolder.getCurrentUser().getId().equals("LH07003")) && !(RequestHolder.getCurrentUser().getId().equals("LH07001"))){
+                if(!(RequestHolder.getCurrentUser().getId().equals("LH07003")) && !(RequestHolder.getCurrentUser().getId().equals("LH07019")) && !(RequestHolder.getCurrentUser().getId().equals("LH07001"))){
                     return ServerResponse.createByErrorMessage("修改失败，您没有权限修改【交包类型】");
                 }
             }
@@ -138,4 +145,5 @@ public class JiaoCaiPlanDataServiceImpl implements IJiaoCaiPlanDataService {
         jiaoCaiPlanDataMapper.deleteByPrimaryKey(id);
         return ServerResponse.createBySuccessMsg("删除成功");
     }
+
 }

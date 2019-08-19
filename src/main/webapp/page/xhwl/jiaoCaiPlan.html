@@ -36,7 +36,7 @@
     </form>
 </div>
 <!-- 数据显示 -->
-<div align="center" style="height:760px;">
+<div align="center" style="height: 85%">
     <table id="data" class="easyui-datagrid" data-options="">
     </table>
 </div>
@@ -63,6 +63,15 @@
                                 ,textField: 'subcode'
                                 ,panelWidth: 200
                                 ,panelHeight: '300' "/>
+    业务部门：<input type="text" style="width:200px" id="partment" class="easyui-combobox"
+               data-options="url: '/management/jiaoCaiPlan/partmentTips'
+                                ,method: 'get'
+                                ,valueField: 'partment'
+                                ,textField: 'partment'
+                                ,panelWidth: 200
+                                ,panelHeight: '300' "/>
+    批次号：<input class="easyui-textbox" id="batchno" style="width:200px">
+
     <br/>
     交包日期开始：<input id="handBagDate" class="easyui-datebox" data-options="" style="width:150px" />
     交包日期结束：<input id="handBagDateEnd" class="easyui-datebox" data-options="" style="width:150px" />

@@ -17,7 +17,7 @@ public class TestTaskSchedule extends BaseJunitTest {
 
     @Test
     public void wmsErrorMsg() {
-        taskSchedule.wmsErrorMsg();
+        taskSchedule.ErrorMsg();
     }
 
     @Test

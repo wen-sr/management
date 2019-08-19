@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.xhwl.BZChuHuoMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.xhwl.BZChuHuo" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="faCase" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="tuiCase" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="zpRej" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="tuiRej" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sgFa" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dzz" jdbcType="NCHAR" javaType="java.lang.String" />
+      <arg column="dd" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="addwho" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="note" jdbcType="NVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, faCase, tuiCase, zpRej, tuiRej, sgFa, dzz, dd, adddate, addwho, note
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from BZChuHuo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from BZChuHuo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.xhwl.BZChuHuo" >
+    insert into BZChuHuo (id, faCase, tuiCase, 
+      zpRej, tuiRej, sgFa, 
+      dzz, dd, adddate, 
+      addwho, note)
+    values (#{id,jdbcType=INTEGER}, #{facase,jdbcType=INTEGER}, #{tuicase,jdbcType=INTEGER}, 
+      #{zprej,jdbcType=INTEGER}, #{tuirej,jdbcType=INTEGER}, #{sgfa,jdbcType=INTEGER}, 
+      #{dzz,jdbcType=NCHAR}, #{dd,jdbcType=NVARCHAR}, #{adddate,jdbcType=TIMESTAMP}, 
+      #{addwho,jdbcType=NVARCHAR}, #{note,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.xhwl.BZChuHuo" >
+    insert into BZChuHuo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="facase != null" >
+        faCase,
+      </if>
+      <if test="tuicase != null" >
+        tuiCase,
+      </if>
+      <if test="zprej != null" >
+        zpRej,
+      </if>
+      <if test="tuirej != null" >
+        tuiRej,
+      </if>
+      <if test="sgfa != null" >
+        sgFa,
+      </if>
+      <if test="dzz != null" >
+        dzz,
+      </if>
+      <if test="dd != null" >
+        dd,
+      </if>
+      <if test="1 != 2" >
+        adddate,
+      </if>
+      <if test="addwho != null" >
+        addwho,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="facase != null" >
+        #{facase,jdbcType=INTEGER},
+      </if>
+      <if test="tuicase != null" >
+        #{tuicase,jdbcType=INTEGER},
+      </if>
+      <if test="zprej != null" >
+        #{zprej,jdbcType=INTEGER},
+      </if>
+      <if test="tuirej != null" >
+        #{tuirej,jdbcType=INTEGER},
+      </if>
+      <if test="sgfa != null" >
+        #{sgfa,jdbcType=INTEGER},
+      </if>
+      <if test="dzz != null" >
+        #{dzz,jdbcType=NCHAR},
+      </if>
+      <if test="dd != null" >
+        #{dd,jdbcType=NVARCHAR},
+      </if>
+      <if test="1 != 2" >
+        getdate(),
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.xhwl.BZChuHuo" >
+    update BZChuHuo
+    <set >
+      <if test="facase != null" >
+        faCase = #{facase,jdbcType=INTEGER},
+      </if>
+      <if test="tuicase != null" >
+        tuiCase = #{tuicase,jdbcType=INTEGER},
+      </if>
+      <if test="zprej != null" >
+        zpRej = #{zprej,jdbcType=INTEGER},
+      </if>
+      <if test="tuirej != null" >
+        tuiRej = #{tuirej,jdbcType=INTEGER},
+      </if>
+      <if test="sgfa != null" >
+        sgFa = #{sgfa,jdbcType=INTEGER},
+      </if>
+      <if test="dzz != null" >
+        dzz = #{dzz,jdbcType=NCHAR},
+      </if>
+      <if test="dd != null" >
+        dd = #{dd,jdbcType=NVARCHAR},
+      </if>
+      <if test="adddate != null" >
+        adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        addwho = #{addwho,jdbcType=NVARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.xhwl.BZChuHuo" >
+    update BZChuHuo
+    set faCase = #{facase,jdbcType=INTEGER},
+      tuiCase = #{tuicase,jdbcType=INTEGER},
+      zpRej = #{zprej,jdbcType=INTEGER},
+      tuiRej = #{tuirej,jdbcType=INTEGER},
+      sgFa = #{sgfa,jdbcType=INTEGER},
+      dzz = #{dzz,jdbcType=NCHAR},
+      dd = #{dd,jdbcType=NVARCHAR},
+      adddate = #{adddate,jdbcType=TIMESTAMP},
+      addwho = #{addwho,jdbcType=NVARCHAR},
+      note = #{note,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultType="com.management.pojo.xhwl.BZChuHuo">
+    select <include refid="Base_Column_List"/>
+    from BZChuHuo
+    <where>
+      <if test="dd != null">
+        dd = #{dd,jdbcType=NVARCHAR}
+      </if>
+    </where>
+    order by dd desc
+  </select>
+
+</mapper>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.liku.BankInterfaceLineMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.liku.BankInterfaceLine" >
+    <constructor >
+      <idArg column="ID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="GUID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Number" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Note" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Way" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Layer" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="StatusDetail" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="HaveContainer" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="OldContainerCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ContainerCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BankNumber" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="CountNumber" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Direction" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ArriveTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="LastArriveTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="InterfaceEnumValue" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GUID, Name, Number, Status, Note, Way, Layer, StatusDetail, HaveContainer, OldContainerCode, 
+    ContainerCode, BankNumber, CountNumber, Direction, ArriveTime, LastArriveTime, InterfaceEnumValue
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bankinterfaceline
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bankinterfaceline
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.liku.BankInterfaceLine" >
+    insert into bankinterfaceline (ID, GUID, Name, 
+      Number, Status, Note, 
+      Way, Layer, StatusDetail, 
+      HaveContainer, OldContainerCode, ContainerCode, 
+      BankNumber, CountNumber, Direction, 
+      ArriveTime, LastArriveTime, InterfaceEnumValue
+      )
+    values (#{id,jdbcType=BIGINT}, #{guid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, 
+      #{way,jdbcType=INTEGER}, #{layer,jdbcType=INTEGER}, #{statusdetail,jdbcType=INTEGER}, 
+      #{havecontainer,jdbcType=BIT}, #{oldcontainercode,jdbcType=VARCHAR}, #{containercode,jdbcType=VARCHAR}, 
+      #{banknumber,jdbcType=INTEGER}, #{countnumber,jdbcType=INTEGER}, #{direction,jdbcType=INTEGER}, 
+      #{arrivetime,jdbcType=TIMESTAMP}, #{lastarrivetime,jdbcType=TIMESTAMP}, #{interfaceenumvalue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.liku.BankInterfaceLine" >
+    insert into bankinterfaceline
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="guid != null" >
+        GUID,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="number != null" >
+        Number,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="way != null" >
+        Way,
+      </if>
+      <if test="layer != null" >
+        Layer,
+      </if>
+      <if test="statusdetail != null" >
+        StatusDetail,
+      </if>
+      <if test="havecontainer != null" >
+        HaveContainer,
+      </if>
+      <if test="oldcontainercode != null" >
+        OldContainerCode,
+      </if>
+      <if test="containercode != null" >
+        ContainerCode,
+      </if>
+      <if test="banknumber != null" >
+        BankNumber,
+      </if>
+      <if test="countnumber != null" >
+        CountNumber,
+      </if>
+      <if test="direction != null" >
+        Direction,
+      </if>
+      <if test="arrivetime != null" >
+        ArriveTime,
+      </if>
+      <if test="lastarrivetime != null" >
+        LastArriveTime,
+      </if>
+      <if test="interfaceenumvalue != null" >
+        InterfaceEnumValue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="guid != null" >
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="way != null" >
+        #{way,jdbcType=INTEGER},
+      </if>
+      <if test="layer != null" >
+        #{layer,jdbcType=INTEGER},
+      </if>
+      <if test="statusdetail != null" >
+        #{statusdetail,jdbcType=INTEGER},
+      </if>
+      <if test="havecontainer != null" >
+        #{havecontainer,jdbcType=BIT},
+      </if>
+      <if test="oldcontainercode != null" >
+        #{oldcontainercode,jdbcType=VARCHAR},
+      </if>
+      <if test="containercode != null" >
+        #{containercode,jdbcType=VARCHAR},
+      </if>
+      <if test="banknumber != null" >
+        #{banknumber,jdbcType=INTEGER},
+      </if>
+      <if test="countnumber != null" >
+        #{countnumber,jdbcType=INTEGER},
+      </if>
+      <if test="direction != null" >
+        #{direction,jdbcType=INTEGER},
+      </if>
+      <if test="arrivetime != null" >
+        #{arrivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastarrivetime != null" >
+        #{lastarrivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interfaceenumvalue != null" >
+        #{interfaceenumvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.liku.BankInterfaceLine" >
+    update bankinterfaceline
+    <set >
+      <if test="guid != null" >
+        GUID = #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        Number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="way != null" >
+        Way = #{way,jdbcType=INTEGER},
+      </if>
+      <if test="layer != null" >
+        Layer = #{layer,jdbcType=INTEGER},
+      </if>
+      <if test="statusdetail != null" >
+        StatusDetail = #{statusdetail,jdbcType=INTEGER},
+      </if>
+      <if test="havecontainer != null" >
+        HaveContainer = #{havecontainer,jdbcType=BIT},
+      </if>
+      <if test="oldcontainercode != null" >
+        OldContainerCode = #{oldcontainercode,jdbcType=VARCHAR},
+      </if>
+      <if test="containercode != null" >
+        ContainerCode = #{containercode,jdbcType=VARCHAR},
+      </if>
+      <if test="banknumber != null" >
+        BankNumber = #{banknumber,jdbcType=INTEGER},
+      </if>
+      <if test="countnumber != null" >
+        CountNumber = #{countnumber,jdbcType=INTEGER},
+      </if>
+      <if test="direction != null" >
+        Direction = #{direction,jdbcType=INTEGER},
+      </if>
+      <if test="arrivetime != null" >
+        ArriveTime = #{arrivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastarrivetime != null" >
+        LastArriveTime = #{lastarrivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interfaceenumvalue != null" >
+        InterfaceEnumValue = #{interfaceenumvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.liku.BankInterfaceLine" >
+    update bankinterfaceline
+    set GUID = #{guid,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      Number = #{number,jdbcType=INTEGER},
+      Status = #{status,jdbcType=INTEGER},
+      Note = #{note,jdbcType=VARCHAR},
+      Way = #{way,jdbcType=INTEGER},
+      Layer = #{layer,jdbcType=INTEGER},
+      StatusDetail = #{statusdetail,jdbcType=INTEGER},
+      HaveContainer = #{havecontainer,jdbcType=BIT},
+      OldContainerCode = #{oldcontainercode,jdbcType=VARCHAR},
+      ContainerCode = #{containercode,jdbcType=VARCHAR},
+      BankNumber = #{banknumber,jdbcType=INTEGER},
+      CountNumber = #{countnumber,jdbcType=INTEGER},
+      Direction = #{direction,jdbcType=INTEGER},
+      ArriveTime = #{arrivetime,jdbcType=TIMESTAMP},
+      LastArriveTime = #{lastarrivetime,jdbcType=TIMESTAMP},
+      InterfaceEnumValue = #{interfaceenumvalue,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

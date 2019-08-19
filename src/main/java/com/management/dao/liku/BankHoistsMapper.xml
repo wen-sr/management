@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.liku.BankHoistsMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.liku.BankHoists" >
+    <constructor >
+      <idArg column="ID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="GUID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Number" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Note" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BankNumber" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Way" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="HoistsPurpose" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="StatusDetail" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="HaveContainerOrShuttle" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ErrorCode" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GUID, Name, Number, Status, Note, BankNumber, Way, HoistsPurpose, StatusDetail, 
+    HaveContainerOrShuttle, ErrorCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bankhoists
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bankhoists
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.liku.BankHoists" >
+    insert into bankhoists (ID, GUID, Name, 
+      Number, Status, Note, 
+      BankNumber, Way, HoistsPurpose, 
+      StatusDetail, HaveContainerOrShuttle, ErrorCode
+      )
+    values (#{id,jdbcType=BIGINT}, #{guid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, 
+      #{banknumber,jdbcType=INTEGER}, #{way,jdbcType=INTEGER}, #{hoistspurpose,jdbcType=INTEGER}, 
+      #{statusdetail,jdbcType=INTEGER}, #{havecontainerorshuttle,jdbcType=INTEGER}, #{errorcode,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.liku.BankHoists" >
+    insert into bankhoists
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="guid != null" >
+        GUID,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="number != null" >
+        Number,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="banknumber != null" >
+        BankNumber,
+      </if>
+      <if test="way != null" >
+        Way,
+      </if>
+      <if test="hoistspurpose != null" >
+        HoistsPurpose,
+      </if>
+      <if test="statusdetail != null" >
+        StatusDetail,
+      </if>
+      <if test="havecontainerorshuttle != null" >
+        HaveContainerOrShuttle,
+      </if>
+      <if test="errorcode != null" >
+        ErrorCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="guid != null" >
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="banknumber != null" >
+        #{banknumber,jdbcType=INTEGER},
+      </if>
+      <if test="way != null" >
+        #{way,jdbcType=INTEGER},
+      </if>
+      <if test="hoistspurpose != null" >
+        #{hoistspurpose,jdbcType=INTEGER},
+      </if>
+      <if test="statusdetail != null" >
+        #{statusdetail,jdbcType=INTEGER},
+      </if>
+      <if test="havecontainerorshuttle != null" >
+        #{havecontainerorshuttle,jdbcType=INTEGER},
+      </if>
+      <if test="errorcode != null" >
+        #{errorcode,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.liku.BankHoists" >
+    update bankhoists
+    <set >
+      <if test="guid != null" >
+        GUID = #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        Number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="banknumber != null" >
+        BankNumber = #{banknumber,jdbcType=INTEGER},
+      </if>
+      <if test="way != null" >
+        Way = #{way,jdbcType=INTEGER},
+      </if>
+      <if test="hoistspurpose != null" >
+        HoistsPurpose = #{hoistspurpose,jdbcType=INTEGER},
+      </if>
+      <if test="statusdetail != null" >
+        StatusDetail = #{statusdetail,jdbcType=INTEGER},
+      </if>
+      <if test="havecontainerorshuttle != null" >
+        HaveContainerOrShuttle = #{havecontainerorshuttle,jdbcType=INTEGER},
+      </if>
+      <if test="errorcode != null" >
+        ErrorCode = #{errorcode,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.liku.BankHoists" >
+    update bankhoists
+    set GUID = #{guid,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      Number = #{number,jdbcType=INTEGER},
+      Status = #{status,jdbcType=INTEGER},
+      Note = #{note,jdbcType=VARCHAR},
+      BankNumber = #{banknumber,jdbcType=INTEGER},
+      Way = #{way,jdbcType=INTEGER},
+      HoistsPurpose = #{hoistspurpose,jdbcType=INTEGER},
+      StatusDetail = #{statusdetail,jdbcType=INTEGER},
+      HaveContainerOrShuttle = #{havecontainerorshuttle,jdbcType=INTEGER},
+      ErrorCode = #{errorcode,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.liku.BankMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.liku.Bank" >
+    <constructor >
+      <idArg column="ID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="GUID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Number" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Note" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BankIP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BankPort" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Control" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OnOff" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="OnlineTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="OfflineTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GUID, Name, Number, Status, Note, BankIP, BankPort, Control, OnOff, OnlineTime, 
+    OfflineTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bank
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bank
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.liku.Bank" >
+    insert into bank (ID, GUID, Name, 
+      Number, Status, Note, 
+      BankIP, BankPort, Control, 
+      OnOff, OnlineTime, OfflineTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{guid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, 
+      #{bankip,jdbcType=VARCHAR}, #{bankport,jdbcType=INTEGER}, #{control,jdbcType=INTEGER}, 
+      #{onoff,jdbcType=BIT}, #{onlinetime,jdbcType=TIMESTAMP}, #{offlinetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.liku.Bank" >
+    insert into bank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="guid != null" >
+        GUID,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="number != null" >
+        Number,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="bankip != null" >
+        BankIP,
+      </if>
+      <if test="bankport != null" >
+        BankPort,
+      </if>
+      <if test="control != null" >
+        Control,
+      </if>
+      <if test="onoff != null" >
+        OnOff,
+      </if>
+      <if test="onlinetime != null" >
+        OnlineTime,
+      </if>
+      <if test="offlinetime != null" >
+        OfflineTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="guid != null" >
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="bankip != null" >
+        #{bankip,jdbcType=VARCHAR},
+      </if>
+      <if test="bankport != null" >
+        #{bankport,jdbcType=INTEGER},
+      </if>
+      <if test="control != null" >
+        #{control,jdbcType=INTEGER},
+      </if>
+      <if test="onoff != null" >
+        #{onoff,jdbcType=BIT},
+      </if>
+      <if test="onlinetime != null" >
+        #{onlinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offlinetime != null" >
+        #{offlinetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.liku.Bank" >
+    update bank
+    <set >
+      <if test="guid != null" >
+        GUID = #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        Number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="bankip != null" >
+        BankIP = #{bankip,jdbcType=VARCHAR},
+      </if>
+      <if test="bankport != null" >
+        BankPort = #{bankport,jdbcType=INTEGER},
+      </if>
+      <if test="control != null" >
+        Control = #{control,jdbcType=INTEGER},
+      </if>
+      <if test="onoff != null" >
+        OnOff = #{onoff,jdbcType=BIT},
+      </if>
+      <if test="onlinetime != null" >
+        OnlineTime = #{onlinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offlinetime != null" >
+        OfflineTime = #{offlinetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.liku.Bank" >
+    update bank
+    set GUID = #{guid,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      Number = #{number,jdbcType=INTEGER},
+      Status = #{status,jdbcType=INTEGER},
+      Note = #{note,jdbcType=VARCHAR},
+      BankIP = #{bankip,jdbcType=VARCHAR},
+      BankPort = #{bankport,jdbcType=INTEGER},
+      Control = #{control,jdbcType=INTEGER},
+      OnOff = #{onoff,jdbcType=BIT},
+      OnlineTime = #{onlinetime,jdbcType=TIMESTAMP},
+      OfflineTime = #{offlinetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

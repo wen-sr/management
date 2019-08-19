@@ -29,6 +29,10 @@ function loadData(pageSize, method, formData){
             title:"期号",
             width:30
         },{
+            field:"partment",
+            title:"业务部门",
+            width:70
+        },{
             field:"plantingname",
             title:"印刷厂",
             width:70
@@ -119,9 +123,11 @@ function queryInfo(){
     var issuenumber = $.trim($("#issuenumber").combobox('getValue'));
     var plantingname = $.trim($("#plantingname").combobox('getValue'));
     var subcode = $.trim($("#subcode").combobox('getValue'));
+    var partment = $.trim($("#partment").combobox('getValue'));
     var handbagdate = $.trim($("#handBagDate").datebox('getValue'));
     var handbagdateEnd = $.trim($("#handBagDateEnd").combobox('getValue'));
     var type = $.trim($("#type").combobox('getValue'));
+    var batchno = $.trim($("#batchno").textbox('getValue'));
     var flag = $("#flag").checkbox('options').checked;
     var formData = {
         issuenumber         : issuenumber,
@@ -130,7 +136,9 @@ function queryInfo(){
         handbagdate         : handbagdate,
         handbagdateEnd      : handbagdateEnd,
         type                : type,
-        flag                : flag
+        flag                : flag,
+        batchno             : batchno,
+        partment            : partment
 
     };
     loadData(20,'POST',formData);
@@ -158,6 +166,9 @@ function editInfo(){
                 $("#data").datagrid('reload');
                 $("#w-editInfo").window("close");
             });
+        },
+        error       : function (msg) {
+            $.messager.alert("操作提示",msg,"error");
         }
     })
 

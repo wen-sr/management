@@ -12,6 +12,7 @@ import com.management.service.wcs.ITaskCarService;
 import com.management.service.wcs.ITaskOpsService;
 import com.management.service.wcs.ITaskWmsService;
 import com.management.service.wechat.WeixinService;
+import com.management.service.xhwl.IBZChuHuoService;
 import com.management.util.ApacheHttpUtils;
 import com.management.vo.login.UserVo;
 import com.management.wechat.builder.TextBuilder;
@@ -58,6 +59,9 @@ public class MsgHandler extends AbstractHandler {
 
     @Autowired
     ITaskCarService taskCarService;
+
+    @Autowired
+    IBZChuHuoService bzChuHuoService;
 
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
@@ -140,7 +144,8 @@ public class MsgHandler extends AbstractHandler {
 
         //当用户输入关键词如“你好”,“客服”等,并且有客服在线时,把消息转发给在线客服
         if (StringUtils.startsWithAny(wxMessage.getContent(), "发送产量", "新华物流产量", "产量", "发产量")) {
-            ApacheHttpUtils.sendHttpPost("http://141.168.1.188:8080/jxxhwl/wx/wXFunction_sendChanLiang.action");
+            bzChuHuoService.SendWx();
+            //ApacheHttpUtils.sendHttpPost("http://141.168.1.188:8080/jxxhwl/wx/wXFunction_sendChanLiang.action");
         }
         if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服")
             && weixinService.hasKefuOnline()) {

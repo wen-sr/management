@@ -243,5 +243,8 @@
     </if>
     order by a.id
   </select>
-
+  <select id="getChuHuoQty" resultType="java.lang.Integer">
+      select isnull(faCase,0) + ISNULL(tuiCase,0) + ISNULL(zpRej,0) + ISNULL(tuiRej,0) + ISNULL(sgFa,0) + ISNULL(dzz,0)
+      from BZChuHuo where dd = CONVERT(varchar(100), GETDATE(), 23)
+    </select>
 </mapper>

@@ -5,6 +5,8 @@ public class JiaoCaiPlanDataVo {
 
     private String issuenumber;
 
+    private String partment;
+
     private String plantingname;
 
     private String subcode;
@@ -40,6 +42,14 @@ public class JiaoCaiPlanDataVo {
     private String remark;
 
     private boolean flag;
+
+    public String getPartment() {
+        return partment;
+    }
+
+    public void setPartment(String partment) {
+        this.partment = partment;
+    }
 
     public boolean isFlag() {
         return flag;

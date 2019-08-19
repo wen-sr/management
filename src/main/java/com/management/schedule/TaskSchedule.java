@@ -1,12 +1,14 @@
 package com.management.schedule;
 
 import com.management.common.Constant;
+import com.management.dao.liku.BankShuttleMapper;
 import com.management.pojo.prd1.WmsErrorMsg;
 import com.management.pojo.wechat.UserInfo;
 import com.management.service.prd1.IWmsErrorMsgService;
 import com.management.service.wechat.IUserInfoService;
 import com.management.util.DataSourceContextHolder;
 import com.management.util.DateTimeUtil;
+import com.management.vo.liku.ErrorMessageVo;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
@@ -34,10 +36,20 @@ public class TaskSchedule {
     @Autowired
     IUserInfoService userInfoService;
 
+    @Autowired
+    BankShuttleMapper bankShuttleMapper;
+
 
 //    @Scheduled(cron="0/5 * * * * ? ") //间隔5秒执行
-    @Scheduled(cron="0 0/2 * * * ? ") //间隔2分钟执行
-    public void wmsErrorMsg(){
+    @Scheduled(cron="0 0/10 * * * ? ") //间隔10分钟执行
+    public void ErrorMsg(){
+        wmsError();
+        likuError();
+    }
+
+
+    //wms报错
+    private void wmsError(){
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
         //logger.info("<<<---------查询WMS系统报错信息的定时任务开始--------->>>");
         wmsErrorMsgService.updateHis();
@@ -63,6 +75,41 @@ public class TaskSchedule {
                     } catch (WxErrorException e) {
                         e.printStackTrace();
                         logger.error("=====微信发送系统故障提醒时报错=====",e);
+                    }
+                }
+
+            }
+        }
+        //logger.info("<<<---------查询WMS系统报错信息的定时任务结束--------->>>");
+    }
+    //立库报错
+    private void likuError(){
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_LIKU);
+        //logger.info("<<<---------查询WMS系统报错信息的定时任务开始--------->>>");
+        List<ErrorMessageVo>  errorMessageVoList = bankShuttleMapper.getErrorMsg();
+        if(errorMessageVoList != null && errorMessageVoList.size() > 0){
+            if(errorMessageVoList.size() > 10) {
+                return;
+            }
+            List<UserInfo> userInfoList = findByroleId(Constant.Role.ROLE_JSY);
+            for(ErrorMessageVo e : errorMessageVoList){
+                for(UserInfo userInfo : userInfoList){
+                    WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+//                            .toUser("oPOAgvx1Utuu0Mg25QTPs5yqDUyw")
+                            .toUser(userInfo.getOpenid())
+                            .templateId("3NNDKh-IQwR4vV8hbv3AY1J1hFEtkrU3MwbXtY3L8dU").build();
+                    templateMessage.getData().add(new WxMpTemplateData("first", "您好，您有一条立库故障通知！", "#284177"));
+                    templateMessage.getData().add(new WxMpTemplateData("keyword1", e.getName(), "#0044BB"));
+                    templateMessage.getData().add(new WxMpTemplateData("keyword2", DateTimeUtil.dateToStr(new Date()), "#0044BB"));
+                    templateMessage.getData().add(new WxMpTemplateData("keyword3", e.getBankId() + "号立库，" + e.getName() + e.getErrorMsg() + "， 报错代码：" + e.getErrorCode(),"#0044BB"));
+                    templateMessage.getData().add(new WxMpTemplateData("remark", "江西蓝海物流技术部", "#AAAAAA"));
+                    templateMessage.setUrl("http://www.jxxh56.com/management/page/infor/messageShow.html");
+
+                    try {
+                        wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
+                    } catch (WxErrorException ex) {
+                        ex.printStackTrace();
+                        logger.error("=====微信发送系统故障提醒时报错=====",ex);
                     }
                 }
 
