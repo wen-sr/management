@@ -5,10 +5,12 @@ import com.github.pagehelper.PageInfo;
 import com.management.common.Constant;
 import com.management.common.ServerResponse;
 import com.management.dao.info.InforErrorMapper;
+import com.management.dao.info.OnOffMapper;
 import com.management.dao.login.LoginMapper;
 import com.management.dao.oa.OrganizationMapper;
 import com.management.dao.wechat.UserInfoMapper;
 import com.management.pojo.info.InforError;
+import com.management.pojo.info.OnOff;
 import com.management.pojo.wechat.UserInfo;
 import com.management.service.info.InforErrorService;
 import com.management.util.DataSourceContextHolder;
@@ -17,6 +19,7 @@ import com.management.util.FTPUtil;
 import com.management.vo.info.InforErrorVo;
 import com.management.vo.login.UserVo;
 import com.management.vo.oa.OrganizationVo;
+import com.sun.xml.internal.ws.api.addressing.OneWayFeature;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
@@ -49,6 +52,9 @@ public class InforErrorServiceImpl implements InforErrorService {
 
     @Autowired
     UserInfoMapper userInfoMapper;
+
+    @Autowired
+    OnOffMapper onOffMapper;
 
     @Override
     public ServerResponse addInforError(InforError inforError) {
@@ -131,6 +137,36 @@ public class InforErrorServiceImpl implements InforErrorService {
         }else{
             return ServerResponse.createByErrorMessage("删除失败");
         }
+    }
+
+    @Override
+    public ServerResponse getOnOff() {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        List<OnOff> onOffList = onOffMapper.selectAll();
+        if(onOffList != null && onOffList.size()> 0){
+            for(OnOff onOff : onOffList){
+                if(Constant.LIKU.equals(onOff.getName())){
+                    onOff.setName("立库故障");
+                }else if(Constant.INFO.equals(onOff.getName())){
+                    onOff.setName("系统故障");
+                }
+                onOff.setFlag(Constant.OnOffEnum.codeOf(Integer.parseInt(onOff.getFlag())).getMsg());
+            }
+        }
+        return ServerResponse.createBySuccess(onOffList);
+    }
+
+    @Override
+    public ServerResponse updateOnOff(OnOff onOff) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        onOff = onOffMapper.selectByPrimaryKey(onOff.getId());
+        if("0".equals(onOff.getFlag())){
+            onOff.setFlag("1");
+        }else {
+            onOff.setFlag("0");
+        }
+        onOffMapper.updateByPrimaryKeySelective(onOff);
+        return ServerResponse.createBySuccessMsg("修改成功");
     }
 
     private List<InforErrorVo> parseToInforErrorVo(List<InforError> inforErrorList) {

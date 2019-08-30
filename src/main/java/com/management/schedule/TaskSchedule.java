@@ -1,6 +1,7 @@
 package com.management.schedule;
 
 import com.management.common.Constant;
+import com.management.dao.info.OnOffMapper;
 import com.management.dao.liku.BankShuttleMapper;
 import com.management.pojo.prd1.WmsErrorMsg;
 import com.management.pojo.wechat.UserInfo;
@@ -13,12 +14,14 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
+import oracle.jdbc.driver.Const;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.awt.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -39,14 +42,23 @@ public class TaskSchedule {
     @Autowired
     BankShuttleMapper bankShuttleMapper;
 
+    @Autowired
+    OnOffMapper onOffMapper;
 
 //    @Scheduled(cron="0/5 * * * * ? ") //间隔5秒执行
-    @Scheduled(cron="0 0/10 * * * ? ") //间隔10分钟执行
+    @Scheduled(cron="0 0/5 * * * ? ") //间隔5分钟执行
     public void ErrorMsg(){
-        wmsError();
-        likuError();
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        String info = onOffMapper.getFlagByName(Constant.INFO);
+        if("1".equals(info)){
+            wmsError();
+        }
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+        String liku = onOffMapper.getFlagByName(Constant.LIKU);
+        if("1".equals(liku)){
+            likuError();
+        }
     }
-
 
     //wms报错
     private void wmsError(){

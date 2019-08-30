@@ -144,13 +144,12 @@
   <select id="getErrorMsg" resultType="com.management.vo.liku.ErrorMessageVo">
     SELECT b.ErrorCode as errorCode,e.ErrorRemark as errorMsg,b.bankNumber as bankId,b.name as name
     FROM bankshuttle AS B LEFT JOIN errorlist AS E ON E.ErrorCode=B.ErrorCode
-    where b.ErrorCode &lt;&gt; '0'
+    LEFT JOIN bank k on b.BankNumber = k.Number
+    where statusdetail &lt;&gt; '0' and e.ErrorType = '0' and k.OnOff &lt;&gt; '0' and b.errorcode &lt;&gt; 0
     union
     SELECT b.ErrorCode as errorCode,e.ErrorRemark as errorMsg,b.bankNumber as bankId,b.name as name
     FROM bankhoists AS B LEFT JOIN errorlist AS E ON E.ErrorCode=B.ErrorCode
-    where b.ErrorCode &lt;&gt; '0'
-    union
-    SELECT "107" as errorCode,"库不可用" as errorMsg, number as bankId, "立库故障" as name  from bank where status &lt;&gt; '0'  and OnOff='1'
+    where b.ErrorCode &lt;&gt; '0' and e.ErrorType = '1'
     union
     SELECT "00" as errorCode,"暂存台不可用" as errorMsg, banknumber as bankId, "暂存台故障" as name  from banktemporaryarea where status &lt;&gt; '0'
   </select>

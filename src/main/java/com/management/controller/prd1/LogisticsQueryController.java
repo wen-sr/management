@@ -5,6 +5,7 @@ import com.management.service.prd1.ILogisticsQueryService;
 import com.management.vo.prd1.DeliveryVo;
 import com.management.vo.prd1.LogisticsQueryVo;
 import com.management.vo.prd1.ReceiptVo;
+import com.management.vo.prd1.ZhuPeiGouBaoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,6 +71,12 @@ public class LogisticsQueryController {
     @ResponseBody
     public ServerResponse caseSkuDetail(DeliveryVo deliveryVo) {
         return logisticsQueryService.caseSkuDetail(deliveryVo);
+    }
+
+    @RequestMapping(value = "/getZhuPeiGouBao", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public ServerResponse getZhuPeiGouBao(String doc_number) {
+        return logisticsQueryService.getZhuPeiGouBao(doc_number);
     }
 
 

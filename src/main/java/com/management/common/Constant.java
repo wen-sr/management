@@ -22,6 +22,8 @@ public class Constant {
     public static final String URL_WEBSITE                  = "http://141.168.1.139:8010/admin/Handler/addCookie.ashx";
     public static final String DATA_FROM                    = "MyWMS";
     public static final String WEBSITE_PIC                  = "http://img.jxlh56.com/website/";
+    public static final String LIKU                         = "liku";
+    public static final String INFO                         = "info";
 
     public interface Role{
         int ROLE_CUSTOMER = 0; //普通用户
@@ -45,7 +47,6 @@ public class Constant {
         String THIRD = "9";
         String WEBSITE = "11";
     }
-
 
     public enum UserSexEnum{
 
@@ -81,6 +82,46 @@ public class Constant {
             for(UserSexEnum  userSexEnum: values()){
                 if(userSexEnum.getCode() == code){
                     return userSexEnum;
+                }
+            }
+            throw new RuntimeException("没有找到对应的枚举");
+        }
+    }
+
+    public enum OnOffEnum{
+
+        ON(1, "checked"),
+        OFF(0, ""),
+        ;
+
+        private Integer code;
+        private String msg;
+
+        OnOffEnum(int code, String msg) {
+            this.code = code;
+            this.msg = msg;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public void setCode(Integer code) {
+            this.code = code;
+        }
+
+        public String getMsg() {
+            return msg;
+        }
+
+        public void setMsg(String msg) {
+            this.msg = msg;
+        }
+
+        public static OnOffEnum codeOf(int code){
+            for(OnOffEnum  unum: values()){
+                if(unum.getCode() == code){
+                    return unum;
                 }
             }
             throw new RuntimeException("没有找到对应的枚举");

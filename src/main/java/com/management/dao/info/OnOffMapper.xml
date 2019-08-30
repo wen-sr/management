@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.info.OnOffMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.info.OnOff" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="name" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="flag" jdbcType="NVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from onOff
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from onOff
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.info.OnOff" >
+    insert into onOff (id, name, flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=NVARCHAR}, #{flag,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.info.OnOff" >
+    insert into onOff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.info.OnOff" >
+    update onOff
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.info.OnOff" >
+    update onOff
+    set name = #{name,jdbcType=NVARCHAR},
+      flag = #{flag,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateOnOffByName">
+    update onOff set flag = #{flag} where name = #{name}
+  </update>
+  <select id="getFlagByName" resultType="java.lang.String">
+    select flag from onOff where name = #{name}
+  </select>
+  <select id="selectAll" resultType="com.management.pojo.info.OnOff">
+    select <include refid="Base_Column_List"/>
+    from onOff
+  </select>
+</mapper>

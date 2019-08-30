@@ -5,8 +5,7 @@ $(function () {
 function getData() {
     $("#list").html("");
     tools.request({
-        url:'/management/info/likuError',
-        data:{id : id},
+        url:'/management/infor/likuError',
         success:function(data, msg){
             if(data != null){
                 if(data != null && data.length > 0){
@@ -14,7 +13,7 @@ function getData() {
                         '{{#list}}' +
                         '<div class="weui-cell">' +
                         '<div class="weui-cell__bd">' +
-                        '<p>e.getBankId() + "号立库，" + e.getName() + e.getErrorMsg()</p>' +
+                        '<p>{{bankId}}号立库，{{name}}{{errorMsg}}，故障代码：{{errorCode}}</p>' +
                         '</div>' +
                         '</div>' +
                         '{{/list}}';

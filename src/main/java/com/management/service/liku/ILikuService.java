@@ -11,4 +11,5 @@ import com.management.common.ServerResponse;
 public interface ILikuService {
 
     public ServerResponse getErrorMsg();
+
 }

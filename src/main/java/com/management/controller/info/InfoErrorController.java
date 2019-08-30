@@ -2,6 +2,7 @@ package com.management.controller.info;
 
 import com.management.common.*;
 import com.management.pojo.info.InforError;
+import com.management.pojo.info.OnOff;
 import com.management.pojo.login.Login;
 import com.management.service.info.InforErrorService;
 import com.management.service.liku.ILikuService;
@@ -235,6 +236,23 @@ public class InfoErrorController extends BaseCotroller {
     public ServerResponse likuError(){
         return likuService.getErrorMsg();
     }
+
+
+
+
+    @RequestMapping("/getOnOff")
+    @ResponseBody
+    public ServerResponse getOnOff(){
+        return inforErrorService.getOnOff();
+    }
+
+    @RequestMapping("/updateOnOff")
+    @ResponseBody
+    public ServerResponse updateOnOff(OnOff onOff){
+        return inforErrorService.updateOnOff(onOff);
+    }
+
+
 
 
 }

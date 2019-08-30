@@ -46,4 +46,6 @@ public interface XsogroupMapper {
     List<DeliveryVo> caseidQuery(DeliveryVo deliveryVo);
 
     List<DeliveryVo> caseSkuDetail(DeliveryVo deliveryVo);
+
+    List<ZhuPeiGouBaoVo> getZhuPeiGouBao(String doc_number);
 }

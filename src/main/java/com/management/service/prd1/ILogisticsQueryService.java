@@ -25,4 +25,6 @@ public interface ILogisticsQueryService {
     ServerResponse caseSkuDetail(DeliveryVo deliveryVo);
 
     Integer ReceiptQty();
+
+    ServerResponse getZhuPeiGouBao(String doc_number);
 }
