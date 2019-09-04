@@ -495,7 +495,7 @@
     consk storerkey,
     shortname,
     (case
-    when status in ('-1', '0')
+    when status in ('-1', '0') then
     '包装完成'
      when status in ('1', '2', '5') then
      '待运'

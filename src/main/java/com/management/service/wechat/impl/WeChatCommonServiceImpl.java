@@ -109,7 +109,7 @@ public class WeChatCommonServiceImpl implements IWeChatCommonService {
     String idIsExist(String id, String businessType){
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_PRD1);
         String name = "";
-        if("1".equals(businessType)){
+        if("1".equals(businessType) || "3".equals(businessType)){
             name = xsogroupMapper.selectStorerById(id);
         }else if("2".equals(businessType)){
             name = xsogroupMapper.selectJiaoCaiStorerById(id);

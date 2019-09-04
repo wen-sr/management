@@ -28,7 +28,7 @@
 
 <body>
 <div align="center">
-    <h2 style="color:#0078CA;font-size: 20px;">系统故障</h2>
+    <h2 style="color:#0078CA;font-size: 20px;">意见反馈</h2>
 </div>
 <!-- 数据显示 -->
 <div id = 'd_data' align="center" style="height:760px;">
@@ -36,22 +36,14 @@
     </table>
 </div>
 <!-- 增加 -->
-<div id="w-addInfo" class="easyui-window" title="添加报修单"
+<div id="w-addInfo" class="easyui-window" title="添加意见反馈"
      data-options="modal:false,closed:true,iconCls:'icon-save'"
      style="width: 700px; height: 400px; padding: 10px;">
     <form id="addForm" name="addForm" method="post" action="/management/infor/addInforErrorPC" align="center" style="text-align:center;margin: 10px;line-height: 41px;" enctype='multipart/form-data'>
         <h2>添加</h2>
         <table id="formtable" border="0px" align="center" cellpadding='2' width="100%">
             <tr>
-                <td>类型:</td>
-                <td><select class="easyui-combobox" name="type" id="add_type" label="" style="width:300px">
-                <option value="0">系统报错</option>
-                <option value="1">系统需求</option>
-                </select>
-                </td>
-            </tr>
-            <tr>
-                <td>故障描述：</td>
+                <td>描述：</td>
                 <td><input id="add_description" name="description" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:100px">
                 </td>
             </tr>

@@ -39,23 +39,14 @@ $(function(){
  */
 function addInfo(){
 
-    var type = $.trim($("#add_type").combobox('getValue'));
     var add_image = $.trim($("#add_image").textbox('getValue'));
     var description = $.trim($("#add_description").textbox('getValue'));
-
-    if(type == 0){
-        if(add_image == ""){
-            $.messager.alert("操作提示","系统报错必须上传截图！","error");
-            return;
-        }
-    }
 
     if(description == ""){
         $.messager.alert("操作提示","描述不能为空！","error");
         return;
     }
     var formData = {
-        "type"              : type,
         "mediaId "          : add_image,
         "description"       : description
     };
@@ -67,8 +58,8 @@ function addInfo(){
         success:function(res){
             if(res.status == 0){
                 $.messager.alert("提示",res.msg,"info",function(){
-                    loadData();
-                    $("#w-addInfo").window("close");
+                    $("#add_image").textbox('setValue', '');
+                    $("#add_description").textbox('setValue', '');
                 });
             }else if(res.status == 1) {
                 $.messager.alert("提示",res.msg,"error");

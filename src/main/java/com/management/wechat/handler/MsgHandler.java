@@ -14,6 +14,7 @@ import com.management.service.wcs.ITaskWmsService;
 import com.management.service.wechat.WeixinService;
 import com.management.service.xhwl.IBZChuHuoService;
 import com.management.util.ApacheHttpUtils;
+import com.management.util.DataSourceContextHolder;
 import com.management.vo.login.UserVo;
 import com.management.wechat.builder.TextBuilder;
 import me.chanjar.weixin.common.api.WxConsts;
@@ -82,16 +83,18 @@ public class MsgHandler extends AbstractHandler {
                 if(strArray.length != 2 || "".equals(strArray[0]) || "".equals(strArray[1]) || "LH".equals(strArray[0].subSequence(0, 1))) {
                     content = "您绑定工号的格式不对";
                 }else{
+                    DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
                     UserInfo userInfo = userInfoMapper.selectByOpenId(wxMessage.getFromUser());
                     if(userInfo != null){
                         if(userInfo.getLoginId() != null && "".equals(userInfo.getLoginId())){
                             content = "您好,您已经绑定工号【" + userInfo.getLoginId() + "】,无需再次绑定";
                         }else{
-                            userInfo = userInfoMapper.selectByLoginId(strArray[0].toUpperCase());
-                            if(userInfo != null){
+                            UserInfo userInfo2 = userInfoMapper.selectByLoginId(strArray[0].toUpperCase());
+                            if(userInfo2 != null){
                                 content = "您好,您的工号已经绑定了一个微信,无法再次绑定";
                             }
                             //验证工号和姓名是否匹配
+                            DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
                             UserVo userVo = loginMapper.selectUserAndOrgnazizationById(strArray[0].toUpperCase());
                             if(userVo == null || !StringUtils.equals(userVo.getName(), strArray[1])){
                                 String con = "";
@@ -115,6 +118,7 @@ public class MsgHandler extends AbstractHandler {
                                 }
                             }
                             userInfo.setLoginId(strArray[0].toUpperCase());
+                            DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
                             int i = userInfoMapper.updateByPrimaryKeySelective(userInfo);
                             if(i > 0) {
                                 WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()

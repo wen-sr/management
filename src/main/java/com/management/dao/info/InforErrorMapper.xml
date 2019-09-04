@@ -224,8 +224,8 @@
   </update>
   <select id="findAll" parameterType="map" resultMap="BaseResultMap">
     select a.*
-    FROM INFOR_ERROR a, login b, ORGANIZATION c
-    where a.ADDWHO=b.id and b.ORGANIZATION_ID = c.ID
+    FROM INFOR_ERROR a
+    <where>
     <if test="inforError.id != null ">
       and a.id = #{inforError.id}
     </if>
@@ -235,13 +235,14 @@
     <if test="inforError.bk1 != null">
       and a.bk1 = #{inforError.bk1}
     </if>
-    <if test="ids != null and ids.size() > 0">
-      and c.id in
-      <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
-        #{item}
-      </foreach>
-    </if>
-    order by a.id
+    </where>
+    <!--<if test="ids != null and ids.size() > 0">-->
+      <!--and c.id in-->
+      <!--<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">-->
+        <!--#{item}-->
+      <!--</foreach>-->
+    <!--</if>-->
+    order by a.id desc
   </select>
   <select id="getChuHuoQty" resultType="java.lang.Integer">
       select isnull(faCase,0) + ISNULL(tuiCase,0) + ISNULL(zpRej,0) + ISNULL(tuiRej,0) + ISNULL(sgFa,0) + ISNULL(dzz,0)

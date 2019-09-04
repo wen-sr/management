@@ -56,18 +56,21 @@ public class InfoErrorController extends BaseCotroller {
                                  InforError inforError,
                                  HttpServletRequest request){
 
-        ServerResponse response = isLogin(session, request);
-
-        if(response.getStatus() != 0){
-            return response;
-        }
-
-
-        Login user = (Login) response.getData();
+        //ServerResponse response = isLogin(session, request);
+        //
+        //if(response.getStatus() != 0){
+        //    return response;
+        //}
+        //
+        //
+        //Login user = (Login) response.getData();
         String path = request.getSession().getServletContext().getRealPath("upload");
         System.out.println(path);
 
         try {
+            if("".equals(mediaId)){
+                return inforErrorService.addInforError(inforError);
+            }
             File file = wxMpService.getMaterialService().mediaDownload(mediaId);
             if(file != null) {
                 // 读入 文件
@@ -82,14 +85,14 @@ public class InfoErrorController extends BaseCotroller {
                 if(targetFileName != null){
 
                     inforError.setImageUrl(targetFileName);
-                    inforError.setAddwho(user.getId());
-                    inforError.setBk1("0");
+                    //inforError.setAddwho(user.getId());
+                    //inforError.setBk1("0");
 
-                    return inforErrorService.addInforError(inforError);
 
                 }else {
                     return ServerResponse.createByErrorMessage("文件上传失败，稍后重试");
                 }
+                return inforErrorService.addInforError(inforError);
             }
         } catch (WxErrorException e) {
             e.printStackTrace();

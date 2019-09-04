@@ -61,38 +61,39 @@ public class InforErrorServiceImpl implements InforErrorService {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         int i = inforErrorMapper.insertSelective(inforError);
 
-        UserVo userVo = loginMapper.selectUserAndOrgnazizationById(inforError.getAddwho());
-
-        String first = "【" + userVo.getOrganizationName() + "】的【" +userVo.getName() +"】上报系统问题";
-        String keyword1 = "系统问题";
-        String keyword2 = inforError.getDescription();
-
-        //查询信息主管和员工的工号
-        List<String> roleIds = new ArrayList<>();
-        roleIds.add("1");
-        roleIds.add("24");
-
-        List<UserInfo> userInfoList = userInfoMapper.selectByLoginIds(roleIds);
-
-        if(userInfoList != null && userInfoList.size() > 0){
-            for(UserInfo u : userInfoList) {
-                this.sendMsg(u.getOpenid(), first, keyword1, keyword2);
-            }
-        }
+        //UserVo userVo = loginMapper.selectUserAndOrgnazizationById(inforError.getAddwho());
+        //
+        //String first = "【" + userVo.getOrganizationName() + "】的【" +userVo.getName() +"】上报系统问题";
+        //String keyword1 = "系统问题";
+        //String keyword2 = inforError.getDescription();
+        //
+        ////查询信息主管和员工的工号
+        //List<String> roleIds = new ArrayList<>();
+        //roleIds.add("1");
+        //roleIds.add("24");
+        //
+        //List<UserInfo> userInfoList = userInfoMapper.selectByLoginIds(roleIds);
+        //
+        //if(userInfoList != null && userInfoList.size() > 0){
+        //    for(UserInfo u : userInfoList) {
+        //        this.sendMsg(u.getOpenid(), first, keyword1, keyword2);
+        //    }
+        //}
 
         if(i > 0) {
-            return ServerResponse.createBySuccessMsg("系统故障上报成功");
+            return ServerResponse.createBySuccessMsg("我们已经收到您的意见，感谢您的反馈");
         }else{
-            return ServerResponse.createByErrorMessage("系统故障上报失败");
+            return ServerResponse.createByErrorMessage("反馈失败");
         }
     }
 
     @Override
     public ServerResponse findAll(InforError inforError, Integer pageSize, Integer pageNum, String organizationId) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         Set<Integer> ids = null;
-        if(StringUtils.isNotEmpty(organizationId)){
-            ids= this.getOrganizationId(Integer.parseInt(organizationId));
-        }
+        //if(StringUtils.isNotEmpty(organizationId)){
+        //    ids= this.getOrganizationId(Integer.parseInt(organizationId));
+        //}
 
         PageHelper.startPage(pageNum,pageSize);
 
@@ -108,7 +109,7 @@ public class InforErrorServiceImpl implements InforErrorService {
 
     @Override
     public ServerResponse edit(InforError inforError) {
-
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         if(StringUtils.equals(inforError.getBk1(), Constant.InforErrorStatusEnum.RESOLVING.getCode().toString())){
 
         }else if(StringUtils.equals(inforError.getBk1(), Constant.InforErrorStatusEnum.RESOLVED.getCode().toString())){
@@ -131,6 +132,7 @@ public class InforErrorServiceImpl implements InforErrorService {
 
     @Override
     public ServerResponse delete(InforError inforError) {
+        DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
         int i = inforErrorMapper.deleteByPrimaryKey(inforError.getId());
         if(i > 0) {
             return ServerResponse.createBySuccessMsg("删除成功");
@@ -177,18 +179,18 @@ public class InforErrorServiceImpl implements InforErrorService {
             inforErrorVo.setAdddate(DateTimeUtil.dateToStr(i.getAdddate()));
             UserVo u1 = loginMapper.selectUserAndOrgnazizationById(i.getAddwho());
             inforErrorVo.setAddwho(i.getAddwho());
-            inforErrorVo.setAddwhoName(u1.getName());
-            inforErrorVo.setOrganizationName(u1.getOrganizationName());
-            inforErrorVo.setBk2(i.getBk2());
-            inforErrorVo.setBk3(i.getBk3());
-            inforErrorVo.setBk4(i.getBk4());
-            inforErrorVo.setBk5(i.getBk5());
+            //inforErrorVo.setAddwhoName(u1.getName());
+            //inforErrorVo.setOrganizationName(u1.getOrganizationName());
+            //inforErrorVo.setBk2(i.getBk2());
+            //inforErrorVo.setBk3(i.getBk3());
+            //inforErrorVo.setBk4(i.getBk4());
+            //inforErrorVo.setBk5(i.getBk5());
             inforErrorVo.setCause(i.getCause());
             inforErrorVo.setDescription(i.getDescription());
             inforErrorVo.setId(i.getId());
             inforErrorVo.setImageUrl(FTPUtil.getFtpUrl() + i.getImageUrl());
             inforErrorVo.setProcessDate(DateTimeUtil.dateToStr(i.getProcessDate()));
-            inforErrorVo.setProcessWho(i.getProcessWho());
+            //inforErrorVo.setProcessWho(i.getProcessWho());
 
             if(i.getProcessWho() != null ){
                 UserVo u2 = loginMapper.selectUserAndOrgnazizationById(i.getProcessWho());
@@ -197,8 +199,8 @@ public class InforErrorServiceImpl implements InforErrorService {
 
             inforErrorVo.setResult(i.getResult());
             inforErrorVo.setSolution(i.getSolution());
-            inforErrorVo.setType(Constant.InforErrorTypeEnum.codeOf(Integer.parseInt(i.getType())).getMsg());
-            inforErrorVo.setBk1(Constant.InforErrorStatusEnum.codeOf(Integer.parseInt(i.getBk1())).getMsg());
+            //inforErrorVo.setType(Constant.InforErrorTypeEnum.codeOf(Integer.parseInt(i.getType())).getMsg());
+            //inforErrorVo.setBk1(Constant.InforErrorStatusEnum.codeOf(Integer.parseInt(i.getBk1())).getMsg());
 
 
             inforErrorVoList.add(inforErrorVo);

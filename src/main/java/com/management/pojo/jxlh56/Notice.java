@@ -5,6 +5,8 @@ import java.util.Date;
 public class Notice {
     private Integer id;
 
+    private String guid;
+
     private Integer channelid;
 
     private String title;
@@ -13,7 +15,7 @@ public class Notice {
 
     private Integer type;
 
-    private String addtime;
+    private Date addtime;
 
     private Date sysdate;
 
@@ -26,6 +28,8 @@ public class Notice {
     private String releaseid;
 
     private String pictureflie;
+
+    private String pictureflieftp;
 
     private String adduserid;
 
@@ -41,10 +45,35 @@ public class Notice {
 
     private Date revokesubmittime;
 
+    private String checkid;
+
+    private Integer checkstatus;
+
+    private Date checktime;
+
+    private String updateid;
+
+    private Date updatetime;
+
+    private String submitid;
+
+    private Date submittime;
+
+    private String downid;
+
+    private Date downtime;
+
+    private String deleteid;
+
+    private Date deletetime;
+
+    private String isbignews;
+
     private String noticecontent;
 
-    public Notice(Integer id, Integer channelid, String title, String subtitle, Integer type, String addtime, Date sysdate, Integer datastatus, String addname, Date releasetime, String releaseid, String pictureflie, String adduserid, Integer isnotpictures, String source, String author, Integer istochart, String revokesubmitid, Date revokesubmittime, String noticecontent) {
+    public Notice(Integer id, String guid, Integer channelid, String title, String subtitle, Integer type, Date addtime, Date sysdate, Integer datastatus, String addname, Date releasetime, String releaseid, String pictureflie, String pictureflieftp, String adduserid, Integer isnotpictures, String source, String author, Integer istochart, String revokesubmitid, Date revokesubmittime, String checkid, Integer checkstatus, Date checktime, String updateid, Date updatetime, String submitid, Date submittime, String downid, Date downtime, String deleteid, Date deletetime, String isbignews, String noticecontent) {
         this.id = id;
+        this.guid = guid;
         this.channelid = channelid;
         this.title = title;
         this.subtitle = subtitle;
@@ -56,6 +85,7 @@ public class Notice {
         this.releasetime = releasetime;
         this.releaseid = releaseid;
         this.pictureflie = pictureflie;
+        this.pictureflieftp = pictureflieftp;
         this.adduserid = adduserid;
         this.isnotpictures = isnotpictures;
         this.source = source;
@@ -63,6 +93,18 @@ public class Notice {
         this.istochart = istochart;
         this.revokesubmitid = revokesubmitid;
         this.revokesubmittime = revokesubmittime;
+        this.checkid = checkid;
+        this.checkstatus = checkstatus;
+        this.checktime = checktime;
+        this.updateid = updateid;
+        this.updatetime = updatetime;
+        this.submitid = submitid;
+        this.submittime = submittime;
+        this.downid = downid;
+        this.downtime = downtime;
+        this.deleteid = deleteid;
+        this.deletetime = deletetime;
+        this.isbignews = isbignews;
         this.noticecontent = noticecontent;
     }
 
@@ -76,6 +118,14 @@ public class Notice {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid == null ? null : guid.trim();
     }
 
     public Integer getChannelid() {
@@ -110,12 +160,12 @@ public class Notice {
         this.type = type;
     }
 
-    public String getAddtime() {
+    public Date getAddtime() {
         return addtime;
     }
 
-    public void setAddtime(String addtime) {
-        this.addtime = addtime == null ? null : addtime.trim();
+    public void setAddtime(Date addtime) {
+        this.addtime = addtime;
     }
 
     public Date getSysdate() {
@@ -164,6 +214,14 @@ public class Notice {
 
     public void setPictureflie(String pictureflie) {
         this.pictureflie = pictureflie == null ? null : pictureflie.trim();
+    }
+
+    public String getPictureflieftp() {
+        return pictureflieftp;
+    }
+
+    public void setPictureflieftp(String pictureflieftp) {
+        this.pictureflieftp = pictureflieftp == null ? null : pictureflieftp.trim();
     }
 
     public String getAdduserid() {
@@ -220,6 +278,102 @@ public class Notice {
 
     public void setRevokesubmittime(Date revokesubmittime) {
         this.revokesubmittime = revokesubmittime;
+    }
+
+    public String getCheckid() {
+        return checkid;
+    }
+
+    public void setCheckid(String checkid) {
+        this.checkid = checkid == null ? null : checkid.trim();
+    }
+
+    public Integer getCheckstatus() {
+        return checkstatus;
+    }
+
+    public void setCheckstatus(Integer checkstatus) {
+        this.checkstatus = checkstatus;
+    }
+
+    public Date getChecktime() {
+        return checktime;
+    }
+
+    public void setChecktime(Date checktime) {
+        this.checktime = checktime;
+    }
+
+    public String getUpdateid() {
+        return updateid;
+    }
+
+    public void setUpdateid(String updateid) {
+        this.updateid = updateid == null ? null : updateid.trim();
+    }
+
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public String getSubmitid() {
+        return submitid;
+    }
+
+    public void setSubmitid(String submitid) {
+        this.submitid = submitid == null ? null : submitid.trim();
+    }
+
+    public Date getSubmittime() {
+        return submittime;
+    }
+
+    public void setSubmittime(Date submittime) {
+        this.submittime = submittime;
+    }
+
+    public String getDownid() {
+        return downid;
+    }
+
+    public void setDownid(String downid) {
+        this.downid = downid == null ? null : downid.trim();
+    }
+
+    public Date getDowntime() {
+        return downtime;
+    }
+
+    public void setDowntime(Date downtime) {
+        this.downtime = downtime;
+    }
+
+    public String getDeleteid() {
+        return deleteid;
+    }
+
+    public void setDeleteid(String deleteid) {
+        this.deleteid = deleteid == null ? null : deleteid.trim();
+    }
+
+    public Date getDeletetime() {
+        return deletetime;
+    }
+
+    public void setDeletetime(Date deletetime) {
+        this.deletetime = deletetime;
+    }
+
+    public String getIsbignews() {
+        return isbignews;
+    }
+
+    public void setIsbignews(String isbignews) {
+        this.isbignews = isbignews == null ? null : isbignews.trim();
     }
 
     public String getNoticecontent() {

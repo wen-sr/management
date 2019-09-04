@@ -6,12 +6,9 @@ $(function(){
             value: 1
         },{
             title: "农家书屋",
-            value: 1
+            value: 3
         },{
-            title: "大中专",
-            value: 1
-        },{
-            title: "教材",
+            title: "教材教辅",
             value: 2
         }]
     });

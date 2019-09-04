@@ -1,177 +1,493 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.management.dao.jxlh56.NewsMapper" >
-  <resultMap id="BaseResultMap" type="com.management.pojo.jxlh56.News" >
-    <constructor >
-      <arg column="ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="TITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="SUBTITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="TYPE" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="ADDTIME" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="SYSDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="DATASTATUS" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="ADDUSERID" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="RELEASETIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="RELEASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="PICTUREFLIE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="RELEASEUSERID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="ISNOTPICTURES" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="SOURCE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="AUTHOR" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="ISTOCHART" jdbcType="INTEGER" javaType="java.lang.Integer" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.dao.jxlh56.NewsMapper">
+  <resultMap id="BaseResultMap" type="com.management.pojo.jxlh56.News">
+    <constructor>
+      <idArg column="ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="GUID" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="TITLE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SUBTITLE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="TYPE" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="CHECKID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CHECKSTATUS" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="CHECKTIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="DATASTATUS" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ADDUSERID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ADDTIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="UPDATEID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="UPDATETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="RELEASEID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RELEASETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="SUBMITID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SUBMITTIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="REVOKESUBMITID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="REVOKESUBMITTIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="DOWNID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DOWNTIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="DELETEID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DELETETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="PICTUREFLIE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PICTUREFLIEFTP" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ISNOTPICTURES" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SOURCE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="AUTHOR" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ISTOCHART" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SYSDATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="ISBIGNEWS" javaType="java.lang.String" jdbcType="NCHAR" />
     </constructor>
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.management.pojo.jxlh56.News" >
-    <constructor >
-      <arg column="ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="TITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="SUBTITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="TYPE" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="ADDTIME" jdbcType="NVARCHAR" javaType="java.lang.String" />
-      <arg column="SYSDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="DATASTATUS" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="ADDUSERID" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="RELEASETIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="RELEASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="PICTUREFLIE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="RELEASEUSERID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="ISNOTPICTURES" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="SOURCE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="AUTHOR" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="ISTOCHART" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="NEWSCONTENT" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+  <resultMap id="ResultMapWithBLOBs" type="com.management.pojo.jxlh56.News">
+    <constructor>
+      <idArg column="ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="GUID" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="TITLE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SUBTITLE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="TYPE" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="CHECKID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CHECKSTATUS" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="CHECKTIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="DATASTATUS" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ADDUSERID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ADDTIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="UPDATEID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="UPDATETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="RELEASEID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RELEASETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="SUBMITID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SUBMITTIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="REVOKESUBMITID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="REVOKESUBMITTIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="DOWNID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DOWNTIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="DELETEID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DELETETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="PICTUREFLIE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PICTUREFLIEFTP" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ISNOTPICTURES" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SOURCE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="AUTHOR" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ISTOCHART" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SYSDATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="ISBIGNEWS" javaType="java.lang.String" jdbcType="NCHAR" />
+      <arg column="NEWSCONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
     </constructor>
   </resultMap>
-  <sql id="Blob_Column_List" >
+  <sql id="Base_Column_List">
+    ID, GUID, TITLE, SUBTITLE, TYPE, CHECKID, CHECKSTATUS, CHECKTIME, DATASTATUS, ADDUSERID, 
+    ADDTIME, UPDATEID, UPDATETIME, RELEASEID, RELEASETIME, SUBMITID, SUBMITTIME, REVOKESUBMITID, 
+    REVOKESUBMITTIME, DOWNID, DOWNTIME, DELETEID, DELETETIME, PICTUREFLIE, PICTUREFLIEFTP, 
+    ISNOTPICTURES, SOURCE, AUTHOR, ISTOCHART, SYSDATE, ISBIGNEWS
+  </sql>
+  <sql id="Blob_Column_List">
     NEWSCONTENT
   </sql>
-  <insert id="insert" parameterType="com.management.pojo.jxlh56.News" >
-    insert into NEWS (ID, TITLE, SUBTITLE, 
-      TYPE, ADDTIME, SYSDATE, 
-      DATASTATUS, ADDUSERID, RELEASETIME, 
-      RELEASEID, PICTUREFLIE, RELEASEUSERID, 
-      ISNOTPICTURES, SOURCE, AUTHOR, 
-      ISTOCHART, NEWSCONTENT)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, 
-      #{type,jdbcType=INTEGER}, #{addtime,jdbcType=NVARCHAR}, #{sysdate,jdbcType=TIMESTAMP}, 
-      #{datastatus,jdbcType=INTEGER}, #{adduserid,jdbcType=VARCHAR}, #{releasetime,jdbcType=TIMESTAMP}, 
-      #{releaseid,jdbcType=VARCHAR}, #{pictureflie,jdbcType=VARCHAR}, #{releaseuserid,jdbcType=INTEGER}, 
-      #{isnotpictures,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
-      #{istochart,jdbcType=INTEGER}, #{newscontent,jdbcType=LONGVARCHAR})
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from NEWS
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from NEWS
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.jxlh56.News">
+    insert into NEWS (ID, GUID, TITLE, 
+      SUBTITLE, TYPE, CHECKID, 
+      CHECKSTATUS, CHECKTIME, DATASTATUS, 
+      ADDUSERID, ADDTIME, UPDATEID, 
+      UPDATETIME, RELEASEID, RELEASETIME, 
+      SUBMITID, SUBMITTIME, REVOKESUBMITID, 
+      REVOKESUBMITTIME, DOWNID, DOWNTIME, 
+      DELETEID, DELETETIME, PICTUREFLIE, 
+      PICTUREFLIEFTP, ISNOTPICTURES, SOURCE, 
+      AUTHOR, ISTOCHART, SYSDATE, 
+      ISBIGNEWS, NEWSCONTENT)
+    values (#{id,jdbcType=INTEGER}, #{guid,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{checkid,jdbcType=VARCHAR}, 
+      #{checkstatus,jdbcType=INTEGER}, #{checktime,jdbcType=TIMESTAMP}, #{datastatus,jdbcType=INTEGER}, 
+      #{adduserid,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{updateid,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{releaseid,jdbcType=VARCHAR}, #{releasetime,jdbcType=TIMESTAMP}, 
+      #{submitid,jdbcType=VARCHAR}, #{submittime,jdbcType=TIMESTAMP}, #{revokesubmitid,jdbcType=VARCHAR}, 
+      #{revokesubmittime,jdbcType=TIMESTAMP}, #{downid,jdbcType=VARCHAR}, #{downtime,jdbcType=TIMESTAMP}, 
+      #{deleteid,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, #{pictureflie,jdbcType=VARCHAR}, 
+      #{pictureflieftp,jdbcType=VARCHAR}, #{isnotpictures,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{istochart,jdbcType=INTEGER}, #{sysdate,jdbcType=TIMESTAMP}, 
+      #{isbignews,jdbcType=NCHAR}, #{newscontent,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.management.pojo.jxlh56.News" >
+  <insert id="insertSelective" parameterType="com.management.pojo.jxlh56.News">
     insert into NEWS
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         ID,
       </if>
-      <if test="title != null" >
+      <if test="guid != null">
+        GUID,
+      </if>
+      <if test="title != null">
         TITLE,
       </if>
-      <if test="subtitle != null" >
+      <if test="subtitle != null">
         SUBTITLE,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         TYPE,
       </if>
-      <if test="addtime != null" >
-        ADDTIME,
+      <if test="checkid != null">
+        CHECKID,
       </if>
-      <if test="sysdate != null" >
-        SYSDATE,
+      <if test="checkstatus != null">
+        CHECKSTATUS,
       </if>
-      <if test="datastatus != null" >
+      <if test="checktime != null">
+        CHECKTIME,
+      </if>
+      <if test="datastatus != null">
         DATASTATUS,
       </if>
-      <if test="adduserid != null" >
+      <if test="adduserid != null">
         ADDUSERID,
       </if>
-      <if test="releasetime != null" >
-        RELEASETIME,
+      <if test="addtime != null">
+        ADDTIME,
       </if>
-      <if test="releaseid != null" >
+      <if test="updateid != null">
+        UPDATEID,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="releaseid != null">
         RELEASEID,
       </if>
-      <if test="pictureflie != null" >
+      <if test="releasetime != null">
+        RELEASETIME,
+      </if>
+      <if test="submitid != null">
+        SUBMITID,
+      </if>
+      <if test="submittime != null">
+        SUBMITTIME,
+      </if>
+      <if test="revokesubmitid != null">
+        REVOKESUBMITID,
+      </if>
+      <if test="revokesubmittime != null">
+        REVOKESUBMITTIME,
+      </if>
+      <if test="downid != null">
+        DOWNID,
+      </if>
+      <if test="downtime != null">
+        DOWNTIME,
+      </if>
+      <if test="deleteid != null">
+        DELETEID,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="pictureflie != null">
         PICTUREFLIE,
       </if>
-      <if test="releaseuserid != null" >
-        RELEASEUSERID,
+      <if test="pictureflieftp != null">
+        PICTUREFLIEFTP,
       </if>
-      <if test="isnotpictures != null" >
+      <if test="isnotpictures != null">
         ISNOTPICTURES,
       </if>
-      <if test="source != null" >
+      <if test="source != null">
         SOURCE,
       </if>
-      <if test="author != null" >
+      <if test="author != null">
         AUTHOR,
       </if>
-      <if test="istochart != null" >
+      <if test="istochart != null">
         ISTOCHART,
       </if>
-      <if test="newscontent != null" >
+      <if test="sysdate != null">
+        SYSDATE,
+      </if>
+      <if test="isbignews != null">
+        ISBIGNEWS,
+      </if>
+      <if test="newscontent != null">
         NEWSCONTENT,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="title != null" >
+      <if test="guid != null">
+        #{guid,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="subtitle != null" >
+      <if test="subtitle != null">
         #{subtitle,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="addtime != null" >
-        #{addtime,jdbcType=NVARCHAR},
+      <if test="checkid != null">
+        #{checkid,jdbcType=VARCHAR},
       </if>
-      <if test="sysdate != null" >
-        #{sysdate,jdbcType=TIMESTAMP},
+      <if test="checkstatus != null">
+        #{checkstatus,jdbcType=INTEGER},
       </if>
-      <if test="datastatus != null" >
+      <if test="checktime != null">
+        #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datastatus != null">
         #{datastatus,jdbcType=INTEGER},
       </if>
-      <if test="adduserid != null" >
+      <if test="adduserid != null">
         #{adduserid,jdbcType=VARCHAR},
       </if>
-      <if test="releasetime != null" >
-        #{releasetime,jdbcType=TIMESTAMP},
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="releaseid != null" >
+      <if test="updateid != null">
+        #{updateid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseid != null">
         #{releaseid,jdbcType=VARCHAR},
       </if>
-      <if test="pictureflie != null" >
+      <if test="releasetime != null">
+        #{releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitid != null">
+        #{submitid,jdbcType=VARCHAR},
+      </if>
+      <if test="submittime != null">
+        #{submittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="revokesubmitid != null">
+        #{revokesubmitid,jdbcType=VARCHAR},
+      </if>
+      <if test="revokesubmittime != null">
+        #{revokesubmittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downid != null">
+        #{downid,jdbcType=VARCHAR},
+      </if>
+      <if test="downtime != null">
+        #{downtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteid != null">
+        #{deleteid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pictureflie != null">
         #{pictureflie,jdbcType=VARCHAR},
       </if>
-      <if test="releaseuserid != null" >
-        #{releaseuserid,jdbcType=INTEGER},
+      <if test="pictureflieftp != null">
+        #{pictureflieftp,jdbcType=VARCHAR},
       </if>
-      <if test="isnotpictures != null" >
+      <if test="isnotpictures != null">
         #{isnotpictures,jdbcType=INTEGER},
       </if>
-      <if test="source != null" >
+      <if test="source != null">
         #{source,jdbcType=VARCHAR},
       </if>
-      <if test="author != null" >
+      <if test="author != null">
         #{author,jdbcType=VARCHAR},
       </if>
-      <if test="istochart != null" >
+      <if test="istochart != null">
         #{istochart,jdbcType=INTEGER},
       </if>
-      <if test="newscontent != null" >
+      <if test="sysdate != null">
+        #{sysdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isbignews != null">
+        #{isbignews,jdbcType=NCHAR},
+      </if>
+      <if test="newscontent != null">
         #{newscontent,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.jxlh56.News">
+    update NEWS
+    <set>
+      <if test="guid != null">
+        GUID = #{guid,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        SUBTITLE = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="checkid != null">
+        CHECKID = #{checkid,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstatus != null">
+        CHECKSTATUS = #{checkstatus,jdbcType=INTEGER},
+      </if>
+      <if test="checktime != null">
+        CHECKTIME = #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datastatus != null">
+        DATASTATUS = #{datastatus,jdbcType=INTEGER},
+      </if>
+      <if test="adduserid != null">
+        ADDUSERID = #{adduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateid != null">
+        UPDATEID = #{updateid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseid != null">
+        RELEASEID = #{releaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null">
+        RELEASETIME = #{releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitid != null">
+        SUBMITID = #{submitid,jdbcType=VARCHAR},
+      </if>
+      <if test="submittime != null">
+        SUBMITTIME = #{submittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="revokesubmitid != null">
+        REVOKESUBMITID = #{revokesubmitid,jdbcType=VARCHAR},
+      </if>
+      <if test="revokesubmittime != null">
+        REVOKESUBMITTIME = #{revokesubmittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downid != null">
+        DOWNID = #{downid,jdbcType=VARCHAR},
+      </if>
+      <if test="downtime != null">
+        DOWNTIME = #{downtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteid != null">
+        DELETEID = #{deleteid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pictureflie != null">
+        PICTUREFLIE = #{pictureflie,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureflieftp != null">
+        PICTUREFLIEFTP = #{pictureflieftp,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotpictures != null">
+        ISNOTPICTURES = #{isnotpictures,jdbcType=INTEGER},
+      </if>
+      <if test="source != null">
+        SOURCE = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        AUTHOR = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="istochart != null">
+        ISTOCHART = #{istochart,jdbcType=INTEGER},
+      </if>
+      <if test="sysdate != null">
+        SYSDATE = #{sysdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isbignews != null">
+        ISBIGNEWS = #{isbignews,jdbcType=NCHAR},
+      </if>
+      <if test="newscontent != null">
+        NEWSCONTENT = #{newscontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.management.pojo.jxlh56.News">
+    update NEWS
+    set GUID = #{guid,jdbcType=CHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      SUBTITLE = #{subtitle,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=INTEGER},
+      CHECKID = #{checkid,jdbcType=VARCHAR},
+      CHECKSTATUS = #{checkstatus,jdbcType=INTEGER},
+      CHECKTIME = #{checktime,jdbcType=TIMESTAMP},
+      DATASTATUS = #{datastatus,jdbcType=INTEGER},
+      ADDUSERID = #{adduserid,jdbcType=VARCHAR},
+      ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      UPDATEID = #{updateid,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      RELEASEID = #{releaseid,jdbcType=VARCHAR},
+      RELEASETIME = #{releasetime,jdbcType=TIMESTAMP},
+      SUBMITID = #{submitid,jdbcType=VARCHAR},
+      SUBMITTIME = #{submittime,jdbcType=TIMESTAMP},
+      REVOKESUBMITID = #{revokesubmitid,jdbcType=VARCHAR},
+      REVOKESUBMITTIME = #{revokesubmittime,jdbcType=TIMESTAMP},
+      DOWNID = #{downid,jdbcType=VARCHAR},
+      DOWNTIME = #{downtime,jdbcType=TIMESTAMP},
+      DELETEID = #{deleteid,jdbcType=VARCHAR},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      PICTUREFLIE = #{pictureflie,jdbcType=VARCHAR},
+      PICTUREFLIEFTP = #{pictureflieftp,jdbcType=VARCHAR},
+      ISNOTPICTURES = #{isnotpictures,jdbcType=INTEGER},
+      SOURCE = #{source,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      ISTOCHART = #{istochart,jdbcType=INTEGER},
+      SYSDATE = #{sysdate,jdbcType=TIMESTAMP},
+      ISBIGNEWS = #{isbignews,jdbcType=NCHAR},
+      NEWSCONTENT = #{newscontent,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.jxlh56.News">
+    update NEWS
+    set GUID = #{guid,jdbcType=CHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      SUBTITLE = #{subtitle,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=INTEGER},
+      CHECKID = #{checkid,jdbcType=VARCHAR},
+      CHECKSTATUS = #{checkstatus,jdbcType=INTEGER},
+      CHECKTIME = #{checktime,jdbcType=TIMESTAMP},
+      DATASTATUS = #{datastatus,jdbcType=INTEGER},
+      ADDUSERID = #{adduserid,jdbcType=VARCHAR},
+      ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      UPDATEID = #{updateid,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      RELEASEID = #{releaseid,jdbcType=VARCHAR},
+      RELEASETIME = #{releasetime,jdbcType=TIMESTAMP},
+      SUBMITID = #{submitid,jdbcType=VARCHAR},
+      SUBMITTIME = #{submittime,jdbcType=TIMESTAMP},
+      REVOKESUBMITID = #{revokesubmitid,jdbcType=VARCHAR},
+      REVOKESUBMITTIME = #{revokesubmittime,jdbcType=TIMESTAMP},
+      DOWNID = #{downid,jdbcType=VARCHAR},
+      DOWNTIME = #{downtime,jdbcType=TIMESTAMP},
+      DELETEID = #{deleteid,jdbcType=VARCHAR},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      PICTUREFLIE = #{pictureflie,jdbcType=VARCHAR},
+      PICTUREFLIEFTP = #{pictureflieftp,jdbcType=VARCHAR},
+      ISNOTPICTURES = #{isnotpictures,jdbcType=INTEGER},
+      SOURCE = #{source,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      ISTOCHART = #{istochart,jdbcType=INTEGER},
+      SYSDATE = #{sysdate,jdbcType=TIMESTAMP},
+      ISBIGNEWS = #{isbignews,jdbcType=NCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
   <update id="updateStatus">
     update news set istochart = '2'
     where id in
-    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
       #{item}
     </foreach>
   </update>
@@ -182,6 +498,7 @@
       <if test="istochart != null">
         istochart = #{istochart}
       </if>
+      and DATASTATUS=3 and CHECKSTATUS=2
       </where>
       order by id desc
     </select>
@@ -189,12 +506,12 @@
     select id,title,newscontent,author,pictureflie
       from news
       where id in
-    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
        #{item}
     </foreach>
   </select>
   <select id="findAll2" resultType="com.management.pojo.jxlh56.News">
-    select top 50 id,title ,newscontent from NEWS
+    select top 50 id,title ,newscontent from NEWS where DATASTATUS=3 and CHECKSTATUS=2
     order by id desc
   </select>
   <select id="queryById" resultType="com.management.pojo.jxlh56.News">

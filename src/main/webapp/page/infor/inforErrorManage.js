@@ -119,7 +119,7 @@ function formatStatus(val,row,index){
  * @returns {*}
  */
 function formatFtpUrl(val,row,index){
-    return '<a href="ftp://' + val + '" target="_blank">截图</a>';
+    return '<a href=' + val + ' target="_blank">截图</a>';
     // return '<a href="javascript: void(0)" onclick=downloadImage("'+ val +'")>截图</a>';
 }
 
@@ -281,6 +281,7 @@ tool = {
         $("#w-queryInfo").window("open");
     },
     add : function (){
+        $('#w-addInfo').window("resize",{top:$(document).scrollTop() + ($(window).height()-250) * 0.5});
         $("#w-addInfo").window("open");
     },
     edit : function (){
