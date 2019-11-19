@@ -106,7 +106,7 @@ public class WeChatCommonController {
                 }
             }
         if (login == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(), "未登录");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NOTHING.getCode(), "未登录");
         }
         login.setPwd("");
         return ServerResponse.createBySuccess(login);

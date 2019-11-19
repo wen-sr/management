@@ -1,6 +1,7 @@
 package com.management.controller.wechat;
 
 import com.management.common.Constant;
+import com.management.common.RequestHolder;
 import com.management.common.ServerResponse;
 import com.management.pojo.login.Login;
 import com.management.pojo.wechat.UserInfo;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/oa/wechat")

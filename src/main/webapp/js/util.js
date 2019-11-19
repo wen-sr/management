@@ -18,6 +18,8 @@ var tools = {
                 // 没有登录状态，需要强制登录
                 else if(10 === res.status){
                     _this.doLogin();
+                }else if(99 === res.status){
+                    //不做任何处理
                 }
                 // 请求数据错误
                 else {

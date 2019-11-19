@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.annotation.ElementType;
 import java.util.*;
+import java.util.regex.Matcher;
 
 @Service
 @Transactional
@@ -138,6 +140,7 @@ public class LogisticsQueryServiceImpl implements ILogisticsQueryService {
                     if(s.equals(z2.getDoc_sku())){
                         if(z2.getDoc_descr()!= null) {
                             zz.setDoc_descr(z2.getDoc_descr());
+                            zz.setDoc_price(z2.getDoc_price());
                         }
                         if(z2.getDoc_number() != null) {
                             zz.setDoc_number(z2.getDoc_number());
@@ -145,12 +148,14 @@ public class LogisticsQueryServiceImpl implements ILogisticsQueryService {
                         if(z2.getDoc_case_qty() != null) {
                             zz.setDoc_case_qty(z2.getDoc_case_qty());
                         }
-                        if(z2.getLcs() > (z2.getDoc_case_qty()/2)) {
+                        if(z2.getLcs() > (Math.floor((double)z2.getDoc_case_qty()/2))) {
                             z2.setWbjs(0);
                             z2.setWblcs(z2.getLcs());
+                            z2.setCaseQty(z2.getZbs() + 1);
                         }else {
                             z2.setWbjs(1);
                             z2.setWblcs(z2.getLcs());
+                            z2.setCaseQty(z2.getZbs());
                         }
                         subList.add(z2);
                         sumCqty += z2.getDoc_cqty();

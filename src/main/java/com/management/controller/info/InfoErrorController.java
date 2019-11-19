@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -251,7 +252,11 @@ public class InfoErrorController extends BaseCotroller {
 
     @RequestMapping("/updateOnOff")
     @ResponseBody
-    public ServerResponse updateOnOff(OnOff onOff){
+    public ServerResponse updateOnOff(OnOff onOff, HttpSession session){
+        Login user = (Login)session.getAttribute(Constant.CURRENT_USER);
+        if(!"LH07027".equals(user.getId()) && !"LH07040".equals(user.getId()) && !"LH07001".equals(user.getId())){
+            return ServerResponse.createByErrorMessage("对不起，您没有权限关闭此功能");
+        }
         return inforErrorService.updateOnOff(onOff);
     }
 

@@ -1,8 +1,10 @@
 package com.management.schedule;
 
 import com.management.common.Constant;
+import com.management.dao.device.DeviceLikuFaultMapper;
 import com.management.dao.info.OnOffMapper;
 import com.management.dao.liku.BankShuttleMapper;
+import com.management.pojo.device.DeviceLikuFault;
 import com.management.pojo.prd1.WmsErrorMsg;
 import com.management.pojo.wechat.UserInfo;
 import com.management.service.prd1.IWmsErrorMsgService;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +48,8 @@ public class TaskSchedule {
     @Autowired
     OnOffMapper onOffMapper;
 
+    @Autowired
+    DeviceLikuFaultMapper deviceLikuFaultMapper;
 //    @Scheduled(cron="0/5 * * * * ? ") //间隔5秒执行
     @Scheduled(cron="0 0/5 * * * ? ") //间隔5分钟执行
     public void ErrorMsg(){
@@ -102,6 +107,20 @@ public class TaskSchedule {
         if(errorMessageVoList != null && errorMessageVoList.size() > 0){
             if(errorMessageVoList.size() > 10) {
                 return;
+            }
+            List<DeviceLikuFault> deviceLikuFaultList = new ArrayList<>();
+            DeviceLikuFault d = null;
+            for(ErrorMessageVo emv : errorMessageVoList) {
+                d = new DeviceLikuFault();
+                d.setBandId(emv.getBankId());
+                d.setErrorCode(emv.getErrorCode());
+                d.setErrorMsg(emv.getErrorMsg());
+                d.setName(emv.getName());
+                deviceLikuFaultList.add(d);
+            }
+            DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_XH);
+            for(DeviceLikuFault dd : deviceLikuFaultList) {
+                deviceLikuFaultMapper.insertSelective(dd);
             }
             List<UserInfo> userInfoList = findByroleId(Constant.Role.ROLE_JSY);
             for(ErrorMessageVo e : errorMessageVoList){

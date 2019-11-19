@@ -14,6 +14,7 @@ public class ZhuPeiGouBaoVo {
     private String doc_shortname;
     private String doc_sku;
     private String doc_descr;
+    private double doc_price;
     private Integer doc_cqty;
     private Integer doc_case_qty;
     //整包数
@@ -25,6 +26,23 @@ public class ZhuPeiGouBaoVo {
     //尾包零册数
     private Integer wblcs;
     private List<ZhuPeiGouBaoVo> zhuPeiGouBaoVoList;
+    private Integer caseQty;
+
+    public double getDoc_price() {
+        return doc_price;
+    }
+
+    public void setDoc_price(double doc_price) {
+        this.doc_price = doc_price;
+    }
+
+    public Integer getCaseQty() {
+        return caseQty;
+    }
+
+    public void setCaseQty(Integer caseQty) {
+        this.caseQty = caseQty;
+    }
 
     public Integer getWblcs() {
         return wblcs;

@@ -578,11 +578,11 @@
    and a.caseid = #{caseid}
     </select>
     <select id="getZhuPeiGouBao" resultType="com.management.vo.prd1.ZhuPeiGouBaoVo">
-      select a.doc_number,doc_consk,doc_shortname,b.barcode doc_sku,doc_descr,doc_cqty,doc_case_qty,floor(doc_cqty/doc_case_qty) zbs,MOD(doc_cqty,doc_case_qty) lcs
+      select a.doc_number,doc_consk,doc_shortname,b.barcode doc_sku,doc_descr,doc_price,doc_cqty,doc_case_qty,floor(doc_cqty/doc_case_qty) zbs,MOD(doc_cqty,doc_case_qty) lcs
       from jobs_xso c,jobscontext_xso a, sku b where a.doc_sku=b.sku and a.doc_number = c.doc_number and c.doc_storerkey = b.storerkey
       and a.doc_number like '%'||#{doc_number}||'%'
       and doc_cqty > 0
-      group by a.doc_number,doc_shortname,doc_consk,b.barcode,doc_descr,doc_cqty,doc_case_qty,floor(doc_cqty/doc_case_qty) ,MOD(doc_cqty,doc_case_qty)
+      group by a.doc_number,doc_shortname,doc_consk,b.barcode,doc_descr,doc_price,doc_cqty,doc_case_qty,floor(doc_cqty/doc_case_qty) ,MOD(doc_cqty,doc_case_qty)
       order by doc_sku,doc_shortname
     </select>
 </mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.device.DeviceLikuFaultMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.device.DeviceLikuFault" >
+    <constructor >
+      <idArg column="ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ERROR_CODE" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="ERROR_MSG" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="BAND_ID" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="NAME" jdbcType="NVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ERROR_CODE, ERROR_MSG, BAND_ID, NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DEVICE_LIKU_FAULT
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DEVICE_LIKU_FAULT
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.device.DeviceLikuFault" >
+    insert into DEVICE_LIKU_FAULT (ID, ERROR_CODE, ERROR_MSG, 
+      BAND_ID, NAME)
+    values (#{id,jdbcType=INTEGER}, #{errorCode,jdbcType=NVARCHAR}, #{errorMsg,jdbcType=NVARCHAR}, 
+      #{bandId,jdbcType=NVARCHAR}, #{name,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.device.DeviceLikuFault" >
+    insert into DEVICE_LIKU_FAULT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="errorCode != null" >
+        ERROR_CODE,
+      </if>
+      <if test="errorMsg != null" >
+        ERROR_MSG,
+      </if>
+      <if test="bandId != null" >
+        BAND_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="errorCode != null" >
+        #{errorCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="errorMsg != null" >
+        #{errorMsg,jdbcType=NVARCHAR},
+      </if>
+      <if test="bandId != null" >
+        #{bandId,jdbcType=NVARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.device.DeviceLikuFault" >
+    update DEVICE_LIKU_FAULT
+    <set >
+      <if test="errorCode != null" >
+        ERROR_CODE = #{errorCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="errorMsg != null" >
+        ERROR_MSG = #{errorMsg,jdbcType=NVARCHAR},
+      </if>
+      <if test="bandId != null" >
+        BAND_ID = #{bandId,jdbcType=NVARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.device.DeviceLikuFault" >
+    update DEVICE_LIKU_FAULT
+    set ERROR_CODE = #{errorCode,jdbcType=NVARCHAR},
+      ERROR_MSG = #{errorMsg,jdbcType=NVARCHAR},
+      BAND_ID = #{bandId,jdbcType=NVARCHAR},
+      NAME = #{name,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
