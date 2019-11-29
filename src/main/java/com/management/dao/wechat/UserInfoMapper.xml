@@ -226,7 +226,7 @@
   </select>
   <select id="findByroleId" resultType="com.management.pojo.wechat.UserInfo">
     select openid from userInfo a,role_login b
-    where a.login_id = b.login_id and role_id = #{i}
+    where a.login_id = b.login_id and  a.subscribe=1 and role_id = #{i}
   </select>
     <select id="findAll" resultMap="BaseResultMap">
       select <include refid="Base_Column_List"/>
