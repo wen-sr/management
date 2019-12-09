@@ -1,5 +1,6 @@
 package com.management.service.wcs;
 
+import com.management.common.ServerResponse;
 import com.management.pojo.wcs.TaskOps;
 
 import java.util.List;
@@ -12,4 +13,8 @@ import java.util.List;
  */
 public interface ITaskOpsService {
     List<TaskOps> selectByConnbr(String connbr);
+
+    /******************ganhong***********************/
+    ServerResponse getTaskOpsData(TaskOps taskOps);
+    /******************ganhong***********************/
 }

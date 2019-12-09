@@ -274,4 +274,9 @@
     from TASK_WMS
     where CONNBR = #{connbr}
   </select>
+
+  <select id="getTaskWmsData" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from TASK_wms t where t.connbr like '%'|| #{connbr} || '%'
+  </select>
 </mapper>

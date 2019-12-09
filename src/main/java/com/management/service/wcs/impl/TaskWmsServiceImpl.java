@@ -1,5 +1,6 @@
 package com.management.service.wcs.impl;
 
+import com.management.common.ServerResponse;
 import com.management.dao.wcs.TaskWmsMapper;
 import com.management.pojo.wcs.TaskWms;
 import com.management.service.wcs.ITaskWmsService;
@@ -25,5 +26,13 @@ public class TaskWmsServiceImpl implements ITaskWmsService {
     public List<TaskWms> selectByConnbr(String connbr) {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WCS);
         return taskWmsMapper.selectByConnbr(connbr);
+    }
+
+    @Override
+    public ServerResponse getTaskWmsData(TaskWms taskWms) {
+        DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_WCS);
+        List<TaskWms> taskWmsList = taskWmsMapper.getTaskWmsData(taskWms);
+        return ServerResponse.createBySuccess("查询成功", taskWmsList);
+
     }
 }

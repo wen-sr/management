@@ -18,4 +18,8 @@ public interface TaskOpsMapper {
     int updateByPrimaryKey(TaskOps record);
 
     List<TaskOps> selectByConnbr(String connbr);
+
+    /********************ganhong********************/
+    List<TaskOps> getTaskOpsData(TaskOps taskOps);//返回值是列表
+    /********************ganhong********************/
 }

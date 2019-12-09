@@ -227,4 +227,10 @@
     from TASK_OPS
     where connbr = #{connbr}
   </select>
+
+  <select id="getTaskOpsData" resultMap="BaseResultMap">
+    select t.*,case t.task_type when ('1') then '提取任务' when ('2') then '存储任务'
+    when ('3') then '输送任务' else '注入空箱' end as taskType
+    from TASK_OPS t where t.connbr like '%'|| #{connbr} || '%'
+  </select>
 </mapper>

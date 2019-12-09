@@ -18,4 +18,7 @@ public interface TaskWmsMapper {
     int updateByPrimaryKey(TaskWms record);
 
     List<TaskWms> selectByConnbr(String connbr);
+
+
+    List<TaskWms> getTaskWmsData(TaskWms taskWms);//返回值是列表
 }

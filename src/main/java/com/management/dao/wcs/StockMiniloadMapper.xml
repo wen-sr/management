@@ -228,4 +228,59 @@
     from STOCK_MINILOAD
     where container_code_tmp = #{boxno}
   </select>
+
+  <select id="getStockMiniloadData" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from  stock_miniload t
+    where t.container_code_tmp like '%'|| #{containerCodeTmp} || '%'
+    or t.container_code like '%'|| #{containerCodeTmp} || '%'
+  </select>
+  <select id="getStockMiniloadData1" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from stock_miniload t
+    where t.bank_id =#{bankId}
+    and t.bank_layer = #{bankLayer}
+    and t.bank_column = #{bankColumn}
+  </select>
+  <select id="getStockMiniloadData2" resultType="com.management.vo.wcs.LocQtyVo">
+    (select '总数量' flag,COUNT(*) locQty  FROM STOCK_MINILOAD T
+    WHERE T.ACTIV ='N'  AND T.BANK_ID IN <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    #{item}
+  </foreach>
+    AND (CONTAINER_CODE_TMP &lt;&gt;'货位被占用' OR CONTAINER_CODE_TMP IS NULL ))
+    union
+    (select '剩余数量' flag,COUNT(*) locQty FROM STOCK_MINILOAD T
+    WHERE T.ACTIV ='N'  AND T.BANK_ID IN <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    #{item}
+  </foreach>
+    AND   T.CONTAINER_CODE_TMP IS    NULL AND T.CONTAINER_CODE IS   NULL)
+    union
+    (select '已用数量' flag,COUNT(*)locQty  FROM STOCK_MINILOAD T
+    WHERE T.ACTIV ='N'  AND T.BANK_ID IN <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    #{item}
+  </foreach>
+    AND  (CONTAINER_CODE_TMP &lt;&gt; '货位被占用' ))
+  </select>
+  <select id="getStockMiniloadData3" resultType="com.management.vo.wcs.LocQtyVo">
+    (select '总数量' flag,COUNT(*) locQty  FROM STOCK_MINILOAD T
+    WHERE T.ACTIV ='N'  AND T.BANK_ID IN <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    #{item}
+  </foreach>
+    AND (CONTAINER_CODE_TMP &lt;&gt;'货位被占用' OR CONTAINER_CODE_TMP IS NULL ))
+    union
+    (select '剩余数量' flag,COUNT(*) locQty FROM STOCK_MINILOAD T
+    WHERE T.ACTIV ='N'  AND T.BANK_ID IN <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    #{item}
+  </foreach>
+    AND   T.CONTAINER_CODE_TMP IS    NULL AND T.CONTAINER_CODE IS   NULL)
+    union
+    (select '已用数量' flag,COUNT(*)locQty  FROM STOCK_MINILOAD T
+    WHERE T.ACTIV ='N'  AND T.BANK_ID IN <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    #{item}
+  </foreach>
+    AND  (CONTAINER_CODE_TMP &lt;&gt; '货位被占用' ))
+  </select>
+
+
+
 </mapper>
