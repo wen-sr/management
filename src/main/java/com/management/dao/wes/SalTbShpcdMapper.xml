@@ -1,0 +1,1840 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.wes.SalTbShpcdMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.wes.SalTbShpcd" >
+    <constructor >
+      <idArg column="PKID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="COID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOCID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOCIDSRC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOCIDEX" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOCTYP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOCRNK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CUSID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DEPID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PRJID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SALNME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="WHID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DATTORCV" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPPCK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASCNT" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="IFXDCK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOCIDXDCK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKUSN" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="SKUID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKUIDEXT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKUIDEX" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKUBAR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKUISBN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKUFNM" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOZID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AILID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOCID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TAGID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASBAR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TRDDIS" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="CSHDIS" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="ORDUOM" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDPRI" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="SHPUOM" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPPRI" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="PURQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="PURAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="RCVASNQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="RCVASNAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="ARVQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="ARVAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="RCVQAQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="RCVQAAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="RCVQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="RCVAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="PUTQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="PUTAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="ORDQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="ORDAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="PICALCQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="PICALCAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="PICQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="PICAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="SORQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="SORAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="PCKQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="PCKAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="SHPQAQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="SHPQAAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="SHPASNQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="SHPASNAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="SHPQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="SHPAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="DLVQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="DLVAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="PAYQTY" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="PAYAMT" jdbcType="NUMERIC" javaType="java.math.BigDecimal" />
+      <arg column="ISSUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ISSDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="APVUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="APVDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PURUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PURDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PUROKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RCVASNUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RCVASNDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ARVUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ARVDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ARVOKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RCVQAUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RCVQADT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RCVQAOKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RCVUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RCVDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RCVOKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PUTUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PUTDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PUTOKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDOKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICALCUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICALCDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICOKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SORUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SORDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SOROKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PCKUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PCKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PCKOKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPQAUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPQADT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPQAOKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPASNUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPASNDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPOKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DLVSETUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DLVSETDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DLVUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DLVDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DLVOKDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PAYSETUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PAYSETDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PAYUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PAYDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CLSUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CLSDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HLDUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HLDDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DELUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DELDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EXT1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EXT2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EXT3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RMK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CHGUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CHGDT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASTOT" jdbcType="NUMERIC" javaType="java.lang.Integer" />
+      <arg column="NOTES" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASLBL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EQUWH" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EQUTYP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SALRTN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TEMID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TEAMNME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TEAMQTY" jdbcType="NUMERIC" javaType="java.lang.Short" />
+      <arg column="TEMSCNNME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TEMSORID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TEMSORNME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHPHOLD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="INPUT_PORT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PASCASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PASGATEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PASGATEUSR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PASGATEUSRNME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKUSPC" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PKID, COID, DOCID, DOCIDSRC, DOCIDEX, DOCTYP, DOCRNK, CUSID, SUPID, DEPID, PRJID, 
+    SALNME, WHID, DATTORCV, SHPPCK, CASCNT, IFXDCK, DOCIDXDCK, SKUSN, SKUID, SKUIDEXT, 
+    SKUIDEX, SKUBAR, SKUISBN, SKUFNM, LOZID, AILID, LOCID, TAGID, CASID, CASBAR, TRDDIS, 
+    CSHDIS, ORDUOM, ORDPRI, SHPUOM, SHPPRI, PURQTY, PURAMT, RCVASNQTY, RCVASNAMT, ARVQTY, 
+    ARVAMT, RCVQAQTY, RCVQAAMT, RCVQTY, RCVAMT, PUTQTY, PUTAMT, ORDQTY, ORDAMT, PICALCQTY, 
+    PICALCAMT, PICQTY, PICAMT, SORQTY, SORAMT, PCKQTY, PCKAMT, SHPQAQTY, SHPQAAMT, SHPASNQTY, 
+    SHPASNAMT, SHPQTY, SHPAMT, DLVQTY, DLVAMT, PAYQTY, PAYAMT, ISSUSR, ISSDT, APVUSR, 
+    APVDT, PURUSR, PURDT, PUROKDT, RCVASNUSR, RCVASNDT, ARVUSR, ARVDT, ARVOKDT, RCVQAUSR, 
+    RCVQADT, RCVQAOKDT, RCVUSR, RCVDT, RCVOKDT, PUTUSR, PUTDT, PUTOKDT, ORDUSR, ORDDT, 
+    ORDOKDT, PICALCUSR, PICALCDT, PICUSR, PICDT, PICOKDT, SORUSR, SORDT, SOROKDT, PCKUSR, 
+    PCKDT, PCKOKDT, SHPQAUSR, SHPQADT, SHPQAOKDT, SHPASNUSR, SHPASNDT, SHPUSR, SHPDT, 
+    SHPOKDT, DLVSETUSR, DLVSETDT, DLVUSR, DLVDT, DLVOKDT, PAYSETUSR, PAYSETDT, PAYUSR, 
+    PAYDT, CLSUSR, CLSDT, HLDUSR, HLDDT, DELUSR, DELDT, STS, EXT1, EXT2, EXT3, RMK, CHGUSR, 
+    CHGDT, CASTOT, NOTES, CASLBL, EQUWH, EQUTYP, SALRTN, TEMID, TEAMNME, TEAMQTY, TEMSCNNME, 
+    TEMSORID, TEMSORNME, SHPHOLD, INPUT_PORT, PASCASEID, PASGATEID, PASGATEUSR, PASGATEUSRNME, 
+    SKUSPC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SAL_TB_SHPCD
+    where PKID = #{pkid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SAL_TB_SHPCD
+    where PKID = #{pkid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.wes.SalTbShpcd" >
+    insert into SAL_TB_SHPCD (PKID, COID, DOCID, 
+      DOCIDSRC, DOCIDEX, DOCTYP, 
+      DOCRNK, CUSID, SUPID, 
+      DEPID, PRJID, SALNME, 
+      WHID, DATTORCV, SHPPCK, 
+      CASCNT, IFXDCK, DOCIDXDCK, 
+      SKUSN, SKUID, SKUIDEXT, 
+      SKUIDEX, SKUBAR, SKUISBN, 
+      SKUFNM, LOZID, AILID, 
+      LOCID, TAGID, CASID, 
+      CASBAR, TRDDIS, CSHDIS, 
+      ORDUOM, ORDPRI, SHPUOM, 
+      SHPPRI, PURQTY, PURAMT, 
+      RCVASNQTY, RCVASNAMT, ARVQTY, 
+      ARVAMT, RCVQAQTY, RCVQAAMT, 
+      RCVQTY, RCVAMT, PUTQTY, 
+      PUTAMT, ORDQTY, ORDAMT, 
+      PICALCQTY, PICALCAMT, PICQTY, 
+      PICAMT, SORQTY, SORAMT, 
+      PCKQTY, PCKAMT, SHPQAQTY, 
+      SHPQAAMT, SHPASNQTY, SHPASNAMT, 
+      SHPQTY, SHPAMT, DLVQTY, 
+      DLVAMT, PAYQTY, PAYAMT, 
+      ISSUSR, ISSDT, APVUSR, 
+      APVDT, PURUSR, PURDT, 
+      PUROKDT, RCVASNUSR, RCVASNDT, 
+      ARVUSR, ARVDT, ARVOKDT, 
+      RCVQAUSR, RCVQADT, RCVQAOKDT, 
+      RCVUSR, RCVDT, RCVOKDT, 
+      PUTUSR, PUTDT, PUTOKDT, 
+      ORDUSR, ORDDT, ORDOKDT, 
+      PICALCUSR, PICALCDT, PICUSR, 
+      PICDT, PICOKDT, SORUSR, 
+      SORDT, SOROKDT, PCKUSR, 
+      PCKDT, PCKOKDT, SHPQAUSR, 
+      SHPQADT, SHPQAOKDT, SHPASNUSR, 
+      SHPASNDT, SHPUSR, SHPDT, 
+      SHPOKDT, DLVSETUSR, DLVSETDT, 
+      DLVUSR, DLVDT, DLVOKDT, 
+      PAYSETUSR, PAYSETDT, PAYUSR, 
+      PAYDT, CLSUSR, CLSDT, 
+      HLDUSR, HLDDT, DELUSR, 
+      DELDT, STS, EXT1, EXT2, 
+      EXT3, RMK, CHGUSR, 
+      CHGDT, CASTOT, NOTES, 
+      CASLBL, EQUWH, EQUTYP, 
+      SALRTN, TEMID, TEAMNME, 
+      TEAMQTY, TEMSCNNME, TEMSORID, 
+      TEMSORNME, SHPHOLD, INPUT_PORT, 
+      PASCASEID, PASGATEID, PASGATEUSR, 
+      PASGATEUSRNME, SKUSPC)
+    values (#{pkid,jdbcType=INTEGER}, #{coid,jdbcType=VARCHAR}, #{docid,jdbcType=VARCHAR}, 
+      #{docidsrc,jdbcType=VARCHAR}, #{docidex,jdbcType=VARCHAR}, #{doctyp,jdbcType=VARCHAR}, 
+      #{docrnk,jdbcType=VARCHAR}, #{cusid,jdbcType=VARCHAR}, #{supid,jdbcType=VARCHAR}, 
+      #{depid,jdbcType=VARCHAR}, #{prjid,jdbcType=VARCHAR}, #{salnme,jdbcType=VARCHAR}, 
+      #{whid,jdbcType=VARCHAR}, #{dattorcv,jdbcType=VARCHAR}, #{shppck,jdbcType=VARCHAR}, 
+      #{cascnt,jdbcType=NUMERIC}, #{ifxdck,jdbcType=VARCHAR}, #{docidxdck,jdbcType=VARCHAR}, 
+      #{skusn,jdbcType=NUMERIC}, #{skuid,jdbcType=VARCHAR}, #{skuidext,jdbcType=VARCHAR}, 
+      #{skuidex,jdbcType=VARCHAR}, #{skubar,jdbcType=VARCHAR}, #{skuisbn,jdbcType=VARCHAR}, 
+      #{skufnm,jdbcType=VARCHAR}, #{lozid,jdbcType=VARCHAR}, #{ailid,jdbcType=VARCHAR}, 
+      #{locid,jdbcType=VARCHAR}, #{tagid,jdbcType=VARCHAR}, #{casid,jdbcType=VARCHAR}, 
+      #{casbar,jdbcType=VARCHAR}, #{trddis,jdbcType=NUMERIC}, #{cshdis,jdbcType=NUMERIC}, 
+      #{orduom,jdbcType=VARCHAR}, #{ordpri,jdbcType=NUMERIC}, #{shpuom,jdbcType=VARCHAR}, 
+      #{shppri,jdbcType=NUMERIC}, #{purqty,jdbcType=NUMERIC}, #{puramt,jdbcType=NUMERIC}, 
+      #{rcvasnqty,jdbcType=NUMERIC}, #{rcvasnamt,jdbcType=NUMERIC}, #{arvqty,jdbcType=NUMERIC}, 
+      #{arvamt,jdbcType=NUMERIC}, #{rcvqaqty,jdbcType=NUMERIC}, #{rcvqaamt,jdbcType=NUMERIC}, 
+      #{rcvqty,jdbcType=NUMERIC}, #{rcvamt,jdbcType=NUMERIC}, #{putqty,jdbcType=NUMERIC}, 
+      #{putamt,jdbcType=NUMERIC}, #{ordqty,jdbcType=NUMERIC}, #{ordamt,jdbcType=NUMERIC}, 
+      #{picalcqty,jdbcType=NUMERIC}, #{picalcamt,jdbcType=NUMERIC}, #{picqty,jdbcType=NUMERIC}, 
+      #{picamt,jdbcType=NUMERIC}, #{sorqty,jdbcType=NUMERIC}, #{soramt,jdbcType=NUMERIC}, 
+      #{pckqty,jdbcType=NUMERIC}, #{pckamt,jdbcType=NUMERIC}, #{shpqaqty,jdbcType=NUMERIC}, 
+      #{shpqaamt,jdbcType=NUMERIC}, #{shpasnqty,jdbcType=NUMERIC}, #{shpasnamt,jdbcType=NUMERIC}, 
+      #{shpqty,jdbcType=NUMERIC}, #{shpamt,jdbcType=NUMERIC}, #{dlvqty,jdbcType=NUMERIC}, 
+      #{dlvamt,jdbcType=NUMERIC}, #{payqty,jdbcType=NUMERIC}, #{payamt,jdbcType=NUMERIC}, 
+      #{issusr,jdbcType=VARCHAR}, #{issdt,jdbcType=VARCHAR}, #{apvusr,jdbcType=VARCHAR}, 
+      #{apvdt,jdbcType=VARCHAR}, #{purusr,jdbcType=VARCHAR}, #{purdt,jdbcType=VARCHAR}, 
+      #{purokdt,jdbcType=VARCHAR}, #{rcvasnusr,jdbcType=VARCHAR}, #{rcvasndt,jdbcType=VARCHAR}, 
+      #{arvusr,jdbcType=VARCHAR}, #{arvdt,jdbcType=VARCHAR}, #{arvokdt,jdbcType=VARCHAR}, 
+      #{rcvqausr,jdbcType=VARCHAR}, #{rcvqadt,jdbcType=VARCHAR}, #{rcvqaokdt,jdbcType=VARCHAR}, 
+      #{rcvusr,jdbcType=VARCHAR}, #{rcvdt,jdbcType=VARCHAR}, #{rcvokdt,jdbcType=VARCHAR}, 
+      #{putusr,jdbcType=VARCHAR}, #{putdt,jdbcType=VARCHAR}, #{putokdt,jdbcType=VARCHAR}, 
+      #{ordusr,jdbcType=VARCHAR}, #{orddt,jdbcType=VARCHAR}, #{ordokdt,jdbcType=VARCHAR}, 
+      #{picalcusr,jdbcType=VARCHAR}, #{picalcdt,jdbcType=VARCHAR}, #{picusr,jdbcType=VARCHAR}, 
+      #{picdt,jdbcType=VARCHAR}, #{picokdt,jdbcType=VARCHAR}, #{sorusr,jdbcType=VARCHAR}, 
+      #{sordt,jdbcType=VARCHAR}, #{sorokdt,jdbcType=VARCHAR}, #{pckusr,jdbcType=VARCHAR}, 
+      #{pckdt,jdbcType=VARCHAR}, #{pckokdt,jdbcType=VARCHAR}, #{shpqausr,jdbcType=VARCHAR}, 
+      #{shpqadt,jdbcType=VARCHAR}, #{shpqaokdt,jdbcType=VARCHAR}, #{shpasnusr,jdbcType=VARCHAR}, 
+      #{shpasndt,jdbcType=VARCHAR}, #{shpusr,jdbcType=VARCHAR}, #{shpdt,jdbcType=VARCHAR}, 
+      #{shpokdt,jdbcType=VARCHAR}, #{dlvsetusr,jdbcType=VARCHAR}, #{dlvsetdt,jdbcType=VARCHAR}, 
+      #{dlvusr,jdbcType=VARCHAR}, #{dlvdt,jdbcType=VARCHAR}, #{dlvokdt,jdbcType=VARCHAR}, 
+      #{paysetusr,jdbcType=VARCHAR}, #{paysetdt,jdbcType=VARCHAR}, #{payusr,jdbcType=VARCHAR}, 
+      #{paydt,jdbcType=VARCHAR}, #{clsusr,jdbcType=VARCHAR}, #{clsdt,jdbcType=VARCHAR}, 
+      #{hldusr,jdbcType=VARCHAR}, #{hlddt,jdbcType=VARCHAR}, #{delusr,jdbcType=VARCHAR}, 
+      #{deldt,jdbcType=VARCHAR}, #{sts,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, 
+      #{ext3,jdbcType=VARCHAR}, #{rmk,jdbcType=VARCHAR}, #{chgusr,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=VARCHAR}, #{castot,jdbcType=NUMERIC}, #{notes,jdbcType=VARCHAR}, 
+      #{caslbl,jdbcType=VARCHAR}, #{equwh,jdbcType=VARCHAR}, #{equtyp,jdbcType=VARCHAR}, 
+      #{salrtn,jdbcType=VARCHAR}, #{temid,jdbcType=VARCHAR}, #{teamnme,jdbcType=VARCHAR}, 
+      #{teamqty,jdbcType=NUMERIC}, #{temscnnme,jdbcType=VARCHAR}, #{temsorid,jdbcType=VARCHAR}, 
+      #{temsornme,jdbcType=VARCHAR}, #{shphold,jdbcType=VARCHAR}, #{inputPort,jdbcType=VARCHAR}, 
+      #{pascaseid,jdbcType=VARCHAR}, #{pasgateid,jdbcType=VARCHAR}, #{pasgateusr,jdbcType=VARCHAR}, 
+      #{pasgateusrnme,jdbcType=VARCHAR}, #{skuspc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.wes.SalTbShpcd" >
+    insert into SAL_TB_SHPCD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pkid != null" >
+        PKID,
+      </if>
+      <if test="coid != null" >
+        COID,
+      </if>
+      <if test="docid != null" >
+        DOCID,
+      </if>
+      <if test="docidsrc != null" >
+        DOCIDSRC,
+      </if>
+      <if test="docidex != null" >
+        DOCIDEX,
+      </if>
+      <if test="doctyp != null" >
+        DOCTYP,
+      </if>
+      <if test="docrnk != null" >
+        DOCRNK,
+      </if>
+      <if test="cusid != null" >
+        CUSID,
+      </if>
+      <if test="supid != null" >
+        SUPID,
+      </if>
+      <if test="depid != null" >
+        DEPID,
+      </if>
+      <if test="prjid != null" >
+        PRJID,
+      </if>
+      <if test="salnme != null" >
+        SALNME,
+      </if>
+      <if test="whid != null" >
+        WHID,
+      </if>
+      <if test="dattorcv != null" >
+        DATTORCV,
+      </if>
+      <if test="shppck != null" >
+        SHPPCK,
+      </if>
+      <if test="cascnt != null" >
+        CASCNT,
+      </if>
+      <if test="ifxdck != null" >
+        IFXDCK,
+      </if>
+      <if test="docidxdck != null" >
+        DOCIDXDCK,
+      </if>
+      <if test="skusn != null" >
+        SKUSN,
+      </if>
+      <if test="skuid != null" >
+        SKUID,
+      </if>
+      <if test="skuidext != null" >
+        SKUIDEXT,
+      </if>
+      <if test="skuidex != null" >
+        SKUIDEX,
+      </if>
+      <if test="skubar != null" >
+        SKUBAR,
+      </if>
+      <if test="skuisbn != null" >
+        SKUISBN,
+      </if>
+      <if test="skufnm != null" >
+        SKUFNM,
+      </if>
+      <if test="lozid != null" >
+        LOZID,
+      </if>
+      <if test="ailid != null" >
+        AILID,
+      </if>
+      <if test="locid != null" >
+        LOCID,
+      </if>
+      <if test="tagid != null" >
+        TAGID,
+      </if>
+      <if test="casid != null" >
+        CASID,
+      </if>
+      <if test="casbar != null" >
+        CASBAR,
+      </if>
+      <if test="trddis != null" >
+        TRDDIS,
+      </if>
+      <if test="cshdis != null" >
+        CSHDIS,
+      </if>
+      <if test="orduom != null" >
+        ORDUOM,
+      </if>
+      <if test="ordpri != null" >
+        ORDPRI,
+      </if>
+      <if test="shpuom != null" >
+        SHPUOM,
+      </if>
+      <if test="shppri != null" >
+        SHPPRI,
+      </if>
+      <if test="purqty != null" >
+        PURQTY,
+      </if>
+      <if test="puramt != null" >
+        PURAMT,
+      </if>
+      <if test="rcvasnqty != null" >
+        RCVASNQTY,
+      </if>
+      <if test="rcvasnamt != null" >
+        RCVASNAMT,
+      </if>
+      <if test="arvqty != null" >
+        ARVQTY,
+      </if>
+      <if test="arvamt != null" >
+        ARVAMT,
+      </if>
+      <if test="rcvqaqty != null" >
+        RCVQAQTY,
+      </if>
+      <if test="rcvqaamt != null" >
+        RCVQAAMT,
+      </if>
+      <if test="rcvqty != null" >
+        RCVQTY,
+      </if>
+      <if test="rcvamt != null" >
+        RCVAMT,
+      </if>
+      <if test="putqty != null" >
+        PUTQTY,
+      </if>
+      <if test="putamt != null" >
+        PUTAMT,
+      </if>
+      <if test="ordqty != null" >
+        ORDQTY,
+      </if>
+      <if test="ordamt != null" >
+        ORDAMT,
+      </if>
+      <if test="picalcqty != null" >
+        PICALCQTY,
+      </if>
+      <if test="picalcamt != null" >
+        PICALCAMT,
+      </if>
+      <if test="picqty != null" >
+        PICQTY,
+      </if>
+      <if test="picamt != null" >
+        PICAMT,
+      </if>
+      <if test="sorqty != null" >
+        SORQTY,
+      </if>
+      <if test="soramt != null" >
+        SORAMT,
+      </if>
+      <if test="pckqty != null" >
+        PCKQTY,
+      </if>
+      <if test="pckamt != null" >
+        PCKAMT,
+      </if>
+      <if test="shpqaqty != null" >
+        SHPQAQTY,
+      </if>
+      <if test="shpqaamt != null" >
+        SHPQAAMT,
+      </if>
+      <if test="shpasnqty != null" >
+        SHPASNQTY,
+      </if>
+      <if test="shpasnamt != null" >
+        SHPASNAMT,
+      </if>
+      <if test="shpqty != null" >
+        SHPQTY,
+      </if>
+      <if test="shpamt != null" >
+        SHPAMT,
+      </if>
+      <if test="dlvqty != null" >
+        DLVQTY,
+      </if>
+      <if test="dlvamt != null" >
+        DLVAMT,
+      </if>
+      <if test="payqty != null" >
+        PAYQTY,
+      </if>
+      <if test="payamt != null" >
+        PAYAMT,
+      </if>
+      <if test="issusr != null" >
+        ISSUSR,
+      </if>
+      <if test="issdt != null" >
+        ISSDT,
+      </if>
+      <if test="apvusr != null" >
+        APVUSR,
+      </if>
+      <if test="apvdt != null" >
+        APVDT,
+      </if>
+      <if test="purusr != null" >
+        PURUSR,
+      </if>
+      <if test="purdt != null" >
+        PURDT,
+      </if>
+      <if test="purokdt != null" >
+        PUROKDT,
+      </if>
+      <if test="rcvasnusr != null" >
+        RCVASNUSR,
+      </if>
+      <if test="rcvasndt != null" >
+        RCVASNDT,
+      </if>
+      <if test="arvusr != null" >
+        ARVUSR,
+      </if>
+      <if test="arvdt != null" >
+        ARVDT,
+      </if>
+      <if test="arvokdt != null" >
+        ARVOKDT,
+      </if>
+      <if test="rcvqausr != null" >
+        RCVQAUSR,
+      </if>
+      <if test="rcvqadt != null" >
+        RCVQADT,
+      </if>
+      <if test="rcvqaokdt != null" >
+        RCVQAOKDT,
+      </if>
+      <if test="rcvusr != null" >
+        RCVUSR,
+      </if>
+      <if test="rcvdt != null" >
+        RCVDT,
+      </if>
+      <if test="rcvokdt != null" >
+        RCVOKDT,
+      </if>
+      <if test="putusr != null" >
+        PUTUSR,
+      </if>
+      <if test="putdt != null" >
+        PUTDT,
+      </if>
+      <if test="putokdt != null" >
+        PUTOKDT,
+      </if>
+      <if test="ordusr != null" >
+        ORDUSR,
+      </if>
+      <if test="orddt != null" >
+        ORDDT,
+      </if>
+      <if test="ordokdt != null" >
+        ORDOKDT,
+      </if>
+      <if test="picalcusr != null" >
+        PICALCUSR,
+      </if>
+      <if test="picalcdt != null" >
+        PICALCDT,
+      </if>
+      <if test="picusr != null" >
+        PICUSR,
+      </if>
+      <if test="picdt != null" >
+        PICDT,
+      </if>
+      <if test="picokdt != null" >
+        PICOKDT,
+      </if>
+      <if test="sorusr != null" >
+        SORUSR,
+      </if>
+      <if test="sordt != null" >
+        SORDT,
+      </if>
+      <if test="sorokdt != null" >
+        SOROKDT,
+      </if>
+      <if test="pckusr != null" >
+        PCKUSR,
+      </if>
+      <if test="pckdt != null" >
+        PCKDT,
+      </if>
+      <if test="pckokdt != null" >
+        PCKOKDT,
+      </if>
+      <if test="shpqausr != null" >
+        SHPQAUSR,
+      </if>
+      <if test="shpqadt != null" >
+        SHPQADT,
+      </if>
+      <if test="shpqaokdt != null" >
+        SHPQAOKDT,
+      </if>
+      <if test="shpasnusr != null" >
+        SHPASNUSR,
+      </if>
+      <if test="shpasndt != null" >
+        SHPASNDT,
+      </if>
+      <if test="shpusr != null" >
+        SHPUSR,
+      </if>
+      <if test="shpdt != null" >
+        SHPDT,
+      </if>
+      <if test="shpokdt != null" >
+        SHPOKDT,
+      </if>
+      <if test="dlvsetusr != null" >
+        DLVSETUSR,
+      </if>
+      <if test="dlvsetdt != null" >
+        DLVSETDT,
+      </if>
+      <if test="dlvusr != null" >
+        DLVUSR,
+      </if>
+      <if test="dlvdt != null" >
+        DLVDT,
+      </if>
+      <if test="dlvokdt != null" >
+        DLVOKDT,
+      </if>
+      <if test="paysetusr != null" >
+        PAYSETUSR,
+      </if>
+      <if test="paysetdt != null" >
+        PAYSETDT,
+      </if>
+      <if test="payusr != null" >
+        PAYUSR,
+      </if>
+      <if test="paydt != null" >
+        PAYDT,
+      </if>
+      <if test="clsusr != null" >
+        CLSUSR,
+      </if>
+      <if test="clsdt != null" >
+        CLSDT,
+      </if>
+      <if test="hldusr != null" >
+        HLDUSR,
+      </if>
+      <if test="hlddt != null" >
+        HLDDT,
+      </if>
+      <if test="delusr != null" >
+        DELUSR,
+      </if>
+      <if test="deldt != null" >
+        DELDT,
+      </if>
+      <if test="sts != null" >
+        STS,
+      </if>
+      <if test="ext1 != null" >
+        EXT1,
+      </if>
+      <if test="ext2 != null" >
+        EXT2,
+      </if>
+      <if test="ext3 != null" >
+        EXT3,
+      </if>
+      <if test="rmk != null" >
+        RMK,
+      </if>
+      <if test="chgusr != null" >
+        CHGUSR,
+      </if>
+      <if test="chgdt != null" >
+        CHGDT,
+      </if>
+      <if test="castot != null" >
+        CASTOT,
+      </if>
+      <if test="notes != null" >
+        NOTES,
+      </if>
+      <if test="caslbl != null" >
+        CASLBL,
+      </if>
+      <if test="equwh != null" >
+        EQUWH,
+      </if>
+      <if test="equtyp != null" >
+        EQUTYP,
+      </if>
+      <if test="salrtn != null" >
+        SALRTN,
+      </if>
+      <if test="temid != null" >
+        TEMID,
+      </if>
+      <if test="teamnme != null" >
+        TEAMNME,
+      </if>
+      <if test="teamqty != null" >
+        TEAMQTY,
+      </if>
+      <if test="temscnnme != null" >
+        TEMSCNNME,
+      </if>
+      <if test="temsorid != null" >
+        TEMSORID,
+      </if>
+      <if test="temsornme != null" >
+        TEMSORNME,
+      </if>
+      <if test="shphold != null" >
+        SHPHOLD,
+      </if>
+      <if test="inputPort != null" >
+        INPUT_PORT,
+      </if>
+      <if test="pascaseid != null" >
+        PASCASEID,
+      </if>
+      <if test="pasgateid != null" >
+        PASGATEID,
+      </if>
+      <if test="pasgateusr != null" >
+        PASGATEUSR,
+      </if>
+      <if test="pasgateusrnme != null" >
+        PASGATEUSRNME,
+      </if>
+      <if test="skuspc != null" >
+        SKUSPC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pkid != null" >
+        #{pkid,jdbcType=INTEGER},
+      </if>
+      <if test="coid != null" >
+        #{coid,jdbcType=VARCHAR},
+      </if>
+      <if test="docid != null" >
+        #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="docidsrc != null" >
+        #{docidsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="docidex != null" >
+        #{docidex,jdbcType=VARCHAR},
+      </if>
+      <if test="doctyp != null" >
+        #{doctyp,jdbcType=VARCHAR},
+      </if>
+      <if test="docrnk != null" >
+        #{docrnk,jdbcType=VARCHAR},
+      </if>
+      <if test="cusid != null" >
+        #{cusid,jdbcType=VARCHAR},
+      </if>
+      <if test="supid != null" >
+        #{supid,jdbcType=VARCHAR},
+      </if>
+      <if test="depid != null" >
+        #{depid,jdbcType=VARCHAR},
+      </if>
+      <if test="prjid != null" >
+        #{prjid,jdbcType=VARCHAR},
+      </if>
+      <if test="salnme != null" >
+        #{salnme,jdbcType=VARCHAR},
+      </if>
+      <if test="whid != null" >
+        #{whid,jdbcType=VARCHAR},
+      </if>
+      <if test="dattorcv != null" >
+        #{dattorcv,jdbcType=VARCHAR},
+      </if>
+      <if test="shppck != null" >
+        #{shppck,jdbcType=VARCHAR},
+      </if>
+      <if test="cascnt != null" >
+        #{cascnt,jdbcType=NUMERIC},
+      </if>
+      <if test="ifxdck != null" >
+        #{ifxdck,jdbcType=VARCHAR},
+      </if>
+      <if test="docidxdck != null" >
+        #{docidxdck,jdbcType=VARCHAR},
+      </if>
+      <if test="skusn != null" >
+        #{skusn,jdbcType=NUMERIC},
+      </if>
+      <if test="skuid != null" >
+        #{skuid,jdbcType=VARCHAR},
+      </if>
+      <if test="skuidext != null" >
+        #{skuidext,jdbcType=VARCHAR},
+      </if>
+      <if test="skuidex != null" >
+        #{skuidex,jdbcType=VARCHAR},
+      </if>
+      <if test="skubar != null" >
+        #{skubar,jdbcType=VARCHAR},
+      </if>
+      <if test="skuisbn != null" >
+        #{skuisbn,jdbcType=VARCHAR},
+      </if>
+      <if test="skufnm != null" >
+        #{skufnm,jdbcType=VARCHAR},
+      </if>
+      <if test="lozid != null" >
+        #{lozid,jdbcType=VARCHAR},
+      </if>
+      <if test="ailid != null" >
+        #{ailid,jdbcType=VARCHAR},
+      </if>
+      <if test="locid != null" >
+        #{locid,jdbcType=VARCHAR},
+      </if>
+      <if test="tagid != null" >
+        #{tagid,jdbcType=VARCHAR},
+      </if>
+      <if test="casid != null" >
+        #{casid,jdbcType=VARCHAR},
+      </if>
+      <if test="casbar != null" >
+        #{casbar,jdbcType=VARCHAR},
+      </if>
+      <if test="trddis != null" >
+        #{trddis,jdbcType=NUMERIC},
+      </if>
+      <if test="cshdis != null" >
+        #{cshdis,jdbcType=NUMERIC},
+      </if>
+      <if test="orduom != null" >
+        #{orduom,jdbcType=VARCHAR},
+      </if>
+      <if test="ordpri != null" >
+        #{ordpri,jdbcType=NUMERIC},
+      </if>
+      <if test="shpuom != null" >
+        #{shpuom,jdbcType=VARCHAR},
+      </if>
+      <if test="shppri != null" >
+        #{shppri,jdbcType=NUMERIC},
+      </if>
+      <if test="purqty != null" >
+        #{purqty,jdbcType=NUMERIC},
+      </if>
+      <if test="puramt != null" >
+        #{puramt,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvasnqty != null" >
+        #{rcvasnqty,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvasnamt != null" >
+        #{rcvasnamt,jdbcType=NUMERIC},
+      </if>
+      <if test="arvqty != null" >
+        #{arvqty,jdbcType=NUMERIC},
+      </if>
+      <if test="arvamt != null" >
+        #{arvamt,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvqaqty != null" >
+        #{rcvqaqty,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvqaamt != null" >
+        #{rcvqaamt,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvqty != null" >
+        #{rcvqty,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvamt != null" >
+        #{rcvamt,jdbcType=NUMERIC},
+      </if>
+      <if test="putqty != null" >
+        #{putqty,jdbcType=NUMERIC},
+      </if>
+      <if test="putamt != null" >
+        #{putamt,jdbcType=NUMERIC},
+      </if>
+      <if test="ordqty != null" >
+        #{ordqty,jdbcType=NUMERIC},
+      </if>
+      <if test="ordamt != null" >
+        #{ordamt,jdbcType=NUMERIC},
+      </if>
+      <if test="picalcqty != null" >
+        #{picalcqty,jdbcType=NUMERIC},
+      </if>
+      <if test="picalcamt != null" >
+        #{picalcamt,jdbcType=NUMERIC},
+      </if>
+      <if test="picqty != null" >
+        #{picqty,jdbcType=NUMERIC},
+      </if>
+      <if test="picamt != null" >
+        #{picamt,jdbcType=NUMERIC},
+      </if>
+      <if test="sorqty != null" >
+        #{sorqty,jdbcType=NUMERIC},
+      </if>
+      <if test="soramt != null" >
+        #{soramt,jdbcType=NUMERIC},
+      </if>
+      <if test="pckqty != null" >
+        #{pckqty,jdbcType=NUMERIC},
+      </if>
+      <if test="pckamt != null" >
+        #{pckamt,jdbcType=NUMERIC},
+      </if>
+      <if test="shpqaqty != null" >
+        #{shpqaqty,jdbcType=NUMERIC},
+      </if>
+      <if test="shpqaamt != null" >
+        #{shpqaamt,jdbcType=NUMERIC},
+      </if>
+      <if test="shpasnqty != null" >
+        #{shpasnqty,jdbcType=NUMERIC},
+      </if>
+      <if test="shpasnamt != null" >
+        #{shpasnamt,jdbcType=NUMERIC},
+      </if>
+      <if test="shpqty != null" >
+        #{shpqty,jdbcType=NUMERIC},
+      </if>
+      <if test="shpamt != null" >
+        #{shpamt,jdbcType=NUMERIC},
+      </if>
+      <if test="dlvqty != null" >
+        #{dlvqty,jdbcType=NUMERIC},
+      </if>
+      <if test="dlvamt != null" >
+        #{dlvamt,jdbcType=NUMERIC},
+      </if>
+      <if test="payqty != null" >
+        #{payqty,jdbcType=NUMERIC},
+      </if>
+      <if test="payamt != null" >
+        #{payamt,jdbcType=NUMERIC},
+      </if>
+      <if test="issusr != null" >
+        #{issusr,jdbcType=VARCHAR},
+      </if>
+      <if test="issdt != null" >
+        #{issdt,jdbcType=VARCHAR},
+      </if>
+      <if test="apvusr != null" >
+        #{apvusr,jdbcType=VARCHAR},
+      </if>
+      <if test="apvdt != null" >
+        #{apvdt,jdbcType=VARCHAR},
+      </if>
+      <if test="purusr != null" >
+        #{purusr,jdbcType=VARCHAR},
+      </if>
+      <if test="purdt != null" >
+        #{purdt,jdbcType=VARCHAR},
+      </if>
+      <if test="purokdt != null" >
+        #{purokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvasnusr != null" >
+        #{rcvasnusr,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvasndt != null" >
+        #{rcvasndt,jdbcType=VARCHAR},
+      </if>
+      <if test="arvusr != null" >
+        #{arvusr,jdbcType=VARCHAR},
+      </if>
+      <if test="arvdt != null" >
+        #{arvdt,jdbcType=VARCHAR},
+      </if>
+      <if test="arvokdt != null" >
+        #{arvokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvqausr != null" >
+        #{rcvqausr,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvqadt != null" >
+        #{rcvqadt,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvqaokdt != null" >
+        #{rcvqaokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvusr != null" >
+        #{rcvusr,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvdt != null" >
+        #{rcvdt,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvokdt != null" >
+        #{rcvokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="putusr != null" >
+        #{putusr,jdbcType=VARCHAR},
+      </if>
+      <if test="putdt != null" >
+        #{putdt,jdbcType=VARCHAR},
+      </if>
+      <if test="putokdt != null" >
+        #{putokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="ordusr != null" >
+        #{ordusr,jdbcType=VARCHAR},
+      </if>
+      <if test="orddt != null" >
+        #{orddt,jdbcType=VARCHAR},
+      </if>
+      <if test="ordokdt != null" >
+        #{ordokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="picalcusr != null" >
+        #{picalcusr,jdbcType=VARCHAR},
+      </if>
+      <if test="picalcdt != null" >
+        #{picalcdt,jdbcType=VARCHAR},
+      </if>
+      <if test="picusr != null" >
+        #{picusr,jdbcType=VARCHAR},
+      </if>
+      <if test="picdt != null" >
+        #{picdt,jdbcType=VARCHAR},
+      </if>
+      <if test="picokdt != null" >
+        #{picokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="sorusr != null" >
+        #{sorusr,jdbcType=VARCHAR},
+      </if>
+      <if test="sordt != null" >
+        #{sordt,jdbcType=VARCHAR},
+      </if>
+      <if test="sorokdt != null" >
+        #{sorokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="pckusr != null" >
+        #{pckusr,jdbcType=VARCHAR},
+      </if>
+      <if test="pckdt != null" >
+        #{pckdt,jdbcType=VARCHAR},
+      </if>
+      <if test="pckokdt != null" >
+        #{pckokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="shpqausr != null" >
+        #{shpqausr,jdbcType=VARCHAR},
+      </if>
+      <if test="shpqadt != null" >
+        #{shpqadt,jdbcType=VARCHAR},
+      </if>
+      <if test="shpqaokdt != null" >
+        #{shpqaokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="shpasnusr != null" >
+        #{shpasnusr,jdbcType=VARCHAR},
+      </if>
+      <if test="shpasndt != null" >
+        #{shpasndt,jdbcType=VARCHAR},
+      </if>
+      <if test="shpusr != null" >
+        #{shpusr,jdbcType=VARCHAR},
+      </if>
+      <if test="shpdt != null" >
+        #{shpdt,jdbcType=VARCHAR},
+      </if>
+      <if test="shpokdt != null" >
+        #{shpokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="dlvsetusr != null" >
+        #{dlvsetusr,jdbcType=VARCHAR},
+      </if>
+      <if test="dlvsetdt != null" >
+        #{dlvsetdt,jdbcType=VARCHAR},
+      </if>
+      <if test="dlvusr != null" >
+        #{dlvusr,jdbcType=VARCHAR},
+      </if>
+      <if test="dlvdt != null" >
+        #{dlvdt,jdbcType=VARCHAR},
+      </if>
+      <if test="dlvokdt != null" >
+        #{dlvokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="paysetusr != null" >
+        #{paysetusr,jdbcType=VARCHAR},
+      </if>
+      <if test="paysetdt != null" >
+        #{paysetdt,jdbcType=VARCHAR},
+      </if>
+      <if test="payusr != null" >
+        #{payusr,jdbcType=VARCHAR},
+      </if>
+      <if test="paydt != null" >
+        #{paydt,jdbcType=VARCHAR},
+      </if>
+      <if test="clsusr != null" >
+        #{clsusr,jdbcType=VARCHAR},
+      </if>
+      <if test="clsdt != null" >
+        #{clsdt,jdbcType=VARCHAR},
+      </if>
+      <if test="hldusr != null" >
+        #{hldusr,jdbcType=VARCHAR},
+      </if>
+      <if test="hlddt != null" >
+        #{hlddt,jdbcType=VARCHAR},
+      </if>
+      <if test="delusr != null" >
+        #{delusr,jdbcType=VARCHAR},
+      </if>
+      <if test="deldt != null" >
+        #{deldt,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        #{sts,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="rmk != null" >
+        #{rmk,jdbcType=VARCHAR},
+      </if>
+      <if test="chgusr != null" >
+        #{chgusr,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=VARCHAR},
+      </if>
+      <if test="castot != null" >
+        #{castot,jdbcType=NUMERIC},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="caslbl != null" >
+        #{caslbl,jdbcType=VARCHAR},
+      </if>
+      <if test="equwh != null" >
+        #{equwh,jdbcType=VARCHAR},
+      </if>
+      <if test="equtyp != null" >
+        #{equtyp,jdbcType=VARCHAR},
+      </if>
+      <if test="salrtn != null" >
+        #{salrtn,jdbcType=VARCHAR},
+      </if>
+      <if test="temid != null" >
+        #{temid,jdbcType=VARCHAR},
+      </if>
+      <if test="teamnme != null" >
+        #{teamnme,jdbcType=VARCHAR},
+      </if>
+      <if test="teamqty != null" >
+        #{teamqty,jdbcType=NUMERIC},
+      </if>
+      <if test="temscnnme != null" >
+        #{temscnnme,jdbcType=VARCHAR},
+      </if>
+      <if test="temsorid != null" >
+        #{temsorid,jdbcType=VARCHAR},
+      </if>
+      <if test="temsornme != null" >
+        #{temsornme,jdbcType=VARCHAR},
+      </if>
+      <if test="shphold != null" >
+        #{shphold,jdbcType=VARCHAR},
+      </if>
+      <if test="inputPort != null" >
+        #{inputPort,jdbcType=VARCHAR},
+      </if>
+      <if test="pascaseid != null" >
+        #{pascaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="pasgateid != null" >
+        #{pasgateid,jdbcType=VARCHAR},
+      </if>
+      <if test="pasgateusr != null" >
+        #{pasgateusr,jdbcType=VARCHAR},
+      </if>
+      <if test="pasgateusrnme != null" >
+        #{pasgateusrnme,jdbcType=VARCHAR},
+      </if>
+      <if test="skuspc != null" >
+        #{skuspc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.wes.SalTbShpcd" >
+    update SAL_TB_SHPCD
+    <set >
+      <if test="coid != null" >
+        COID = #{coid,jdbcType=VARCHAR},
+      </if>
+      <if test="docid != null" >
+        DOCID = #{docid,jdbcType=VARCHAR},
+      </if>
+      <if test="docidsrc != null" >
+        DOCIDSRC = #{docidsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="docidex != null" >
+        DOCIDEX = #{docidex,jdbcType=VARCHAR},
+      </if>
+      <if test="doctyp != null" >
+        DOCTYP = #{doctyp,jdbcType=VARCHAR},
+      </if>
+      <if test="docrnk != null" >
+        DOCRNK = #{docrnk,jdbcType=VARCHAR},
+      </if>
+      <if test="cusid != null" >
+        CUSID = #{cusid,jdbcType=VARCHAR},
+      </if>
+      <if test="supid != null" >
+        SUPID = #{supid,jdbcType=VARCHAR},
+      </if>
+      <if test="depid != null" >
+        DEPID = #{depid,jdbcType=VARCHAR},
+      </if>
+      <if test="prjid != null" >
+        PRJID = #{prjid,jdbcType=VARCHAR},
+      </if>
+      <if test="salnme != null" >
+        SALNME = #{salnme,jdbcType=VARCHAR},
+      </if>
+      <if test="whid != null" >
+        WHID = #{whid,jdbcType=VARCHAR},
+      </if>
+      <if test="dattorcv != null" >
+        DATTORCV = #{dattorcv,jdbcType=VARCHAR},
+      </if>
+      <if test="shppck != null" >
+        SHPPCK = #{shppck,jdbcType=VARCHAR},
+      </if>
+      <if test="cascnt != null" >
+        CASCNT = #{cascnt,jdbcType=NUMERIC},
+      </if>
+      <if test="ifxdck != null" >
+        IFXDCK = #{ifxdck,jdbcType=VARCHAR},
+      </if>
+      <if test="docidxdck != null" >
+        DOCIDXDCK = #{docidxdck,jdbcType=VARCHAR},
+      </if>
+      <if test="skusn != null" >
+        SKUSN = #{skusn,jdbcType=NUMERIC},
+      </if>
+      <if test="skuid != null" >
+        SKUID = #{skuid,jdbcType=VARCHAR},
+      </if>
+      <if test="skuidext != null" >
+        SKUIDEXT = #{skuidext,jdbcType=VARCHAR},
+      </if>
+      <if test="skuidex != null" >
+        SKUIDEX = #{skuidex,jdbcType=VARCHAR},
+      </if>
+      <if test="skubar != null" >
+        SKUBAR = #{skubar,jdbcType=VARCHAR},
+      </if>
+      <if test="skuisbn != null" >
+        SKUISBN = #{skuisbn,jdbcType=VARCHAR},
+      </if>
+      <if test="skufnm != null" >
+        SKUFNM = #{skufnm,jdbcType=VARCHAR},
+      </if>
+      <if test="lozid != null" >
+        LOZID = #{lozid,jdbcType=VARCHAR},
+      </if>
+      <if test="ailid != null" >
+        AILID = #{ailid,jdbcType=VARCHAR},
+      </if>
+      <if test="locid != null" >
+        LOCID = #{locid,jdbcType=VARCHAR},
+      </if>
+      <if test="tagid != null" >
+        TAGID = #{tagid,jdbcType=VARCHAR},
+      </if>
+      <if test="casid != null" >
+        CASID = #{casid,jdbcType=VARCHAR},
+      </if>
+      <if test="casbar != null" >
+        CASBAR = #{casbar,jdbcType=VARCHAR},
+      </if>
+      <if test="trddis != null" >
+        TRDDIS = #{trddis,jdbcType=NUMERIC},
+      </if>
+      <if test="cshdis != null" >
+        CSHDIS = #{cshdis,jdbcType=NUMERIC},
+      </if>
+      <if test="orduom != null" >
+        ORDUOM = #{orduom,jdbcType=VARCHAR},
+      </if>
+      <if test="ordpri != null" >
+        ORDPRI = #{ordpri,jdbcType=NUMERIC},
+      </if>
+      <if test="shpuom != null" >
+        SHPUOM = #{shpuom,jdbcType=VARCHAR},
+      </if>
+      <if test="shppri != null" >
+        SHPPRI = #{shppri,jdbcType=NUMERIC},
+      </if>
+      <if test="purqty != null" >
+        PURQTY = #{purqty,jdbcType=NUMERIC},
+      </if>
+      <if test="puramt != null" >
+        PURAMT = #{puramt,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvasnqty != null" >
+        RCVASNQTY = #{rcvasnqty,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvasnamt != null" >
+        RCVASNAMT = #{rcvasnamt,jdbcType=NUMERIC},
+      </if>
+      <if test="arvqty != null" >
+        ARVQTY = #{arvqty,jdbcType=NUMERIC},
+      </if>
+      <if test="arvamt != null" >
+        ARVAMT = #{arvamt,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvqaqty != null" >
+        RCVQAQTY = #{rcvqaqty,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvqaamt != null" >
+        RCVQAAMT = #{rcvqaamt,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvqty != null" >
+        RCVQTY = #{rcvqty,jdbcType=NUMERIC},
+      </if>
+      <if test="rcvamt != null" >
+        RCVAMT = #{rcvamt,jdbcType=NUMERIC},
+      </if>
+      <if test="putqty != null" >
+        PUTQTY = #{putqty,jdbcType=NUMERIC},
+      </if>
+      <if test="putamt != null" >
+        PUTAMT = #{putamt,jdbcType=NUMERIC},
+      </if>
+      <if test="ordqty != null" >
+        ORDQTY = #{ordqty,jdbcType=NUMERIC},
+      </if>
+      <if test="ordamt != null" >
+        ORDAMT = #{ordamt,jdbcType=NUMERIC},
+      </if>
+      <if test="picalcqty != null" >
+        PICALCQTY = #{picalcqty,jdbcType=NUMERIC},
+      </if>
+      <if test="picalcamt != null" >
+        PICALCAMT = #{picalcamt,jdbcType=NUMERIC},
+      </if>
+      <if test="picqty != null" >
+        PICQTY = #{picqty,jdbcType=NUMERIC},
+      </if>
+      <if test="picamt != null" >
+        PICAMT = #{picamt,jdbcType=NUMERIC},
+      </if>
+      <if test="sorqty != null" >
+        SORQTY = #{sorqty,jdbcType=NUMERIC},
+      </if>
+      <if test="soramt != null" >
+        SORAMT = #{soramt,jdbcType=NUMERIC},
+      </if>
+      <if test="pckqty != null" >
+        PCKQTY = #{pckqty,jdbcType=NUMERIC},
+      </if>
+      <if test="pckamt != null" >
+        PCKAMT = #{pckamt,jdbcType=NUMERIC},
+      </if>
+      <if test="shpqaqty != null" >
+        SHPQAQTY = #{shpqaqty,jdbcType=NUMERIC},
+      </if>
+      <if test="shpqaamt != null" >
+        SHPQAAMT = #{shpqaamt,jdbcType=NUMERIC},
+      </if>
+      <if test="shpasnqty != null" >
+        SHPASNQTY = #{shpasnqty,jdbcType=NUMERIC},
+      </if>
+      <if test="shpasnamt != null" >
+        SHPASNAMT = #{shpasnamt,jdbcType=NUMERIC},
+      </if>
+      <if test="shpqty != null" >
+        SHPQTY = #{shpqty,jdbcType=NUMERIC},
+      </if>
+      <if test="shpamt != null" >
+        SHPAMT = #{shpamt,jdbcType=NUMERIC},
+      </if>
+      <if test="dlvqty != null" >
+        DLVQTY = #{dlvqty,jdbcType=NUMERIC},
+      </if>
+      <if test="dlvamt != null" >
+        DLVAMT = #{dlvamt,jdbcType=NUMERIC},
+      </if>
+      <if test="payqty != null" >
+        PAYQTY = #{payqty,jdbcType=NUMERIC},
+      </if>
+      <if test="payamt != null" >
+        PAYAMT = #{payamt,jdbcType=NUMERIC},
+      </if>
+      <if test="issusr != null" >
+        ISSUSR = #{issusr,jdbcType=VARCHAR},
+      </if>
+      <if test="issdt != null" >
+        ISSDT = #{issdt,jdbcType=VARCHAR},
+      </if>
+      <if test="apvusr != null" >
+        APVUSR = #{apvusr,jdbcType=VARCHAR},
+      </if>
+      <if test="apvdt != null" >
+        APVDT = #{apvdt,jdbcType=VARCHAR},
+      </if>
+      <if test="purusr != null" >
+        PURUSR = #{purusr,jdbcType=VARCHAR},
+      </if>
+      <if test="purdt != null" >
+        PURDT = #{purdt,jdbcType=VARCHAR},
+      </if>
+      <if test="purokdt != null" >
+        PUROKDT = #{purokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvasnusr != null" >
+        RCVASNUSR = #{rcvasnusr,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvasndt != null" >
+        RCVASNDT = #{rcvasndt,jdbcType=VARCHAR},
+      </if>
+      <if test="arvusr != null" >
+        ARVUSR = #{arvusr,jdbcType=VARCHAR},
+      </if>
+      <if test="arvdt != null" >
+        ARVDT = #{arvdt,jdbcType=VARCHAR},
+      </if>
+      <if test="arvokdt != null" >
+        ARVOKDT = #{arvokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvqausr != null" >
+        RCVQAUSR = #{rcvqausr,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvqadt != null" >
+        RCVQADT = #{rcvqadt,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvqaokdt != null" >
+        RCVQAOKDT = #{rcvqaokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvusr != null" >
+        RCVUSR = #{rcvusr,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvdt != null" >
+        RCVDT = #{rcvdt,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvokdt != null" >
+        RCVOKDT = #{rcvokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="putusr != null" >
+        PUTUSR = #{putusr,jdbcType=VARCHAR},
+      </if>
+      <if test="putdt != null" >
+        PUTDT = #{putdt,jdbcType=VARCHAR},
+      </if>
+      <if test="putokdt != null" >
+        PUTOKDT = #{putokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="ordusr != null" >
+        ORDUSR = #{ordusr,jdbcType=VARCHAR},
+      </if>
+      <if test="orddt != null" >
+        ORDDT = #{orddt,jdbcType=VARCHAR},
+      </if>
+      <if test="ordokdt != null" >
+        ORDOKDT = #{ordokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="picalcusr != null" >
+        PICALCUSR = #{picalcusr,jdbcType=VARCHAR},
+      </if>
+      <if test="picalcdt != null" >
+        PICALCDT = #{picalcdt,jdbcType=VARCHAR},
+      </if>
+      <if test="picusr != null" >
+        PICUSR = #{picusr,jdbcType=VARCHAR},
+      </if>
+      <if test="picdt != null" >
+        PICDT = #{picdt,jdbcType=VARCHAR},
+      </if>
+      <if test="picokdt != null" >
+        PICOKDT = #{picokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="sorusr != null" >
+        SORUSR = #{sorusr,jdbcType=VARCHAR},
+      </if>
+      <if test="sordt != null" >
+        SORDT = #{sordt,jdbcType=VARCHAR},
+      </if>
+      <if test="sorokdt != null" >
+        SOROKDT = #{sorokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="pckusr != null" >
+        PCKUSR = #{pckusr,jdbcType=VARCHAR},
+      </if>
+      <if test="pckdt != null" >
+        PCKDT = #{pckdt,jdbcType=VARCHAR},
+      </if>
+      <if test="pckokdt != null" >
+        PCKOKDT = #{pckokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="shpqausr != null" >
+        SHPQAUSR = #{shpqausr,jdbcType=VARCHAR},
+      </if>
+      <if test="shpqadt != null" >
+        SHPQADT = #{shpqadt,jdbcType=VARCHAR},
+      </if>
+      <if test="shpqaokdt != null" >
+        SHPQAOKDT = #{shpqaokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="shpasnusr != null" >
+        SHPASNUSR = #{shpasnusr,jdbcType=VARCHAR},
+      </if>
+      <if test="shpasndt != null" >
+        SHPASNDT = #{shpasndt,jdbcType=VARCHAR},
+      </if>
+      <if test="shpusr != null" >
+        SHPUSR = #{shpusr,jdbcType=VARCHAR},
+      </if>
+      <if test="shpdt != null" >
+        SHPDT = #{shpdt,jdbcType=VARCHAR},
+      </if>
+      <if test="shpokdt != null" >
+        SHPOKDT = #{shpokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="dlvsetusr != null" >
+        DLVSETUSR = #{dlvsetusr,jdbcType=VARCHAR},
+      </if>
+      <if test="dlvsetdt != null" >
+        DLVSETDT = #{dlvsetdt,jdbcType=VARCHAR},
+      </if>
+      <if test="dlvusr != null" >
+        DLVUSR = #{dlvusr,jdbcType=VARCHAR},
+      </if>
+      <if test="dlvdt != null" >
+        DLVDT = #{dlvdt,jdbcType=VARCHAR},
+      </if>
+      <if test="dlvokdt != null" >
+        DLVOKDT = #{dlvokdt,jdbcType=VARCHAR},
+      </if>
+      <if test="paysetusr != null" >
+        PAYSETUSR = #{paysetusr,jdbcType=VARCHAR},
+      </if>
+      <if test="paysetdt != null" >
+        PAYSETDT = #{paysetdt,jdbcType=VARCHAR},
+      </if>
+      <if test="payusr != null" >
+        PAYUSR = #{payusr,jdbcType=VARCHAR},
+      </if>
+      <if test="paydt != null" >
+        PAYDT = #{paydt,jdbcType=VARCHAR},
+      </if>
+      <if test="clsusr != null" >
+        CLSUSR = #{clsusr,jdbcType=VARCHAR},
+      </if>
+      <if test="clsdt != null" >
+        CLSDT = #{clsdt,jdbcType=VARCHAR},
+      </if>
+      <if test="hldusr != null" >
+        HLDUSR = #{hldusr,jdbcType=VARCHAR},
+      </if>
+      <if test="hlddt != null" >
+        HLDDT = #{hlddt,jdbcType=VARCHAR},
+      </if>
+      <if test="delusr != null" >
+        DELUSR = #{delusr,jdbcType=VARCHAR},
+      </if>
+      <if test="deldt != null" >
+        DELDT = #{deldt,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null" >
+        STS = #{sts,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        EXT1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        EXT2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        EXT3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="rmk != null" >
+        RMK = #{rmk,jdbcType=VARCHAR},
+      </if>
+      <if test="chgusr != null" >
+        CHGUSR = #{chgusr,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        CHGDT = #{chgdt,jdbcType=VARCHAR},
+      </if>
+      <if test="castot != null" >
+        CASTOT = #{castot,jdbcType=NUMERIC},
+      </if>
+      <if test="notes != null" >
+        NOTES = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="caslbl != null" >
+        CASLBL = #{caslbl,jdbcType=VARCHAR},
+      </if>
+      <if test="equwh != null" >
+        EQUWH = #{equwh,jdbcType=VARCHAR},
+      </if>
+      <if test="equtyp != null" >
+        EQUTYP = #{equtyp,jdbcType=VARCHAR},
+      </if>
+      <if test="salrtn != null" >
+        SALRTN = #{salrtn,jdbcType=VARCHAR},
+      </if>
+      <if test="temid != null" >
+        TEMID = #{temid,jdbcType=VARCHAR},
+      </if>
+      <if test="teamnme != null" >
+        TEAMNME = #{teamnme,jdbcType=VARCHAR},
+      </if>
+      <if test="teamqty != null" >
+        TEAMQTY = #{teamqty,jdbcType=NUMERIC},
+      </if>
+      <if test="temscnnme != null" >
+        TEMSCNNME = #{temscnnme,jdbcType=VARCHAR},
+      </if>
+      <if test="temsorid != null" >
+        TEMSORID = #{temsorid,jdbcType=VARCHAR},
+      </if>
+      <if test="temsornme != null" >
+        TEMSORNME = #{temsornme,jdbcType=VARCHAR},
+      </if>
+      <if test="shphold != null" >
+        SHPHOLD = #{shphold,jdbcType=VARCHAR},
+      </if>
+      <if test="inputPort != null" >
+        INPUT_PORT = #{inputPort,jdbcType=VARCHAR},
+      </if>
+      <if test="pascaseid != null" >
+        PASCASEID = #{pascaseid,jdbcType=VARCHAR},
+      </if>
+      <if test="pasgateid != null" >
+        PASGATEID = #{pasgateid,jdbcType=VARCHAR},
+      </if>
+      <if test="pasgateusr != null" >
+        PASGATEUSR = #{pasgateusr,jdbcType=VARCHAR},
+      </if>
+      <if test="pasgateusrnme != null" >
+        PASGATEUSRNME = #{pasgateusrnme,jdbcType=VARCHAR},
+      </if>
+      <if test="skuspc != null" >
+        SKUSPC = #{skuspc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PKID = #{pkid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.wes.SalTbShpcd" >
+    update SAL_TB_SHPCD
+    set COID = #{coid,jdbcType=VARCHAR},
+      DOCID = #{docid,jdbcType=VARCHAR},
+      DOCIDSRC = #{docidsrc,jdbcType=VARCHAR},
+      DOCIDEX = #{docidex,jdbcType=VARCHAR},
+      DOCTYP = #{doctyp,jdbcType=VARCHAR},
+      DOCRNK = #{docrnk,jdbcType=VARCHAR},
+      CUSID = #{cusid,jdbcType=VARCHAR},
+      SUPID = #{supid,jdbcType=VARCHAR},
+      DEPID = #{depid,jdbcType=VARCHAR},
+      PRJID = #{prjid,jdbcType=VARCHAR},
+      SALNME = #{salnme,jdbcType=VARCHAR},
+      WHID = #{whid,jdbcType=VARCHAR},
+      DATTORCV = #{dattorcv,jdbcType=VARCHAR},
+      SHPPCK = #{shppck,jdbcType=VARCHAR},
+      CASCNT = #{cascnt,jdbcType=NUMERIC},
+      IFXDCK = #{ifxdck,jdbcType=VARCHAR},
+      DOCIDXDCK = #{docidxdck,jdbcType=VARCHAR},
+      SKUSN = #{skusn,jdbcType=NUMERIC},
+      SKUID = #{skuid,jdbcType=VARCHAR},
+      SKUIDEXT = #{skuidext,jdbcType=VARCHAR},
+      SKUIDEX = #{skuidex,jdbcType=VARCHAR},
+      SKUBAR = #{skubar,jdbcType=VARCHAR},
+      SKUISBN = #{skuisbn,jdbcType=VARCHAR},
+      SKUFNM = #{skufnm,jdbcType=VARCHAR},
+      LOZID = #{lozid,jdbcType=VARCHAR},
+      AILID = #{ailid,jdbcType=VARCHAR},
+      LOCID = #{locid,jdbcType=VARCHAR},
+      TAGID = #{tagid,jdbcType=VARCHAR},
+      CASID = #{casid,jdbcType=VARCHAR},
+      CASBAR = #{casbar,jdbcType=VARCHAR},
+      TRDDIS = #{trddis,jdbcType=NUMERIC},
+      CSHDIS = #{cshdis,jdbcType=NUMERIC},
+      ORDUOM = #{orduom,jdbcType=VARCHAR},
+      ORDPRI = #{ordpri,jdbcType=NUMERIC},
+      SHPUOM = #{shpuom,jdbcType=VARCHAR},
+      SHPPRI = #{shppri,jdbcType=NUMERIC},
+      PURQTY = #{purqty,jdbcType=NUMERIC},
+      PURAMT = #{puramt,jdbcType=NUMERIC},
+      RCVASNQTY = #{rcvasnqty,jdbcType=NUMERIC},
+      RCVASNAMT = #{rcvasnamt,jdbcType=NUMERIC},
+      ARVQTY = #{arvqty,jdbcType=NUMERIC},
+      ARVAMT = #{arvamt,jdbcType=NUMERIC},
+      RCVQAQTY = #{rcvqaqty,jdbcType=NUMERIC},
+      RCVQAAMT = #{rcvqaamt,jdbcType=NUMERIC},
+      RCVQTY = #{rcvqty,jdbcType=NUMERIC},
+      RCVAMT = #{rcvamt,jdbcType=NUMERIC},
+      PUTQTY = #{putqty,jdbcType=NUMERIC},
+      PUTAMT = #{putamt,jdbcType=NUMERIC},
+      ORDQTY = #{ordqty,jdbcType=NUMERIC},
+      ORDAMT = #{ordamt,jdbcType=NUMERIC},
+      PICALCQTY = #{picalcqty,jdbcType=NUMERIC},
+      PICALCAMT = #{picalcamt,jdbcType=NUMERIC},
+      PICQTY = #{picqty,jdbcType=NUMERIC},
+      PICAMT = #{picamt,jdbcType=NUMERIC},
+      SORQTY = #{sorqty,jdbcType=NUMERIC},
+      SORAMT = #{soramt,jdbcType=NUMERIC},
+      PCKQTY = #{pckqty,jdbcType=NUMERIC},
+      PCKAMT = #{pckamt,jdbcType=NUMERIC},
+      SHPQAQTY = #{shpqaqty,jdbcType=NUMERIC},
+      SHPQAAMT = #{shpqaamt,jdbcType=NUMERIC},
+      SHPASNQTY = #{shpasnqty,jdbcType=NUMERIC},
+      SHPASNAMT = #{shpasnamt,jdbcType=NUMERIC},
+      SHPQTY = #{shpqty,jdbcType=NUMERIC},
+      SHPAMT = #{shpamt,jdbcType=NUMERIC},
+      DLVQTY = #{dlvqty,jdbcType=NUMERIC},
+      DLVAMT = #{dlvamt,jdbcType=NUMERIC},
+      PAYQTY = #{payqty,jdbcType=NUMERIC},
+      PAYAMT = #{payamt,jdbcType=NUMERIC},
+      ISSUSR = #{issusr,jdbcType=VARCHAR},
+      ISSDT = #{issdt,jdbcType=VARCHAR},
+      APVUSR = #{apvusr,jdbcType=VARCHAR},
+      APVDT = #{apvdt,jdbcType=VARCHAR},
+      PURUSR = #{purusr,jdbcType=VARCHAR},
+      PURDT = #{purdt,jdbcType=VARCHAR},
+      PUROKDT = #{purokdt,jdbcType=VARCHAR},
+      RCVASNUSR = #{rcvasnusr,jdbcType=VARCHAR},
+      RCVASNDT = #{rcvasndt,jdbcType=VARCHAR},
+      ARVUSR = #{arvusr,jdbcType=VARCHAR},
+      ARVDT = #{arvdt,jdbcType=VARCHAR},
+      ARVOKDT = #{arvokdt,jdbcType=VARCHAR},
+      RCVQAUSR = #{rcvqausr,jdbcType=VARCHAR},
+      RCVQADT = #{rcvqadt,jdbcType=VARCHAR},
+      RCVQAOKDT = #{rcvqaokdt,jdbcType=VARCHAR},
+      RCVUSR = #{rcvusr,jdbcType=VARCHAR},
+      RCVDT = #{rcvdt,jdbcType=VARCHAR},
+      RCVOKDT = #{rcvokdt,jdbcType=VARCHAR},
+      PUTUSR = #{putusr,jdbcType=VARCHAR},
+      PUTDT = #{putdt,jdbcType=VARCHAR},
+      PUTOKDT = #{putokdt,jdbcType=VARCHAR},
+      ORDUSR = #{ordusr,jdbcType=VARCHAR},
+      ORDDT = #{orddt,jdbcType=VARCHAR},
+      ORDOKDT = #{ordokdt,jdbcType=VARCHAR},
+      PICALCUSR = #{picalcusr,jdbcType=VARCHAR},
+      PICALCDT = #{picalcdt,jdbcType=VARCHAR},
+      PICUSR = #{picusr,jdbcType=VARCHAR},
+      PICDT = #{picdt,jdbcType=VARCHAR},
+      PICOKDT = #{picokdt,jdbcType=VARCHAR},
+      SORUSR = #{sorusr,jdbcType=VARCHAR},
+      SORDT = #{sordt,jdbcType=VARCHAR},
+      SOROKDT = #{sorokdt,jdbcType=VARCHAR},
+      PCKUSR = #{pckusr,jdbcType=VARCHAR},
+      PCKDT = #{pckdt,jdbcType=VARCHAR},
+      PCKOKDT = #{pckokdt,jdbcType=VARCHAR},
+      SHPQAUSR = #{shpqausr,jdbcType=VARCHAR},
+      SHPQADT = #{shpqadt,jdbcType=VARCHAR},
+      SHPQAOKDT = #{shpqaokdt,jdbcType=VARCHAR},
+      SHPASNUSR = #{shpasnusr,jdbcType=VARCHAR},
+      SHPASNDT = #{shpasndt,jdbcType=VARCHAR},
+      SHPUSR = #{shpusr,jdbcType=VARCHAR},
+      SHPDT = #{shpdt,jdbcType=VARCHAR},
+      SHPOKDT = #{shpokdt,jdbcType=VARCHAR},
+      DLVSETUSR = #{dlvsetusr,jdbcType=VARCHAR},
+      DLVSETDT = #{dlvsetdt,jdbcType=VARCHAR},
+      DLVUSR = #{dlvusr,jdbcType=VARCHAR},
+      DLVDT = #{dlvdt,jdbcType=VARCHAR},
+      DLVOKDT = #{dlvokdt,jdbcType=VARCHAR},
+      PAYSETUSR = #{paysetusr,jdbcType=VARCHAR},
+      PAYSETDT = #{paysetdt,jdbcType=VARCHAR},
+      PAYUSR = #{payusr,jdbcType=VARCHAR},
+      PAYDT = #{paydt,jdbcType=VARCHAR},
+      CLSUSR = #{clsusr,jdbcType=VARCHAR},
+      CLSDT = #{clsdt,jdbcType=VARCHAR},
+      HLDUSR = #{hldusr,jdbcType=VARCHAR},
+      HLDDT = #{hlddt,jdbcType=VARCHAR},
+      DELUSR = #{delusr,jdbcType=VARCHAR},
+      DELDT = #{deldt,jdbcType=VARCHAR},
+      STS = #{sts,jdbcType=VARCHAR},
+      EXT1 = #{ext1,jdbcType=VARCHAR},
+      EXT2 = #{ext2,jdbcType=VARCHAR},
+      EXT3 = #{ext3,jdbcType=VARCHAR},
+      RMK = #{rmk,jdbcType=VARCHAR},
+      CHGUSR = #{chgusr,jdbcType=VARCHAR},
+      CHGDT = #{chgdt,jdbcType=VARCHAR},
+      CASTOT = #{castot,jdbcType=NUMERIC},
+      NOTES = #{notes,jdbcType=VARCHAR},
+      CASLBL = #{caslbl,jdbcType=VARCHAR},
+      EQUWH = #{equwh,jdbcType=VARCHAR},
+      EQUTYP = #{equtyp,jdbcType=VARCHAR},
+      SALRTN = #{salrtn,jdbcType=VARCHAR},
+      TEMID = #{temid,jdbcType=VARCHAR},
+      TEAMNME = #{teamnme,jdbcType=VARCHAR},
+      TEAMQTY = #{teamqty,jdbcType=NUMERIC},
+      TEMSCNNME = #{temscnnme,jdbcType=VARCHAR},
+      TEMSORID = #{temsorid,jdbcType=VARCHAR},
+      TEMSORNME = #{temsornme,jdbcType=VARCHAR},
+      SHPHOLD = #{shphold,jdbcType=VARCHAR},
+      INPUT_PORT = #{inputPort,jdbcType=VARCHAR},
+      PASCASEID = #{pascaseid,jdbcType=VARCHAR},
+      PASGATEID = #{pasgateid,jdbcType=VARCHAR},
+      PASGATEUSR = #{pasgateusr,jdbcType=VARCHAR},
+      PASGATEUSRNME = #{pasgateusrnme,jdbcType=VARCHAR},
+      SKUSPC = #{skuspc,jdbcType=VARCHAR}
+    where PKID = #{pkid,jdbcType=INTEGER}
+  </update>
+  <select id="bx" parameterType="com.management.vo.salTbShpcd.BxVo" resultType="com.management.vo.salTbShpcd.BxVo">
+select sts,caslbl,docid,skubar,skufnm,docidsrc from sal_tb_shpcd where docid
+ like '0000'+#{docid}+'%' and caslbl =''
+    </select>
+</mapper>

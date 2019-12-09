@@ -27,6 +27,7 @@ public class CustomSqlSessionTemplate extends SqlSessionTemplate {
     private Map<Object, SqlSessionFactory> targetSqlSessionFactorys;
     private SqlSessionFactory defaultTargetSqlSessionFactory;
 
+
     public void setTargetSqlSessionFactorys(Map<Object, SqlSessionFactory> targetSqlSessionFactorys) {
         this.targetSqlSessionFactorys = targetSqlSessionFactorys;
     }
