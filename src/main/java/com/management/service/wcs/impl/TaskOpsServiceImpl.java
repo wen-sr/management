@@ -1,5 +1,6 @@
 package com.management.service.wcs.impl;
 
+import com.management.common.ServerResponse;
 import com.management.dao.wcs.TaskOpsMapper;
 import com.management.pojo.wcs.TaskOps;
 import com.management.service.wcs.ITaskOpsService;
@@ -25,5 +26,13 @@ public class TaskOpsServiceImpl implements ITaskOpsService {
     public List<TaskOps> selectByConnbr(String connbr) {
         DataSourceContextHolder. setDbType(DataSourceContextHolder.SESSION_FACTORY_WCS);
         return taskOpsMapper.selectByConnbr(connbr);
+    }
+
+    @Override
+    public ServerResponse getTaskOpsData(TaskOps taskOps) {
+        DataSourceContextHolder.setDbType(DataSourceContextHolder.SESSION_FACTORY_WCS);
+        List<TaskOps> taskOPSList = taskOpsMapper.getTaskOpsData(taskOps);
+        return ServerResponse.createBySuccess("查询成功", taskOPSList);
+
     }
 }

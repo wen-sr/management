@@ -1,5 +1,6 @@
 package com.management.service.wcs;
 
+import com.management.common.ServerResponse;
 import com.management.pojo.wcs.TaskWms;
 
 import java.util.List;
@@ -12,4 +13,7 @@ import java.util.List;
  */
 public interface ITaskWmsService {
     List<TaskWms> selectByConnbr(String connbr);
+    /**************ganhong*****************/
+    ServerResponse getTaskWmsData(TaskWms taskWms);
+    /**************ganhong*****************/
 }

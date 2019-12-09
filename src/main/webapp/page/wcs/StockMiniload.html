@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WCS查询</title>
+    <style>
+        ul li {
+            list-style:none;
+            float:left;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2 style="background-color: white;font-family: 'Adobe 宋体 Std L';color: black;width: 512px; height: 30px">查询箱子所在货位</h2>
+<div>
+    箱号：<input id="containerCodeTmp" type="text" >
+    <input type="button" value="查询" onclick="queryInfo()">
+
+</div>
+</div>
+<div id="detail">
+</div>
+<h2 style="background-color: white;font-family: 'Adobe 宋体 Std L';color: black;width: 512px; height: 30px">通过货位查询箱子</h2>
+<div>
+    库号：<input id="bankId" type="text">
+    所在层：<input id="bankLayer" type="text">
+    储位：<input id="bankColumn" type="text">
+    <input type="button" value="查询" onclick="queryInfo1()">
+</div>
+<div id="detail1">
+</div>
+<h2 style="background-color: white;font-family: 'Adobe 宋体 Std L';color: black;width: 512px; height: 30px">箱式库剩余储位</h2>
+<div>
+    <input type="checkbox" name="bank" id="selectAll">  全选
+    <input type="checkbox" name="bank" id="bankId1">  1号库
+    <input type="checkbox" name="bank" id="bankId2">  2号库
+    <input type="checkbox" name="bank" id="bankId3">  3号库
+    <input type="checkbox" name="bank" id="bankId4">  4号库
+    <input type="checkbox" name="bank" id="bankId5">  5号库
+    <input type="checkbox" name="bank" id="bankId6">  6号库
+    <input type="checkbox" name="bank" id="bankId7">  7号库
+    <input type="checkbox" name="bank" id="bankId8">  8号库
+    <input type="checkbox" name="bank" id="bankId9">  9号库
+    <input type="checkbox" name="bank" id="bankId10"> 10号库
+    <input type="button" value="查询" onclick="queryInfo2()">
+</div>
+<div id="detail2">
+</div>
+<div id="detail6">
+</div>
+<div id="detail7">
+</div>
+</div>
+<h2 style="background-color: white;font-family: 'Adobe 宋体 Std L';color: black;width: 512px; height: 30px">路顺库剩余储位</h2>
+<div>
+    <div>
+        <input type="checkbox" name="bank1" id="selectAll1">  全选
+        <input type="checkbox" name="bank1" id="bankId11">  11号库
+        <input type="checkbox" name="bank1" id="bankId12">  12号库
+        <input type="button" value="查询" onclick="queryInfo3()">
+    </div>
+    <div id="detail3">
+    </div>
+    <div id="detail8">
+    </div>
+    <div id="detail9">
+    </div>
+    <h2 style="background-color: white;font-family: 'Adobe 宋体 Std L';color: black;width: 512px; height: 30px">查询OPS任务表</h2>
+    <div>
+        箱号：<input id="connbr" type="text" >
+        <input type="button" value="查询" onclick="queryInfo4()">
+
+    </div>
+</div>
+<div id="detail4">
+</div>
+<h2 style="background-color: white;font-family: 'Adobe 宋体 Std L';color: black;width: 512px; height: 30px">查询WMS任务表</h2>
+<div>
+    箱号：<input id="connbr1" type="text" >
+    <input type="button" value="查询" onclick="queryInfo5()">
+
+</div>
+</div>
+<div id="detail5">
+</div>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/util.js"></script>
+<script type="text/javascript" src="../../js/hogan.js"></script>
+<script type="text/javascript" src="StockMiniload.js"></script>
+</body>
+</html>
