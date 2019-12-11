@@ -261,6 +261,73 @@
     </bean>
 
 
+    <bean id="dataSource_transit" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${db.driverClassName}"/>
+        <property name="url" value="${transit.url}"/>
+        <property name="username" value="${transit.username}"/>
+        <property name="password" value="${transit.password}"/>
+        <!-- 连接池启动时的初始值 -->
+        <property name="initialSize" value="${db.initialSize}"/>
+        <!-- 连接池的最大值 -->
+        <property name="maxActive" value="${db.maxActive}"/>
+        <!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 -->
+        <property name="maxIdle" value="${db.maxIdle}"/>
+        <!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
+        <property name="minIdle" value="${db.minIdle}"/>
+        <!-- 最大建立连接等待时间。如果超过此时间将接到异常。设为－1表示无限制 -->
+        <property name="maxWait" value="${db.maxWait}"/>
+        <!--#给出一条简单的sql语句进行验证 -->
+        <!--<property name="validationQuery" value="select getdate()" />-->
+        <property name="defaultAutoCommit" value="${db.defaultAutoCommit}"/>
+        <!--回收被遗弃的（一般是忘了释放的）数据库连接到连接池中-->
+        <property name="removeAbandoned" value="true" />
+        <!--数据库连接过多长时间不用将被视为被遗弃而收回连接池中-->
+        <property name="removeAbandonedTimeout" value="120" />
+        <!-- #连接的超时时间，默认为半小时。 -->
+        <property name="minEvictableIdleTimeMillis" value="${db.minEvictableIdleTimeMillis}"/>
+
+        <!--# 失效检查线程运行时间间隔，要小于MySQL默认-->
+        <property name="timeBetweenEvictionRunsMillis" value="40000"/>
+        <!--# 检查连接是否有效-->
+        <property name="testWhileIdle" value="true"/>
+        <!--# 检查连接有效性的SQL语句-->
+        <property name="validationQuery" value="SELECT getdate()"/>
+    </bean>
+
+    <bean id="dataSource_ops" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${db.driverClassName}"/>
+        <property name="url" value="${ops.url}"/>
+        <property name="username" value="${ops.username}"/>
+        <property name="password" value="${ops.password}"/>
+        <!-- 连接池启动时的初始值 -->
+        <property name="initialSize" value="${db.initialSize}"/>
+        <!-- 连接池的最大值 -->
+        <property name="maxActive" value="${db.maxActive}"/>
+        <!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 -->
+        <property name="maxIdle" value="${db.maxIdle}"/>
+        <!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
+        <property name="minIdle" value="${db.minIdle}"/>
+        <!-- 最大建立连接等待时间。如果超过此时间将接到异常。设为－1表示无限制 -->
+        <property name="maxWait" value="${db.maxWait}"/>
+        <!--#给出一条简单的sql语句进行验证 -->
+        <!--<property name="validationQuery" value="select getdate()" />-->
+        <property name="defaultAutoCommit" value="${db.defaultAutoCommit}"/>
+        <!--回收被遗弃的（一般是忘了释放的）数据库连接到连接池中-->
+        <property name="removeAbandoned" value="true" />
+        <!--数据库连接过多长时间不用将被视为被遗弃而收回连接池中-->
+        <property name="removeAbandonedTimeout" value="120" />
+        <!-- #连接的超时时间，默认为半小时。 -->
+        <property name="minEvictableIdleTimeMillis" value="${db.minEvictableIdleTimeMillis}"/>
+
+        <!--# 失效检查线程运行时间间隔，要小于MySQL默认-->
+        <property name="timeBetweenEvictionRunsMillis" value="40000"/>
+        <!--# 检查连接是否有效-->
+        <property name="testWhileIdle" value="true"/>
+        <!--# 检查连接有效性的SQL语句-->
+        <property name="validationQuery" value="SELECT getdate()"/>
+    </bean>
+
+
     <bean id ="dataSource" class= "com.management.util.DynamicDataSource" >
         <property name ="targetDataSources">
             <map key-type ="java.lang.String">
@@ -271,6 +338,8 @@
                 <entry value-ref ="dataSource_jxlh56" key= "dataSource_jxlh56"/>
                 <entry value-ref ="dataSource_liku" key= "dataSource_liku"/>
                 <entry value-ref ="dataSource_wes" key= "dataSource_wes"/>
+                <entry value-ref ="dataSource_transit" key= "dataSource_transit"/>
+                <entry value-ref ="dataSource_ops" key= "dataSource_ops"/>
             </map >
         </property >
         <property name ="defaultTargetDataSource" ref= "dataSource_xh"/>      <!-- 默认使用ds1的数据源 -->
@@ -416,6 +485,45 @@
         </property>
     </bean>
 
+
+    <bean id="sqlSessionFactory_transit" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource_transit"/>
+        <!-- 指定mybatis 的配置文件 -->
+        <!--<property name ="configLocation" value= "classpath:mybatis-config.xml" />-->
+        <property name="mapperLocations" value="classpath*:com/management/dao/**/*Mapper.xml"></property>
+        <!-- 分页插件 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=sqlserver
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="sqlSessionFactory_ops" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource_ops"/>
+        <!-- 指定mybatis 的配置文件 -->
+        <!--<property name ="configLocation" value= "classpath:mybatis-config.xml" />-->
+        <property name="mapperLocations" value="classpath*:com/management/dao/**/*Mapper.xml"></property>
+        <!-- 分页插件 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=sqlserver
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
     <!-- 配置自定义的SqlSessionTemplate模板，注入相关配置 -->
     <bean id="sqlSessionTemplate" class="com.management.util.CustomSqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory_xh" />
@@ -428,6 +536,8 @@
                 <entry value-ref="sqlSessionFactory_jxlh56" key="jxlh56"/>
                 <entry value-ref="sqlSessionFactory_liku" key="liku"/>
                 <entry value-ref="sqlSessionFactory_wes" key="wes"/>
+                <entry value-ref="sqlSessionFactory_transit" key="transit"/>
+                <entry value-ref="sqlSessionFactory_ops" key="ops"/>
             </map>
         </property>
     </bean>
@@ -494,4 +604,22 @@
     </bean>
     <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->
     <tx:annotation-driven transaction-manager="transactionManager_wes" proxy-target-class="true" />
+    <!--&lt;!&ndash; 事务管理 &ndash;&gt;-->
+    <bean id="transactionManager_transit" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource_transit"/>
+        <property name="rollbackOnCommitFailure" value="true"/>
+    </bean>
+    <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->
+    <tx:annotation-driven transaction-manager="transactionManager_transit" proxy-target-class="true" />
+
+    <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->
+    <tx:annotation-driven transaction-manager="transactionManager_wcs" proxy-target-class="true" />
+    <!-- 事务管理 -->
+    <bean id="transactionManager_ops" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource_ops"/>
+        <property name="rollbackOnCommitFailure" value="true"/>
+    </bean>
+    <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->
+    <tx:annotation-driven transaction-manager="transactionManager_ops" proxy-target-class="true" />
+
 </beans>

@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.TaskDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.TaskDetail" >
+    <constructor >
+      <idArg column="TASKDETAILKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SERIALKEY" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="WHSEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASKTYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STORERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKU" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UOM" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UOMQTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="QTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="FROMLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOGICALFROMLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FROMID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TOLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOGICALTOLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TOID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKMETHOD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUSMSG" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PRIORITY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SOURCEPRIORITY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HOLDKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USERPOSITION" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="USERKEYOVERRIDE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STARTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ENDTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="SOURCETYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SOURCEKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKDETAILKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDERLINENUMBER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LISTKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="WAVEKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REASONKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MESSAGE01" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MESSAGE02" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MESSAGE03" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FINALTOLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RELEASEDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="OPTBATCHID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPTTASKSEQUENCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPTREPLENISHMENTUOM" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPTQTYLOCMINIMUM" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="OPTLOCATIONTYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPTQTYLOCLIMIT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="SEQNO" jdbcType="DECIMAL" javaType="java.lang.Integer" />
+      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ADDWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EDITWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOOR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ROUTE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STOP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PUTAWAYZONE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BOXNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICK_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="PICK_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CC_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QTY01" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="QTY02" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="QTY03" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="PUTAWAY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="PUTAWAY_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LETTER_BOX_FLAG" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SEAL_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SEAL_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="PACKKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TASKDETAILKEY, SERIALKEY, WHSEID, TASKTYPE, STORERKEY, SKU, LOT, UOM, UOMQTY, QTY, 
+    FROMLOC, LOGICALFROMLOC, FROMID, TOLOC, LOGICALTOLOC, TOID, CASEID, PICKMETHOD, STATUS, 
+    STATUSMSG, PRIORITY, SOURCEPRIORITY, HOLDKEY, USERKEY, USERPOSITION, USERKEYOVERRIDE, 
+    STARTTIME, ENDTIME, SOURCETYPE, SOURCEKEY, PICKDETAILKEY, ORDERKEY, ORDERLINENUMBER, 
+    LISTKEY, WAVEKEY, REASONKEY, MESSAGE01, MESSAGE02, MESSAGE03, FINALTOLOC, RELEASEDATE, 
+    OPTBATCHID, OPTTASKSEQUENCE, OPTREPLENISHMENTUOM, OPTQTYLOCMINIMUM, OPTLOCATIONTYPE, 
+    OPTQTYLOCLIMIT, SEQNO, ADDDATE, ADDWHO, EDITDATE, EDITWHO, DOOR, ROUTE, STOP, PUTAWAYZONE, 
+    BOXNO, PICKNO, PICK_DATE, PICK_USER, CC_TYPE, QTY01, QTY02, QTY03, PUTAWAY_DATE, 
+    PUTAWAY_USER, LETTER_BOX_FLAG, SEAL_USER, SEAL_DATE, PACKKEY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TASKDETAIL
+    where TASKDETAILKEY = #{taskdetailkey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TASKDETAIL
+    where TASKDETAILKEY = #{taskdetailkey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.report.TaskDetail" >
+    insert into TASKDETAIL (TASKDETAILKEY, SERIALKEY, WHSEID, 
+      TASKTYPE, STORERKEY, SKU, 
+      LOT, UOM, UOMQTY, QTY, 
+      FROMLOC, LOGICALFROMLOC, FROMID, 
+      TOLOC, LOGICALTOLOC, TOID, 
+      CASEID, PICKMETHOD, STATUS, 
+      STATUSMSG, PRIORITY, SOURCEPRIORITY, 
+      HOLDKEY, USERKEY, USERPOSITION, 
+      USERKEYOVERRIDE, STARTTIME, ENDTIME, 
+      SOURCETYPE, SOURCEKEY, PICKDETAILKEY, 
+      ORDERKEY, ORDERLINENUMBER, LISTKEY, 
+      WAVEKEY, REASONKEY, MESSAGE01, 
+      MESSAGE02, MESSAGE03, FINALTOLOC, 
+      RELEASEDATE, OPTBATCHID, OPTTASKSEQUENCE, 
+      OPTREPLENISHMENTUOM, OPTQTYLOCMINIMUM, 
+      OPTLOCATIONTYPE, OPTQTYLOCLIMIT, SEQNO, 
+      ADDDATE, ADDWHO, EDITDATE, 
+      EDITWHO, DOOR, ROUTE, 
+      STOP, PUTAWAYZONE, BOXNO, 
+      PICKNO, PICK_DATE, PICK_USER, 
+      CC_TYPE, QTY01, QTY02, 
+      QTY03, PUTAWAY_DATE, PUTAWAY_USER, 
+      LETTER_BOX_FLAG, SEAL_USER, SEAL_DATE, 
+      PACKKEY)
+    values (#{taskdetailkey,jdbcType=VARCHAR}, #{serialkey,jdbcType=DECIMAL}, #{whseid,jdbcType=VARCHAR}, 
+      #{tasktype,jdbcType=VARCHAR}, #{storerkey,jdbcType=VARCHAR}, #{sku,jdbcType=VARCHAR}, 
+      #{lot,jdbcType=VARCHAR}, #{uom,jdbcType=VARCHAR}, #{uomqty,jdbcType=DECIMAL}, #{qty,jdbcType=DECIMAL}, 
+      #{fromloc,jdbcType=VARCHAR}, #{logicalfromloc,jdbcType=VARCHAR}, #{fromid,jdbcType=VARCHAR}, 
+      #{toloc,jdbcType=VARCHAR}, #{logicaltoloc,jdbcType=VARCHAR}, #{toid,jdbcType=VARCHAR}, 
+      #{caseid,jdbcType=VARCHAR}, #{pickmethod,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{statusmsg,jdbcType=VARCHAR}, #{priority,jdbcType=VARCHAR}, #{sourcepriority,jdbcType=VARCHAR}, 
+      #{holdkey,jdbcType=VARCHAR}, #{userkey,jdbcType=VARCHAR}, #{userposition,jdbcType=VARCHAR}, 
+      #{userkeyoverride,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{sourcetype,jdbcType=VARCHAR}, #{sourcekey,jdbcType=VARCHAR}, #{pickdetailkey,jdbcType=VARCHAR}, 
+      #{orderkey,jdbcType=VARCHAR}, #{orderlinenumber,jdbcType=VARCHAR}, #{listkey,jdbcType=VARCHAR}, 
+      #{wavekey,jdbcType=VARCHAR}, #{reasonkey,jdbcType=VARCHAR}, #{message01,jdbcType=VARCHAR}, 
+      #{message02,jdbcType=VARCHAR}, #{message03,jdbcType=VARCHAR}, #{finaltoloc,jdbcType=VARCHAR}, 
+      #{releasedate,jdbcType=TIMESTAMP}, #{optbatchid,jdbcType=VARCHAR}, #{opttasksequence,jdbcType=VARCHAR}, 
+      #{optreplenishmentuom,jdbcType=VARCHAR}, #{optqtylocminimum,jdbcType=DECIMAL}, 
+      #{optlocationtype,jdbcType=VARCHAR}, #{optqtyloclimit,jdbcType=DECIMAL}, #{seqno,jdbcType=DECIMAL}, 
+      #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=VARCHAR}, #{editdate,jdbcType=TIMESTAMP}, 
+      #{editwho,jdbcType=VARCHAR}, #{door,jdbcType=VARCHAR}, #{route,jdbcType=VARCHAR}, 
+      #{stop,jdbcType=VARCHAR}, #{putawayzone,jdbcType=VARCHAR}, #{boxno,jdbcType=VARCHAR}, 
+      #{pickno,jdbcType=VARCHAR}, #{pickDate,jdbcType=TIMESTAMP}, #{pickUser,jdbcType=VARCHAR}, 
+      #{ccType,jdbcType=VARCHAR}, #{qty01,jdbcType=DECIMAL}, #{qty02,jdbcType=DECIMAL}, 
+      #{qty03,jdbcType=DECIMAL}, #{putawayDate,jdbcType=TIMESTAMP}, #{putawayUser,jdbcType=VARCHAR}, 
+      #{letterBoxFlag,jdbcType=VARCHAR}, #{sealUser,jdbcType=VARCHAR}, #{sealDate,jdbcType=TIMESTAMP}, 
+      #{packkey,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.TaskDetail" >
+    insert into TASKDETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskdetailkey != null" >
+        TASKDETAILKEY,
+      </if>
+      <if test="serialkey != null" >
+        SERIALKEY,
+      </if>
+      <if test="whseid != null" >
+        WHSEID,
+      </if>
+      <if test="tasktype != null" >
+        TASKTYPE,
+      </if>
+      <if test="storerkey != null" >
+        STORERKEY,
+      </if>
+      <if test="sku != null" >
+        SKU,
+      </if>
+      <if test="lot != null" >
+        LOT,
+      </if>
+      <if test="uom != null" >
+        UOM,
+      </if>
+      <if test="uomqty != null" >
+        UOMQTY,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="fromloc != null" >
+        FROMLOC,
+      </if>
+      <if test="logicalfromloc != null" >
+        LOGICALFROMLOC,
+      </if>
+      <if test="fromid != null" >
+        FROMID,
+      </if>
+      <if test="toloc != null" >
+        TOLOC,
+      </if>
+      <if test="logicaltoloc != null" >
+        LOGICALTOLOC,
+      </if>
+      <if test="toid != null" >
+        TOID,
+      </if>
+      <if test="caseid != null" >
+        CASEID,
+      </if>
+      <if test="pickmethod != null" >
+        PICKMETHOD,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="statusmsg != null" >
+        STATUSMSG,
+      </if>
+      <if test="priority != null" >
+        PRIORITY,
+      </if>
+      <if test="sourcepriority != null" >
+        SOURCEPRIORITY,
+      </if>
+      <if test="holdkey != null" >
+        HOLDKEY,
+      </if>
+      <if test="userkey != null" >
+        USERKEY,
+      </if>
+      <if test="userposition != null" >
+        USERPOSITION,
+      </if>
+      <if test="userkeyoverride != null" >
+        USERKEYOVERRIDE,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="sourcetype != null" >
+        SOURCETYPE,
+      </if>
+      <if test="sourcekey != null" >
+        SOURCEKEY,
+      </if>
+      <if test="pickdetailkey != null" >
+        PICKDETAILKEY,
+      </if>
+      <if test="orderkey != null" >
+        ORDERKEY,
+      </if>
+      <if test="orderlinenumber != null" >
+        ORDERLINENUMBER,
+      </if>
+      <if test="listkey != null" >
+        LISTKEY,
+      </if>
+      <if test="wavekey != null" >
+        WAVEKEY,
+      </if>
+      <if test="reasonkey != null" >
+        REASONKEY,
+      </if>
+      <if test="message01 != null" >
+        MESSAGE01,
+      </if>
+      <if test="message02 != null" >
+        MESSAGE02,
+      </if>
+      <if test="message03 != null" >
+        MESSAGE03,
+      </if>
+      <if test="finaltoloc != null" >
+        FINALTOLOC,
+      </if>
+      <if test="releasedate != null" >
+        RELEASEDATE,
+      </if>
+      <if test="optbatchid != null" >
+        OPTBATCHID,
+      </if>
+      <if test="opttasksequence != null" >
+        OPTTASKSEQUENCE,
+      </if>
+      <if test="optreplenishmentuom != null" >
+        OPTREPLENISHMENTUOM,
+      </if>
+      <if test="optqtylocminimum != null" >
+        OPTQTYLOCMINIMUM,
+      </if>
+      <if test="optlocationtype != null" >
+        OPTLOCATIONTYPE,
+      </if>
+      <if test="optqtyloclimit != null" >
+        OPTQTYLOCLIMIT,
+      </if>
+      <if test="seqno != null" >
+        SEQNO,
+      </if>
+      <if test="adddate != null" >
+        ADDDATE,
+      </if>
+      <if test="addwho != null" >
+        ADDWHO,
+      </if>
+      <if test="editdate != null" >
+        EDITDATE,
+      </if>
+      <if test="editwho != null" >
+        EDITWHO,
+      </if>
+      <if test="door != null" >
+        DOOR,
+      </if>
+      <if test="route != null" >
+        ROUTE,
+      </if>
+      <if test="stop != null" >
+        STOP,
+      </if>
+      <if test="putawayzone != null" >
+        PUTAWAYZONE,
+      </if>
+      <if test="boxno != null" >
+        BOXNO,
+      </if>
+      <if test="pickno != null" >
+        PICKNO,
+      </if>
+      <if test="pickDate != null" >
+        PICK_DATE,
+      </if>
+      <if test="pickUser != null" >
+        PICK_USER,
+      </if>
+      <if test="ccType != null" >
+        CC_TYPE,
+      </if>
+      <if test="qty01 != null" >
+        QTY01,
+      </if>
+      <if test="qty02 != null" >
+        QTY02,
+      </if>
+      <if test="qty03 != null" >
+        QTY03,
+      </if>
+      <if test="putawayDate != null" >
+        PUTAWAY_DATE,
+      </if>
+      <if test="putawayUser != null" >
+        PUTAWAY_USER,
+      </if>
+      <if test="letterBoxFlag != null" >
+        LETTER_BOX_FLAG,
+      </if>
+      <if test="sealUser != null" >
+        SEAL_USER,
+      </if>
+      <if test="sealDate != null" >
+        SEAL_DATE,
+      </if>
+      <if test="packkey != null" >
+        PACKKEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskdetailkey != null" >
+        #{taskdetailkey,jdbcType=VARCHAR},
+      </if>
+      <if test="serialkey != null" >
+        #{serialkey,jdbcType=DECIMAL},
+      </if>
+      <if test="whseid != null" >
+        #{whseid,jdbcType=VARCHAR},
+      </if>
+      <if test="tasktype != null" >
+        #{tasktype,jdbcType=VARCHAR},
+      </if>
+      <if test="storerkey != null" >
+        #{storerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="lot != null" >
+        #{lot,jdbcType=VARCHAR},
+      </if>
+      <if test="uom != null" >
+        #{uom,jdbcType=VARCHAR},
+      </if>
+      <if test="uomqty != null" >
+        #{uomqty,jdbcType=DECIMAL},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="fromloc != null" >
+        #{fromloc,jdbcType=VARCHAR},
+      </if>
+      <if test="logicalfromloc != null" >
+        #{logicalfromloc,jdbcType=VARCHAR},
+      </if>
+      <if test="fromid != null" >
+        #{fromid,jdbcType=VARCHAR},
+      </if>
+      <if test="toloc != null" >
+        #{toloc,jdbcType=VARCHAR},
+      </if>
+      <if test="logicaltoloc != null" >
+        #{logicaltoloc,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        #{toid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseid != null" >
+        #{caseid,jdbcType=VARCHAR},
+      </if>
+      <if test="pickmethod != null" >
+        #{pickmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="statusmsg != null" >
+        #{statusmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcepriority != null" >
+        #{sourcepriority,jdbcType=VARCHAR},
+      </if>
+      <if test="holdkey != null" >
+        #{holdkey,jdbcType=VARCHAR},
+      </if>
+      <if test="userkey != null" >
+        #{userkey,jdbcType=VARCHAR},
+      </if>
+      <if test="userposition != null" >
+        #{userposition,jdbcType=VARCHAR},
+      </if>
+      <if test="userkeyoverride != null" >
+        #{userkeyoverride,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourcetype != null" >
+        #{sourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcekey != null" >
+        #{sourcekey,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdetailkey != null" >
+        #{pickdetailkey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderkey != null" >
+        #{orderkey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderlinenumber != null" >
+        #{orderlinenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="listkey != null" >
+        #{listkey,jdbcType=VARCHAR},
+      </if>
+      <if test="wavekey != null" >
+        #{wavekey,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonkey != null" >
+        #{reasonkey,jdbcType=VARCHAR},
+      </if>
+      <if test="message01 != null" >
+        #{message01,jdbcType=VARCHAR},
+      </if>
+      <if test="message02 != null" >
+        #{message02,jdbcType=VARCHAR},
+      </if>
+      <if test="message03 != null" >
+        #{message03,jdbcType=VARCHAR},
+      </if>
+      <if test="finaltoloc != null" >
+        #{finaltoloc,jdbcType=VARCHAR},
+      </if>
+      <if test="releasedate != null" >
+        #{releasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="optbatchid != null" >
+        #{optbatchid,jdbcType=VARCHAR},
+      </if>
+      <if test="opttasksequence != null" >
+        #{opttasksequence,jdbcType=VARCHAR},
+      </if>
+      <if test="optreplenishmentuom != null" >
+        #{optreplenishmentuom,jdbcType=VARCHAR},
+      </if>
+      <if test="optqtylocminimum != null" >
+        #{optqtylocminimum,jdbcType=DECIMAL},
+      </if>
+      <if test="optlocationtype != null" >
+        #{optlocationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="optqtyloclimit != null" >
+        #{optqtyloclimit,jdbcType=DECIMAL},
+      </if>
+      <if test="seqno != null" >
+        #{seqno,jdbcType=DECIMAL},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="door != null" >
+        #{door,jdbcType=VARCHAR},
+      </if>
+      <if test="route != null" >
+        #{route,jdbcType=VARCHAR},
+      </if>
+      <if test="stop != null" >
+        #{stop,jdbcType=VARCHAR},
+      </if>
+      <if test="putawayzone != null" >
+        #{putawayzone,jdbcType=VARCHAR},
+      </if>
+      <if test="boxno != null" >
+        #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickno != null" >
+        #{pickno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickDate != null" >
+        #{pickDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pickUser != null" >
+        #{pickUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ccType != null" >
+        #{ccType,jdbcType=VARCHAR},
+      </if>
+      <if test="qty01 != null" >
+        #{qty01,jdbcType=DECIMAL},
+      </if>
+      <if test="qty02 != null" >
+        #{qty02,jdbcType=DECIMAL},
+      </if>
+      <if test="qty03 != null" >
+        #{qty03,jdbcType=DECIMAL},
+      </if>
+      <if test="putawayDate != null" >
+        #{putawayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putawayUser != null" >
+        #{putawayUser,jdbcType=VARCHAR},
+      </if>
+      <if test="letterBoxFlag != null" >
+        #{letterBoxFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="sealUser != null" >
+        #{sealUser,jdbcType=VARCHAR},
+      </if>
+      <if test="sealDate != null" >
+        #{sealDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packkey != null" >
+        #{packkey,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.report.TaskDetail" >
+    update TASKDETAIL
+    <set >
+      <if test="serialkey != null" >
+        SERIALKEY = #{serialkey,jdbcType=DECIMAL},
+      </if>
+      <if test="whseid != null" >
+        WHSEID = #{whseid,jdbcType=VARCHAR},
+      </if>
+      <if test="tasktype != null" >
+        TASKTYPE = #{tasktype,jdbcType=VARCHAR},
+      </if>
+      <if test="storerkey != null" >
+        STORERKEY = #{storerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        SKU = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="lot != null" >
+        LOT = #{lot,jdbcType=VARCHAR},
+      </if>
+      <if test="uom != null" >
+        UOM = #{uom,jdbcType=VARCHAR},
+      </if>
+      <if test="uomqty != null" >
+        UOMQTY = #{uomqty,jdbcType=DECIMAL},
+      </if>
+      <if test="qty != null" >
+        QTY = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="fromloc != null" >
+        FROMLOC = #{fromloc,jdbcType=VARCHAR},
+      </if>
+      <if test="logicalfromloc != null" >
+        LOGICALFROMLOC = #{logicalfromloc,jdbcType=VARCHAR},
+      </if>
+      <if test="fromid != null" >
+        FROMID = #{fromid,jdbcType=VARCHAR},
+      </if>
+      <if test="toloc != null" >
+        TOLOC = #{toloc,jdbcType=VARCHAR},
+      </if>
+      <if test="logicaltoloc != null" >
+        LOGICALTOLOC = #{logicaltoloc,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        TOID = #{toid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseid != null" >
+        CASEID = #{caseid,jdbcType=VARCHAR},
+      </if>
+      <if test="pickmethod != null" >
+        PICKMETHOD = #{pickmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="statusmsg != null" >
+        STATUSMSG = #{statusmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        PRIORITY = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcepriority != null" >
+        SOURCEPRIORITY = #{sourcepriority,jdbcType=VARCHAR},
+      </if>
+      <if test="holdkey != null" >
+        HOLDKEY = #{holdkey,jdbcType=VARCHAR},
+      </if>
+      <if test="userkey != null" >
+        USERKEY = #{userkey,jdbcType=VARCHAR},
+      </if>
+      <if test="userposition != null" >
+        USERPOSITION = #{userposition,jdbcType=VARCHAR},
+      </if>
+      <if test="userkeyoverride != null" >
+        USERKEYOVERRIDE = #{userkeyoverride,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourcetype != null" >
+        SOURCETYPE = #{sourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcekey != null" >
+        SOURCEKEY = #{sourcekey,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdetailkey != null" >
+        PICKDETAILKEY = #{pickdetailkey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderkey != null" >
+        ORDERKEY = #{orderkey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderlinenumber != null" >
+        ORDERLINENUMBER = #{orderlinenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="listkey != null" >
+        LISTKEY = #{listkey,jdbcType=VARCHAR},
+      </if>
+      <if test="wavekey != null" >
+        WAVEKEY = #{wavekey,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonkey != null" >
+        REASONKEY = #{reasonkey,jdbcType=VARCHAR},
+      </if>
+      <if test="message01 != null" >
+        MESSAGE01 = #{message01,jdbcType=VARCHAR},
+      </if>
+      <if test="message02 != null" >
+        MESSAGE02 = #{message02,jdbcType=VARCHAR},
+      </if>
+      <if test="message03 != null" >
+        MESSAGE03 = #{message03,jdbcType=VARCHAR},
+      </if>
+      <if test="finaltoloc != null" >
+        FINALTOLOC = #{finaltoloc,jdbcType=VARCHAR},
+      </if>
+      <if test="releasedate != null" >
+        RELEASEDATE = #{releasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="optbatchid != null" >
+        OPTBATCHID = #{optbatchid,jdbcType=VARCHAR},
+      </if>
+      <if test="opttasksequence != null" >
+        OPTTASKSEQUENCE = #{opttasksequence,jdbcType=VARCHAR},
+      </if>
+      <if test="optreplenishmentuom != null" >
+        OPTREPLENISHMENTUOM = #{optreplenishmentuom,jdbcType=VARCHAR},
+      </if>
+      <if test="optqtylocminimum != null" >
+        OPTQTYLOCMINIMUM = #{optqtylocminimum,jdbcType=DECIMAL},
+      </if>
+      <if test="optlocationtype != null" >
+        OPTLOCATIONTYPE = #{optlocationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="optqtyloclimit != null" >
+        OPTQTYLOCLIMIT = #{optqtyloclimit,jdbcType=DECIMAL},
+      </if>
+      <if test="seqno != null" >
+        SEQNO = #{seqno,jdbcType=DECIMAL},
+      </if>
+      <if test="adddate != null" >
+        ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        ADDWHO = #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        EDITWHO = #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="door != null" >
+        DOOR = #{door,jdbcType=VARCHAR},
+      </if>
+      <if test="route != null" >
+        ROUTE = #{route,jdbcType=VARCHAR},
+      </if>
+      <if test="stop != null" >
+        STOP = #{stop,jdbcType=VARCHAR},
+      </if>
+      <if test="putawayzone != null" >
+        PUTAWAYZONE = #{putawayzone,jdbcType=VARCHAR},
+      </if>
+      <if test="boxno != null" >
+        BOXNO = #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickno != null" >
+        PICKNO = #{pickno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickDate != null" >
+        PICK_DATE = #{pickDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pickUser != null" >
+        PICK_USER = #{pickUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ccType != null" >
+        CC_TYPE = #{ccType,jdbcType=VARCHAR},
+      </if>
+      <if test="qty01 != null" >
+        QTY01 = #{qty01,jdbcType=DECIMAL},
+      </if>
+      <if test="qty02 != null" >
+        QTY02 = #{qty02,jdbcType=DECIMAL},
+      </if>
+      <if test="qty03 != null" >
+        QTY03 = #{qty03,jdbcType=DECIMAL},
+      </if>
+      <if test="putawayDate != null" >
+        PUTAWAY_DATE = #{putawayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putawayUser != null" >
+        PUTAWAY_USER = #{putawayUser,jdbcType=VARCHAR},
+      </if>
+      <if test="letterBoxFlag != null" >
+        LETTER_BOX_FLAG = #{letterBoxFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="sealUser != null" >
+        SEAL_USER = #{sealUser,jdbcType=VARCHAR},
+      </if>
+      <if test="sealDate != null" >
+        SEAL_DATE = #{sealDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packkey != null" >
+        PACKKEY = #{packkey,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TASKDETAILKEY = #{taskdetailkey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.report.TaskDetail" >
+    update TASKDETAIL
+    set SERIALKEY = #{serialkey,jdbcType=DECIMAL},
+      WHSEID = #{whseid,jdbcType=VARCHAR},
+      TASKTYPE = #{tasktype,jdbcType=VARCHAR},
+      STORERKEY = #{storerkey,jdbcType=VARCHAR},
+      SKU = #{sku,jdbcType=VARCHAR},
+      LOT = #{lot,jdbcType=VARCHAR},
+      UOM = #{uom,jdbcType=VARCHAR},
+      UOMQTY = #{uomqty,jdbcType=DECIMAL},
+      QTY = #{qty,jdbcType=DECIMAL},
+      FROMLOC = #{fromloc,jdbcType=VARCHAR},
+      LOGICALFROMLOC = #{logicalfromloc,jdbcType=VARCHAR},
+      FROMID = #{fromid,jdbcType=VARCHAR},
+      TOLOC = #{toloc,jdbcType=VARCHAR},
+      LOGICALTOLOC = #{logicaltoloc,jdbcType=VARCHAR},
+      TOID = #{toid,jdbcType=VARCHAR},
+      CASEID = #{caseid,jdbcType=VARCHAR},
+      PICKMETHOD = #{pickmethod,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      STATUSMSG = #{statusmsg,jdbcType=VARCHAR},
+      PRIORITY = #{priority,jdbcType=VARCHAR},
+      SOURCEPRIORITY = #{sourcepriority,jdbcType=VARCHAR},
+      HOLDKEY = #{holdkey,jdbcType=VARCHAR},
+      USERKEY = #{userkey,jdbcType=VARCHAR},
+      USERPOSITION = #{userposition,jdbcType=VARCHAR},
+      USERKEYOVERRIDE = #{userkeyoverride,jdbcType=VARCHAR},
+      STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+      SOURCETYPE = #{sourcetype,jdbcType=VARCHAR},
+      SOURCEKEY = #{sourcekey,jdbcType=VARCHAR},
+      PICKDETAILKEY = #{pickdetailkey,jdbcType=VARCHAR},
+      ORDERKEY = #{orderkey,jdbcType=VARCHAR},
+      ORDERLINENUMBER = #{orderlinenumber,jdbcType=VARCHAR},
+      LISTKEY = #{listkey,jdbcType=VARCHAR},
+      WAVEKEY = #{wavekey,jdbcType=VARCHAR},
+      REASONKEY = #{reasonkey,jdbcType=VARCHAR},
+      MESSAGE01 = #{message01,jdbcType=VARCHAR},
+      MESSAGE02 = #{message02,jdbcType=VARCHAR},
+      MESSAGE03 = #{message03,jdbcType=VARCHAR},
+      FINALTOLOC = #{finaltoloc,jdbcType=VARCHAR},
+      RELEASEDATE = #{releasedate,jdbcType=TIMESTAMP},
+      OPTBATCHID = #{optbatchid,jdbcType=VARCHAR},
+      OPTTASKSEQUENCE = #{opttasksequence,jdbcType=VARCHAR},
+      OPTREPLENISHMENTUOM = #{optreplenishmentuom,jdbcType=VARCHAR},
+      OPTQTYLOCMINIMUM = #{optqtylocminimum,jdbcType=DECIMAL},
+      OPTLOCATIONTYPE = #{optlocationtype,jdbcType=VARCHAR},
+      OPTQTYLOCLIMIT = #{optqtyloclimit,jdbcType=DECIMAL},
+      SEQNO = #{seqno,jdbcType=DECIMAL},
+      ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      ADDWHO = #{addwho,jdbcType=VARCHAR},
+      EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      EDITWHO = #{editwho,jdbcType=VARCHAR},
+      DOOR = #{door,jdbcType=VARCHAR},
+      ROUTE = #{route,jdbcType=VARCHAR},
+      STOP = #{stop,jdbcType=VARCHAR},
+      PUTAWAYZONE = #{putawayzone,jdbcType=VARCHAR},
+      BOXNO = #{boxno,jdbcType=VARCHAR},
+      PICKNO = #{pickno,jdbcType=VARCHAR},
+      PICK_DATE = #{pickDate,jdbcType=TIMESTAMP},
+      PICK_USER = #{pickUser,jdbcType=VARCHAR},
+      CC_TYPE = #{ccType,jdbcType=VARCHAR},
+      QTY01 = #{qty01,jdbcType=DECIMAL},
+      QTY02 = #{qty02,jdbcType=DECIMAL},
+      QTY03 = #{qty03,jdbcType=DECIMAL},
+      PUTAWAY_DATE = #{putawayDate,jdbcType=TIMESTAMP},
+      PUTAWAY_USER = #{putawayUser,jdbcType=VARCHAR},
+      LETTER_BOX_FLAG = #{letterBoxFlag,jdbcType=VARCHAR},
+      SEAL_USER = #{sealUser,jdbcType=VARCHAR},
+      SEAL_DATE = #{sealDate,jdbcType=TIMESTAMP},
+      PACKKEY = #{packkey,jdbcType=VARCHAR}
+    where TASKDETAILKEY = #{taskdetailkey,jdbcType=VARCHAR}
+  </update>
+  <select id="getQingPeiData" resultType="java.lang.Integer">
+select nvl(sum(qty),0) as boxUp from taskdetail where tasktype = 'PA' and toloc = '41SMART' and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData1" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from taskdetail where tasktype = 'PA' and toloc = '41SMART' AND STATUS = '9' and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData2" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from taskdetail where tasktype = 'PA' and toloc = '41SMART' AND STATUS = '0'
+    </select>
+  <select id="getQingPeiData3" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from taskdetail where tasktype = 'PA' and toloc = '42SMART' AND STATUS = '9' and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData4" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from taskdetail  where tasktype = 'PA' and toloc = '42SMART' AND STATUS = '0'
+    </select>
+  <select id="getQingPeiData5" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from taskdetail where tasktype = 'PA' and toloc = 'TF' AND STATUS = '9' and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData6" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from taskdetail where tasktype = 'PA' and toloc = 'TF' AND STATUS = '0'
+    </select>
+  <select id="getQingPeiData7" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from taskdetail where tasktype = 'PA' and toloc not in ('41SMART','42SMART','TF')  AND STATUS = '9'  and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData8" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from taskdetail where tasktype = 'PA' and toloc not in ('41SMART','42SMART','TF')  AND STATUS = '0'
+    </select>
+  <select id="getQingPeiData9" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from taskdetail where tasktype = 'PA'  AND STATUS = '9' and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData10" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from taskdetail where tasktype = 'PA'  AND STATUS = '0'
+    </select>
+  <select id="getQingPeiData25" resultType="java.lang.Integer">
+ select nvl(sum(js),0) from
+ (select nvl((uomqty/key),0)js from
+ (select substr(packkey,instr(packkey,'_',1,1)+1,instr(packkey,'_',1,2)-1-instr(packkey,'_',1,1)) key,uomqty from taskdetail
+ where tasktype = 'PA' and toloc = '42SMART' AND STATUS = '9'
+ and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})))
+    </select>
+  <select id="getQingPeiData26" resultType="java.lang.Integer">
+  select nvl(sum(js),0) from
+  (select nvl((uomqty/key),0) js from
+ (select nvl(substr(packkey,instr(packkey,'_',1,1)+1,instr(packkey,'_',1,2)-1-instr(packkey,'_',1,1)),0) key,nvl(uomqty,0) uomqty from
+taskdetail where tasktype = 'PA' and toloc = '42SMART' AND STATUS = '0'))
+    </select>
+</mapper>

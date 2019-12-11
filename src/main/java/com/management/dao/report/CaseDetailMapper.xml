@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.CaseDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.CaseDetail" >
+    <constructor >
+      <arg column="FROMTABLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FROMTYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEID_BAK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LINENUMBER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PACKID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKDETAILKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STORERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TYPE" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="DOC_NUMBER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKU" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QTY" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="SEQ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PRICE" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DISCOUNT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="AMT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="NET" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="NETWEIGHT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="VOLUME" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="SUSR1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR4" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR5" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ADDWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EDITWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.report.CaseDetail" >
+    insert into CASEDETAIL (FROMTABLE, FROMTYPE, CASEID, 
+      CASEID_BAK, LINENUMBER, PACKID, 
+      PICKDETAILKEY, STORERKEY, TYPE, 
+      DOC_NUMBER, SKU, QTY, 
+      SEQ, PRICE, DISCOUNT, 
+      AMT, NET, NETWEIGHT, 
+      VOLUME, SUSR1, SUSR2, 
+      SUSR3, SUSR4, SUSR5, 
+      ADDDATE, ADDWHO, EDITDATE, 
+      EDITWHO, PICKNO, ORDERKEY
+      )
+    values (#{fromtable,jdbcType=VARCHAR}, #{fromtype,jdbcType=VARCHAR}, #{caseid,jdbcType=VARCHAR}, 
+      #{caseidBak,jdbcType=VARCHAR}, #{linenumber,jdbcType=VARCHAR}, #{packid,jdbcType=VARCHAR}, 
+      #{pickdetailkey,jdbcType=VARCHAR}, #{storerkey,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, 
+      #{docNumber,jdbcType=VARCHAR}, #{sku,jdbcType=VARCHAR}, #{qty,jdbcType=DECIMAL}, 
+      #{seq,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{discount,jdbcType=DECIMAL}, 
+      #{amt,jdbcType=DECIMAL}, #{net,jdbcType=DECIMAL}, #{netweight,jdbcType=DECIMAL}, 
+      #{volume,jdbcType=DECIMAL}, #{susr1,jdbcType=VARCHAR}, #{susr2,jdbcType=VARCHAR}, 
+      #{susr3,jdbcType=VARCHAR}, #{susr4,jdbcType=VARCHAR}, #{susr5,jdbcType=VARCHAR}, 
+      #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=VARCHAR}, #{editdate,jdbcType=TIMESTAMP}, 
+      #{editwho,jdbcType=VARCHAR}, #{pickno,jdbcType=VARCHAR}, #{orderkey,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.CaseDetail" >
+    insert into CASEDETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fromtable != null" >
+        FROMTABLE,
+      </if>
+      <if test="fromtype != null" >
+        FROMTYPE,
+      </if>
+      <if test="caseid != null" >
+        CASEID,
+      </if>
+      <if test="caseidBak != null" >
+        CASEID_BAK,
+      </if>
+      <if test="linenumber != null" >
+        LINENUMBER,
+      </if>
+      <if test="packid != null" >
+        PACKID,
+      </if>
+      <if test="pickdetailkey != null" >
+        PICKDETAILKEY,
+      </if>
+      <if test="storerkey != null" >
+        STORERKEY,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="docNumber != null" >
+        DOC_NUMBER,
+      </if>
+      <if test="sku != null" >
+        SKU,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="seq != null" >
+        SEQ,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="discount != null" >
+        DISCOUNT,
+      </if>
+      <if test="amt != null" >
+        AMT,
+      </if>
+      <if test="net != null" >
+        NET,
+      </if>
+      <if test="netweight != null" >
+        NETWEIGHT,
+      </if>
+      <if test="volume != null" >
+        VOLUME,
+      </if>
+      <if test="susr1 != null" >
+        SUSR1,
+      </if>
+      <if test="susr2 != null" >
+        SUSR2,
+      </if>
+      <if test="susr3 != null" >
+        SUSR3,
+      </if>
+      <if test="susr4 != null" >
+        SUSR4,
+      </if>
+      <if test="susr5 != null" >
+        SUSR5,
+      </if>
+      <if test="adddate != null" >
+        ADDDATE,
+      </if>
+      <if test="addwho != null" >
+        ADDWHO,
+      </if>
+      <if test="editdate != null" >
+        EDITDATE,
+      </if>
+      <if test="editwho != null" >
+        EDITWHO,
+      </if>
+      <if test="pickno != null" >
+        PICKNO,
+      </if>
+      <if test="orderkey != null" >
+        ORDERKEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fromtable != null" >
+        #{fromtable,jdbcType=VARCHAR},
+      </if>
+      <if test="fromtype != null" >
+        #{fromtype,jdbcType=VARCHAR},
+      </if>
+      <if test="caseid != null" >
+        #{caseid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseidBak != null" >
+        #{caseidBak,jdbcType=VARCHAR},
+      </if>
+      <if test="linenumber != null" >
+        #{linenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="packid != null" >
+        #{packid,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdetailkey != null" >
+        #{pickdetailkey,jdbcType=VARCHAR},
+      </if>
+      <if test="storerkey != null" >
+        #{storerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="docNumber != null" >
+        #{docNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="amt != null" >
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="net != null" >
+        #{net,jdbcType=DECIMAL},
+      </if>
+      <if test="netweight != null" >
+        #{netweight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="susr1 != null" >
+        #{susr1,jdbcType=VARCHAR},
+      </if>
+      <if test="susr2 != null" >
+        #{susr2,jdbcType=VARCHAR},
+      </if>
+      <if test="susr3 != null" >
+        #{susr3,jdbcType=VARCHAR},
+      </if>
+      <if test="susr4 != null" >
+        #{susr4,jdbcType=VARCHAR},
+      </if>
+      <if test="susr5 != null" >
+        #{susr5,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="pickno != null" >
+        #{pickno,jdbcType=VARCHAR},
+      </if>
+      <if test="orderkey != null" >
+        #{orderkey,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="getBaoZData" resultType="java.lang.Integer">
+select nvl(sum(t),0) from (
+select sum(nvl(baks, 1)) t
+    from (select storerkey, caseid_bak, max(baks) baks, sum(qty) qty, type
+    from (select min(cd.storerkey) storerkey,
+    c.caseid_bak,
+    max(nvl(c.susr1, 1)) baks,
+    sum(cd.qty) qty,
+    (case
+    when cd.fromtype = 0 and cd.type = 0 then
+    '主配发货'
+    when ((cd.fromtype = 0 and cd.type = 1) or
+    (cd.fromtype = 1 and cd.type = 2)) then
+    '退货'
+    when cd.fromtype = 1 and cd.type = 1 then
+    '请配发货'
+    when cd.fromtype = 9 and cd.type = 0 then
+    '主配拒收'
+    when cd.fromtype = 9 and cd.type = 1 then
+    '客退拒收'
+    end) type
+    from (select caseid, caseid_bak, susr1
+    from caseid
+    where boxno is not null
+
+    group by caseid, caseid_bak, susr1) c,
+    casedetail cd
+    where c.caseid = cd.caseid
+    and c.caseid_bak = cd.caseid_bak
+    and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    and storerkey='H360016' and cd.fromtype = 0 and cd.type = 0
+    group by cd.storerkey, c.caseid_bak, cd.type, cd.fromtype)
+    group by storerkey, caseid_bak, type)
+    group by storerkey, type)
+    </select>
+  <select id="getBaoZData1" resultType="java.lang.Integer">
+select nvl(sum(t),0) from (
+select sum(nvl(qty, 1)) t
+    from (select storerkey, caseid_bak, max(baks) baks, sum(qty) qty, type
+    from (select min(cd.storerkey) storerkey,
+    c.caseid_bak,
+    max(nvl(c.susr1, 1)) baks,
+    sum(cd.qty) qty,
+    (case
+    when cd.fromtype = 0 and cd.type = 0 then
+    '主配发货'
+    when ((cd.fromtype = 0 and cd.type = 1) or
+    (cd.fromtype = 1 and cd.type = 2)) then
+    '退货'
+    when cd.fromtype = 1 and cd.type = 1 then
+    '请配发货'
+    when cd.fromtype = 9 and cd.type = 0 then
+    '主配拒收'
+    when cd.fromtype = 9 and cd.type = 1 then
+    '客退拒收'
+    end) type
+    from (select caseid, caseid_bak, susr1
+    from caseid
+    where boxno is not null
+
+    group by caseid, caseid_bak, susr1) c,
+    casedetail cd
+    where c.caseid = cd.caseid
+    and c.caseid_bak = cd.caseid_bak
+    and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    and storerkey='H360016' and cd.fromtype = 0 and cd.type = 0
+    group by cd.storerkey, c.caseid_bak, cd.type, cd.fromtype)
+    group by storerkey, caseid_bak, type)
+    group by storerkey, type)
+    </select>
+  <select id="getBaoZData2" resultType="java.lang.Integer">
+select nvl(sum(js),0) from (select
+sum(nvl(c.susr1, 1)) js
+  from caseid c,(select storerkey,caseid,fromtype,type,sum(qty) qty from casedetail group by storerkey,caseid,fromtype,type) cd
+ where c.caseid = cd.caseid
+   and c.susr5 between #{date_begin} AND #{date_end}
+   and cd.fromtype = 0
+   and cd.type = 0 and storerkey='H360016'
+ group by cd.storerkey, fromtype, type)
+    </select>
+  <select id="getBaoZData3" resultType="java.lang.Integer">
+ select nvl(sum(qty),0) from (select
+ sum(nvl(cd.qty,0)) qty
+  from caseid c,(select storerkey,caseid,fromtype,type,sum(qty) qty from casedetail group by storerkey,caseid,fromtype,type) cd
+ where c.caseid = cd.caseid
+   and c.susr5 between #{date_begin} AND #{date_end}
+   and cd.fromtype = 0
+   and cd.type = 0 and storerkey='H360016'
+ group by cd.storerkey, fromtype, type)
+    </select>
+
+  <select id="getBaoZData6" resultType="java.lang.Integer">
+select nvl(sum(t),0) from (
+select sum(nvl(baks, 1)) t
+    from (select storerkey, caseid_bak, max(baks) baks, sum(qty) qty, type
+    from (select min(cd.storerkey) storerkey,
+    c.caseid_bak,
+    max(nvl(c.susr1, 1)) baks,
+    sum(cd.qty) qty,
+    (case
+    when cd.fromtype = 0 and cd.type = 0 then
+    '主配发货'
+    when ((cd.fromtype = 0 and cd.type = 1) or
+    (cd.fromtype = 1 and cd.type = 2)) then
+    '退货'
+    when cd.fromtype = 1 and cd.type = 1 then
+    '请配发货'
+    when cd.fromtype = 9 and cd.type = 0 then
+    '主配拒收'
+    when cd.fromtype = 9 and cd.type = 1 then
+    '客退拒收'
+    end) type
+    from (select caseid, caseid_bak, susr1
+    from caseid
+    where boxno is not null
+
+    group by caseid, caseid_bak, susr1) c,
+    casedetail cd
+    where c.caseid = cd.caseid
+    and c.caseid_bak = cd.caseid_bak
+    and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    and storerkey='H360016' and (cd.fromtype = 1 and cd.type = 1)
+    group by cd.storerkey, c.caseid_bak, cd.type, cd.fromtype)
+    group by storerkey, caseid_bak, type)
+    group by storerkey, type)
+    </select>
+  <select id="getBaoZData7" resultType="java.lang.Integer">
+select nvl(sum(t),0) from (
+select sum(nvl(qty, 1)) t
+    from (select storerkey, caseid_bak, max(baks) baks, sum(qty) qty, type
+    from (select min(cd.storerkey) storerkey,
+    c.caseid_bak,
+    max(nvl(c.susr1, 1)) baks,
+    sum(cd.qty) qty,
+    (case
+    when cd.fromtype = 0 and cd.type = 0 then
+    '主配发货'
+    when ((cd.fromtype = 0 and cd.type = 1) or
+    (cd.fromtype = 1 and cd.type = 2)) then
+    '退货'
+    when cd.fromtype = 1 and cd.type = 1 then
+    '请配发货'
+    when cd.fromtype = 9 and cd.type = 0 then
+    '主配拒收'
+    when cd.fromtype = 9 and cd.type = 1 then
+    '客退拒收'
+    end) type
+    from (select caseid, caseid_bak, susr1
+    from caseid
+    where boxno is not null
+
+    group by caseid, caseid_bak, susr1) c,
+    casedetail cd
+    where c.caseid = cd.caseid
+    and c.caseid_bak = cd.caseid_bak
+    and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    and storerkey='H360016'  and (cd.fromtype = 1 and cd.type = 1)
+    group by cd.storerkey, c.caseid_bak, cd.type, cd.fromtype)
+    group by storerkey, caseid_bak, type)
+    group by storerkey, type)
+    </select>
+  <select id="getBaoZData8" resultType="java.lang.Integer">
+select nvl(sum(t),0) from (
+select sum(nvl(c.susr1, 1)) t
+  from caseid c, (select storerkey,caseid,fromtype,type,sum(qty) qty from casedetail group by storerkey,caseid,fromtype,type) cd
+ where c.caseid = cd.caseid
+   and c.susr5 between #{date_begin} AND #{date_end}
+   and (cd.fromtype = 1 and cd.type = 1)
+ group by cd.storerkey, fromtype, type)
+    </select>
+  <select id="getBaoZData9" resultType="java.lang.Integer">
+select nvl(sum(t),0) from (
+select sum(nvl(cd.qty, 1)) t
+  from caseid c,(select storerkey,caseid,fromtype,type,sum(qty) qty from casedetail group by storerkey,caseid,fromtype,type) cd
+ where c.caseid = cd.caseid
+   and c.susr5 between #{date_begin} AND #{date_end}
+   and (cd.fromtype = 1 and cd.type = 1)
+ group by cd.storerkey, fromtype, type)
+    </select>
+  <select id="getBaoZData12" resultType="java.lang.Integer">
+select nvl(sum(t),0) from (
+select sum(nvl(baks, 1)) t
+    from (select storerkey, caseid_bak, max(baks) baks, sum(qty) qty, type
+    from (select min(cd.storerkey) storerkey,
+    c.caseid_bak,
+    max(nvl(c.susr1, 1)) baks,
+    sum(cd.qty) qty,
+    (case
+    when cd.fromtype = 0 and cd.type = 0 then
+    '主配发货'
+    when ((cd.fromtype = 0 and cd.type = 1) or
+    (cd.fromtype = 1 and cd.type = 2)) then
+    '退货'
+    when cd.fromtype = 1 and cd.type = 1 then
+    '请配发货'
+    when cd.fromtype = 9 and cd.type = 0 then
+    '主配拒收'
+    when cd.fromtype = 9 and cd.type = 1 then
+    '客退拒收'
+    end) type
+    from (select caseid, caseid_bak, susr1
+    from caseid
+    where boxno is not null
+
+    group by caseid, caseid_bak, susr1) c,
+    casedetail cd
+    where c.caseid = cd.caseid
+    and c.caseid_bak = cd.caseid_bak
+    and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    and storerkey='H360016' and (((cd.fromtype = 0 and cd.type = 1) or
+                              (cd.fromtype = 1 and cd.type = 2)))
+    group by cd.storerkey, c.caseid_bak, cd.type, cd.fromtype)
+    group by storerkey, caseid_bak, type)
+    group by storerkey, type)
+    </select>
+  <select id="getBaoZData13" resultType="java.lang.Integer">
+select nvl(sum(t),0) from (
+select sum(nvl(qty, 1)) t
+    from (select storerkey, caseid_bak, max(baks) baks, sum(qty) qty, type
+    from (select min(cd.storerkey) storerkey,
+    c.caseid_bak,
+    max(nvl(c.susr1, 1)) baks,
+    sum(cd.qty) qty,
+    (case
+    when cd.fromtype = 0 and cd.type = 0 then
+    '主配发货'
+    when ((cd.fromtype = 0 and cd.type = 1) or
+    (cd.fromtype = 1 and cd.type = 2)) then
+    '退货'
+    when cd.fromtype = 1 and cd.type = 1 then
+    '请配发货'
+    when cd.fromtype = 9 and cd.type = 0 then
+    '主配拒收'
+    when cd.fromtype = 9 and cd.type = 1 then
+    '客退拒收'
+    end) type
+    from (select caseid, caseid_bak, susr1
+    from caseid
+    where boxno is not null
+
+    group by caseid, caseid_bak, susr1) c,
+    casedetail cd
+    where c.caseid = cd.caseid
+    and c.caseid_bak = cd.caseid_bak
+    and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    and storerkey='H360016' and (((cd.fromtype = 0 and cd.type = 1) or
+                              (cd.fromtype = 1 and cd.type = 2)))
+    group by cd.storerkey, c.caseid_bak, cd.type, cd.fromtype)
+    group by storerkey, caseid_bak, type)
+    group by storerkey, type)
+    </select>
+  <select id="getBaoZData14" resultType="java.lang.Integer">
+select nvl(sum(js),0) from (select
+    sum(nvl(c.susr1,1)) js
+    from caseid c,(select storerkey,caseid,fromtype,type,sum(qty) qty from casedetail group by storerkey,caseid,fromtype,type) cd
+    where c.caseid = cd.caseid
+    and c.susr5 between #{date_begin} AND #{date_end}
+    and ((cd.fromtype = 0 and cd.type = 1) or
+    (cd.fromtype = 1 and cd.type = 2))
+    and storerkey = 'H360016'
+    group by cd.storerkey, fromtype, type)
+  </select>
+  <select id="getBaoZData15" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from (select
+ nvl(sum(cd.qty),0) qty
+  from caseid c,(select storerkey,caseid,fromtype,type,sum(qty) qty from casedetail group by storerkey,caseid,fromtype,type) cd
+ where c.caseid = cd.caseid
+   and c.susr5 between #{date_begin} AND #{date_end}
+   and ((cd.fromtype = 0 and cd.type = 1) or
+              (cd.fromtype = 1 and cd.type = 2))
+ group by cd.storerkey, fromtype, type)
+    </select>
+  <select id="getBaoZData18" resultType="java.lang.Integer">
+select nvl(sum(t),0) from (
+select sum(nvl(baks, 1)) t
+    from (select storerkey, caseid_bak, max(baks) baks, sum(qty) qty, type
+    from (select min(cd.storerkey) storerkey,
+    c.caseid_bak,
+    max(nvl(c.susr1, 1)) baks,
+    sum(cd.qty) qty,
+    (case
+    when cd.fromtype = 0 and cd.type = 0 then
+    '主配发货'
+    when ((cd.fromtype = 0 and cd.type = 1) or
+    (cd.fromtype = 1 and cd.type = 2)) then
+    '退货'
+    when cd.fromtype = 1 and cd.type = 1 then
+    '请配发货'
+    when cd.fromtype = 9 and cd.type = 0 then
+    '主配拒收'
+    when cd.fromtype = 9 and cd.type = 1 then
+    '客退拒收'
+    end) type
+    from (select caseid, caseid_bak, susr1
+    from caseid
+    where boxno is not null
+    group by caseid, caseid_bak, susr1) c,
+    casedetail cd
+    where c.caseid = cd.caseid
+    and c.caseid_bak = cd.caseid_bak
+    and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    and storerkey='H360020' and (cd.fromtype = 0 and cd.type = 0)
+    group by cd.storerkey, c.caseid_bak, cd.type, cd.fromtype)
+    group by storerkey, caseid_bak, type)
+    group by storerkey, type)
+    </select>
+  <select id="getBaoZData19" resultType="java.lang.Integer">
+select nvl(sum(t),0) from (
+select sum(nvl(qty, 1)) t
+    from (select storerkey, caseid_bak, max(baks) baks, sum(qty) qty, type
+    from (select min(cd.storerkey) storerkey,
+    c.caseid_bak,
+    max(nvl(c.susr1, 1)) baks,
+    sum(cd.qty) qty,
+    (case
+    when cd.fromtype = 0 and cd.type = 0 then
+    '主配发货'
+    when ((cd.fromtype = 0 and cd.type = 1) or
+    (cd.fromtype = 1 and cd.type = 2)) then
+    '退货'
+    when cd.fromtype = 1 and cd.type = 1 then
+    '请配发货'
+    when cd.fromtype = 9 and cd.type = 0 then
+    '主配拒收'
+    when cd.fromtype = 9 and cd.type = 1 then
+    '客退拒收'
+    end) type
+    from (select caseid, caseid_bak, susr1
+    from caseid
+    where boxno is not null
+    group by caseid, caseid_bak, susr1) c,
+    casedetail cd
+    where c.caseid = cd.caseid
+    and c.caseid_bak = cd.caseid_bak
+    and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    and storerkey='H360020' and (cd.fromtype = 0 and cd.type = 0)
+    group by cd.storerkey, c.caseid_bak, cd.type, cd.fromtype)
+    group by storerkey, caseid_bak, type)
+    group by storerkey, type)
+    </select>
+  <select id="getBaoZData20" resultType="java.lang.Integer">
+select nvl(sum(js),0) from (select
+sum(nvl(c.susr1, 1)) js
+  from caseid c, (select storerkey,caseid,fromtype,type,sum(qty) qty from casedetail group by storerkey,caseid,fromtype,type) cd
+ where c.caseid = cd.caseid
+   and c.susr5 between #{date_begin} AND #{date_end}
+   and cd.fromtype = 0
+   and cd.type = 0 and storerkey='H360020'
+ group by cd.storerkey, fromtype, type)
+    </select>
+  <select id="getBaoZData21" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from (select
+ sum(nvl(cd.qty,0)) qty
+  from caseid c, (select storerkey,caseid,fromtype,type,sum(qty) qty from casedetail group by storerkey,caseid,fromtype,type) cd
+ where c.caseid = cd.caseid
+   and c.susr5 between #{date_begin} AND #{date_end}
+   and cd.fromtype = 0
+   and cd.type = 0 and storerkey='H360020'
+ group by cd.storerkey, fromtype, type)
+    </select>
+  <!--<update id="go1" parameterType="string">-->
+    <!--update casedetail set qty = qty - {qty} where doc_number like '%'|| #{doc_number} || '%' and sku = #{sku} and exists (select '1' from caseid where casedetail.caseid = caseid.caseid and caseid.IF_CASEID='1' and caseid.consk= #{consk})-->
+  <!--</update>-->
+  <!--大中专主配发货-->
+  <select id="getBaoZData25" resultType="java.lang.Integer">
+(select nvl(sum(t),0) from
+(select  sum(nvl(baks,0)) t
+  from (select storerkey, caseid_bak, max(baks) baks, sum(qty) qty, type
+          from (select min(cd.storerkey) storerkey,
+                       c.caseid_bak,
+                       max(nvl(c.susr1, 1)) baks,
+                       sum(cd.qty) qty,
+                       (case
+                         when cd.fromtype = 0 and cd.type = 0 then
+                          '主配发货'
+                         when ((cd.fromtype = 0 and cd.type = 1) or
+                              (cd.fromtype = 1 and cd.type = 2)) then
+                          '退货'
+                         when cd.fromtype = 1 and cd.type = 1 then
+                          '请配发货'
+                         when cd.fromtype = 9 and cd.type = 0 then
+                          '主配拒收'
+                         when cd.fromtype = 9 and cd.type = 1 then
+                          '客退拒收'
+                       end) type
+                  from (select caseid, caseid_bak, susr1
+                          from caseid
+                         where boxno is not null
+                         group by caseid, caseid_bak, susr1) c,
+                       casedetail cd
+                 where c.caseid = cd.caseid
+                   and c.caseid_bak = cd.caseid_bak
+                   and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+                   and storerkey = 'H360060'
+                   and ((cd.fromtype = 0 and cd.type = 1) or
+                       (cd.fromtype = 1 and cd.type = 2))
+                 group by cd.storerkey, c.caseid_bak, cd.type, cd.fromtype)
+         group by storerkey, caseid_bak, type)
+ group by storerkey, type))
+
+    </select>
+  <select id="getBaoZData26" resultType="java.lang.Integer">
+    select nvl(sum(t),0) from(
+select  sum(nvl(qty,0)) t
+    from (select storerkey, caseid_bak, max(baks) baks, sum(qty) qty, type
+    from (select min(cd.storerkey) storerkey,
+    c.caseid_bak,
+    max(nvl(c.susr1, 1)) baks,
+    sum(cd.qty) qty,
+    (case
+    when cd.fromtype = 0 and cd.type = 0 then
+    '主配发货'
+    when ((cd.fromtype = 0 and cd.type = 1) or
+    (cd.fromtype = 1 and cd.type = 2)) then
+    '退货'
+    when cd.fromtype = 1 and cd.type = 1 then
+    '请配发货'
+    when cd.fromtype = 9 and cd.type = 0 then
+    '主配拒收'
+    when cd.fromtype = 9 and cd.type = 1 then
+    '客退拒收'
+    end) type
+    from (select caseid, caseid_bak, susr1
+    from caseid
+    where boxno is not null
+
+    group by caseid, caseid_bak, susr1) c,
+    casedetail cd
+    where c.caseid = cd.caseid
+    and c.caseid_bak = cd.caseid_bak
+    and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    and storerkey='H360060' and ((cd.fromtype = 0 and cd.type = 1) or
+                              (cd.fromtype = 1 and cd.type = 2))
+    group by cd.storerkey, c.caseid_bak, cd.type, cd.fromtype)
+    group by storerkey, caseid_bak, type)
+    group by storerkey, type)
+    </select>
+</mapper>
+

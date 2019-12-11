@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.ReplenishmentMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.Replenishment" >
+    <constructor >
+      <idArg column="REPLENISHMENTGROUP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <idArg column="REPLENISHMENTKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SERIALKEY" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="WHSEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STORERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKU" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FROMLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TOLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="QTYMOVED" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="QTYINPICKLOC" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="PRIORITY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UOM" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PACKKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IDMOVED" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOTMOVED" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOCMOVEDFROM" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REASON" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TOID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FINALTOLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ADDWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EDITWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SENDCODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SENDTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="RE_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    REPLENISHMENTGROUP, REPLENISHMENTKEY, SERIALKEY, WHSEID, STORERKEY, SKU, FROMLOC, 
+    TOLOC, LOT, ID, QTY, QTYMOVED, QTYINPICKLOC, PRIORITY, UOM, PACKKEY, IDMOVED, LOTMOVED, 
+    LOCMOVEDFROM, REASON, TOID, FINALTOLOC, ADDDATE, ADDWHO, EDITDATE, EDITWHO, STATUS, 
+    SENDCODE, SENDTIME, RE_TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.management.pojo.report.ReplenishmentKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from REPLENISHMENT
+    where REPLENISHMENTGROUP = #{replenishmentgroup,jdbcType=VARCHAR}
+      and REPLENISHMENTKEY = #{replenishmentkey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.management.pojo.report.ReplenishmentKey" >
+    delete from REPLENISHMENT
+    where REPLENISHMENTGROUP = #{replenishmentgroup,jdbcType=VARCHAR}
+      and REPLENISHMENTKEY = #{replenishmentkey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.report.Replenishment" >
+    insert into REPLENISHMENT (REPLENISHMENTGROUP, REPLENISHMENTKEY, 
+      SERIALKEY, WHSEID, STORERKEY, 
+      SKU, FROMLOC, TOLOC, 
+      LOT, ID, QTY, QTYMOVED, 
+      QTYINPICKLOC, PRIORITY, UOM, 
+      PACKKEY, IDMOVED, LOTMOVED, 
+      LOCMOVEDFROM, REASON, TOID, 
+      FINALTOLOC, ADDDATE, ADDWHO, 
+      EDITDATE, EDITWHO, STATUS, 
+      SENDCODE, SENDTIME, RE_TYPE
+      )
+    values (#{replenishmentgroup,jdbcType=VARCHAR}, #{replenishmentkey,jdbcType=VARCHAR}, 
+      #{serialkey,jdbcType=DECIMAL}, #{whseid,jdbcType=VARCHAR}, #{storerkey,jdbcType=VARCHAR}, 
+      #{sku,jdbcType=VARCHAR}, #{fromloc,jdbcType=VARCHAR}, #{toloc,jdbcType=VARCHAR}, 
+      #{lot,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{qty,jdbcType=DECIMAL}, #{qtymoved,jdbcType=DECIMAL}, 
+      #{qtyinpickloc,jdbcType=DECIMAL}, #{priority,jdbcType=VARCHAR}, #{uom,jdbcType=VARCHAR}, 
+      #{packkey,jdbcType=VARCHAR}, #{idmoved,jdbcType=VARCHAR}, #{lotmoved,jdbcType=VARCHAR}, 
+      #{locmovedfrom,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{toid,jdbcType=VARCHAR}, 
+      #{finaltoloc,jdbcType=VARCHAR}, #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=VARCHAR}, 
+      #{editdate,jdbcType=TIMESTAMP}, #{editwho,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{sendcode,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, #{reType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.Replenishment" >
+    insert into REPLENISHMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="replenishmentgroup != null" >
+        REPLENISHMENTGROUP,
+      </if>
+      <if test="replenishmentkey != null" >
+        REPLENISHMENTKEY,
+      </if>
+      <if test="serialkey != null" >
+        SERIALKEY,
+      </if>
+      <if test="whseid != null" >
+        WHSEID,
+      </if>
+      <if test="storerkey != null" >
+        STORERKEY,
+      </if>
+      <if test="sku != null" >
+        SKU,
+      </if>
+      <if test="fromloc != null" >
+        FROMLOC,
+      </if>
+      <if test="toloc != null" >
+        TOLOC,
+      </if>
+      <if test="lot != null" >
+        LOT,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="qtymoved != null" >
+        QTYMOVED,
+      </if>
+      <if test="qtyinpickloc != null" >
+        QTYINPICKLOC,
+      </if>
+      <if test="priority != null" >
+        PRIORITY,
+      </if>
+      <if test="uom != null" >
+        UOM,
+      </if>
+      <if test="packkey != null" >
+        PACKKEY,
+      </if>
+      <if test="idmoved != null" >
+        IDMOVED,
+      </if>
+      <if test="lotmoved != null" >
+        LOTMOVED,
+      </if>
+      <if test="locmovedfrom != null" >
+        LOCMOVEDFROM,
+      </if>
+      <if test="reason != null" >
+        REASON,
+      </if>
+      <if test="toid != null" >
+        TOID,
+      </if>
+      <if test="finaltoloc != null" >
+        FINALTOLOC,
+      </if>
+      <if test="adddate != null" >
+        ADDDATE,
+      </if>
+      <if test="addwho != null" >
+        ADDWHO,
+      </if>
+      <if test="editdate != null" >
+        EDITDATE,
+      </if>
+      <if test="editwho != null" >
+        EDITWHO,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="sendcode != null" >
+        SENDCODE,
+      </if>
+      <if test="sendtime != null" >
+        SENDTIME,
+      </if>
+      <if test="reType != null" >
+        RE_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="replenishmentgroup != null" >
+        #{replenishmentgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="replenishmentkey != null" >
+        #{replenishmentkey,jdbcType=VARCHAR},
+      </if>
+      <if test="serialkey != null" >
+        #{serialkey,jdbcType=DECIMAL},
+      </if>
+      <if test="whseid != null" >
+        #{whseid,jdbcType=VARCHAR},
+      </if>
+      <if test="storerkey != null" >
+        #{storerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="fromloc != null" >
+        #{fromloc,jdbcType=VARCHAR},
+      </if>
+      <if test="toloc != null" >
+        #{toloc,jdbcType=VARCHAR},
+      </if>
+      <if test="lot != null" >
+        #{lot,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="qtymoved != null" >
+        #{qtymoved,jdbcType=DECIMAL},
+      </if>
+      <if test="qtyinpickloc != null" >
+        #{qtyinpickloc,jdbcType=DECIMAL},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="uom != null" >
+        #{uom,jdbcType=VARCHAR},
+      </if>
+      <if test="packkey != null" >
+        #{packkey,jdbcType=VARCHAR},
+      </if>
+      <if test="idmoved != null" >
+        #{idmoved,jdbcType=VARCHAR},
+      </if>
+      <if test="lotmoved != null" >
+        #{lotmoved,jdbcType=VARCHAR},
+      </if>
+      <if test="locmovedfrom != null" >
+        #{locmovedfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        #{toid,jdbcType=VARCHAR},
+      </if>
+      <if test="finaltoloc != null" >
+        #{finaltoloc,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sendcode != null" >
+        #{sendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reType != null" >
+        #{reType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.report.Replenishment" >
+    update REPLENISHMENT
+    <set >
+      <if test="serialkey != null" >
+        SERIALKEY = #{serialkey,jdbcType=DECIMAL},
+      </if>
+      <if test="whseid != null" >
+        WHSEID = #{whseid,jdbcType=VARCHAR},
+      </if>
+      <if test="storerkey != null" >
+        STORERKEY = #{storerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        SKU = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="fromloc != null" >
+        FROMLOC = #{fromloc,jdbcType=VARCHAR},
+      </if>
+      <if test="toloc != null" >
+        TOLOC = #{toloc,jdbcType=VARCHAR},
+      </if>
+      <if test="lot != null" >
+        LOT = #{lot,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        QTY = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="qtymoved != null" >
+        QTYMOVED = #{qtymoved,jdbcType=DECIMAL},
+      </if>
+      <if test="qtyinpickloc != null" >
+        QTYINPICKLOC = #{qtyinpickloc,jdbcType=DECIMAL},
+      </if>
+      <if test="priority != null" >
+        PRIORITY = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="uom != null" >
+        UOM = #{uom,jdbcType=VARCHAR},
+      </if>
+      <if test="packkey != null" >
+        PACKKEY = #{packkey,jdbcType=VARCHAR},
+      </if>
+      <if test="idmoved != null" >
+        IDMOVED = #{idmoved,jdbcType=VARCHAR},
+      </if>
+      <if test="lotmoved != null" >
+        LOTMOVED = #{lotmoved,jdbcType=VARCHAR},
+      </if>
+      <if test="locmovedfrom != null" >
+        LOCMOVEDFROM = #{locmovedfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        REASON = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        TOID = #{toid,jdbcType=VARCHAR},
+      </if>
+      <if test="finaltoloc != null" >
+        FINALTOLOC = #{finaltoloc,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        ADDWHO = #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        EDITWHO = #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sendcode != null" >
+        SENDCODE = #{sendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reType != null" >
+        RE_TYPE = #{reType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where REPLENISHMENTGROUP = #{replenishmentgroup,jdbcType=VARCHAR}
+      and REPLENISHMENTKEY = #{replenishmentkey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.report.Replenishment" >
+    update REPLENISHMENT
+    set SERIALKEY = #{serialkey,jdbcType=DECIMAL},
+      WHSEID = #{whseid,jdbcType=VARCHAR},
+      STORERKEY = #{storerkey,jdbcType=VARCHAR},
+      SKU = #{sku,jdbcType=VARCHAR},
+      FROMLOC = #{fromloc,jdbcType=VARCHAR},
+      TOLOC = #{toloc,jdbcType=VARCHAR},
+      LOT = #{lot,jdbcType=VARCHAR},
+      ID = #{id,jdbcType=VARCHAR},
+      QTY = #{qty,jdbcType=DECIMAL},
+      QTYMOVED = #{qtymoved,jdbcType=DECIMAL},
+      QTYINPICKLOC = #{qtyinpickloc,jdbcType=DECIMAL},
+      PRIORITY = #{priority,jdbcType=VARCHAR},
+      UOM = #{uom,jdbcType=VARCHAR},
+      PACKKEY = #{packkey,jdbcType=VARCHAR},
+      IDMOVED = #{idmoved,jdbcType=VARCHAR},
+      LOTMOVED = #{lotmoved,jdbcType=VARCHAR},
+      LOCMOVEDFROM = #{locmovedfrom,jdbcType=VARCHAR},
+      REASON = #{reason,jdbcType=VARCHAR},
+      TOID = #{toid,jdbcType=VARCHAR},
+      FINALTOLOC = #{finaltoloc,jdbcType=VARCHAR},
+      ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      ADDWHO = #{addwho,jdbcType=VARCHAR},
+      EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      EDITWHO = #{editwho,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      SENDCODE = #{sendcode,jdbcType=VARCHAR},
+      SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      RE_TYPE = #{reType,jdbcType=VARCHAR}
+    where REPLENISHMENTGROUP = #{replenishmentgroup,jdbcType=VARCHAR}
+      and REPLENISHMENTKEY = #{replenishmentkey,jdbcType=VARCHAR}
+  </update>
+  <select id="getQingPeiData19" resultType="java.lang.Integer">
+select nvl(sum(qtyinpickloc),0) qty  from replenishment where status='9' and (to_char(adddate, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData20" resultType="java.lang.Integer">
+select nvl(sum(qtyinpickloc),0)  qty from replenishment where status in('0','1','2')
+    </select>
+</mapper>

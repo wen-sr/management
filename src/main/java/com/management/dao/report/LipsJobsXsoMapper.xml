@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.LipsJobsXsoMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.LipsJobsXso" >
+    <constructor >
+      <idArg column="DOC_NUMBER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_REGISTER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_STORERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_WH" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_COMPANY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_COMPNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_TYPE" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="DOC_ISSUER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_ISSDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DOC_PRIORITY" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="DOC_FINDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="doc_STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_DONE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_CONSK_QTY" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="DOC_AREA_QTY" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="DOC_SUSR1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SUSR2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SUSR3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SUSR4" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SUSR5" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Adddate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="AddWho" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Editdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EditWho" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BATCHNO" jdbcType="NCHAR" javaType="java.lang.String" />
+      <arg column="ERP_STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ERP_DATE" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="ERP_TZDH" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="doc_transno" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="doc_xsogroupkey" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="doc_qty" jdbcType="NVARCHAR" javaType="java.lang.String" />
+      <arg column="doc_traycode" jdbcType="LONGNVARCHAR" javaType="java.lang.String" />
+      <arg column="doc_deviceno" jdbcType="NVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DOC_NUMBER, DOC_REGISTER, DOC_STORERKEY, DOC_WH, DOC_COMPANY, DOC_COMPNAME, DOC_TYPE, 
+    DOC_ISSUER, DOC_ISSDATE, DOC_PRIORITY, DOC_FINDATE, doc_STATUS, DOC_DONE, DOC_CONSK_QTY, 
+    DOC_AREA_QTY, DOC_SUSR1, DOC_SUSR2, DOC_SUSR3, DOC_SUSR4, DOC_SUSR5, Adddate, AddWho, 
+    Editdate, EditWho, BATCHNO, ERP_STATUS, ERP_DATE, ERP_TZDH, doc_transno, doc_xsogroupkey, 
+    doc_qty, doc_traycode, doc_deviceno
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from LIPS_JOBS_XSO
+    where DOC_NUMBER = #{docNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LIPS_JOBS_XSO
+    where DOC_NUMBER = #{docNumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.report.LipsJobsXso" >
+    insert into LIPS_JOBS_XSO (DOC_NUMBER, DOC_REGISTER, DOC_STORERKEY, 
+      DOC_WH, DOC_COMPANY, DOC_COMPNAME, 
+      DOC_TYPE, DOC_ISSUER, DOC_ISSDATE, 
+      DOC_PRIORITY, DOC_FINDATE, doc_STATUS, 
+      DOC_DONE, DOC_CONSK_QTY, DOC_AREA_QTY, 
+      DOC_SUSR1, DOC_SUSR2, DOC_SUSR3, 
+      DOC_SUSR4, DOC_SUSR5, Adddate, 
+      AddWho, Editdate, EditWho, 
+      BATCHNO, ERP_STATUS, ERP_DATE, 
+      ERP_TZDH, doc_transno, doc_xsogroupkey, 
+      doc_qty, doc_traycode, doc_deviceno
+      )
+    values (#{docNumber,jdbcType=VARCHAR}, #{docRegister,jdbcType=VARCHAR}, #{docStorerkey,jdbcType=VARCHAR}, 
+      #{docWh,jdbcType=VARCHAR}, #{docCompany,jdbcType=VARCHAR}, #{docCompname,jdbcType=VARCHAR}, 
+      #{docType,jdbcType=SMALLINT}, #{docIssuer,jdbcType=VARCHAR}, #{docIssdate,jdbcType=TIMESTAMP}, 
+      #{docPriority,jdbcType=SMALLINT}, #{docFindate,jdbcType=TIMESTAMP}, #{docStatus,jdbcType=VARCHAR}, 
+      #{docDone,jdbcType=VARCHAR}, #{docConskQty,jdbcType=SMALLINT}, #{docAreaQty,jdbcType=SMALLINT}, 
+      #{docSusr1,jdbcType=VARCHAR}, #{docSusr2,jdbcType=VARCHAR}, #{docSusr3,jdbcType=VARCHAR}, 
+      #{docSusr4,jdbcType=VARCHAR}, #{docSusr5,jdbcType=VARCHAR}, #{adddate,jdbcType=TIMESTAMP}, 
+      #{addwho,jdbcType=VARCHAR}, #{editdate,jdbcType=TIMESTAMP}, #{editwho,jdbcType=VARCHAR}, 
+      #{batchno,jdbcType=NCHAR}, #{erpStatus,jdbcType=VARCHAR}, #{erpDate,jdbcType=NVARCHAR}, 
+      #{erpTzdh,jdbcType=VARCHAR}, #{docTransno,jdbcType=NVARCHAR}, #{docXsogroupkey,jdbcType=NVARCHAR}, 
+      #{docQty,jdbcType=NVARCHAR}, #{docTraycode,jdbcType=LONGNVARCHAR}, #{docDeviceno,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.LipsJobsXso" >
+    insert into LIPS_JOBS_XSO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docNumber != null" >
+        DOC_NUMBER,
+      </if>
+      <if test="docRegister != null" >
+        DOC_REGISTER,
+      </if>
+      <if test="docStorerkey != null" >
+        DOC_STORERKEY,
+      </if>
+      <if test="docWh != null" >
+        DOC_WH,
+      </if>
+      <if test="docCompany != null" >
+        DOC_COMPANY,
+      </if>
+      <if test="docCompname != null" >
+        DOC_COMPNAME,
+      </if>
+      <if test="docType != null" >
+        DOC_TYPE,
+      </if>
+      <if test="docIssuer != null" >
+        DOC_ISSUER,
+      </if>
+      <if test="docIssdate != null" >
+        DOC_ISSDATE,
+      </if>
+      <if test="docPriority != null" >
+        DOC_PRIORITY,
+      </if>
+      <if test="docFindate != null" >
+        DOC_FINDATE,
+      </if>
+      <if test="docStatus != null" >
+        doc_STATUS,
+      </if>
+      <if test="docDone != null" >
+        DOC_DONE,
+      </if>
+      <if test="docConskQty != null" >
+        DOC_CONSK_QTY,
+      </if>
+      <if test="docAreaQty != null" >
+        DOC_AREA_QTY,
+      </if>
+      <if test="docSusr1 != null" >
+        DOC_SUSR1,
+      </if>
+      <if test="docSusr2 != null" >
+        DOC_SUSR2,
+      </if>
+      <if test="docSusr3 != null" >
+        DOC_SUSR3,
+      </if>
+      <if test="docSusr4 != null" >
+        DOC_SUSR4,
+      </if>
+      <if test="docSusr5 != null" >
+        DOC_SUSR5,
+      </if>
+      <if test="adddate != null" >
+        Adddate,
+      </if>
+      <if test="addwho != null" >
+        AddWho,
+      </if>
+      <if test="editdate != null" >
+        Editdate,
+      </if>
+      <if test="editwho != null" >
+        EditWho,
+      </if>
+      <if test="batchno != null" >
+        BATCHNO,
+      </if>
+      <if test="erpStatus != null" >
+        ERP_STATUS,
+      </if>
+      <if test="erpDate != null" >
+        ERP_DATE,
+      </if>
+      <if test="erpTzdh != null" >
+        ERP_TZDH,
+      </if>
+      <if test="docTransno != null" >
+        doc_transno,
+      </if>
+      <if test="docXsogroupkey != null" >
+        doc_xsogroupkey,
+      </if>
+      <if test="docQty != null" >
+        doc_qty,
+      </if>
+      <if test="docTraycode != null" >
+        doc_traycode,
+      </if>
+      <if test="docDeviceno != null" >
+        doc_deviceno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docNumber != null" >
+        #{docNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="docRegister != null" >
+        #{docRegister,jdbcType=VARCHAR},
+      </if>
+      <if test="docStorerkey != null" >
+        #{docStorerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="docWh != null" >
+        #{docWh,jdbcType=VARCHAR},
+      </if>
+      <if test="docCompany != null" >
+        #{docCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="docCompname != null" >
+        #{docCompname,jdbcType=VARCHAR},
+      </if>
+      <if test="docType != null" >
+        #{docType,jdbcType=SMALLINT},
+      </if>
+      <if test="docIssuer != null" >
+        #{docIssuer,jdbcType=VARCHAR},
+      </if>
+      <if test="docIssdate != null" >
+        #{docIssdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="docPriority != null" >
+        #{docPriority,jdbcType=SMALLINT},
+      </if>
+      <if test="docFindate != null" >
+        #{docFindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="docStatus != null" >
+        #{docStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="docDone != null" >
+        #{docDone,jdbcType=VARCHAR},
+      </if>
+      <if test="docConskQty != null" >
+        #{docConskQty,jdbcType=SMALLINT},
+      </if>
+      <if test="docAreaQty != null" >
+        #{docAreaQty,jdbcType=SMALLINT},
+      </if>
+      <if test="docSusr1 != null" >
+        #{docSusr1,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr2 != null" >
+        #{docSusr2,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr3 != null" >
+        #{docSusr3,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr4 != null" >
+        #{docSusr4,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr5 != null" >
+        #{docSusr5,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="batchno != null" >
+        #{batchno,jdbcType=NCHAR},
+      </if>
+      <if test="erpStatus != null" >
+        #{erpStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="erpDate != null" >
+        #{erpDate,jdbcType=NVARCHAR},
+      </if>
+      <if test="erpTzdh != null" >
+        #{erpTzdh,jdbcType=VARCHAR},
+      </if>
+      <if test="docTransno != null" >
+        #{docTransno,jdbcType=NVARCHAR},
+      </if>
+      <if test="docXsogroupkey != null" >
+        #{docXsogroupkey,jdbcType=NVARCHAR},
+      </if>
+      <if test="docQty != null" >
+        #{docQty,jdbcType=NVARCHAR},
+      </if>
+      <if test="docTraycode != null" >
+        #{docTraycode,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="docDeviceno != null" >
+        #{docDeviceno,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.report.LipsJobsXso" >
+    update LIPS_JOBS_XSO
+    <set >
+      <if test="docRegister != null" >
+        DOC_REGISTER = #{docRegister,jdbcType=VARCHAR},
+      </if>
+      <if test="docStorerkey != null" >
+        DOC_STORERKEY = #{docStorerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="docWh != null" >
+        DOC_WH = #{docWh,jdbcType=VARCHAR},
+      </if>
+      <if test="docCompany != null" >
+        DOC_COMPANY = #{docCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="docCompname != null" >
+        DOC_COMPNAME = #{docCompname,jdbcType=VARCHAR},
+      </if>
+      <if test="docType != null" >
+        DOC_TYPE = #{docType,jdbcType=SMALLINT},
+      </if>
+      <if test="docIssuer != null" >
+        DOC_ISSUER = #{docIssuer,jdbcType=VARCHAR},
+      </if>
+      <if test="docIssdate != null" >
+        DOC_ISSDATE = #{docIssdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="docPriority != null" >
+        DOC_PRIORITY = #{docPriority,jdbcType=SMALLINT},
+      </if>
+      <if test="docFindate != null" >
+        DOC_FINDATE = #{docFindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="docStatus != null" >
+        doc_STATUS = #{docStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="docDone != null" >
+        DOC_DONE = #{docDone,jdbcType=VARCHAR},
+      </if>
+      <if test="docConskQty != null" >
+        DOC_CONSK_QTY = #{docConskQty,jdbcType=SMALLINT},
+      </if>
+      <if test="docAreaQty != null" >
+        DOC_AREA_QTY = #{docAreaQty,jdbcType=SMALLINT},
+      </if>
+      <if test="docSusr1 != null" >
+        DOC_SUSR1 = #{docSusr1,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr2 != null" >
+        DOC_SUSR2 = #{docSusr2,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr3 != null" >
+        DOC_SUSR3 = #{docSusr3,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr4 != null" >
+        DOC_SUSR4 = #{docSusr4,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr5 != null" >
+        DOC_SUSR5 = #{docSusr5,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        Adddate = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        AddWho = #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        Editdate = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        EditWho = #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="batchno != null" >
+        BATCHNO = #{batchno,jdbcType=NCHAR},
+      </if>
+      <if test="erpStatus != null" >
+        ERP_STATUS = #{erpStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="erpDate != null" >
+        ERP_DATE = #{erpDate,jdbcType=NVARCHAR},
+      </if>
+      <if test="erpTzdh != null" >
+        ERP_TZDH = #{erpTzdh,jdbcType=VARCHAR},
+      </if>
+      <if test="docTransno != null" >
+        doc_transno = #{docTransno,jdbcType=NVARCHAR},
+      </if>
+      <if test="docXsogroupkey != null" >
+        doc_xsogroupkey = #{docXsogroupkey,jdbcType=NVARCHAR},
+      </if>
+      <if test="docQty != null" >
+        doc_qty = #{docQty,jdbcType=NVARCHAR},
+      </if>
+      <if test="docTraycode != null" >
+        doc_traycode = #{docTraycode,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="docDeviceno != null" >
+        doc_deviceno = #{docDeviceno,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where DOC_NUMBER = #{docNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.report.LipsJobsXso" >
+    update LIPS_JOBS_XSO
+    set DOC_REGISTER = #{docRegister,jdbcType=VARCHAR},
+      DOC_STORERKEY = #{docStorerkey,jdbcType=VARCHAR},
+      DOC_WH = #{docWh,jdbcType=VARCHAR},
+      DOC_COMPANY = #{docCompany,jdbcType=VARCHAR},
+      DOC_COMPNAME = #{docCompname,jdbcType=VARCHAR},
+      DOC_TYPE = #{docType,jdbcType=SMALLINT},
+      DOC_ISSUER = #{docIssuer,jdbcType=VARCHAR},
+      DOC_ISSDATE = #{docIssdate,jdbcType=TIMESTAMP},
+      DOC_PRIORITY = #{docPriority,jdbcType=SMALLINT},
+      DOC_FINDATE = #{docFindate,jdbcType=TIMESTAMP},
+      doc_STATUS = #{docStatus,jdbcType=VARCHAR},
+      DOC_DONE = #{docDone,jdbcType=VARCHAR},
+      DOC_CONSK_QTY = #{docConskQty,jdbcType=SMALLINT},
+      DOC_AREA_QTY = #{docAreaQty,jdbcType=SMALLINT},
+      DOC_SUSR1 = #{docSusr1,jdbcType=VARCHAR},
+      DOC_SUSR2 = #{docSusr2,jdbcType=VARCHAR},
+      DOC_SUSR3 = #{docSusr3,jdbcType=VARCHAR},
+      DOC_SUSR4 = #{docSusr4,jdbcType=VARCHAR},
+      DOC_SUSR5 = #{docSusr5,jdbcType=VARCHAR},
+      Adddate = #{adddate,jdbcType=TIMESTAMP},
+      AddWho = #{addwho,jdbcType=VARCHAR},
+      Editdate = #{editdate,jdbcType=TIMESTAMP},
+      EditWho = #{editwho,jdbcType=VARCHAR},
+      BATCHNO = #{batchno,jdbcType=NCHAR},
+      ERP_STATUS = #{erpStatus,jdbcType=VARCHAR},
+      ERP_DATE = #{erpDate,jdbcType=NVARCHAR},
+      ERP_TZDH = #{erpTzdh,jdbcType=VARCHAR},
+      doc_transno = #{docTransno,jdbcType=NVARCHAR},
+      doc_xsogroupkey = #{docXsogroupkey,jdbcType=NVARCHAR},
+      doc_qty = #{docQty,jdbcType=NVARCHAR},
+      doc_traycode = #{docTraycode,jdbcType=LONGNVARCHAR},
+      doc_deviceno = #{docDeviceno,jdbcType=NVARCHAR}
+    where DOC_NUMBER = #{docNumber,jdbcType=VARCHAR}
+  </update>
+  <select id="wj" parameterType="com.management.vo.lipsJobsXso.WjVo" resultType="com.management.vo.lipsJobsXso.WjVo">
+select DOC_NUMBER docNumber ,DOC_REGISTER docRegister,DOC_COMPANY docCompany,DOC_COMPNAME docCompname,doc_STATUS docStatus
+from LIPS_JOBS_XSO where DOC_NUMBER like '%'+#{docNumber}+'%'
+  </select>
+</mapper>

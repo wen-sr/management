@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.JobscontextXsoMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.JobscontextXso" >
+    <constructor >
+      <idArg column="DOC_NUMBER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <idArg column="DOC_SEQ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_CONSK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SHORTNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SKU" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_DESCR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_EQTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_CQTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_CASE_QTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_WESQTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_AQTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_AMT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_ACT_AMT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_NET" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_ACT_MY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_PRICE" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_DISCOUNT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_CAT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_CATNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_EXPORTNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_LOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_PACKKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SUSR1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SUSR2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SUSR3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SUSR4" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_SUSR5" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ADDWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EDITWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_ZQTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DOC_WMS_AQTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="OPS_SHELFQTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="OPS_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPS_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DOC_BUNDLE_QTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DOC_NUMBER, DOC_SEQ, DOC_CONSK, DOC_SHORTNAME, DOC_SKU, DOC_DESCR, DOC_EQTY, DOC_CQTY, 
+    DOC_CASE_QTY, DOC_WESQTY, DOC_AQTY, DOC_AMT, DOC_ACT_AMT, DOC_NET, DOC_ACT_MY, DOC_PRICE, 
+    DOC_DISCOUNT, DOC_CAT, DOC_CATNAME, DOC_EXPORTNO, DOC_LOC, DOC_PACKKEY, DOC_SUSR1, 
+    DOC_SUSR2, DOC_SUSR3, DOC_SUSR4, DOC_SUSR5, ADDDATE, ADDWHO, EDITDATE, EDITWHO, STATUS, 
+    DOC_ZQTY, DOC_WMS_AQTY, OPS_SHELFQTY, OPS_USER, OPS_DATE, DOC_BUNDLE_QTY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.management.pojo.report.JobscontextXsoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from JOBSCONTEXT_XSO
+    where DOC_NUMBER = #{docNumber,jdbcType=VARCHAR}
+      and DOC_SEQ = #{docSeq,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.management.pojo.report.JobscontextXsoKey" >
+    delete from JOBSCONTEXT_XSO
+    where DOC_NUMBER = #{docNumber,jdbcType=VARCHAR}
+      and DOC_SEQ = #{docSeq,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.report.JobscontextXso" >
+    insert into JOBSCONTEXT_XSO (DOC_NUMBER, DOC_SEQ, DOC_CONSK, 
+      DOC_SHORTNAME, DOC_SKU, DOC_DESCR, 
+      DOC_EQTY, DOC_CQTY, DOC_CASE_QTY, 
+      DOC_WESQTY, DOC_AQTY, DOC_AMT, 
+      DOC_ACT_AMT, DOC_NET, DOC_ACT_MY, 
+      DOC_PRICE, DOC_DISCOUNT, DOC_CAT, 
+      DOC_CATNAME, DOC_EXPORTNO, DOC_LOC, 
+      DOC_PACKKEY, DOC_SUSR1, DOC_SUSR2, 
+      DOC_SUSR3, DOC_SUSR4, DOC_SUSR5, 
+      ADDDATE, ADDWHO, EDITDATE, 
+      EDITWHO, STATUS, DOC_ZQTY, 
+      DOC_WMS_AQTY, OPS_SHELFQTY, OPS_USER, 
+      OPS_DATE, DOC_BUNDLE_QTY)
+    values (#{docNumber,jdbcType=VARCHAR}, #{docSeq,jdbcType=VARCHAR}, #{docConsk,jdbcType=VARCHAR}, 
+      #{docShortname,jdbcType=VARCHAR}, #{docSku,jdbcType=VARCHAR}, #{docDescr,jdbcType=VARCHAR}, 
+      #{docEqty,jdbcType=DECIMAL}, #{docCqty,jdbcType=DECIMAL}, #{docCaseQty,jdbcType=DECIMAL}, 
+      #{docWesqty,jdbcType=DECIMAL}, #{docAqty,jdbcType=DECIMAL}, #{docAmt,jdbcType=DECIMAL}, 
+      #{docActAmt,jdbcType=DECIMAL}, #{docNet,jdbcType=DECIMAL}, #{docActMy,jdbcType=DECIMAL}, 
+      #{docPrice,jdbcType=DECIMAL}, #{docDiscount,jdbcType=DECIMAL}, #{docCat,jdbcType=VARCHAR}, 
+      #{docCatname,jdbcType=VARCHAR}, #{docExportno,jdbcType=VARCHAR}, #{docLoc,jdbcType=VARCHAR}, 
+      #{docPackkey,jdbcType=VARCHAR}, #{docSusr1,jdbcType=VARCHAR}, #{docSusr2,jdbcType=VARCHAR}, 
+      #{docSusr3,jdbcType=VARCHAR}, #{docSusr4,jdbcType=VARCHAR}, #{docSusr5,jdbcType=VARCHAR}, 
+      #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=VARCHAR}, #{editdate,jdbcType=TIMESTAMP}, 
+      #{editwho,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{docZqty,jdbcType=DECIMAL}, 
+      #{docWmsAqty,jdbcType=DECIMAL}, #{opsShelfqty,jdbcType=DECIMAL}, #{opsUser,jdbcType=VARCHAR}, 
+      #{opsDate,jdbcType=TIMESTAMP}, #{docBundleQty,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.JobscontextXso" >
+    insert into JOBSCONTEXT_XSO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docNumber != null" >
+        DOC_NUMBER,
+      </if>
+      <if test="docSeq != null" >
+        DOC_SEQ,
+      </if>
+      <if test="docConsk != null" >
+        DOC_CONSK,
+      </if>
+      <if test="docShortname != null" >
+        DOC_SHORTNAME,
+      </if>
+      <if test="docSku != null" >
+        DOC_SKU,
+      </if>
+      <if test="docDescr != null" >
+        DOC_DESCR,
+      </if>
+      <if test="docEqty != null" >
+        DOC_EQTY,
+      </if>
+      <if test="docCqty != null" >
+        DOC_CQTY,
+      </if>
+      <if test="docCaseQty != null" >
+        DOC_CASE_QTY,
+      </if>
+      <if test="docWesqty != null" >
+        DOC_WESQTY,
+      </if>
+      <if test="docAqty != null" >
+        DOC_AQTY,
+      </if>
+      <if test="docAmt != null" >
+        DOC_AMT,
+      </if>
+      <if test="docActAmt != null" >
+        DOC_ACT_AMT,
+      </if>
+      <if test="docNet != null" >
+        DOC_NET,
+      </if>
+      <if test="docActMy != null" >
+        DOC_ACT_MY,
+      </if>
+      <if test="docPrice != null" >
+        DOC_PRICE,
+      </if>
+      <if test="docDiscount != null" >
+        DOC_DISCOUNT,
+      </if>
+      <if test="docCat != null" >
+        DOC_CAT,
+      </if>
+      <if test="docCatname != null" >
+        DOC_CATNAME,
+      </if>
+      <if test="docExportno != null" >
+        DOC_EXPORTNO,
+      </if>
+      <if test="docLoc != null" >
+        DOC_LOC,
+      </if>
+      <if test="docPackkey != null" >
+        DOC_PACKKEY,
+      </if>
+      <if test="docSusr1 != null" >
+        DOC_SUSR1,
+      </if>
+      <if test="docSusr2 != null" >
+        DOC_SUSR2,
+      </if>
+      <if test="docSusr3 != null" >
+        DOC_SUSR3,
+      </if>
+      <if test="docSusr4 != null" >
+        DOC_SUSR4,
+      </if>
+      <if test="docSusr5 != null" >
+        DOC_SUSR5,
+      </if>
+      <if test="adddate != null" >
+        ADDDATE,
+      </if>
+      <if test="addwho != null" >
+        ADDWHO,
+      </if>
+      <if test="editdate != null" >
+        EDITDATE,
+      </if>
+      <if test="editwho != null" >
+        EDITWHO,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="docZqty != null" >
+        DOC_ZQTY,
+      </if>
+      <if test="docWmsAqty != null" >
+        DOC_WMS_AQTY,
+      </if>
+      <if test="opsShelfqty != null" >
+        OPS_SHELFQTY,
+      </if>
+      <if test="opsUser != null" >
+        OPS_USER,
+      </if>
+      <if test="opsDate != null" >
+        OPS_DATE,
+      </if>
+      <if test="docBundleQty != null" >
+        DOC_BUNDLE_QTY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docNumber != null" >
+        #{docNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="docSeq != null" >
+        #{docSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="docConsk != null" >
+        #{docConsk,jdbcType=VARCHAR},
+      </if>
+      <if test="docShortname != null" >
+        #{docShortname,jdbcType=VARCHAR},
+      </if>
+      <if test="docSku != null" >
+        #{docSku,jdbcType=VARCHAR},
+      </if>
+      <if test="docDescr != null" >
+        #{docDescr,jdbcType=VARCHAR},
+      </if>
+      <if test="docEqty != null" >
+        #{docEqty,jdbcType=DECIMAL},
+      </if>
+      <if test="docCqty != null" >
+        #{docCqty,jdbcType=DECIMAL},
+      </if>
+      <if test="docCaseQty != null" >
+        #{docCaseQty,jdbcType=DECIMAL},
+      </if>
+      <if test="docWesqty != null" >
+        #{docWesqty,jdbcType=DECIMAL},
+      </if>
+      <if test="docAqty != null" >
+        #{docAqty,jdbcType=DECIMAL},
+      </if>
+      <if test="docAmt != null" >
+        #{docAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="docActAmt != null" >
+        #{docActAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="docNet != null" >
+        #{docNet,jdbcType=DECIMAL},
+      </if>
+      <if test="docActMy != null" >
+        #{docActMy,jdbcType=DECIMAL},
+      </if>
+      <if test="docPrice != null" >
+        #{docPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="docDiscount != null" >
+        #{docDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="docCat != null" >
+        #{docCat,jdbcType=VARCHAR},
+      </if>
+      <if test="docCatname != null" >
+        #{docCatname,jdbcType=VARCHAR},
+      </if>
+      <if test="docExportno != null" >
+        #{docExportno,jdbcType=VARCHAR},
+      </if>
+      <if test="docLoc != null" >
+        #{docLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="docPackkey != null" >
+        #{docPackkey,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr1 != null" >
+        #{docSusr1,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr2 != null" >
+        #{docSusr2,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr3 != null" >
+        #{docSusr3,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr4 != null" >
+        #{docSusr4,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr5 != null" >
+        #{docSusr5,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="docZqty != null" >
+        #{docZqty,jdbcType=DECIMAL},
+      </if>
+      <if test="docWmsAqty != null" >
+        #{docWmsAqty,jdbcType=DECIMAL},
+      </if>
+      <if test="opsShelfqty != null" >
+        #{opsShelfqty,jdbcType=DECIMAL},
+      </if>
+      <if test="opsUser != null" >
+        #{opsUser,jdbcType=VARCHAR},
+      </if>
+      <if test="opsDate != null" >
+        #{opsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="docBundleQty != null" >
+        #{docBundleQty,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.report.JobscontextXso" >
+    update JOBSCONTEXT_XSO
+    <set >
+      <if test="docConsk != null" >
+        DOC_CONSK = #{docConsk,jdbcType=VARCHAR},
+      </if>
+      <if test="docShortname != null" >
+        DOC_SHORTNAME = #{docShortname,jdbcType=VARCHAR},
+      </if>
+      <if test="docSku != null" >
+        DOC_SKU = #{docSku,jdbcType=VARCHAR},
+      </if>
+      <if test="docDescr != null" >
+        DOC_DESCR = #{docDescr,jdbcType=VARCHAR},
+      </if>
+      <if test="docEqty != null" >
+        DOC_EQTY = #{docEqty,jdbcType=DECIMAL},
+      </if>
+      <if test="docCqty != null" >
+        DOC_CQTY = #{docCqty,jdbcType=DECIMAL},
+      </if>
+      <if test="docCaseQty != null" >
+        DOC_CASE_QTY = #{docCaseQty,jdbcType=DECIMAL},
+      </if>
+      <if test="docWesqty != null" >
+        DOC_WESQTY = #{docWesqty,jdbcType=DECIMAL},
+      </if>
+      <if test="docAqty != null" >
+        DOC_AQTY = #{docAqty,jdbcType=DECIMAL},
+      </if>
+      <if test="docAmt != null" >
+        DOC_AMT = #{docAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="docActAmt != null" >
+        DOC_ACT_AMT = #{docActAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="docNet != null" >
+        DOC_NET = #{docNet,jdbcType=DECIMAL},
+      </if>
+      <if test="docActMy != null" >
+        DOC_ACT_MY = #{docActMy,jdbcType=DECIMAL},
+      </if>
+      <if test="docPrice != null" >
+        DOC_PRICE = #{docPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="docDiscount != null" >
+        DOC_DISCOUNT = #{docDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="docCat != null" >
+        DOC_CAT = #{docCat,jdbcType=VARCHAR},
+      </if>
+      <if test="docCatname != null" >
+        DOC_CATNAME = #{docCatname,jdbcType=VARCHAR},
+      </if>
+      <if test="docExportno != null" >
+        DOC_EXPORTNO = #{docExportno,jdbcType=VARCHAR},
+      </if>
+      <if test="docLoc != null" >
+        DOC_LOC = #{docLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="docPackkey != null" >
+        DOC_PACKKEY = #{docPackkey,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr1 != null" >
+        DOC_SUSR1 = #{docSusr1,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr2 != null" >
+        DOC_SUSR2 = #{docSusr2,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr3 != null" >
+        DOC_SUSR3 = #{docSusr3,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr4 != null" >
+        DOC_SUSR4 = #{docSusr4,jdbcType=VARCHAR},
+      </if>
+      <if test="docSusr5 != null" >
+        DOC_SUSR5 = #{docSusr5,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        ADDWHO = #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        EDITWHO = #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="docZqty != null" >
+        DOC_ZQTY = #{docZqty,jdbcType=DECIMAL},
+      </if>
+      <if test="docWmsAqty != null" >
+        DOC_WMS_AQTY = #{docWmsAqty,jdbcType=DECIMAL},
+      </if>
+      <if test="opsShelfqty != null" >
+        OPS_SHELFQTY = #{opsShelfqty,jdbcType=DECIMAL},
+      </if>
+      <if test="opsUser != null" >
+        OPS_USER = #{opsUser,jdbcType=VARCHAR},
+      </if>
+      <if test="opsDate != null" >
+        OPS_DATE = #{opsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="docBundleQty != null" >
+        DOC_BUNDLE_QTY = #{docBundleQty,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DOC_NUMBER = #{docNumber,jdbcType=VARCHAR}
+      and DOC_SEQ = #{docSeq,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.report.JobscontextXso" >
+    update JOBSCONTEXT_XSO
+    set DOC_CONSK = #{docConsk,jdbcType=VARCHAR},
+      DOC_SHORTNAME = #{docShortname,jdbcType=VARCHAR},
+      DOC_SKU = #{docSku,jdbcType=VARCHAR},
+      DOC_DESCR = #{docDescr,jdbcType=VARCHAR},
+      DOC_EQTY = #{docEqty,jdbcType=DECIMAL},
+      DOC_CQTY = #{docCqty,jdbcType=DECIMAL},
+      DOC_CASE_QTY = #{docCaseQty,jdbcType=DECIMAL},
+      DOC_WESQTY = #{docWesqty,jdbcType=DECIMAL},
+      DOC_AQTY = #{docAqty,jdbcType=DECIMAL},
+      DOC_AMT = #{docAmt,jdbcType=DECIMAL},
+      DOC_ACT_AMT = #{docActAmt,jdbcType=DECIMAL},
+      DOC_NET = #{docNet,jdbcType=DECIMAL},
+      DOC_ACT_MY = #{docActMy,jdbcType=DECIMAL},
+      DOC_PRICE = #{docPrice,jdbcType=DECIMAL},
+      DOC_DISCOUNT = #{docDiscount,jdbcType=DECIMAL},
+      DOC_CAT = #{docCat,jdbcType=VARCHAR},
+      DOC_CATNAME = #{docCatname,jdbcType=VARCHAR},
+      DOC_EXPORTNO = #{docExportno,jdbcType=VARCHAR},
+      DOC_LOC = #{docLoc,jdbcType=VARCHAR},
+      DOC_PACKKEY = #{docPackkey,jdbcType=VARCHAR},
+      DOC_SUSR1 = #{docSusr1,jdbcType=VARCHAR},
+      DOC_SUSR2 = #{docSusr2,jdbcType=VARCHAR},
+      DOC_SUSR3 = #{docSusr3,jdbcType=VARCHAR},
+      DOC_SUSR4 = #{docSusr4,jdbcType=VARCHAR},
+      DOC_SUSR5 = #{docSusr5,jdbcType=VARCHAR},
+      ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      ADDWHO = #{addwho,jdbcType=VARCHAR},
+      EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      EDITWHO = #{editwho,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DOC_ZQTY = #{docZqty,jdbcType=DECIMAL},
+      DOC_WMS_AQTY = #{docWmsAqty,jdbcType=DECIMAL},
+      OPS_SHELFQTY = #{opsShelfqty,jdbcType=DECIMAL},
+      OPS_USER = #{opsUser,jdbcType=VARCHAR},
+      OPS_DATE = #{opsDate,jdbcType=TIMESTAMP},
+      DOC_BUNDLE_QTY = #{docBundleQty,jdbcType=DECIMAL}
+    where DOC_NUMBER = #{docNumber,jdbcType=VARCHAR}
+      and DOC_SEQ = #{docSeq,jdbcType=VARCHAR}
+  </update>
+  <update id="go" parameterType="string">
+    update jobscontext_xso set doc_cqty = doc_cqty - {qty} where doc_number like '%'|| #{doc_number} || '%' and doc_sku = #{sku} and doc_consk = #{consk};
+  </update>
+  <select id="cx" parameterType="com.management.vo.xgw.XgwVo" resultType="com.management.vo.xgw.XgwVo" >
+select b.doc_consk consk,
+       b.doc_shortname,
+       b.doc_number,
+       b.doc_sku sku,
+       b.doc_descr,
+       b.doc_price,
+       sum(b.doc_eqty) kd,
+       sum((b.doc_cqty + b.doc_aqty + nvl(b.doc_zqty, 0))) ss,
+       sum((b.doc_eqty - (b.doc_cqty + b.doc_aqty + nvl(b.doc_zqty, 0)))) cy,
+       sum((b.doc_eqty - (b.doc_cqty + b.doc_aqty + nvl(b.doc_zqty, 0))) *
+           b.doc_price) cym,
+       c.barcode
+  from  jobscontext_xso b, sku c
+ where b.doc_sku = c.sku
+   and b.doc_number like '%'|| #{doc_number} || '%'
+   and (doc_eqty - (doc_cqty + doc_aqty + nvl(doc_zqty, 0))) > 0
+ group by b.doc_consk,
+          b.doc_shortname,
+          b.doc_number,
+          b.doc_sku,
+          b.doc_descr,
+          b.doc_price,
+          c.barcode
+  </select>
+  <update id="go1" parameterType="string">
+    update casedetail set qty = qty - {qty} where doc_number like '%'|| #{doc_number} || '%' and sku = #{sku} and exists (select '1' from caseid where casedetail.caseid = caseid.caseid and caseid.IF_CASEID='1' and caseid.consk= #{consk})
+  </update>
+  <update id="go2" parameterType="string">
+    update caseid set qty = qty - #{qty} where batchno like '%'|| #{doc_number} || '%' and caseid.consk= #{sku} and caseid.IF_CASEID='1' and exists (select '1' from casedetail where caseid.caseid = casedetail.caseid and sku = #{consk})
+  </update>
+</mapper>

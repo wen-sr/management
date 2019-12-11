@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.PickingStationWorkOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.PickingStationWorkOrder" >
+    <constructor >
+      <idArg column="ProcessingID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TaskType" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TaskGUID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PickingStationCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Priority" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TaskStatus" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ContainerCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MergeContainerSN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CreateTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="SendedTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="RepliedTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="BankTaskTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="HangUpFlag" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CallbackFlag" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CallbackTargetContainerCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ProcessingID, TaskType, TaskGUID, PickingStationCode, Priority, TaskStatus, ContainerCode, 
+    OrderCode, MergeContainerSN, CreateTime, SendedTime, RepliedTime, BankTaskTime, HangUpFlag, 
+    CallbackFlag, CallbackTargetContainerCode, Remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from PickingStationWorkOrder
+    where ProcessingID = #{processingid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from PickingStationWorkOrder
+    where ProcessingID = #{processingid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.report.PickingStationWorkOrder" >
+    insert into PickingStationWorkOrder (ProcessingID, TaskType, TaskGUID, 
+      PickingStationCode, Priority, TaskStatus, 
+      ContainerCode, OrderCode, MergeContainerSN, 
+      CreateTime, SendedTime, RepliedTime, 
+      BankTaskTime, HangUpFlag, CallbackFlag, 
+      CallbackTargetContainerCode, Remark)
+    values (#{processingid,jdbcType=INTEGER}, #{tasktype,jdbcType=VARCHAR}, #{taskguid,jdbcType=VARCHAR}, 
+      #{pickingstationcode,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, #{taskstatus,jdbcType=VARCHAR}, 
+      #{containercode,jdbcType=VARCHAR}, #{ordercode,jdbcType=VARCHAR}, #{mergecontainersn,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{sendedtime,jdbcType=TIMESTAMP}, #{repliedtime,jdbcType=TIMESTAMP}, 
+      #{banktasktime,jdbcType=TIMESTAMP}, #{hangupflag,jdbcType=VARCHAR}, #{callbackflag,jdbcType=VARCHAR}, 
+      #{callbacktargetcontainercode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.PickingStationWorkOrder" >
+    insert into PickingStationWorkOrder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="processingid != null" >
+        ProcessingID,
+      </if>
+      <if test="tasktype != null" >
+        TaskType,
+      </if>
+      <if test="taskguid != null" >
+        TaskGUID,
+      </if>
+      <if test="pickingstationcode != null" >
+        PickingStationCode,
+      </if>
+      <if test="priority != null" >
+        Priority,
+      </if>
+      <if test="taskstatus != null" >
+        TaskStatus,
+      </if>
+      <if test="containercode != null" >
+        ContainerCode,
+      </if>
+      <if test="ordercode != null" >
+        OrderCode,
+      </if>
+      <if test="mergecontainersn != null" >
+        MergeContainerSN,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="sendedtime != null" >
+        SendedTime,
+      </if>
+      <if test="repliedtime != null" >
+        RepliedTime,
+      </if>
+      <if test="banktasktime != null" >
+        BankTaskTime,
+      </if>
+      <if test="hangupflag != null" >
+        HangUpFlag,
+      </if>
+      <if test="callbackflag != null" >
+        CallbackFlag,
+      </if>
+      <if test="callbacktargetcontainercode != null" >
+        CallbackTargetContainerCode,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="processingid != null" >
+        #{processingid,jdbcType=INTEGER},
+      </if>
+      <if test="tasktype != null" >
+        #{tasktype,jdbcType=VARCHAR},
+      </if>
+      <if test="taskguid != null" >
+        #{taskguid,jdbcType=VARCHAR},
+      </if>
+      <if test="pickingstationcode != null" >
+        #{pickingstationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="taskstatus != null" >
+        #{taskstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="containercode != null" >
+        #{containercode,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercode != null" >
+        #{ordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="mergecontainersn != null" >
+        #{mergecontainersn,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendedtime != null" >
+        #{sendedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repliedtime != null" >
+        #{repliedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="banktasktime != null" >
+        #{banktasktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hangupflag != null" >
+        #{hangupflag,jdbcType=VARCHAR},
+      </if>
+      <if test="callbackflag != null" >
+        #{callbackflag,jdbcType=VARCHAR},
+      </if>
+      <if test="callbacktargetcontainercode != null" >
+        #{callbacktargetcontainercode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.report.PickingStationWorkOrder" >
+    update PickingStationWorkOrder
+    <set >
+      <if test="tasktype != null" >
+        TaskType = #{tasktype,jdbcType=VARCHAR},
+      </if>
+      <if test="taskguid != null" >
+        TaskGUID = #{taskguid,jdbcType=VARCHAR},
+      </if>
+      <if test="pickingstationcode != null" >
+        PickingStationCode = #{pickingstationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        Priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="taskstatus != null" >
+        TaskStatus = #{taskstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="containercode != null" >
+        ContainerCode = #{containercode,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercode != null" >
+        OrderCode = #{ordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="mergecontainersn != null" >
+        MergeContainerSN = #{mergecontainersn,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendedtime != null" >
+        SendedTime = #{sendedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repliedtime != null" >
+        RepliedTime = #{repliedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="banktasktime != null" >
+        BankTaskTime = #{banktasktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hangupflag != null" >
+        HangUpFlag = #{hangupflag,jdbcType=VARCHAR},
+      </if>
+      <if test="callbackflag != null" >
+        CallbackFlag = #{callbackflag,jdbcType=VARCHAR},
+      </if>
+      <if test="callbacktargetcontainercode != null" >
+        CallbackTargetContainerCode = #{callbacktargetcontainercode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ProcessingID = #{processingid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.report.PickingStationWorkOrder" >
+    update PickingStationWorkOrder
+    set TaskType = #{tasktype,jdbcType=VARCHAR},
+      TaskGUID = #{taskguid,jdbcType=VARCHAR},
+      PickingStationCode = #{pickingstationcode,jdbcType=VARCHAR},
+      Priority = #{priority,jdbcType=INTEGER},
+      TaskStatus = #{taskstatus,jdbcType=VARCHAR},
+      ContainerCode = #{containercode,jdbcType=VARCHAR},
+      OrderCode = #{ordercode,jdbcType=VARCHAR},
+      MergeContainerSN = #{mergecontainersn,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      SendedTime = #{sendedtime,jdbcType=TIMESTAMP},
+      RepliedTime = #{repliedtime,jdbcType=TIMESTAMP},
+      BankTaskTime = #{banktasktime,jdbcType=TIMESTAMP},
+      HangUpFlag = #{hangupflag,jdbcType=VARCHAR},
+      CallbackFlag = #{callbackflag,jdbcType=VARCHAR},
+      CallbackTargetContainerCode = #{callbacktargetcontainercode,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR}
+    where ProcessingID = #{processingid,jdbcType=INTEGER}
+  </update>
+  <select id="getQingPeiData21" resultType="java.lang.Integer">
+    select isnull(sum (a.COUNT),0) as qty from (
+    SELECT E.EmployeeName,A.CreateTime,a.Operator,SUM(A.COUNT) AS COUNT,COUNT(A.OrderCode) AS Task FROM (
+    SELECT PF.Operator ,PF.OrderCode ,SUM(COUNT) AS COUNT ,
+    CONVERT(varchar(10), PF.CreateTime, 120 ) AS  CreateTime
+    FROM PutAwayOrderForShelf  AS PF
+    WHERE PF.CreateTime &gt;= #{date_begin}+' 00:00:00.000' AND PF.CreateTime &lt;= #{date_end}+' 23:59:59.000'
+    GROUP BY PF.Operator ,PF.OrderCode,CONVERT(varchar(10), PF.CreateTime, 120 )) AS A
+    LEFT JOIN Employee AS E ON E.EmployeeCode=A.Operator
+    GROUP BY E.EmployeeName,a.CreateTime,a.Operator)  as a
+    </select>
+  <select id="getQingPeiData22" resultType="java.lang.Integer">
+   select isnull(sum (a.COUNT),0) as qty from (
+SELECT E.EmployeeName,a.OperationTime,a.Operator,SUM(A.COUNT) AS COUNT,COUNT(A.OrderCode) AS Task FROM (
+SELECT RP.Operator ,RP.OrderCode ,SUM(COUNT) AS COUNT ,
+CONVERT(varchar(10), RP.OperationTime, 120 ) AS  OperationTime
+FROM ReContainerPickingShelfOrder  AS RP
+WHERE RP.OperationTime &gt;= #{date_begin}+' 00:00:00.000' AND RP.OperationTime &lt;= #{date_end}+' 23:59:59.000'
+GROUP BY RP.Operator ,RP.OrderCode,CONVERT(varchar(10), RP.OperationTime, 120 ) ) AS A
+LEFT JOIN Employee AS E ON E.EmployeeCode=A.Operator
+GROUP BY E.EmployeeName,a.OperationTime,a.Operator )  as a
+    </select>
+</mapper>
