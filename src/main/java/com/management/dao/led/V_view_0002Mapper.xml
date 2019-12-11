@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.led.V_view_0002Mapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.led.V_view_0002" >
+    <constructor >
+      <arg column="入库总包件数" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="入库数箱" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="入库板数" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="路顺库入库数" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="路顺库出库数" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="出库总数" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="装车数" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="发运数" jdbcType="DECIMAL" javaType="java.lang.Short" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.led.V_view_0002" >
+    insert into V_VIEW_0002 (入库总包件数, 入库数箱, 入库板数, 
+      路顺库入库数, 路顺库出库数, 出库总数, 
+      装车数, 发运数)
+    values (#{入库总包件数,jdbcType=DECIMAL}, #{入库数箱,jdbcType=DECIMAL}, #{入库板数,jdbcType=DECIMAL}, 
+      #{路顺库入库数,jdbcType=DECIMAL}, #{路顺库出库数,jdbcType=DECIMAL}, #{出库总数,jdbcType=DECIMAL}, 
+      #{装车数,jdbcType=DECIMAL}, #{发运数,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.led.V_view_0002" >
+    insert into V_VIEW_0002
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="入库总包件数 != null" >
+        入库总包件数,
+      </if>
+      <if test="入库数箱 != null" >
+        入库数箱,
+      </if>
+      <if test="入库板数 != null" >
+        入库板数,
+      </if>
+      <if test="路顺库入库数 != null" >
+        路顺库入库数,
+      </if>
+      <if test="路顺库出库数 != null" >
+        路顺库出库数,
+      </if>
+      <if test="出库总数 != null" >
+        出库总数,
+      </if>
+      <if test="装车数 != null" >
+        装车数,
+      </if>
+      <if test="发运数 != null" >
+        发运数,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="入库总包件数 != null" >
+        #{入库总包件数,jdbcType=DECIMAL},
+      </if>
+      <if test="入库数箱 != null" >
+        #{入库数箱,jdbcType=DECIMAL},
+      </if>
+      <if test="入库板数 != null" >
+        #{入库板数,jdbcType=DECIMAL},
+      </if>
+      <if test="路顺库入库数 != null" >
+        #{路顺库入库数,jdbcType=DECIMAL},
+      </if>
+      <if test="路顺库出库数 != null" >
+        #{路顺库出库数,jdbcType=DECIMAL},
+      </if>
+      <if test="出库总数 != null" >
+        #{出库总数,jdbcType=DECIMAL},
+      </if>
+      <if test="装车数 != null" >
+        #{装车数,jdbcType=DECIMAL},
+      </if>
+      <if test="发运数 != null" >
+        #{发运数,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+    <select id="getLuShunKuData" resultType="java.lang.Integer">
+      select 入库总包件数 as caseQty1 from v_view_0002
+    </select>
+  <select id="getLuShunKuData2" resultType="java.lang.Integer">
+    select 入库数箱 as box from v_view_0002
+  </select>
+  <select id="getLuShunKuData3" resultType="java.lang.Integer">
+    select 入库板数 as trayqty from v_view_0002
+  </select>
+  <select id="getLuShunKuData4" resultType="java.lang.Integer">
+    select 装车数 as carqty from v_view_0002
+  </select>
+  <select id="getLuShunKuData5" resultType="java.lang.Integer">
+    select 发运数 as carryqty from v_view_0002
+  </select>
+  <select id="getLuShunKuData6" resultType="java.lang.Integer">
+    select 出库总数 as outqty from v_view_0002
+  </select>
+  <select id="getLuShunKuData7" resultType="java.lang.Integer">
+    select 路顺库入库数 as roadqty from v_view_0002
+  </select>
+  <select id="getLuShunKuData8" resultType="java.lang.Integer">
+    select 路顺库出库数 as outroadqty from v_view_0002
+  </select>
+</mapper>

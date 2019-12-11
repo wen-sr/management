@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        td{
+            padding:1px;
+            border-bottom:1px;
+            text-align: center;
+            height: 30px;
+            border-bottom:1px solid;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var attime;
+        function clock(){
+            var time=new Date();
+            var month=time.getMonth()+1;
+            attime=time.getFullYear()+"/"+month+"/"+time.getDate()+time.getHours()+":"+time.getMinutes();
+            document.getElementById("clock").value = attime;
+        }
+        setInterval(clock,1000);
+    </script>
+</head>
+<p>
+<div id="header" style="background-color: black;font-family: 'Adobe 宋体 Std L';color: red;width: 512px; height: 30px; padding:0 20px;padding-top: 20px;">
+    <span style="font-size: 18px;font-weight: normal;padding-left: 100px;">仓管中心作业产量</span>
+    <span  id='clock' style="font-size: 15px;padding-left: 20px;background-color: black;color: red;align-content: center;"></span>
+</div>
+<div  style="background-color: black;color: red;font-size: 20px;font-family: 'Adobe 宋体 Std L';width: 512px; height: 256px;padding:0 20px;padding-bottom: 20px; ">
+<form>
+    <table  id='t1'  cellpadding='0' cellspacing='0' style='font-size: 18px;width: 100%;font-weight:normal;border-spacing:0px 1.5px;' border="0px" >
+        <tr>
+            <td colspan="2">入库总包件数</td>
+            <td colspan="2">出库总件数</td>
+        </tr>
+        <tr>
+            <td colspan="2"><span id="caseQty1"></span></td>
+            <td colspan="2"><span id="caseQty6"></span></td>
+        </tr>
+        <tr>
+            <td>入库数（周转箱）</td>
+            <td>入库数（托盘）</td>
+            <td>装车数</td>
+            <td>发运数</td>
+        </tr>
+        <tr>
+            <td><span id="caseQty2"></span></td>
+            <td><span id="caseQty3"></span></td>
+            <td><span id="caseQty4"></span></td>
+            <td><span id="caseQty5"></span></td>
+        </tr>
+        <tr>
+            <td colspan="2">路顺库入库数(箱库)</td>
+            <td colspan="2">路顺库出库数(箱库)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><span id="caseQty7"></span></td>
+            <td colspan="2"><span id="caseQty8"></span></td>
+        </tr>
+    </table>
+</form>
+</div>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/util.js"></script>
+<script type="text/javascript" src="lushunku.js"></script>
+</body>
+</html>
