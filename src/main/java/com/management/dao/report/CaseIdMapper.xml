@@ -1,0 +1,1112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.CaseIdMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.CaseId" >
+    <constructor >
+      <idArg column="CASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <idArg column="CASEID_BAK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BATCHNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHIPKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_STORERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="WH" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONSK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHORTNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QTY" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="AMT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="NET" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="WEIGHT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="NETWEIGHT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="VOLUME" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="SUSR1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR4" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR5" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ADDWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EDITWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BOX_WGT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="SEND_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SEND_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="REC_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REC_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="DIVEDE_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DIVIDE_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="MERGE_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MERGE_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="CONFIRM_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONFIRM_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="LOAD_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOAD_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="SHIP_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHIP_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IS_MERGE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PACK_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PACK_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="BOXNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FLAG" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BOXNO_BIND" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEOUTFLAG" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BOXNO_DISBIND" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IDBINDWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEINFLAG" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEOUTBATCH" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEOUTID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OUTBATCHNODT" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IDVALIDFLAG" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TMS_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TOLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONTOUTSTATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONTOUTTASKNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEINTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IDBINDTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="TASKNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BOXNO_BIND_HIS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BIND_PALLET_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BIND_PALLET_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ID_BINDER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ID_BINDTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="BOXNO_BIND_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="BOXNO_BIND_WHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MANUALNOTES" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUS_ZJK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEOUTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="IS_REFUSE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHIPDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="SEND_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SIGNER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SIGNERDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="RETURNER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RETURNDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CASEID, CASEID_BAK, BATCHNO, SHIPKEY, DOC_STORERKEY, WH, CONSK, SHORTNAME, STATUS, 
+    LOC, QTY, AMT, NET, WEIGHT, NETWEIGHT, VOLUME, SUSR1, SUSR2, SUSR3, SUSR4, SUSR5, 
+    ADDDATE, ADDWHO, EDITDATE, EDITWHO, BOX_WGT, SEND_USER, SEND_DATE, REC_USER, REC_DATE, 
+    DIVEDE_USER, DIVIDE_DATE, MERGE_USER, MERGE_DATE, CONFIRM_USER, CONFIRM_DATE, LOAD_USER, 
+    LOAD_DATE, SHIP_USER, SHIP_DATE, IS_MERGE, PACK_USER, PACK_DATE, BOXNO, FLAG, BOXNO_BIND, 
+    CASEOUTFLAG, BOXNO_DISBIND, ID, IDBINDWHO, CASEINFLAG, CASEOUTBATCH, CASEOUTID, OUTBATCHNODT, 
+    IDVALIDFLAG, TMS_TYPE, TOLOC, CONTOUTSTATUS, CONTOUTTASKNO, CASEINTIME, IDBINDTIME, 
+    TASKNO, BOXNO_BIND_HIS, BIND_PALLET_USER, BIND_PALLET_DATE, ID_BINDER, ID_BINDTIME, 
+    BOXNO_BIND_TIME, BOXNO_BIND_WHO, MANUALNOTES, STATUS_ZJK, CASEOUTTIME, IS_REFUSE, 
+    SHIPDATE, SEND_TYPE, SIGNER, SIGNERDATE, RETURNER, RETURNDATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.management.pojo.report.CaseIdKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from CASEID
+    where CASEID = #{caseid,jdbcType=VARCHAR}
+      and CASEID_BAK = #{caseidBak,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.management.pojo.report.CaseIdKey" >
+    delete from CASEID
+    where CASEID = #{caseid,jdbcType=VARCHAR}
+      and CASEID_BAK = #{caseidBak,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.report.CaseId" >
+    insert into CASEID (CASEID, CASEID_BAK, BATCHNO, 
+      SHIPKEY, DOC_STORERKEY, WH, 
+      CONSK, SHORTNAME, STATUS, 
+      LOC, QTY, AMT, NET, 
+      WEIGHT, NETWEIGHT, VOLUME, 
+      SUSR1, SUSR2, SUSR3, 
+      SUSR4, SUSR5, ADDDATE, 
+      ADDWHO, EDITDATE, EDITWHO, 
+      BOX_WGT, SEND_USER, SEND_DATE, 
+      REC_USER, REC_DATE, DIVEDE_USER, 
+      DIVIDE_DATE, MERGE_USER, MERGE_DATE, 
+      CONFIRM_USER, CONFIRM_DATE, LOAD_USER, 
+      LOAD_DATE, SHIP_USER, SHIP_DATE, 
+      IS_MERGE, PACK_USER, PACK_DATE, 
+      BOXNO, FLAG, BOXNO_BIND, 
+      CASEOUTFLAG, BOXNO_DISBIND, ID, 
+      IDBINDWHO, CASEINFLAG, CASEOUTBATCH, 
+      CASEOUTID, OUTBATCHNODT, IDVALIDFLAG, 
+      TMS_TYPE, TOLOC, CONTOUTSTATUS, 
+      CONTOUTTASKNO, CASEINTIME, IDBINDTIME, 
+      TASKNO, BOXNO_BIND_HIS, BIND_PALLET_USER, 
+      BIND_PALLET_DATE, ID_BINDER, ID_BINDTIME, 
+      BOXNO_BIND_TIME, BOXNO_BIND_WHO, MANUALNOTES, 
+      STATUS_ZJK, CASEOUTTIME, IS_REFUSE, 
+      SHIPDATE, SEND_TYPE, SIGNER, 
+      SIGNERDATE, RETURNER, RETURNDATE
+      )
+    values (#{caseid,jdbcType=VARCHAR}, #{caseidBak,jdbcType=VARCHAR}, #{batchno,jdbcType=VARCHAR}, 
+      #{shipkey,jdbcType=VARCHAR}, #{docStorerkey,jdbcType=VARCHAR}, #{wh,jdbcType=VARCHAR}, 
+      #{consk,jdbcType=VARCHAR}, #{shortname,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{loc,jdbcType=VARCHAR}, #{qty,jdbcType=DECIMAL}, #{amt,jdbcType=DECIMAL}, #{net,jdbcType=DECIMAL}, 
+      #{weight,jdbcType=DECIMAL}, #{netweight,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, 
+      #{susr1,jdbcType=VARCHAR}, #{susr2,jdbcType=VARCHAR}, #{susr3,jdbcType=VARCHAR}, 
+      #{susr4,jdbcType=VARCHAR}, #{susr5,jdbcType=VARCHAR}, #{adddate,jdbcType=TIMESTAMP}, 
+      #{addwho,jdbcType=VARCHAR}, #{editdate,jdbcType=TIMESTAMP}, #{editwho,jdbcType=VARCHAR}, 
+      #{boxWgt,jdbcType=DECIMAL}, #{sendUser,jdbcType=VARCHAR}, #{sendDate,jdbcType=TIMESTAMP}, 
+      #{recUser,jdbcType=VARCHAR}, #{recDate,jdbcType=TIMESTAMP}, #{divedeUser,jdbcType=VARCHAR}, 
+      #{divideDate,jdbcType=TIMESTAMP}, #{mergeUser,jdbcType=VARCHAR}, #{mergeDate,jdbcType=TIMESTAMP}, 
+      #{confirmUser,jdbcType=VARCHAR}, #{confirmDate,jdbcType=TIMESTAMP}, #{loadUser,jdbcType=VARCHAR}, 
+      #{loadDate,jdbcType=TIMESTAMP}, #{shipUser,jdbcType=VARCHAR}, #{shipDate,jdbcType=TIMESTAMP}, 
+      #{isMerge,jdbcType=VARCHAR}, #{packUser,jdbcType=VARCHAR}, #{packDate,jdbcType=TIMESTAMP}, 
+      #{boxno,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, #{boxnoBind,jdbcType=VARCHAR}, 
+      #{caseoutflag,jdbcType=VARCHAR}, #{boxnoDisbind,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, 
+      #{idbindwho,jdbcType=VARCHAR}, #{caseinflag,jdbcType=VARCHAR}, #{caseoutbatch,jdbcType=VARCHAR}, 
+      #{caseoutid,jdbcType=VARCHAR}, #{outbatchnodt,jdbcType=TIMESTAMP}, #{idvalidflag,jdbcType=VARCHAR}, 
+      #{tmsType,jdbcType=VARCHAR}, #{toloc,jdbcType=VARCHAR}, #{contoutstatus,jdbcType=VARCHAR}, 
+      #{contouttaskno,jdbcType=VARCHAR}, #{caseintime,jdbcType=TIMESTAMP}, #{idbindtime,jdbcType=TIMESTAMP}, 
+      #{taskno,jdbcType=VARCHAR}, #{boxnoBindHis,jdbcType=VARCHAR}, #{bindPalletUser,jdbcType=VARCHAR}, 
+      #{bindPalletDate,jdbcType=TIMESTAMP}, #{idBinder,jdbcType=VARCHAR}, #{idBindtime,jdbcType=TIMESTAMP}, 
+      #{boxnoBindTime,jdbcType=TIMESTAMP}, #{boxnoBindWho,jdbcType=VARCHAR}, #{manualnotes,jdbcType=VARCHAR}, 
+      #{statusZjk,jdbcType=VARCHAR}, #{caseouttime,jdbcType=TIMESTAMP}, #{isRefuse,jdbcType=VARCHAR}, 
+      #{shipdate,jdbcType=TIMESTAMP}, #{sendType,jdbcType=VARCHAR}, #{signer,jdbcType=VARCHAR}, 
+      #{signerdate,jdbcType=TIMESTAMP}, #{returner,jdbcType=VARCHAR}, #{returndate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.CaseId" >
+    insert into CASEID
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseid != null" >
+        CASEID,
+      </if>
+      <if test="caseidBak != null" >
+        CASEID_BAK,
+      </if>
+      <if test="batchno != null" >
+        BATCHNO,
+      </if>
+      <if test="shipkey != null" >
+        SHIPKEY,
+      </if>
+      <if test="docStorerkey != null" >
+        DOC_STORERKEY,
+      </if>
+      <if test="wh != null" >
+        WH,
+      </if>
+      <if test="consk != null" >
+        CONSK,
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="loc != null" >
+        LOC,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="amt != null" >
+        AMT,
+      </if>
+      <if test="net != null" >
+        NET,
+      </if>
+      <if test="weight != null" >
+        WEIGHT,
+      </if>
+      <if test="netweight != null" >
+        NETWEIGHT,
+      </if>
+      <if test="volume != null" >
+        VOLUME,
+      </if>
+      <if test="susr1 != null" >
+        SUSR1,
+      </if>
+      <if test="susr2 != null" >
+        SUSR2,
+      </if>
+      <if test="susr3 != null" >
+        SUSR3,
+      </if>
+      <if test="susr4 != null" >
+        SUSR4,
+      </if>
+      <if test="susr5 != null" >
+        SUSR5,
+      </if>
+      <if test="adddate != null" >
+        ADDDATE,
+      </if>
+      <if test="addwho != null" >
+        ADDWHO,
+      </if>
+      <if test="editdate != null" >
+        EDITDATE,
+      </if>
+      <if test="editwho != null" >
+        EDITWHO,
+      </if>
+      <if test="boxWgt != null" >
+        BOX_WGT,
+      </if>
+      <if test="sendUser != null" >
+        SEND_USER,
+      </if>
+      <if test="sendDate != null" >
+        SEND_DATE,
+      </if>
+      <if test="recUser != null" >
+        REC_USER,
+      </if>
+      <if test="recDate != null" >
+        REC_DATE,
+      </if>
+      <if test="divedeUser != null" >
+        DIVEDE_USER,
+      </if>
+      <if test="divideDate != null" >
+        DIVIDE_DATE,
+      </if>
+      <if test="mergeUser != null" >
+        MERGE_USER,
+      </if>
+      <if test="mergeDate != null" >
+        MERGE_DATE,
+      </if>
+      <if test="confirmUser != null" >
+        CONFIRM_USER,
+      </if>
+      <if test="confirmDate != null" >
+        CONFIRM_DATE,
+      </if>
+      <if test="loadUser != null" >
+        LOAD_USER,
+      </if>
+      <if test="loadDate != null" >
+        LOAD_DATE,
+      </if>
+      <if test="shipUser != null" >
+        SHIP_USER,
+      </if>
+      <if test="shipDate != null" >
+        SHIP_DATE,
+      </if>
+      <if test="isMerge != null" >
+        IS_MERGE,
+      </if>
+      <if test="packUser != null" >
+        PACK_USER,
+      </if>
+      <if test="packDate != null" >
+        PACK_DATE,
+      </if>
+      <if test="boxno != null" >
+        BOXNO,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+      <if test="boxnoBind != null" >
+        BOXNO_BIND,
+      </if>
+      <if test="caseoutflag != null" >
+        CASEOUTFLAG,
+      </if>
+      <if test="boxnoDisbind != null" >
+        BOXNO_DISBIND,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="idbindwho != null" >
+        IDBINDWHO,
+      </if>
+      <if test="caseinflag != null" >
+        CASEINFLAG,
+      </if>
+      <if test="caseoutbatch != null" >
+        CASEOUTBATCH,
+      </if>
+      <if test="caseoutid != null" >
+        CASEOUTID,
+      </if>
+      <if test="outbatchnodt != null" >
+        OUTBATCHNODT,
+      </if>
+      <if test="idvalidflag != null" >
+        IDVALIDFLAG,
+      </if>
+      <if test="tmsType != null" >
+        TMS_TYPE,
+      </if>
+      <if test="toloc != null" >
+        TOLOC,
+      </if>
+      <if test="contoutstatus != null" >
+        CONTOUTSTATUS,
+      </if>
+      <if test="contouttaskno != null" >
+        CONTOUTTASKNO,
+      </if>
+      <if test="caseintime != null" >
+        CASEINTIME,
+      </if>
+      <if test="idbindtime != null" >
+        IDBINDTIME,
+      </if>
+      <if test="taskno != null" >
+        TASKNO,
+      </if>
+      <if test="boxnoBindHis != null" >
+        BOXNO_BIND_HIS,
+      </if>
+      <if test="bindPalletUser != null" >
+        BIND_PALLET_USER,
+      </if>
+      <if test="bindPalletDate != null" >
+        BIND_PALLET_DATE,
+      </if>
+      <if test="idBinder != null" >
+        ID_BINDER,
+      </if>
+      <if test="idBindtime != null" >
+        ID_BINDTIME,
+      </if>
+      <if test="boxnoBindTime != null" >
+        BOXNO_BIND_TIME,
+      </if>
+      <if test="boxnoBindWho != null" >
+        BOXNO_BIND_WHO,
+      </if>
+      <if test="manualnotes != null" >
+        MANUALNOTES,
+      </if>
+      <if test="statusZjk != null" >
+        STATUS_ZJK,
+      </if>
+      <if test="caseouttime != null" >
+        CASEOUTTIME,
+      </if>
+      <if test="isRefuse != null" >
+        IS_REFUSE,
+      </if>
+      <if test="shipdate != null" >
+        SHIPDATE,
+      </if>
+      <if test="sendType != null" >
+        SEND_TYPE,
+      </if>
+      <if test="signer != null" >
+        SIGNER,
+      </if>
+      <if test="signerdate != null" >
+        SIGNERDATE,
+      </if>
+      <if test="returner != null" >
+        RETURNER,
+      </if>
+      <if test="returndate != null" >
+        RETURNDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseid != null" >
+        #{caseid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseidBak != null" >
+        #{caseidBak,jdbcType=VARCHAR},
+      </if>
+      <if test="batchno != null" >
+        #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="shipkey != null" >
+        #{shipkey,jdbcType=VARCHAR},
+      </if>
+      <if test="docStorerkey != null" >
+        #{docStorerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="wh != null" >
+        #{wh,jdbcType=VARCHAR},
+      </if>
+      <if test="consk != null" >
+        #{consk,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null" >
+        #{loc,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="amt != null" >
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="net != null" >
+        #{net,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="netweight != null" >
+        #{netweight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="susr1 != null" >
+        #{susr1,jdbcType=VARCHAR},
+      </if>
+      <if test="susr2 != null" >
+        #{susr2,jdbcType=VARCHAR},
+      </if>
+      <if test="susr3 != null" >
+        #{susr3,jdbcType=VARCHAR},
+      </if>
+      <if test="susr4 != null" >
+        #{susr4,jdbcType=VARCHAR},
+      </if>
+      <if test="susr5 != null" >
+        #{susr5,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="boxWgt != null" >
+        #{boxWgt,jdbcType=DECIMAL},
+      </if>
+      <if test="sendUser != null" >
+        #{sendUser,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDate != null" >
+        #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUser != null" >
+        #{recUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recDate != null" >
+        #{recDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="divedeUser != null" >
+        #{divedeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="divideDate != null" >
+        #{divideDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mergeUser != null" >
+        #{mergeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="mergeDate != null" >
+        #{mergeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmUser != null" >
+        #{confirmUser,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmDate != null" >
+        #{confirmDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loadUser != null" >
+        #{loadUser,jdbcType=VARCHAR},
+      </if>
+      <if test="loadDate != null" >
+        #{loadDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipUser != null" >
+        #{shipUser,jdbcType=VARCHAR},
+      </if>
+      <if test="shipDate != null" >
+        #{shipDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isMerge != null" >
+        #{isMerge,jdbcType=VARCHAR},
+      </if>
+      <if test="packUser != null" >
+        #{packUser,jdbcType=VARCHAR},
+      </if>
+      <if test="packDate != null" >
+        #{packDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boxno != null" >
+        #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="boxnoBind != null" >
+        #{boxnoBind,jdbcType=VARCHAR},
+      </if>
+      <if test="caseoutflag != null" >
+        #{caseoutflag,jdbcType=VARCHAR},
+      </if>
+      <if test="boxnoDisbind != null" >
+        #{boxnoDisbind,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="idbindwho != null" >
+        #{idbindwho,jdbcType=VARCHAR},
+      </if>
+      <if test="caseinflag != null" >
+        #{caseinflag,jdbcType=VARCHAR},
+      </if>
+      <if test="caseoutbatch != null" >
+        #{caseoutbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="caseoutid != null" >
+        #{caseoutid,jdbcType=VARCHAR},
+      </if>
+      <if test="outbatchnodt != null" >
+        #{outbatchnodt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idvalidflag != null" >
+        #{idvalidflag,jdbcType=VARCHAR},
+      </if>
+      <if test="tmsType != null" >
+        #{tmsType,jdbcType=VARCHAR},
+      </if>
+      <if test="toloc != null" >
+        #{toloc,jdbcType=VARCHAR},
+      </if>
+      <if test="contoutstatus != null" >
+        #{contoutstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="contouttaskno != null" >
+        #{contouttaskno,jdbcType=VARCHAR},
+      </if>
+      <if test="caseintime != null" >
+        #{caseintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idbindtime != null" >
+        #{idbindtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskno != null" >
+        #{taskno,jdbcType=VARCHAR},
+      </if>
+      <if test="boxnoBindHis != null" >
+        #{boxnoBindHis,jdbcType=VARCHAR},
+      </if>
+      <if test="bindPalletUser != null" >
+        #{bindPalletUser,jdbcType=VARCHAR},
+      </if>
+      <if test="bindPalletDate != null" >
+        #{bindPalletDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idBinder != null" >
+        #{idBinder,jdbcType=VARCHAR},
+      </if>
+      <if test="idBindtime != null" >
+        #{idBindtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boxnoBindTime != null" >
+        #{boxnoBindTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boxnoBindWho != null" >
+        #{boxnoBindWho,jdbcType=VARCHAR},
+      </if>
+      <if test="manualnotes != null" >
+        #{manualnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="statusZjk != null" >
+        #{statusZjk,jdbcType=VARCHAR},
+      </if>
+      <if test="caseouttime != null" >
+        #{caseouttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRefuse != null" >
+        #{isRefuse,jdbcType=VARCHAR},
+      </if>
+      <if test="shipdate != null" >
+        #{shipdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendType != null" >
+        #{sendType,jdbcType=VARCHAR},
+      </if>
+      <if test="signer != null" >
+        #{signer,jdbcType=VARCHAR},
+      </if>
+      <if test="signerdate != null" >
+        #{signerdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returner != null" >
+        #{returner,jdbcType=VARCHAR},
+      </if>
+      <if test="returndate != null" >
+        #{returndate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.report.CaseId" >
+    update CASEID
+    <set >
+      <if test="batchno != null" >
+        BATCHNO = #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="shipkey != null" >
+        SHIPKEY = #{shipkey,jdbcType=VARCHAR},
+      </if>
+      <if test="docStorerkey != null" >
+        DOC_STORERKEY = #{docStorerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="wh != null" >
+        WH = #{wh,jdbcType=VARCHAR},
+      </if>
+      <if test="consk != null" >
+        CONSK = #{consk,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME = #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null" >
+        LOC = #{loc,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        QTY = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="amt != null" >
+        AMT = #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="net != null" >
+        NET = #{net,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null" >
+        WEIGHT = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="netweight != null" >
+        NETWEIGHT = #{netweight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null" >
+        VOLUME = #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="susr1 != null" >
+        SUSR1 = #{susr1,jdbcType=VARCHAR},
+      </if>
+      <if test="susr2 != null" >
+        SUSR2 = #{susr2,jdbcType=VARCHAR},
+      </if>
+      <if test="susr3 != null" >
+        SUSR3 = #{susr3,jdbcType=VARCHAR},
+      </if>
+      <if test="susr4 != null" >
+        SUSR4 = #{susr4,jdbcType=VARCHAR},
+      </if>
+      <if test="susr5 != null" >
+        SUSR5 = #{susr5,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        ADDWHO = #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        EDITWHO = #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="boxWgt != null" >
+        BOX_WGT = #{boxWgt,jdbcType=DECIMAL},
+      </if>
+      <if test="sendUser != null" >
+        SEND_USER = #{sendUser,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDate != null" >
+        SEND_DATE = #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUser != null" >
+        REC_USER = #{recUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recDate != null" >
+        REC_DATE = #{recDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="divedeUser != null" >
+        DIVEDE_USER = #{divedeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="divideDate != null" >
+        DIVIDE_DATE = #{divideDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mergeUser != null" >
+        MERGE_USER = #{mergeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="mergeDate != null" >
+        MERGE_DATE = #{mergeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmUser != null" >
+        CONFIRM_USER = #{confirmUser,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmDate != null" >
+        CONFIRM_DATE = #{confirmDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loadUser != null" >
+        LOAD_USER = #{loadUser,jdbcType=VARCHAR},
+      </if>
+      <if test="loadDate != null" >
+        LOAD_DATE = #{loadDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipUser != null" >
+        SHIP_USER = #{shipUser,jdbcType=VARCHAR},
+      </if>
+      <if test="shipDate != null" >
+        SHIP_DATE = #{shipDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isMerge != null" >
+        IS_MERGE = #{isMerge,jdbcType=VARCHAR},
+      </if>
+      <if test="packUser != null" >
+        PACK_USER = #{packUser,jdbcType=VARCHAR},
+      </if>
+      <if test="packDate != null" >
+        PACK_DATE = #{packDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boxno != null" >
+        BOXNO = #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="boxnoBind != null" >
+        BOXNO_BIND = #{boxnoBind,jdbcType=VARCHAR},
+      </if>
+      <if test="caseoutflag != null" >
+        CASEOUTFLAG = #{caseoutflag,jdbcType=VARCHAR},
+      </if>
+      <if test="boxnoDisbind != null" >
+        BOXNO_DISBIND = #{boxnoDisbind,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="idbindwho != null" >
+        IDBINDWHO = #{idbindwho,jdbcType=VARCHAR},
+      </if>
+      <if test="caseinflag != null" >
+        CASEINFLAG = #{caseinflag,jdbcType=VARCHAR},
+      </if>
+      <if test="caseoutbatch != null" >
+        CASEOUTBATCH = #{caseoutbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="caseoutid != null" >
+        CASEOUTID = #{caseoutid,jdbcType=VARCHAR},
+      </if>
+      <if test="outbatchnodt != null" >
+        OUTBATCHNODT = #{outbatchnodt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idvalidflag != null" >
+        IDVALIDFLAG = #{idvalidflag,jdbcType=VARCHAR},
+      </if>
+      <if test="tmsType != null" >
+        TMS_TYPE = #{tmsType,jdbcType=VARCHAR},
+      </if>
+      <if test="toloc != null" >
+        TOLOC = #{toloc,jdbcType=VARCHAR},
+      </if>
+      <if test="contoutstatus != null" >
+        CONTOUTSTATUS = #{contoutstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="contouttaskno != null" >
+        CONTOUTTASKNO = #{contouttaskno,jdbcType=VARCHAR},
+      </if>
+      <if test="caseintime != null" >
+        CASEINTIME = #{caseintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idbindtime != null" >
+        IDBINDTIME = #{idbindtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskno != null" >
+        TASKNO = #{taskno,jdbcType=VARCHAR},
+      </if>
+      <if test="boxnoBindHis != null" >
+        BOXNO_BIND_HIS = #{boxnoBindHis,jdbcType=VARCHAR},
+      </if>
+      <if test="bindPalletUser != null" >
+        BIND_PALLET_USER = #{bindPalletUser,jdbcType=VARCHAR},
+      </if>
+      <if test="bindPalletDate != null" >
+        BIND_PALLET_DATE = #{bindPalletDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idBinder != null" >
+        ID_BINDER = #{idBinder,jdbcType=VARCHAR},
+      </if>
+      <if test="idBindtime != null" >
+        ID_BINDTIME = #{idBindtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boxnoBindTime != null" >
+        BOXNO_BIND_TIME = #{boxnoBindTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boxnoBindWho != null" >
+        BOXNO_BIND_WHO = #{boxnoBindWho,jdbcType=VARCHAR},
+      </if>
+      <if test="manualnotes != null" >
+        MANUALNOTES = #{manualnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="statusZjk != null" >
+        STATUS_ZJK = #{statusZjk,jdbcType=VARCHAR},
+      </if>
+      <if test="caseouttime != null" >
+        CASEOUTTIME = #{caseouttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRefuse != null" >
+        IS_REFUSE = #{isRefuse,jdbcType=VARCHAR},
+      </if>
+      <if test="shipdate != null" >
+        SHIPDATE = #{shipdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendType != null" >
+        SEND_TYPE = #{sendType,jdbcType=VARCHAR},
+      </if>
+      <if test="signer != null" >
+        SIGNER = #{signer,jdbcType=VARCHAR},
+      </if>
+      <if test="signerdate != null" >
+        SIGNERDATE = #{signerdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returner != null" >
+        RETURNER = #{returner,jdbcType=VARCHAR},
+      </if>
+      <if test="returndate != null" >
+        RETURNDATE = #{returndate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CASEID = #{caseid,jdbcType=VARCHAR}
+      and CASEID_BAK = #{caseidBak,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.report.CaseId" >
+    update CASEID
+    set BATCHNO = #{batchno,jdbcType=VARCHAR},
+      SHIPKEY = #{shipkey,jdbcType=VARCHAR},
+      DOC_STORERKEY = #{docStorerkey,jdbcType=VARCHAR},
+      WH = #{wh,jdbcType=VARCHAR},
+      CONSK = #{consk,jdbcType=VARCHAR},
+      SHORTNAME = #{shortname,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      LOC = #{loc,jdbcType=VARCHAR},
+      QTY = #{qty,jdbcType=DECIMAL},
+      AMT = #{amt,jdbcType=DECIMAL},
+      NET = #{net,jdbcType=DECIMAL},
+      WEIGHT = #{weight,jdbcType=DECIMAL},
+      NETWEIGHT = #{netweight,jdbcType=DECIMAL},
+      VOLUME = #{volume,jdbcType=DECIMAL},
+      SUSR1 = #{susr1,jdbcType=VARCHAR},
+      SUSR2 = #{susr2,jdbcType=VARCHAR},
+      SUSR3 = #{susr3,jdbcType=VARCHAR},
+      SUSR4 = #{susr4,jdbcType=VARCHAR},
+      SUSR5 = #{susr5,jdbcType=VARCHAR},
+      ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      ADDWHO = #{addwho,jdbcType=VARCHAR},
+      EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      EDITWHO = #{editwho,jdbcType=VARCHAR},
+      BOX_WGT = #{boxWgt,jdbcType=DECIMAL},
+      SEND_USER = #{sendUser,jdbcType=VARCHAR},
+      SEND_DATE = #{sendDate,jdbcType=TIMESTAMP},
+      REC_USER = #{recUser,jdbcType=VARCHAR},
+      REC_DATE = #{recDate,jdbcType=TIMESTAMP},
+      DIVEDE_USER = #{divedeUser,jdbcType=VARCHAR},
+      DIVIDE_DATE = #{divideDate,jdbcType=TIMESTAMP},
+      MERGE_USER = #{mergeUser,jdbcType=VARCHAR},
+      MERGE_DATE = #{mergeDate,jdbcType=TIMESTAMP},
+      CONFIRM_USER = #{confirmUser,jdbcType=VARCHAR},
+      CONFIRM_DATE = #{confirmDate,jdbcType=TIMESTAMP},
+      LOAD_USER = #{loadUser,jdbcType=VARCHAR},
+      LOAD_DATE = #{loadDate,jdbcType=TIMESTAMP},
+      SHIP_USER = #{shipUser,jdbcType=VARCHAR},
+      SHIP_DATE = #{shipDate,jdbcType=TIMESTAMP},
+      IS_MERGE = #{isMerge,jdbcType=VARCHAR},
+      PACK_USER = #{packUser,jdbcType=VARCHAR},
+      PACK_DATE = #{packDate,jdbcType=TIMESTAMP},
+      BOXNO = #{boxno,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=VARCHAR},
+      BOXNO_BIND = #{boxnoBind,jdbcType=VARCHAR},
+      CASEOUTFLAG = #{caseoutflag,jdbcType=VARCHAR},
+      BOXNO_DISBIND = #{boxnoDisbind,jdbcType=VARCHAR},
+      ID = #{id,jdbcType=VARCHAR},
+      IDBINDWHO = #{idbindwho,jdbcType=VARCHAR},
+      CASEINFLAG = #{caseinflag,jdbcType=VARCHAR},
+      CASEOUTBATCH = #{caseoutbatch,jdbcType=VARCHAR},
+      CASEOUTID = #{caseoutid,jdbcType=VARCHAR},
+      OUTBATCHNODT = #{outbatchnodt,jdbcType=TIMESTAMP},
+      IDVALIDFLAG = #{idvalidflag,jdbcType=VARCHAR},
+      TMS_TYPE = #{tmsType,jdbcType=VARCHAR},
+      TOLOC = #{toloc,jdbcType=VARCHAR},
+      CONTOUTSTATUS = #{contoutstatus,jdbcType=VARCHAR},
+      CONTOUTTASKNO = #{contouttaskno,jdbcType=VARCHAR},
+      CASEINTIME = #{caseintime,jdbcType=TIMESTAMP},
+      IDBINDTIME = #{idbindtime,jdbcType=TIMESTAMP},
+      TASKNO = #{taskno,jdbcType=VARCHAR},
+      BOXNO_BIND_HIS = #{boxnoBindHis,jdbcType=VARCHAR},
+      BIND_PALLET_USER = #{bindPalletUser,jdbcType=VARCHAR},
+      BIND_PALLET_DATE = #{bindPalletDate,jdbcType=TIMESTAMP},
+      ID_BINDER = #{idBinder,jdbcType=VARCHAR},
+      ID_BINDTIME = #{idBindtime,jdbcType=TIMESTAMP},
+      BOXNO_BIND_TIME = #{boxnoBindTime,jdbcType=TIMESTAMP},
+      BOXNO_BIND_WHO = #{boxnoBindWho,jdbcType=VARCHAR},
+      MANUALNOTES = #{manualnotes,jdbcType=VARCHAR},
+      STATUS_ZJK = #{statusZjk,jdbcType=VARCHAR},
+      CASEOUTTIME = #{caseouttime,jdbcType=TIMESTAMP},
+      IS_REFUSE = #{isRefuse,jdbcType=VARCHAR},
+      SHIPDATE = #{shipdate,jdbcType=TIMESTAMP},
+      SEND_TYPE = #{sendType,jdbcType=VARCHAR},
+      SIGNER = #{signer,jdbcType=VARCHAR},
+      SIGNERDATE = #{signerdate,jdbcType=TIMESTAMP},
+      RETURNER = #{returner,jdbcType=VARCHAR},
+      RETURNDATE = #{returndate,jdbcType=TIMESTAMP}
+    where CASEID = #{caseid,jdbcType=VARCHAR}
+      and CASEID_BAK = #{caseidBak,jdbcType=VARCHAR}
+  </update>
+  <select id="getCaseIdData" resultType="com.management.vo.caseid.WeiVo">
+
+    (select '未交包' ty,
+    (case
+    when fromtype = 0 and type = 0 then
+    '主配发货'
+    when (fromtype = 0 and type = 1) or (fromtype = 1 and type = 2) then
+    '退货'
+    when fromtype = 1 and type = 1 then
+    '请配发货'
+    end) type,
+    caseid,
+    batchno,
+    consk,
+    shortname,
+    boxnoBind,
+    boxnoBindWho,
+    description,
+    sum(caseqty) caseqty,
+    sum(qty) qty,
+    adddate
+    from (select c.caseid,
+    c.batchno,
+    c.consk,
+    c.shortname,
+    c.boxno_bind boxnoBind,
+    c.BOXNO_BIND_WHO boxnoBindWho,
+    cd.fromtype,
+    cd.type,
+    st.description,
+    send_type,
+    nvl(c.susr1, 1) caseqty,
+    sum(cd.qty) qty,
+    c.adddate
+    from caseid c
+    join casedetail cd
+    on c.caseid = cd.caseid
+    and c.caseid_bak = cd.caseid_bak
+    join storer st
+    on c.doc_storerkey = st.storerkey
+    where c.is_refuse = '0'
+    and c.status in ('0')
+    and to_char(c.adddate,'yyyy-mm-dd') between #{date_begin} and #{date_end}
+    <if test="type == 1" >
+      and fromtype = 0 and cd.type = 0
+    </if>
+    <if test="type == 2" >
+      and fromtype = 1 and cd.type = 1
+    </if>
+    <if test="type == 3" >
+      and ((fromtype = 0 and cd.type = 1) or (fromtype = 1 and cd.type = 2))
+    </if>
+    <if test="type == 4" >
+      and 1=2
+    </if>
+    <if test="type == 5" >
+      and to_char(adddate,'yyyy-mm-dd') &lt;&gt; to_char(rec_date,'yyyy-mm-dd')
+    </if>
+    group by c.caseid,
+    c.batchno,
+    c.consk,
+    c.shortname,
+    c.boxno_bind ,
+    c.BOXNO_BIND_WHO,
+    send_type,
+    cd.fromtype,
+    cd.type,
+    st.description,
+    nvl(c.susr1, 1),
+    st.description,
+    c.adddate
+    order by send_type, adddate)
+    group by caseid,
+    batchno,
+    consk,
+    shortname,
+    boxnoBind,
+    boxnoBindWho,description, send_type, adddate, fromtype, type)
+    union
+    (select '未交包',
+    '拒收',
+    caseid,
+    batchno,
+    consk,
+    shortname,
+    boxnoBind,
+    boxnoBindWho,
+    description,
+    sum(caseqty) caseqty,
+    sum(qty) qty,
+    adddate
+    from (select c.caseid,c.batchno,
+    c.consk,
+    c.shortname,
+    c.boxno_bind boxnoBind,
+    c.BOXNO_BIND_WHO boxnoBindWho,
+    st.description,
+    send_type,
+    nvl(c.susr1, 1) caseqty,
+    0 qty,
+    c.adddate
+    from caseid c
+    join storer st
+    on c.doc_storerkey = st.storerkey
+    where c.is_refuse &lt;&gt;'0'
+    and c.status in ('0')
+    and to_char(c.adddate,'yyyy-mm-dd') between #{date_begin} and #{date_end}
+    <if test="type == 1" >
+      and 1=2
+    </if>
+    <if test="type == 2" >
+      and 1=2
+    </if>
+    <if test="type == 3" >
+      and 1=2
+    </if>
+    group by c.caseid,
+    c.batchno,
+    c.consk,
+    c.shortname,
+    c.boxno_bind,
+    c.BOXNO_BIND_WHO,
+    send_type,
+    st.description,
+    nvl(c.susr1, 1),
+    st.description,
+    c.adddate
+    order by send_type, adddate)
+    group by caseid,
+    batchno,
+    consk,
+    shortname,
+    boxnoBind,
+    boxnoBindWho,description, adddate)
+    order by boxnobind
+  </select>
+  <!--<update id="go2" parameterType="string">-->
+    <!--update caseid set qty = qty - #{qty} where batchno like '%'|| #{doc_number} || '%' and caseid.consk= #{sku} and caseid.IF_CASEID='1' and exists (select '1' from casedetail where caseid.caseid = casedetail.caseid and sku = #{consk})-->
+  <!--</update>-->
+
+  <select id="getBaoZData27" resultType="java.lang.Integer">
+select nvl(sum(susr1),0) from caseid  where susr5='拒收转打包不需上传'
+and to_char(editdate,'yyyy-mm-dd') between #{date_begin} AND #{date_end}
+    </select>
+ </mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.TaskCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.TaskCase" >
+    <constructor >
+      <idArg column="CASEOUTID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEOUTBATCH" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_STORERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QTY" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="SCAN_QTY" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BOXNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MSG" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EXPORT_BARCODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MK1" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="ID_BINDER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ID_BINDTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CASEOUTID, CASEOUTBATCH, DOC_STORERKEY, QTY, SCAN_QTY, ID, BOXNO, MSG, EXPORT_BARCODE, 
+    MK1, ID_BINDER, ID_BINDTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TASK_CASE
+    where CASEOUTID = #{caseoutid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TASK_CASE
+    where CASEOUTID = #{caseoutid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.report.TaskCase" >
+    insert into TASK_CASE (CASEOUTID, CASEOUTBATCH, DOC_STORERKEY, 
+      QTY, SCAN_QTY, ID, BOXNO, 
+      MSG, EXPORT_BARCODE, MK1, 
+      ID_BINDER, ID_BINDTIME)
+    values (#{caseoutid,jdbcType=VARCHAR}, #{caseoutbatch,jdbcType=VARCHAR}, #{docStorerkey,jdbcType=VARCHAR}, 
+      #{qty,jdbcType=DECIMAL}, #{scanQty,jdbcType=DECIMAL}, #{id,jdbcType=VARCHAR}, #{boxno,jdbcType=VARCHAR}, 
+      #{msg,jdbcType=VARCHAR}, #{exportBarcode,jdbcType=VARCHAR}, #{mk1,jdbcType=CHAR}, 
+      #{idBinder,jdbcType=VARCHAR}, #{idBindtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.TaskCase" >
+    insert into TASK_CASE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseoutid != null" >
+        CASEOUTID,
+      </if>
+      <if test="caseoutbatch != null" >
+        CASEOUTBATCH,
+      </if>
+      <if test="docStorerkey != null" >
+        DOC_STORERKEY,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="scanQty != null" >
+        SCAN_QTY,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="boxno != null" >
+        BOXNO,
+      </if>
+      <if test="msg != null" >
+        MSG,
+      </if>
+      <if test="exportBarcode != null" >
+        EXPORT_BARCODE,
+      </if>
+      <if test="mk1 != null" >
+        MK1,
+      </if>
+      <if test="idBinder != null" >
+        ID_BINDER,
+      </if>
+      <if test="idBindtime != null" >
+        ID_BINDTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseoutid != null" >
+        #{caseoutid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseoutbatch != null" >
+        #{caseoutbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="docStorerkey != null" >
+        #{docStorerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="scanQty != null" >
+        #{scanQty,jdbcType=DECIMAL},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="boxno != null" >
+        #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="exportBarcode != null" >
+        #{exportBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="mk1 != null" >
+        #{mk1,jdbcType=CHAR},
+      </if>
+      <if test="idBinder != null" >
+        #{idBinder,jdbcType=VARCHAR},
+      </if>
+      <if test="idBindtime != null" >
+        #{idBindtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.report.TaskCase" >
+    update TASK_CASE
+    <set >
+      <if test="caseoutbatch != null" >
+        CASEOUTBATCH = #{caseoutbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="docStorerkey != null" >
+        DOC_STORERKEY = #{docStorerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        QTY = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="scanQty != null" >
+        SCAN_QTY = #{scanQty,jdbcType=DECIMAL},
+      </if>
+      <if test="id != null" >
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="boxno != null" >
+        BOXNO = #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        MSG = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="exportBarcode != null" >
+        EXPORT_BARCODE = #{exportBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="mk1 != null" >
+        MK1 = #{mk1,jdbcType=CHAR},
+      </if>
+      <if test="idBinder != null" >
+        ID_BINDER = #{idBinder,jdbcType=VARCHAR},
+      </if>
+      <if test="idBindtime != null" >
+        ID_BINDTIME = #{idBindtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CASEOUTID = #{caseoutid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.report.TaskCase" >
+    update TASK_CASE
+    set CASEOUTBATCH = #{caseoutbatch,jdbcType=VARCHAR},
+      DOC_STORERKEY = #{docStorerkey,jdbcType=VARCHAR},
+      QTY = #{qty,jdbcType=DECIMAL},
+      SCAN_QTY = #{scanQty,jdbcType=DECIMAL},
+      ID = #{id,jdbcType=VARCHAR},
+      BOXNO = #{boxno,jdbcType=VARCHAR},
+      MSG = #{msg,jdbcType=VARCHAR},
+      EXPORT_BARCODE = #{exportBarcode,jdbcType=VARCHAR},
+      MK1 = #{mk1,jdbcType=CHAR},
+      ID_BINDER = #{idBinder,jdbcType=VARCHAR},
+      ID_BINDTIME = #{idBindtime,jdbcType=TIMESTAMP}
+    where CASEOUTID = #{caseoutid,jdbcType=VARCHAR}
+  </update>
+  <select id="getTaskCaseData" resultType="com.management.vo.taskCase.QxbVo" >
+ select caseoutbatch,caseoutid,qty,scan_Qty,mk1,id_Bindtime  from task_case  where (to_char(id_bindtime, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+  </select>
+  <update id="updateTaskCaseData" parameterType="string">
+ update task_case set MK1 = 1  where caseoutid = #{caseoutid}
+  </update>
+  <update id="updateCaseid">
+    update jobscontext_xso set doc_cqty = doc_cqty - {qty} where doc_number = '' and doc_sku = '' and doc_consk = '';
+  </update>
+
+
+</mapper>

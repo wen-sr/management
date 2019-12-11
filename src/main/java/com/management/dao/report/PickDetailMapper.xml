@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.PickDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.PickDetail" >
+    <constructor >
+      <idArg column="PICKDETAILKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SERIALKEY" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="WHSEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKHEADERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDERLINENUMBER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STORERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKU" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ALTSKU" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UOM" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UOMQTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="QTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="QTYMOVED" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DROPID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PACKKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UPDATESOURCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CARTONGROUP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CARTONTYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TOLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOREPLENISH" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REPLENISHZONE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOCARTONIZE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKMETHOD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="WAVEKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EFFECTIVEDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="FORTE_FLAG" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FROMLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TRACKINGID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FREIGHTCHARGES" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="INTERMODALVEHICLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LOADID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="STOP" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="DOOR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ROUTE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SORTATIONLOCATION" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SORTATIONSTATION" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BATCHCARTONID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ISCLOSED" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QCSTATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PDUDF1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PDUDF2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PDUDF3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKNOTES" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="RECEIPTKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CROSSDOCKED" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SEQNO" jdbcType="DECIMAL" javaType="java.lang.Integer" />
+      <arg column="LABELTYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANYPREFIX" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SERIALREFERENCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ADDWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EDITWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPTIMIZECOP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BOXNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICK_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="PICK_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICK_QTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="QTYOLD" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="SENDCODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SENDTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="OPSTIME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OLD_LOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OLD_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PICKDETAILKEY, SERIALKEY, WHSEID, CASEID, PICKHEADERKEY, ORDERKEY, ORDERLINENUMBER, 
+    LOT, STORERKEY, SKU, ALTSKU, UOM, UOMQTY, QTY, QTYMOVED, STATUS, DROPID, LOC, ID, 
+    PACKKEY, UPDATESOURCE, CARTONGROUP, CARTONTYPE, TOLOC, DOREPLENISH, REPLENISHZONE, 
+    DOCARTONIZE, PICKMETHOD, WAVEKEY, EFFECTIVEDATE, FORTE_FLAG, FROMLOC, TRACKINGID, 
+    FREIGHTCHARGES, INTERMODALVEHICLE, LOADID, STOP, DOOR, ROUTE, SORTATIONLOCATION, 
+    SORTATIONSTATION, BATCHCARTONID, ISCLOSED, QCSTATUS, PDUDF1, PDUDF2, PDUDF3, PICKNOTES, 
+    RECEIPTKEY, CROSSDOCKED, SEQNO, LABELTYPE, COMPANYPREFIX, SERIALREFERENCE, ADDDATE, 
+    ADDWHO, EDITDATE, EDITWHO, OPTIMIZECOP, BOXNO, PICKNO, PICK_DATE, PICK_USER, PICK_QTY, 
+    QTYOLD, SENDCODE, SENDTIME, OPSTIME, OLD_LOC, OLD_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PICKDETAIL
+    where PICKDETAILKEY = #{pickdetailkey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PICKDETAIL
+    where PICKDETAILKEY = #{pickdetailkey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.report.PickDetail" >
+    insert into PICKDETAIL (PICKDETAILKEY, SERIALKEY, WHSEID, 
+      CASEID, PICKHEADERKEY, ORDERKEY, 
+      ORDERLINENUMBER, LOT, STORERKEY, 
+      SKU, ALTSKU, UOM, UOMQTY, 
+      QTY, QTYMOVED, STATUS, 
+      DROPID, LOC, ID, PACKKEY, 
+      UPDATESOURCE, CARTONGROUP, CARTONTYPE, 
+      TOLOC, DOREPLENISH, REPLENISHZONE, 
+      DOCARTONIZE, PICKMETHOD, WAVEKEY, 
+      EFFECTIVEDATE, FORTE_FLAG, FROMLOC, 
+      TRACKINGID, FREIGHTCHARGES, INTERMODALVEHICLE, 
+      LOADID, STOP, DOOR, 
+      ROUTE, SORTATIONLOCATION, SORTATIONSTATION, 
+      BATCHCARTONID, ISCLOSED, QCSTATUS, 
+      PDUDF1, PDUDF2, PDUDF3, 
+      PICKNOTES, RECEIPTKEY, CROSSDOCKED, 
+      SEQNO, LABELTYPE, COMPANYPREFIX, 
+      SERIALREFERENCE, ADDDATE, ADDWHO, 
+      EDITDATE, EDITWHO, OPTIMIZECOP, 
+      BOXNO, PICKNO, PICK_DATE, 
+      PICK_USER, PICK_QTY, QTYOLD, 
+      SENDCODE, SENDTIME, OPSTIME, 
+      OLD_LOC, OLD_ID)
+    values (#{pickdetailkey,jdbcType=VARCHAR}, #{serialkey,jdbcType=DECIMAL}, #{whseid,jdbcType=VARCHAR}, 
+      #{caseid,jdbcType=VARCHAR}, #{pickheaderkey,jdbcType=VARCHAR}, #{orderkey,jdbcType=VARCHAR}, 
+      #{orderlinenumber,jdbcType=VARCHAR}, #{lot,jdbcType=VARCHAR}, #{storerkey,jdbcType=VARCHAR}, 
+      #{sku,jdbcType=VARCHAR}, #{altsku,jdbcType=VARCHAR}, #{uom,jdbcType=VARCHAR}, #{uomqty,jdbcType=DECIMAL}, 
+      #{qty,jdbcType=DECIMAL}, #{qtymoved,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, 
+      #{dropid,jdbcType=VARCHAR}, #{loc,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{packkey,jdbcType=VARCHAR}, 
+      #{updatesource,jdbcType=VARCHAR}, #{cartongroup,jdbcType=VARCHAR}, #{cartontype,jdbcType=VARCHAR}, 
+      #{toloc,jdbcType=VARCHAR}, #{doreplenish,jdbcType=VARCHAR}, #{replenishzone,jdbcType=VARCHAR}, 
+      #{docartonize,jdbcType=VARCHAR}, #{pickmethod,jdbcType=VARCHAR}, #{wavekey,jdbcType=VARCHAR}, 
+      #{effectivedate,jdbcType=TIMESTAMP}, #{forteFlag,jdbcType=VARCHAR}, #{fromloc,jdbcType=VARCHAR}, 
+      #{trackingid,jdbcType=VARCHAR}, #{freightcharges,jdbcType=DECIMAL}, #{intermodalvehicle,jdbcType=VARCHAR}, 
+      #{loadid,jdbcType=DECIMAL}, #{stop,jdbcType=DECIMAL}, #{door,jdbcType=VARCHAR}, 
+      #{route,jdbcType=VARCHAR}, #{sortationlocation,jdbcType=VARCHAR}, #{sortationstation,jdbcType=VARCHAR}, 
+      #{batchcartonid,jdbcType=VARCHAR}, #{isclosed,jdbcType=VARCHAR}, #{qcstatus,jdbcType=VARCHAR}, 
+      #{pdudf1,jdbcType=VARCHAR}, #{pdudf2,jdbcType=VARCHAR}, #{pdudf3,jdbcType=VARCHAR}, 
+      #{picknotes,jdbcType=VARCHAR}, #{receiptkey,jdbcType=VARCHAR}, #{crossdocked,jdbcType=VARCHAR}, 
+      #{seqno,jdbcType=DECIMAL}, #{labeltype,jdbcType=VARCHAR}, #{companyprefix,jdbcType=VARCHAR}, 
+      #{serialreference,jdbcType=VARCHAR}, #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=VARCHAR}, 
+      #{editdate,jdbcType=TIMESTAMP}, #{editwho,jdbcType=VARCHAR}, #{optimizecop,jdbcType=VARCHAR}, 
+      #{boxno,jdbcType=VARCHAR}, #{pickno,jdbcType=VARCHAR}, #{pickDate,jdbcType=TIMESTAMP}, 
+      #{pickUser,jdbcType=VARCHAR}, #{pickQty,jdbcType=DECIMAL}, #{qtyold,jdbcType=DECIMAL}, 
+      #{sendcode,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, #{opstime,jdbcType=VARCHAR}, 
+      #{oldLoc,jdbcType=VARCHAR}, #{oldId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.PickDetail" >
+    insert into PICKDETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pickdetailkey != null" >
+        PICKDETAILKEY,
+      </if>
+      <if test="serialkey != null" >
+        SERIALKEY,
+      </if>
+      <if test="whseid != null" >
+        WHSEID,
+      </if>
+      <if test="caseid != null" >
+        CASEID,
+      </if>
+      <if test="pickheaderkey != null" >
+        PICKHEADERKEY,
+      </if>
+      <if test="orderkey != null" >
+        ORDERKEY,
+      </if>
+      <if test="orderlinenumber != null" >
+        ORDERLINENUMBER,
+      </if>
+      <if test="lot != null" >
+        LOT,
+      </if>
+      <if test="storerkey != null" >
+        STORERKEY,
+      </if>
+      <if test="sku != null" >
+        SKU,
+      </if>
+      <if test="altsku != null" >
+        ALTSKU,
+      </if>
+      <if test="uom != null" >
+        UOM,
+      </if>
+      <if test="uomqty != null" >
+        UOMQTY,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="qtymoved != null" >
+        QTYMOVED,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="dropid != null" >
+        DROPID,
+      </if>
+      <if test="loc != null" >
+        LOC,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="packkey != null" >
+        PACKKEY,
+      </if>
+      <if test="updatesource != null" >
+        UPDATESOURCE,
+      </if>
+      <if test="cartongroup != null" >
+        CARTONGROUP,
+      </if>
+      <if test="cartontype != null" >
+        CARTONTYPE,
+      </if>
+      <if test="toloc != null" >
+        TOLOC,
+      </if>
+      <if test="doreplenish != null" >
+        DOREPLENISH,
+      </if>
+      <if test="replenishzone != null" >
+        REPLENISHZONE,
+      </if>
+      <if test="docartonize != null" >
+        DOCARTONIZE,
+      </if>
+      <if test="pickmethod != null" >
+        PICKMETHOD,
+      </if>
+      <if test="wavekey != null" >
+        WAVEKEY,
+      </if>
+      <if test="effectivedate != null" >
+        EFFECTIVEDATE,
+      </if>
+      <if test="forteFlag != null" >
+        FORTE_FLAG,
+      </if>
+      <if test="fromloc != null" >
+        FROMLOC,
+      </if>
+      <if test="trackingid != null" >
+        TRACKINGID,
+      </if>
+      <if test="freightcharges != null" >
+        FREIGHTCHARGES,
+      </if>
+      <if test="intermodalvehicle != null" >
+        INTERMODALVEHICLE,
+      </if>
+      <if test="loadid != null" >
+        LOADID,
+      </if>
+      <if test="stop != null" >
+        STOP,
+      </if>
+      <if test="door != null" >
+        DOOR,
+      </if>
+      <if test="route != null" >
+        ROUTE,
+      </if>
+      <if test="sortationlocation != null" >
+        SORTATIONLOCATION,
+      </if>
+      <if test="sortationstation != null" >
+        SORTATIONSTATION,
+      </if>
+      <if test="batchcartonid != null" >
+        BATCHCARTONID,
+      </if>
+      <if test="isclosed != null" >
+        ISCLOSED,
+      </if>
+      <if test="qcstatus != null" >
+        QCSTATUS,
+      </if>
+      <if test="pdudf1 != null" >
+        PDUDF1,
+      </if>
+      <if test="pdudf2 != null" >
+        PDUDF2,
+      </if>
+      <if test="pdudf3 != null" >
+        PDUDF3,
+      </if>
+      <if test="picknotes != null" >
+        PICKNOTES,
+      </if>
+      <if test="receiptkey != null" >
+        RECEIPTKEY,
+      </if>
+      <if test="crossdocked != null" >
+        CROSSDOCKED,
+      </if>
+      <if test="seqno != null" >
+        SEQNO,
+      </if>
+      <if test="labeltype != null" >
+        LABELTYPE,
+      </if>
+      <if test="companyprefix != null" >
+        COMPANYPREFIX,
+      </if>
+      <if test="serialreference != null" >
+        SERIALREFERENCE,
+      </if>
+      <if test="adddate != null" >
+        ADDDATE,
+      </if>
+      <if test="addwho != null" >
+        ADDWHO,
+      </if>
+      <if test="editdate != null" >
+        EDITDATE,
+      </if>
+      <if test="editwho != null" >
+        EDITWHO,
+      </if>
+      <if test="optimizecop != null" >
+        OPTIMIZECOP,
+      </if>
+      <if test="boxno != null" >
+        BOXNO,
+      </if>
+      <if test="pickno != null" >
+        PICKNO,
+      </if>
+      <if test="pickDate != null" >
+        PICK_DATE,
+      </if>
+      <if test="pickUser != null" >
+        PICK_USER,
+      </if>
+      <if test="pickQty != null" >
+        PICK_QTY,
+      </if>
+      <if test="qtyold != null" >
+        QTYOLD,
+      </if>
+      <if test="sendcode != null" >
+        SENDCODE,
+      </if>
+      <if test="sendtime != null" >
+        SENDTIME,
+      </if>
+      <if test="opstime != null" >
+        OPSTIME,
+      </if>
+      <if test="oldLoc != null" >
+        OLD_LOC,
+      </if>
+      <if test="oldId != null" >
+        OLD_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pickdetailkey != null" >
+        #{pickdetailkey,jdbcType=VARCHAR},
+      </if>
+      <if test="serialkey != null" >
+        #{serialkey,jdbcType=DECIMAL},
+      </if>
+      <if test="whseid != null" >
+        #{whseid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseid != null" >
+        #{caseid,jdbcType=VARCHAR},
+      </if>
+      <if test="pickheaderkey != null" >
+        #{pickheaderkey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderkey != null" >
+        #{orderkey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderlinenumber != null" >
+        #{orderlinenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lot != null" >
+        #{lot,jdbcType=VARCHAR},
+      </if>
+      <if test="storerkey != null" >
+        #{storerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="altsku != null" >
+        #{altsku,jdbcType=VARCHAR},
+      </if>
+      <if test="uom != null" >
+        #{uom,jdbcType=VARCHAR},
+      </if>
+      <if test="uomqty != null" >
+        #{uomqty,jdbcType=DECIMAL},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="qtymoved != null" >
+        #{qtymoved,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="dropid != null" >
+        #{dropid,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null" >
+        #{loc,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="packkey != null" >
+        #{packkey,jdbcType=VARCHAR},
+      </if>
+      <if test="updatesource != null" >
+        #{updatesource,jdbcType=VARCHAR},
+      </if>
+      <if test="cartongroup != null" >
+        #{cartongroup,jdbcType=VARCHAR},
+      </if>
+      <if test="cartontype != null" >
+        #{cartontype,jdbcType=VARCHAR},
+      </if>
+      <if test="toloc != null" >
+        #{toloc,jdbcType=VARCHAR},
+      </if>
+      <if test="doreplenish != null" >
+        #{doreplenish,jdbcType=VARCHAR},
+      </if>
+      <if test="replenishzone != null" >
+        #{replenishzone,jdbcType=VARCHAR},
+      </if>
+      <if test="docartonize != null" >
+        #{docartonize,jdbcType=VARCHAR},
+      </if>
+      <if test="pickmethod != null" >
+        #{pickmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="wavekey != null" >
+        #{wavekey,jdbcType=VARCHAR},
+      </if>
+      <if test="effectivedate != null" >
+        #{effectivedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="forteFlag != null" >
+        #{forteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fromloc != null" >
+        #{fromloc,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingid != null" >
+        #{trackingid,jdbcType=VARCHAR},
+      </if>
+      <if test="freightcharges != null" >
+        #{freightcharges,jdbcType=DECIMAL},
+      </if>
+      <if test="intermodalvehicle != null" >
+        #{intermodalvehicle,jdbcType=VARCHAR},
+      </if>
+      <if test="loadid != null" >
+        #{loadid,jdbcType=DECIMAL},
+      </if>
+      <if test="stop != null" >
+        #{stop,jdbcType=DECIMAL},
+      </if>
+      <if test="door != null" >
+        #{door,jdbcType=VARCHAR},
+      </if>
+      <if test="route != null" >
+        #{route,jdbcType=VARCHAR},
+      </if>
+      <if test="sortationlocation != null" >
+        #{sortationlocation,jdbcType=VARCHAR},
+      </if>
+      <if test="sortationstation != null" >
+        #{sortationstation,jdbcType=VARCHAR},
+      </if>
+      <if test="batchcartonid != null" >
+        #{batchcartonid,jdbcType=VARCHAR},
+      </if>
+      <if test="isclosed != null" >
+        #{isclosed,jdbcType=VARCHAR},
+      </if>
+      <if test="qcstatus != null" >
+        #{qcstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="pdudf1 != null" >
+        #{pdudf1,jdbcType=VARCHAR},
+      </if>
+      <if test="pdudf2 != null" >
+        #{pdudf2,jdbcType=VARCHAR},
+      </if>
+      <if test="pdudf3 != null" >
+        #{pdudf3,jdbcType=VARCHAR},
+      </if>
+      <if test="picknotes != null" >
+        #{picknotes,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptkey != null" >
+        #{receiptkey,jdbcType=VARCHAR},
+      </if>
+      <if test="crossdocked != null" >
+        #{crossdocked,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno != null" >
+        #{seqno,jdbcType=DECIMAL},
+      </if>
+      <if test="labeltype != null" >
+        #{labeltype,jdbcType=VARCHAR},
+      </if>
+      <if test="companyprefix != null" >
+        #{companyprefix,jdbcType=VARCHAR},
+      </if>
+      <if test="serialreference != null" >
+        #{serialreference,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="optimizecop != null" >
+        #{optimizecop,jdbcType=VARCHAR},
+      </if>
+      <if test="boxno != null" >
+        #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickno != null" >
+        #{pickno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickDate != null" >
+        #{pickDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pickUser != null" >
+        #{pickUser,jdbcType=VARCHAR},
+      </if>
+      <if test="pickQty != null" >
+        #{pickQty,jdbcType=DECIMAL},
+      </if>
+      <if test="qtyold != null" >
+        #{qtyold,jdbcType=DECIMAL},
+      </if>
+      <if test="sendcode != null" >
+        #{sendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opstime != null" >
+        #{opstime,jdbcType=VARCHAR},
+      </if>
+      <if test="oldLoc != null" >
+        #{oldLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="oldId != null" >
+        #{oldId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.report.PickDetail" >
+    update PICKDETAIL
+    <set >
+      <if test="serialkey != null" >
+        SERIALKEY = #{serialkey,jdbcType=DECIMAL},
+      </if>
+      <if test="whseid != null" >
+        WHSEID = #{whseid,jdbcType=VARCHAR},
+      </if>
+      <if test="caseid != null" >
+        CASEID = #{caseid,jdbcType=VARCHAR},
+      </if>
+      <if test="pickheaderkey != null" >
+        PICKHEADERKEY = #{pickheaderkey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderkey != null" >
+        ORDERKEY = #{orderkey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderlinenumber != null" >
+        ORDERLINENUMBER = #{orderlinenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lot != null" >
+        LOT = #{lot,jdbcType=VARCHAR},
+      </if>
+      <if test="storerkey != null" >
+        STORERKEY = #{storerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        SKU = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="altsku != null" >
+        ALTSKU = #{altsku,jdbcType=VARCHAR},
+      </if>
+      <if test="uom != null" >
+        UOM = #{uom,jdbcType=VARCHAR},
+      </if>
+      <if test="uomqty != null" >
+        UOMQTY = #{uomqty,jdbcType=DECIMAL},
+      </if>
+      <if test="qty != null" >
+        QTY = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="qtymoved != null" >
+        QTYMOVED = #{qtymoved,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="dropid != null" >
+        DROPID = #{dropid,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null" >
+        LOC = #{loc,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="packkey != null" >
+        PACKKEY = #{packkey,jdbcType=VARCHAR},
+      </if>
+      <if test="updatesource != null" >
+        UPDATESOURCE = #{updatesource,jdbcType=VARCHAR},
+      </if>
+      <if test="cartongroup != null" >
+        CARTONGROUP = #{cartongroup,jdbcType=VARCHAR},
+      </if>
+      <if test="cartontype != null" >
+        CARTONTYPE = #{cartontype,jdbcType=VARCHAR},
+      </if>
+      <if test="toloc != null" >
+        TOLOC = #{toloc,jdbcType=VARCHAR},
+      </if>
+      <if test="doreplenish != null" >
+        DOREPLENISH = #{doreplenish,jdbcType=VARCHAR},
+      </if>
+      <if test="replenishzone != null" >
+        REPLENISHZONE = #{replenishzone,jdbcType=VARCHAR},
+      </if>
+      <if test="docartonize != null" >
+        DOCARTONIZE = #{docartonize,jdbcType=VARCHAR},
+      </if>
+      <if test="pickmethod != null" >
+        PICKMETHOD = #{pickmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="wavekey != null" >
+        WAVEKEY = #{wavekey,jdbcType=VARCHAR},
+      </if>
+      <if test="effectivedate != null" >
+        EFFECTIVEDATE = #{effectivedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="forteFlag != null" >
+        FORTE_FLAG = #{forteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fromloc != null" >
+        FROMLOC = #{fromloc,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingid != null" >
+        TRACKINGID = #{trackingid,jdbcType=VARCHAR},
+      </if>
+      <if test="freightcharges != null" >
+        FREIGHTCHARGES = #{freightcharges,jdbcType=DECIMAL},
+      </if>
+      <if test="intermodalvehicle != null" >
+        INTERMODALVEHICLE = #{intermodalvehicle,jdbcType=VARCHAR},
+      </if>
+      <if test="loadid != null" >
+        LOADID = #{loadid,jdbcType=DECIMAL},
+      </if>
+      <if test="stop != null" >
+        STOP = #{stop,jdbcType=DECIMAL},
+      </if>
+      <if test="door != null" >
+        DOOR = #{door,jdbcType=VARCHAR},
+      </if>
+      <if test="route != null" >
+        ROUTE = #{route,jdbcType=VARCHAR},
+      </if>
+      <if test="sortationlocation != null" >
+        SORTATIONLOCATION = #{sortationlocation,jdbcType=VARCHAR},
+      </if>
+      <if test="sortationstation != null" >
+        SORTATIONSTATION = #{sortationstation,jdbcType=VARCHAR},
+      </if>
+      <if test="batchcartonid != null" >
+        BATCHCARTONID = #{batchcartonid,jdbcType=VARCHAR},
+      </if>
+      <if test="isclosed != null" >
+        ISCLOSED = #{isclosed,jdbcType=VARCHAR},
+      </if>
+      <if test="qcstatus != null" >
+        QCSTATUS = #{qcstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="pdudf1 != null" >
+        PDUDF1 = #{pdudf1,jdbcType=VARCHAR},
+      </if>
+      <if test="pdudf2 != null" >
+        PDUDF2 = #{pdudf2,jdbcType=VARCHAR},
+      </if>
+      <if test="pdudf3 != null" >
+        PDUDF3 = #{pdudf3,jdbcType=VARCHAR},
+      </if>
+      <if test="picknotes != null" >
+        PICKNOTES = #{picknotes,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptkey != null" >
+        RECEIPTKEY = #{receiptkey,jdbcType=VARCHAR},
+      </if>
+      <if test="crossdocked != null" >
+        CROSSDOCKED = #{crossdocked,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno != null" >
+        SEQNO = #{seqno,jdbcType=DECIMAL},
+      </if>
+      <if test="labeltype != null" >
+        LABELTYPE = #{labeltype,jdbcType=VARCHAR},
+      </if>
+      <if test="companyprefix != null" >
+        COMPANYPREFIX = #{companyprefix,jdbcType=VARCHAR},
+      </if>
+      <if test="serialreference != null" >
+        SERIALREFERENCE = #{serialreference,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        ADDWHO = #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        EDITWHO = #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="optimizecop != null" >
+        OPTIMIZECOP = #{optimizecop,jdbcType=VARCHAR},
+      </if>
+      <if test="boxno != null" >
+        BOXNO = #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickno != null" >
+        PICKNO = #{pickno,jdbcType=VARCHAR},
+      </if>
+      <if test="pickDate != null" >
+        PICK_DATE = #{pickDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pickUser != null" >
+        PICK_USER = #{pickUser,jdbcType=VARCHAR},
+      </if>
+      <if test="pickQty != null" >
+        PICK_QTY = #{pickQty,jdbcType=DECIMAL},
+      </if>
+      <if test="qtyold != null" >
+        QTYOLD = #{qtyold,jdbcType=DECIMAL},
+      </if>
+      <if test="sendcode != null" >
+        SENDCODE = #{sendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opstime != null" >
+        OPSTIME = #{opstime,jdbcType=VARCHAR},
+      </if>
+      <if test="oldLoc != null" >
+        OLD_LOC = #{oldLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="oldId != null" >
+        OLD_ID = #{oldId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PICKDETAILKEY = #{pickdetailkey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.report.PickDetail" >
+    update PICKDETAIL
+    set SERIALKEY = #{serialkey,jdbcType=DECIMAL},
+      WHSEID = #{whseid,jdbcType=VARCHAR},
+      CASEID = #{caseid,jdbcType=VARCHAR},
+      PICKHEADERKEY = #{pickheaderkey,jdbcType=VARCHAR},
+      ORDERKEY = #{orderkey,jdbcType=VARCHAR},
+      ORDERLINENUMBER = #{orderlinenumber,jdbcType=VARCHAR},
+      LOT = #{lot,jdbcType=VARCHAR},
+      STORERKEY = #{storerkey,jdbcType=VARCHAR},
+      SKU = #{sku,jdbcType=VARCHAR},
+      ALTSKU = #{altsku,jdbcType=VARCHAR},
+      UOM = #{uom,jdbcType=VARCHAR},
+      UOMQTY = #{uomqty,jdbcType=DECIMAL},
+      QTY = #{qty,jdbcType=DECIMAL},
+      QTYMOVED = #{qtymoved,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DROPID = #{dropid,jdbcType=VARCHAR},
+      LOC = #{loc,jdbcType=VARCHAR},
+      ID = #{id,jdbcType=VARCHAR},
+      PACKKEY = #{packkey,jdbcType=VARCHAR},
+      UPDATESOURCE = #{updatesource,jdbcType=VARCHAR},
+      CARTONGROUP = #{cartongroup,jdbcType=VARCHAR},
+      CARTONTYPE = #{cartontype,jdbcType=VARCHAR},
+      TOLOC = #{toloc,jdbcType=VARCHAR},
+      DOREPLENISH = #{doreplenish,jdbcType=VARCHAR},
+      REPLENISHZONE = #{replenishzone,jdbcType=VARCHAR},
+      DOCARTONIZE = #{docartonize,jdbcType=VARCHAR},
+      PICKMETHOD = #{pickmethod,jdbcType=VARCHAR},
+      WAVEKEY = #{wavekey,jdbcType=VARCHAR},
+      EFFECTIVEDATE = #{effectivedate,jdbcType=TIMESTAMP},
+      FORTE_FLAG = #{forteFlag,jdbcType=VARCHAR},
+      FROMLOC = #{fromloc,jdbcType=VARCHAR},
+      TRACKINGID = #{trackingid,jdbcType=VARCHAR},
+      FREIGHTCHARGES = #{freightcharges,jdbcType=DECIMAL},
+      INTERMODALVEHICLE = #{intermodalvehicle,jdbcType=VARCHAR},
+      LOADID = #{loadid,jdbcType=DECIMAL},
+      STOP = #{stop,jdbcType=DECIMAL},
+      DOOR = #{door,jdbcType=VARCHAR},
+      ROUTE = #{route,jdbcType=VARCHAR},
+      SORTATIONLOCATION = #{sortationlocation,jdbcType=VARCHAR},
+      SORTATIONSTATION = #{sortationstation,jdbcType=VARCHAR},
+      BATCHCARTONID = #{batchcartonid,jdbcType=VARCHAR},
+      ISCLOSED = #{isclosed,jdbcType=VARCHAR},
+      QCSTATUS = #{qcstatus,jdbcType=VARCHAR},
+      PDUDF1 = #{pdudf1,jdbcType=VARCHAR},
+      PDUDF2 = #{pdudf2,jdbcType=VARCHAR},
+      PDUDF3 = #{pdudf3,jdbcType=VARCHAR},
+      PICKNOTES = #{picknotes,jdbcType=VARCHAR},
+      RECEIPTKEY = #{receiptkey,jdbcType=VARCHAR},
+      CROSSDOCKED = #{crossdocked,jdbcType=VARCHAR},
+      SEQNO = #{seqno,jdbcType=DECIMAL},
+      LABELTYPE = #{labeltype,jdbcType=VARCHAR},
+      COMPANYPREFIX = #{companyprefix,jdbcType=VARCHAR},
+      SERIALREFERENCE = #{serialreference,jdbcType=VARCHAR},
+      ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      ADDWHO = #{addwho,jdbcType=VARCHAR},
+      EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      EDITWHO = #{editwho,jdbcType=VARCHAR},
+      OPTIMIZECOP = #{optimizecop,jdbcType=VARCHAR},
+      BOXNO = #{boxno,jdbcType=VARCHAR},
+      PICKNO = #{pickno,jdbcType=VARCHAR},
+      PICK_DATE = #{pickDate,jdbcType=TIMESTAMP},
+      PICK_USER = #{pickUser,jdbcType=VARCHAR},
+      PICK_QTY = #{pickQty,jdbcType=DECIMAL},
+      QTYOLD = #{qtyold,jdbcType=DECIMAL},
+      SENDCODE = #{sendcode,jdbcType=VARCHAR},
+      SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      OPSTIME = #{opstime,jdbcType=VARCHAR},
+      OLD_LOC = #{oldLoc,jdbcType=VARCHAR},
+      OLD_ID = #{oldId,jdbcType=VARCHAR}
+    where PICKDETAILKEY = #{pickdetailkey,jdbcType=VARCHAR}
+  </update>
+  <select id="getQingPeiData11" resultType="java.lang.Integer">
+select nvl(sum(pick_qty),0) from pickdetail where old_loc = '41SMART' AND status &lt;&gt;'0' and (to_char(pick_date, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData12" resultType="java.lang.Integer">
+select nvl(sum(pick_qty),0) from pickdetail where old_loc = '41SMART' AND status = '0'
+    </select>
+  <select id="getQingPeiData13" resultType="java.lang.Integer">
+select nvl(sum(pick_qty),0) from pickdetail where old_loc = '42SMART' AND status &lt;&gt; '0' and (to_char(pick_date, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData14" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from pickdetail where old_loc = '42SMART' AND status = '0'
+    </select>
+  <select id="getQingPeiData15" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from pickdetail where old_loc not in ('41SMART','42SMART') AND status &lt;&gt; '0' and (to_char(pick_date, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData16" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from pickdetail where old_loc not in ('41SMART','42SMART') AND status = '0'
+    </select>
+  <select id="getQingPeiData17" resultType="java.lang.Integer">
+select nvl(COUNT(distinct pickno),0) from pickdetail where status &lt;&gt; '0' and (to_char(pick_date, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData18" resultType="java.lang.Integer">
+select nvl(COUNT(distinct pickno),0) from pickdetail where status = '0'
+    </select>
+  <select id="getQingPeiData23" resultType="java.lang.Integer">
+select nvl(sum(uomqty),0) from pickdetail where old_loc = '42SMART' AND status &lt;&gt; '0' and (to_char(pick_date, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData24" resultType="java.lang.Integer">
+select nvl(sum(uomqty),0) from pickdetail where old_loc = '42SMART' AND status = '0'
+    </select>
+  <select id="getQingPeiData27" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from pickdetail where status &lt;&gt; '0' and (to_char(pick_date, 'yyyy-mm-dd') between #{date_begin} AND #{date_end})
+    </select>
+  <select id="getQingPeiData28" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from pickdetail where status = '0'
+    </select>
+</mapper>

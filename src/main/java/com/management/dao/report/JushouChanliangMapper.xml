@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.JushouChanliangMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.JushouChanliang" >
+    <constructor >
+      <arg column="CASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QTY" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="CASEQTY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DOC_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DD" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.report.JushouChanliang" >
+    insert into JUSHOU_CHANLIANG (CASEID, QTY, CASEQTY, 
+      DOC_TYPE, DD)
+    values (#{caseid,jdbcType=VARCHAR}, #{qty,jdbcType=DECIMAL}, #{caseqty,jdbcType=VARCHAR}, 
+      #{docType,jdbcType=VARCHAR}, #{dd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.JushouChanliang" >
+    insert into JUSHOU_CHANLIANG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseid != null" >
+        CASEID,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="caseqty != null" >
+        CASEQTY,
+      </if>
+      <if test="docType != null" >
+        DOC_TYPE,
+      </if>
+      <if test="dd != null" >
+        DD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseid != null" >
+        #{caseid,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="caseqty != null" >
+        #{caseqty,jdbcType=VARCHAR},
+      </if>
+      <if test="docType != null" >
+        #{docType,jdbcType=VARCHAR},
+      </if>
+      <if test="dd != null" >
+        #{dd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="getBaoZData24" resultType="java.lang.Integer">
+select nvl(sum(caseqty),0) from
+jushou_chanliang where dd between #{date_begin} AND #{date_end}
+    </select>
+  <select id="getBaoZData28" resultType="java.lang.Integer">
+select nvl(sum(qty),0) from
+jushou_chanliang where dd between #{date_begin} AND #{date_end}
+    </select>
+</mapper>

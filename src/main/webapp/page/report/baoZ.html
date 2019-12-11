@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>包装作业日报表</title>
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../easyui/locale/easyui-lang-zh_CN.js"></script>
+    <style type="text/css">
+        th{
+            padding:1px;
+            text-align: center;
+            height: 30px;
+            border-bottom:1px solid;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <h1>包装作业日报表</h1>
+    <div>
+        开始日期：<input class="easyui-datebox" id="date_begin" style="width:150px;" data-options="label:''">
+        结束日期：<input class="easyui-datebox" id="date_end" style="width:150px;" data-options="label:''">
+        <a id="btn" class="easyui-linkbutton" iconCls="iconCls:'icon-cut',disabled:true" onclick="queryInfo()">查询</a>
+    </div>
+</div>
+<p></p>
+<div id="show">
+    <table id='t1' align="center" border='1' cellpadding='0' cellspacing='0' style='font-size: 15px;width: 80%;font-weight:normal;' >
+        <tr>
+            <th>&nbsp;</th><th>主配发货</th><th>主配够包</th><th>主配发未完成</th><th>请配发货</th><th>请配够包</th><th>请配发未完成</th><th>退货</th><th>退货够包</th><th>退货发未完成</th>
+        </tr>
+        <tr>
+            <th>一般图书</th><th><span id="yzf"></span><span id="yzf1"></span></th>
+            <th><span id="yzg"></span><span id="yzg1"></span></th>
+            <th><span id="yzw"></span><span id="yzw1"></span></th>
+            <th><span id="yqf"></span><span id="yqf1"></span></th>
+            <th><span id="yqg"></span><span id="yqg1"></span></th>
+            <th><span id="yqw"></span><span id="yqw1"></span></th>
+            <th><span id="ytf"></span><span id="ytf1"></span></th>
+            <th><span id="ytg"></span><span id="ytg1"></span></th>
+            <th><span id="ytw"></span><span id="ytw1"></span></th>
+        </tr>
+        <tr>
+            <th>农家书屋</th><th><span id="nzf"></span><span id="nzf1"></span></th>
+            <th><span id="nzg"></span><span id="nzg1"></span></th>
+            <th><span id="nzw"></span><span id="nzw1"></span></th>
+            <th>手工单</th>
+            <th>主配拒收</th>
+            <th><span id="zj"></span></th>
+            <th>客退拒收</th>
+            <th><span id="kj"></span><span id="kj1"></span></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>大中专</th><th><span id="dzf"></span><span id="dzf1"></span></th>
+            <th><span id="dzg"></span><span id="dzg1"></span></th>
+            <th><span id="dzw"></span><span id="dzw1"></span></th>
+            <th><span id="dqf"></span><span id="dqf1"></span></th>
+            <th><span id="dqg"></span><span id="dqg1"></span></th>
+            <th><span id="dqw"></span><span id="dqw1"></span></th>
+            <th><span id="dtf"></span><span id="dtf1"></span></th>
+            <th><span id="dtg"></span><span id="dtg1"></span></th>
+            <th><span id="dtw"></span><span id="dtw1"></span></th>
+        </tr>
+        <tr>
+            <th>汇总</th><th><span id="hzf"></span><span id="hzf1"></span></th>
+            <th><span id="hzg"></span><span id="hzg1"></span></th>
+            <th><span id="hzw"></span><span id="hzw1"></span></th>
+            <th>发货汇总</th>
+            <th><span id="fh"></span><span id="fh1"></span></th>
+            <th>退货汇总</th>
+            <th><span id="th"></span><span id="th1"></span></th>
+            <th>包装总产量</th>
+            <th><span id="zz"></span><span id="zz1"></span></th>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript" src="../../js/util.js"></script>
+<script type="text/javascript" src="baoZ.js"></script>
+</body>
+</html>

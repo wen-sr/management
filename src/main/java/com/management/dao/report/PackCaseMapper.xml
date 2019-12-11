@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.report.PackCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.report.PackCase" >
+    <constructor >
+      <idArg column="PACKID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BATCH_NO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FROMTABLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FROMTYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKDETAILKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STORERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BOXNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BOXNOBAK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASEID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CASELINENO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TYPE" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="DOC_NUMBER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SEQ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SKU" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PACKQTY" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="CONFIRM_QTY" jdbcType="DECIMAL" javaType="java.lang.Short" />
+      <arg column="PRICE" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DISCOUNT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="MY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="STATUS" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="CONSK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHORTNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EXPORTNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR4" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUSR5" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="ADDWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="EDITDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EDITWHO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PACK_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PACK_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="CONFIRM_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONFIRM_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="MERGE_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MERGE_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="SOW_USER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SOW_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="NET_WEIGHT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="ACT_WEIGHT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="BARCODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DESCR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IS_MERGE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PICKNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ROUTE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PUTAWAYZONE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PACK_USER1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PACK_DATE1" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="PACKLOC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATION" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ORDERKEY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FROMBOX" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="WES_HANGUP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MERGE_STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MERGETASKNO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="WES_HANGUP_OLD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CANMERGE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IS_REFUSE" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PACKID, BATCH_NO, FROMTABLE, FROMTYPE, PICKDETAILKEY, STORERKEY, BOXNO, BOXNOBAK, 
+    CASEID, CASELINENO, TYPE, DOC_NUMBER, SEQ, SKU, PACKQTY, CONFIRM_QTY, PRICE, DISCOUNT, 
+    MY, STATUS, CONSK, SHORTNAME, EXPORTNO, SUSR1, SUSR2, SUSR3, SUSR4, SUSR5, ADDDATE, 
+    ADDWHO, EDITDATE, EDITWHO, PACK_USER, PACK_DATE, CONFIRM_USER, CONFIRM_DATE, MERGE_USER, 
+    MERGE_DATE, SOW_USER, SOW_DATE, NET_WEIGHT, ACT_WEIGHT, BARCODE, DESCR, IS_MERGE, 
+    PICKNO, ROUTE, PUTAWAYZONE, PACK_USER1, PACK_DATE1, PACKLOC, STATION, ORDERKEY, FROMBOX, 
+    WES_HANGUP, MERGE_STATUS, MERGETASKNO, WES_HANGUP_OLD, CANMERGE, IS_REFUSE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PACK_CASE
+    where PACKID = #{packid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PACK_CASE
+    where PACKID = #{packid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.pojo.report.PackCase" >
+    insert into PACK_CASE (PACKID, BATCH_NO, FROMTABLE, 
+      FROMTYPE, PICKDETAILKEY, STORERKEY, 
+      BOXNO, BOXNOBAK, CASEID, 
+      CASELINENO, TYPE, DOC_NUMBER, 
+      SEQ, SKU, PACKQTY, 
+      CONFIRM_QTY, PRICE, DISCOUNT, 
+      MY, STATUS, CONSK, 
+      SHORTNAME, EXPORTNO, SUSR1, 
+      SUSR2, SUSR3, SUSR4, 
+      SUSR5, ADDDATE, ADDWHO, 
+      EDITDATE, EDITWHO, PACK_USER, 
+      PACK_DATE, CONFIRM_USER, CONFIRM_DATE, 
+      MERGE_USER, MERGE_DATE, SOW_USER, 
+      SOW_DATE, NET_WEIGHT, ACT_WEIGHT, 
+      BARCODE, DESCR, IS_MERGE, 
+      PICKNO, ROUTE, PUTAWAYZONE, 
+      PACK_USER1, PACK_DATE1, PACKLOC, 
+      STATION, ORDERKEY, FROMBOX, 
+      WES_HANGUP, MERGE_STATUS, MERGETASKNO, 
+      WES_HANGUP_OLD, CANMERGE, IS_REFUSE
+      )
+    values (#{packid,jdbcType=VARCHAR}, #{batchNo,jdbcType=VARCHAR}, #{fromtable,jdbcType=VARCHAR}, 
+      #{fromtype,jdbcType=VARCHAR}, #{pickdetailkey,jdbcType=VARCHAR}, #{storerkey,jdbcType=VARCHAR}, 
+      #{boxno,jdbcType=VARCHAR}, #{boxnobak,jdbcType=VARCHAR}, #{caseid,jdbcType=VARCHAR}, 
+      #{caselineno,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, #{docNumber,jdbcType=VARCHAR}, 
+      #{seq,jdbcType=VARCHAR}, #{sku,jdbcType=VARCHAR}, #{packqty,jdbcType=DECIMAL}, 
+      #{confirmQty,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{discount,jdbcType=DECIMAL}, 
+      #{my,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, #{consk,jdbcType=VARCHAR}, 
+      #{shortname,jdbcType=VARCHAR}, #{exportno,jdbcType=VARCHAR}, #{susr1,jdbcType=VARCHAR}, 
+      #{susr2,jdbcType=VARCHAR}, #{susr3,jdbcType=VARCHAR}, #{susr4,jdbcType=VARCHAR}, 
+      #{susr5,jdbcType=VARCHAR}, #{adddate,jdbcType=TIMESTAMP}, #{addwho,jdbcType=VARCHAR}, 
+      #{editdate,jdbcType=TIMESTAMP}, #{editwho,jdbcType=VARCHAR}, #{packUser,jdbcType=VARCHAR}, 
+      #{packDate,jdbcType=TIMESTAMP}, #{confirmUser,jdbcType=VARCHAR}, #{confirmDate,jdbcType=TIMESTAMP}, 
+      #{mergeUser,jdbcType=VARCHAR}, #{mergeDate,jdbcType=TIMESTAMP}, #{sowUser,jdbcType=VARCHAR}, 
+      #{sowDate,jdbcType=TIMESTAMP}, #{netWeight,jdbcType=DECIMAL}, #{actWeight,jdbcType=DECIMAL}, 
+      #{barcode,jdbcType=VARCHAR}, #{descr,jdbcType=VARCHAR}, #{isMerge,jdbcType=VARCHAR}, 
+      #{pickno,jdbcType=VARCHAR}, #{route,jdbcType=VARCHAR}, #{putawayzone,jdbcType=VARCHAR}, 
+      #{packUser1,jdbcType=VARCHAR}, #{packDate1,jdbcType=TIMESTAMP}, #{packloc,jdbcType=VARCHAR}, 
+      #{station,jdbcType=VARCHAR}, #{orderkey,jdbcType=VARCHAR}, #{frombox,jdbcType=VARCHAR}, 
+      #{wesHangup,jdbcType=VARCHAR}, #{mergeStatus,jdbcType=VARCHAR}, #{mergetaskno,jdbcType=VARCHAR}, 
+      #{wesHangupOld,jdbcType=VARCHAR}, #{canmerge,jdbcType=VARCHAR}, #{isRefuse,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.report.PackCase" >
+    insert into PACK_CASE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="packid != null" >
+        PACKID,
+      </if>
+      <if test="batchNo != null" >
+        BATCH_NO,
+      </if>
+      <if test="fromtable != null" >
+        FROMTABLE,
+      </if>
+      <if test="fromtype != null" >
+        FROMTYPE,
+      </if>
+      <if test="pickdetailkey != null" >
+        PICKDETAILKEY,
+      </if>
+      <if test="storerkey != null" >
+        STORERKEY,
+      </if>
+      <if test="boxno != null" >
+        BOXNO,
+      </if>
+      <if test="boxnobak != null" >
+        BOXNOBAK,
+      </if>
+      <if test="caseid != null" >
+        CASEID,
+      </if>
+      <if test="caselineno != null" >
+        CASELINENO,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="docNumber != null" >
+        DOC_NUMBER,
+      </if>
+      <if test="seq != null" >
+        SEQ,
+      </if>
+      <if test="sku != null" >
+        SKU,
+      </if>
+      <if test="packqty != null" >
+        PACKQTY,
+      </if>
+      <if test="confirmQty != null" >
+        CONFIRM_QTY,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="discount != null" >
+        DISCOUNT,
+      </if>
+      <if test="my != null" >
+        MY,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="consk != null" >
+        CONSK,
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME,
+      </if>
+      <if test="exportno != null" >
+        EXPORTNO,
+      </if>
+      <if test="susr1 != null" >
+        SUSR1,
+      </if>
+      <if test="susr2 != null" >
+        SUSR2,
+      </if>
+      <if test="susr3 != null" >
+        SUSR3,
+      </if>
+      <if test="susr4 != null" >
+        SUSR4,
+      </if>
+      <if test="susr5 != null" >
+        SUSR5,
+      </if>
+      <if test="adddate != null" >
+        ADDDATE,
+      </if>
+      <if test="addwho != null" >
+        ADDWHO,
+      </if>
+      <if test="editdate != null" >
+        EDITDATE,
+      </if>
+      <if test="editwho != null" >
+        EDITWHO,
+      </if>
+      <if test="packUser != null" >
+        PACK_USER,
+      </if>
+      <if test="packDate != null" >
+        PACK_DATE,
+      </if>
+      <if test="confirmUser != null" >
+        CONFIRM_USER,
+      </if>
+      <if test="confirmDate != null" >
+        CONFIRM_DATE,
+      </if>
+      <if test="mergeUser != null" >
+        MERGE_USER,
+      </if>
+      <if test="mergeDate != null" >
+        MERGE_DATE,
+      </if>
+      <if test="sowUser != null" >
+        SOW_USER,
+      </if>
+      <if test="sowDate != null" >
+        SOW_DATE,
+      </if>
+      <if test="netWeight != null" >
+        NET_WEIGHT,
+      </if>
+      <if test="actWeight != null" >
+        ACT_WEIGHT,
+      </if>
+      <if test="barcode != null" >
+        BARCODE,
+      </if>
+      <if test="descr != null" >
+        DESCR,
+      </if>
+      <if test="isMerge != null" >
+        IS_MERGE,
+      </if>
+      <if test="pickno != null" >
+        PICKNO,
+      </if>
+      <if test="route != null" >
+        ROUTE,
+      </if>
+      <if test="putawayzone != null" >
+        PUTAWAYZONE,
+      </if>
+      <if test="packUser1 != null" >
+        PACK_USER1,
+      </if>
+      <if test="packDate1 != null" >
+        PACK_DATE1,
+      </if>
+      <if test="packloc != null" >
+        PACKLOC,
+      </if>
+      <if test="station != null" >
+        STATION,
+      </if>
+      <if test="orderkey != null" >
+        ORDERKEY,
+      </if>
+      <if test="frombox != null" >
+        FROMBOX,
+      </if>
+      <if test="wesHangup != null" >
+        WES_HANGUP,
+      </if>
+      <if test="mergeStatus != null" >
+        MERGE_STATUS,
+      </if>
+      <if test="mergetaskno != null" >
+        MERGETASKNO,
+      </if>
+      <if test="wesHangupOld != null" >
+        WES_HANGUP_OLD,
+      </if>
+      <if test="canmerge != null" >
+        CANMERGE,
+      </if>
+      <if test="isRefuse != null" >
+        IS_REFUSE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="packid != null" >
+        #{packid,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null" >
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fromtable != null" >
+        #{fromtable,jdbcType=VARCHAR},
+      </if>
+      <if test="fromtype != null" >
+        #{fromtype,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdetailkey != null" >
+        #{pickdetailkey,jdbcType=VARCHAR},
+      </if>
+      <if test="storerkey != null" >
+        #{storerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="boxno != null" >
+        #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="boxnobak != null" >
+        #{boxnobak,jdbcType=VARCHAR},
+      </if>
+      <if test="caseid != null" >
+        #{caseid,jdbcType=VARCHAR},
+      </if>
+      <if test="caselineno != null" >
+        #{caselineno,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="docNumber != null" >
+        #{docNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="packqty != null" >
+        #{packqty,jdbcType=DECIMAL},
+      </if>
+      <if test="confirmQty != null" >
+        #{confirmQty,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="my != null" >
+        #{my,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="consk != null" >
+        #{consk,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="exportno != null" >
+        #{exportno,jdbcType=VARCHAR},
+      </if>
+      <if test="susr1 != null" >
+        #{susr1,jdbcType=VARCHAR},
+      </if>
+      <if test="susr2 != null" >
+        #{susr2,jdbcType=VARCHAR},
+      </if>
+      <if test="susr3 != null" >
+        #{susr3,jdbcType=VARCHAR},
+      </if>
+      <if test="susr4 != null" >
+        #{susr4,jdbcType=VARCHAR},
+      </if>
+      <if test="susr5 != null" >
+        #{susr5,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="packUser != null" >
+        #{packUser,jdbcType=VARCHAR},
+      </if>
+      <if test="packDate != null" >
+        #{packDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmUser != null" >
+        #{confirmUser,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmDate != null" >
+        #{confirmDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mergeUser != null" >
+        #{mergeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="mergeDate != null" >
+        #{mergeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sowUser != null" >
+        #{sowUser,jdbcType=VARCHAR},
+      </if>
+      <if test="sowDate != null" >
+        #{sowDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="netWeight != null" >
+        #{netWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="actWeight != null" >
+        #{actWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="barcode != null" >
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="descr != null" >
+        #{descr,jdbcType=VARCHAR},
+      </if>
+      <if test="isMerge != null" >
+        #{isMerge,jdbcType=VARCHAR},
+      </if>
+      <if test="pickno != null" >
+        #{pickno,jdbcType=VARCHAR},
+      </if>
+      <if test="route != null" >
+        #{route,jdbcType=VARCHAR},
+      </if>
+      <if test="putawayzone != null" >
+        #{putawayzone,jdbcType=VARCHAR},
+      </if>
+      <if test="packUser1 != null" >
+        #{packUser1,jdbcType=VARCHAR},
+      </if>
+      <if test="packDate1 != null" >
+        #{packDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packloc != null" >
+        #{packloc,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null" >
+        #{station,jdbcType=VARCHAR},
+      </if>
+      <if test="orderkey != null" >
+        #{orderkey,jdbcType=VARCHAR},
+      </if>
+      <if test="frombox != null" >
+        #{frombox,jdbcType=VARCHAR},
+      </if>
+      <if test="wesHangup != null" >
+        #{wesHangup,jdbcType=VARCHAR},
+      </if>
+      <if test="mergeStatus != null" >
+        #{mergeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mergetaskno != null" >
+        #{mergetaskno,jdbcType=VARCHAR},
+      </if>
+      <if test="wesHangupOld != null" >
+        #{wesHangupOld,jdbcType=VARCHAR},
+      </if>
+      <if test="canmerge != null" >
+        #{canmerge,jdbcType=VARCHAR},
+      </if>
+      <if test="isRefuse != null" >
+        #{isRefuse,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.pojo.report.PackCase" >
+    update PACK_CASE
+    <set >
+      <if test="batchNo != null" >
+        BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fromtable != null" >
+        FROMTABLE = #{fromtable,jdbcType=VARCHAR},
+      </if>
+      <if test="fromtype != null" >
+        FROMTYPE = #{fromtype,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdetailkey != null" >
+        PICKDETAILKEY = #{pickdetailkey,jdbcType=VARCHAR},
+      </if>
+      <if test="storerkey != null" >
+        STORERKEY = #{storerkey,jdbcType=VARCHAR},
+      </if>
+      <if test="boxno != null" >
+        BOXNO = #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="boxnobak != null" >
+        BOXNOBAK = #{boxnobak,jdbcType=VARCHAR},
+      </if>
+      <if test="caseid != null" >
+        CASEID = #{caseid,jdbcType=VARCHAR},
+      </if>
+      <if test="caselineno != null" >
+        CASELINENO = #{caselineno,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="docNumber != null" >
+        DOC_NUMBER = #{docNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        SEQ = #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        SKU = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="packqty != null" >
+        PACKQTY = #{packqty,jdbcType=DECIMAL},
+      </if>
+      <if test="confirmQty != null" >
+        CONFIRM_QTY = #{confirmQty,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        DISCOUNT = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="my != null" >
+        MY = #{my,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="consk != null" >
+        CONSK = #{consk,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        SHORTNAME = #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="exportno != null" >
+        EXPORTNO = #{exportno,jdbcType=VARCHAR},
+      </if>
+      <if test="susr1 != null" >
+        SUSR1 = #{susr1,jdbcType=VARCHAR},
+      </if>
+      <if test="susr2 != null" >
+        SUSR2 = #{susr2,jdbcType=VARCHAR},
+      </if>
+      <if test="susr3 != null" >
+        SUSR3 = #{susr3,jdbcType=VARCHAR},
+      </if>
+      <if test="susr4 != null" >
+        SUSR4 = #{susr4,jdbcType=VARCHAR},
+      </if>
+      <if test="susr5 != null" >
+        SUSR5 = #{susr5,jdbcType=VARCHAR},
+      </if>
+      <if test="adddate != null" >
+        ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addwho != null" >
+        ADDWHO = #{addwho,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null" >
+        EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editwho != null" >
+        EDITWHO = #{editwho,jdbcType=VARCHAR},
+      </if>
+      <if test="packUser != null" >
+        PACK_USER = #{packUser,jdbcType=VARCHAR},
+      </if>
+      <if test="packDate != null" >
+        PACK_DATE = #{packDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmUser != null" >
+        CONFIRM_USER = #{confirmUser,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmDate != null" >
+        CONFIRM_DATE = #{confirmDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mergeUser != null" >
+        MERGE_USER = #{mergeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="mergeDate != null" >
+        MERGE_DATE = #{mergeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sowUser != null" >
+        SOW_USER = #{sowUser,jdbcType=VARCHAR},
+      </if>
+      <if test="sowDate != null" >
+        SOW_DATE = #{sowDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="netWeight != null" >
+        NET_WEIGHT = #{netWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="actWeight != null" >
+        ACT_WEIGHT = #{actWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="barcode != null" >
+        BARCODE = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="descr != null" >
+        DESCR = #{descr,jdbcType=VARCHAR},
+      </if>
+      <if test="isMerge != null" >
+        IS_MERGE = #{isMerge,jdbcType=VARCHAR},
+      </if>
+      <if test="pickno != null" >
+        PICKNO = #{pickno,jdbcType=VARCHAR},
+      </if>
+      <if test="route != null" >
+        ROUTE = #{route,jdbcType=VARCHAR},
+      </if>
+      <if test="putawayzone != null" >
+        PUTAWAYZONE = #{putawayzone,jdbcType=VARCHAR},
+      </if>
+      <if test="packUser1 != null" >
+        PACK_USER1 = #{packUser1,jdbcType=VARCHAR},
+      </if>
+      <if test="packDate1 != null" >
+        PACK_DATE1 = #{packDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packloc != null" >
+        PACKLOC = #{packloc,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null" >
+        STATION = #{station,jdbcType=VARCHAR},
+      </if>
+      <if test="orderkey != null" >
+        ORDERKEY = #{orderkey,jdbcType=VARCHAR},
+      </if>
+      <if test="frombox != null" >
+        FROMBOX = #{frombox,jdbcType=VARCHAR},
+      </if>
+      <if test="wesHangup != null" >
+        WES_HANGUP = #{wesHangup,jdbcType=VARCHAR},
+      </if>
+      <if test="mergeStatus != null" >
+        MERGE_STATUS = #{mergeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mergetaskno != null" >
+        MERGETASKNO = #{mergetaskno,jdbcType=VARCHAR},
+      </if>
+      <if test="wesHangupOld != null" >
+        WES_HANGUP_OLD = #{wesHangupOld,jdbcType=VARCHAR},
+      </if>
+      <if test="canmerge != null" >
+        CANMERGE = #{canmerge,jdbcType=VARCHAR},
+      </if>
+      <if test="isRefuse != null" >
+        IS_REFUSE = #{isRefuse,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PACKID = #{packid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.pojo.report.PackCase" >
+    update PACK_CASE
+    set BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      FROMTABLE = #{fromtable,jdbcType=VARCHAR},
+      FROMTYPE = #{fromtype,jdbcType=VARCHAR},
+      PICKDETAILKEY = #{pickdetailkey,jdbcType=VARCHAR},
+      STORERKEY = #{storerkey,jdbcType=VARCHAR},
+      BOXNO = #{boxno,jdbcType=VARCHAR},
+      BOXNOBAK = #{boxnobak,jdbcType=VARCHAR},
+      CASEID = #{caseid,jdbcType=VARCHAR},
+      CASELINENO = #{caselineno,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=DECIMAL},
+      DOC_NUMBER = #{docNumber,jdbcType=VARCHAR},
+      SEQ = #{seq,jdbcType=VARCHAR},
+      SKU = #{sku,jdbcType=VARCHAR},
+      PACKQTY = #{packqty,jdbcType=DECIMAL},
+      CONFIRM_QTY = #{confirmQty,jdbcType=DECIMAL},
+      PRICE = #{price,jdbcType=DECIMAL},
+      DISCOUNT = #{discount,jdbcType=DECIMAL},
+      MY = #{my,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      CONSK = #{consk,jdbcType=VARCHAR},
+      SHORTNAME = #{shortname,jdbcType=VARCHAR},
+      EXPORTNO = #{exportno,jdbcType=VARCHAR},
+      SUSR1 = #{susr1,jdbcType=VARCHAR},
+      SUSR2 = #{susr2,jdbcType=VARCHAR},
+      SUSR3 = #{susr3,jdbcType=VARCHAR},
+      SUSR4 = #{susr4,jdbcType=VARCHAR},
+      SUSR5 = #{susr5,jdbcType=VARCHAR},
+      ADDDATE = #{adddate,jdbcType=TIMESTAMP},
+      ADDWHO = #{addwho,jdbcType=VARCHAR},
+      EDITDATE = #{editdate,jdbcType=TIMESTAMP},
+      EDITWHO = #{editwho,jdbcType=VARCHAR},
+      PACK_USER = #{packUser,jdbcType=VARCHAR},
+      PACK_DATE = #{packDate,jdbcType=TIMESTAMP},
+      CONFIRM_USER = #{confirmUser,jdbcType=VARCHAR},
+      CONFIRM_DATE = #{confirmDate,jdbcType=TIMESTAMP},
+      MERGE_USER = #{mergeUser,jdbcType=VARCHAR},
+      MERGE_DATE = #{mergeDate,jdbcType=TIMESTAMP},
+      SOW_USER = #{sowUser,jdbcType=VARCHAR},
+      SOW_DATE = #{sowDate,jdbcType=TIMESTAMP},
+      NET_WEIGHT = #{netWeight,jdbcType=DECIMAL},
+      ACT_WEIGHT = #{actWeight,jdbcType=DECIMAL},
+      BARCODE = #{barcode,jdbcType=VARCHAR},
+      DESCR = #{descr,jdbcType=VARCHAR},
+      IS_MERGE = #{isMerge,jdbcType=VARCHAR},
+      PICKNO = #{pickno,jdbcType=VARCHAR},
+      ROUTE = #{route,jdbcType=VARCHAR},
+      PUTAWAYZONE = #{putawayzone,jdbcType=VARCHAR},
+      PACK_USER1 = #{packUser1,jdbcType=VARCHAR},
+      PACK_DATE1 = #{packDate1,jdbcType=TIMESTAMP},
+      PACKLOC = #{packloc,jdbcType=VARCHAR},
+      STATION = #{station,jdbcType=VARCHAR},
+      ORDERKEY = #{orderkey,jdbcType=VARCHAR},
+      FROMBOX = #{frombox,jdbcType=VARCHAR},
+      WES_HANGUP = #{wesHangup,jdbcType=VARCHAR},
+      MERGE_STATUS = #{mergeStatus,jdbcType=VARCHAR},
+      MERGETASKNO = #{mergetaskno,jdbcType=VARCHAR},
+      WES_HANGUP_OLD = #{wesHangupOld,jdbcType=VARCHAR},
+      CANMERGE = #{canmerge,jdbcType=VARCHAR},
+      IS_REFUSE = #{isRefuse,jdbcType=VARCHAR}
+    where PACKID = #{packid,jdbcType=VARCHAR}
+  </update>
+  <!--<select id="getBaoZData4" resultType="java.lang.Integer">-->
+  <!--select-->
+  <!--nvl(sum(is_refuse),0)-->
+  <!--from pack_case-->
+  <!--where  status &lt;&gt;9-->
+  <!--and ((fromtype = 1 and type = 0) or (fromtype = 2 and type = 0)) and storerkey='H360016'-->
+  <!--</select>-->
+  <select id="getBaoZData5" resultType="java.lang.Integer">
+  select
+  nvl(sum(packqty), 0)
+  from pack_case
+  where  status &lt;&gt;9
+  and ((fromtype = 1 and type = 0) or (fromtype = 2 and type = 0)) and storerkey='H360016'
+  </select>
+  <!--<select id="getBaoZData10" resultType="java.lang.Integer">-->
+    <!--select-->
+    <!--nvl(sum(is_refuse),0)-->
+    <!--from pack_case-->
+    <!--where  status &lt;&gt;9-->
+    <!--and (fromtype = 4 and type = 1) and storerkey='H360016'-->
+    <!--</select>-->
+  <select id="getBaoZData11" resultType="java.lang.Integer">
+    select
+     nvl(sum(packqty),0)
+    from pack_case
+    where  status &lt;&gt;9
+    and (fromtype = 4 and type = 1) and storerkey='H360016'
+    </select>
+  <!--<select id="getBaoZData16" resultType="java.lang.Integer">-->
+    <!--select sum(nvl(js,0)) from (select-->
+    <!--nvl(sum(is_refuse),0) js-->
+    <!--from pack_case-->
+    <!--where  status &lt;&gt;9-->
+    <!--and ((fromtype = 1 and type = 1) or (fromtype = 4 and type = 2) or (fromtype = 2 and type = 1))-->
+    <!--and storerkey='H360016')-->
+    <!--</select>-->
+  <select id="getBaoZData17" resultType="java.lang.Integer">
+    select sum(nvl(qty,0)) from (select
+     sum(packqty) qty
+    from pack_case
+    where  status &lt;&gt;9
+    and ((fromtype = 1 and type = 1) or (fromtype = 4 and type = 2) or (fromtype = 2 and type = 1))
+    and storerkey='H360016')
+    </select>
+  <!--<select id="getBaoZData22" resultType="java.lang.Integer">-->
+    <!--select sum(nvl(js,0)) from (select-->
+    <!--nvl(sum(is_refuse),0) js-->
+    <!--from pack_case-->
+    <!--where  status &lt;&gt;9-->
+    <!--and storerkey='H360020' and-->
+    <!--((fromtype = 1 and type = 0) or (fromtype = 2 and type = 0)))-->
+    <!--</select>-->
+  <select id="getBaoZData23" resultType="java.lang.Integer">
+    select sum(nvl(qty,0)) from (select
+     sum(packqty) qty
+    from pack_case
+    where  status &lt;&gt;9
+    and storerkey='H360020' and
+     ((fromtype = 1 and type = 0) or (fromtype = 2 and type = 0)))
+
+    </select>
+
+</mapper>
