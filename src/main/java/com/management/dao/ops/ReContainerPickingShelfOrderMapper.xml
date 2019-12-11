@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.ops.ReContainerPickingShelfOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.ops.ReContainerPickingShelfOrder" >
+    <constructor >
+      <arg column="PickingResultCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PickingStationCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TargetContainerCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="KeyCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TaskID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TaskGUID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CargoID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Quality" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Operator" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OperationTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="MergeSN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OrderStatus" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AllowManualEndContainer" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="InsertingPlateInfo" jdbcType="TINYINT" javaType="java.lang.Byte" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.ops.ReContainerPickingShelfOrder" >
+    insert into ReContainerPickingShelfOrder (PickingResultCode, PickingStationCode, 
+      TargetContainerCode, KeyCode, OrderCode, 
+      TaskID, TaskGUID, CargoID, 
+      Quality, Count, Operator, 
+      OperationTime, MergeSN, OrderStatus, 
+      AllowManualEndContainer, InsertingPlateInfo
+      )
+    values (#{pickingresultcode,jdbcType=VARCHAR}, #{pickingstationcode,jdbcType=VARCHAR}, 
+      #{targetcontainercode,jdbcType=VARCHAR}, #{keycode,jdbcType=VARCHAR}, #{ordercode,jdbcType=VARCHAR}, 
+      #{taskid,jdbcType=INTEGER}, #{taskguid,jdbcType=VARCHAR}, #{cargoid,jdbcType=VARCHAR}, 
+      #{quality,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{operator,jdbcType=VARCHAR}, 
+      #{operationtime,jdbcType=TIMESTAMP}, #{mergesn,jdbcType=VARCHAR}, #{orderstatus,jdbcType=VARCHAR}, 
+      #{allowmanualendcontainer,jdbcType=BIT}, #{insertingplateinfo,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.vo.ops.RPVo" >
+    insert into ReContainerPickingShelfOrder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pickingresultcode != null" >
+        PickingResultCode,
+      </if>
+      <if test="pickingstationcode != null" >
+        PickingStationCode,
+      </if>
+      <if test="targetcontainercode != null" >
+        TargetContainerCode,
+      </if>
+      <if test="keycode != null" >
+        KeyCode,
+      </if>
+      <if test="ordercode != null" >
+        OrderCode,
+      </if>
+      <if test="taskid != null" >
+        TaskID,
+      </if>
+      <if test="taskguid != null" >
+        TaskGUID,
+      </if>
+      <if test="cargoid != null" >
+        CargoID,
+      </if>
+      <if test="quality != null" >
+        Quality,
+      </if>
+      <if test="count != null" >
+        Count,
+      </if>
+      <if test="operator != null" >
+        Operator,
+      </if>
+      <if test="operationtime != null" >
+        OperationTime,
+      </if>
+      <if test="mergesn != null" >
+        MergeSN,
+      </if>
+      <if test="orderstatus != null" >
+        OrderStatus,
+      </if>
+      <if test="allowmanualendcontainer != null" >
+        AllowManualEndContainer,
+      </if>
+      <if test="insertingplateinfo != null" >
+        InsertingPlateInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pickingresultcode != null" >
+        #{pickingresultcode,jdbcType=VARCHAR},
+      </if>
+      <if test="pickingstationcode != null" >
+        #{pickingstationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="targetcontainercode != null" >
+        #{targetcontainercode,jdbcType=VARCHAR},
+      </if>
+      <if test="keycode != null" >
+        #{keycode,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercode != null" >
+        #{ordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskid != null" >
+        #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="taskguid != null" >
+        #{taskguid,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoid != null" >
+        #{cargoid,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null" >
+        #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operationtime != null" >
+        #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mergesn != null" >
+        #{mergesn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstatus != null" >
+        #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="allowmanualendcontainer != null" >
+        #{allowmanualendcontainer,jdbcType=BIT},
+      </if>
+      <if test="insertingplateinfo != null" >
+        #{insertingplateinfo,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="getReContainerPickingShelfOrderData" resultType="com.management.vo.ops.RPVo">
+    (SELECT '货阁下架'ty,E.EmployeeName,a.Operator,SUM(A.COUNT) AS COUNT ,COUNT(A.OrderCode) AS Task ,a.OperationTime FROM (
+    SELECT RP.Operator ,RP.OrderCode ,SUM(COUNT) AS COUNT ,
+    CONVERT(varchar(10), RP.OperationTime, 120 ) AS  OperationTime
+    FROM ReContainerPickingShelfOrder  AS RP
+    WHERE RP.OperationTime between #{date_begin}+' 00:00:00.000' AND #{date_end}+' 23:59:59.000'
+    GROUP BY RP.Operator ,RP.OrderCode,CONVERT(varchar(10), RP.OperationTime, 120 )) AS A
+    LEFT JOIN Employee AS E ON E.EmployeeCode=A.Operator
+    GROUP BY E.EmployeeName,a.OperationTime,a.Operator)
+    union
+    (SELECT '货阁上架'ty, E.EmployeeName,a.Operator,SUM(A.COUNT) AS COUNT,COUNT(A.OrderCode) AS Task,A.CreateTime FROM (
+    SELECT PF.Operator ,PF.OrderCode ,SUM(COUNT) AS COUNT ,
+    CONVERT(varchar(10), PF.CreateTime, 120 ) AS  CreateTime
+    FROM PutAwayOrderForShelf  AS PF
+    WHERE PF.CreateTime between #{date_begin}+' 00:00:00.000' AND #{date_end}+' 23:59:59.000'
+    GROUP BY PF.Operator ,PF.OrderCode,CONVERT(varchar(10), PF.CreateTime, 120 )) AS A
+    LEFT JOIN Employee AS E ON E.EmployeeCode=A.Operator
+    GROUP BY E.EmployeeName,a.CreateTime,a.Operator)
+  </select>
+</mapper>
