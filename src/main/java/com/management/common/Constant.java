@@ -47,7 +47,9 @@ public class Constant {
         String THIRD = "9";
         String WEBSITE = "11";
     }
-
+    public interface ConfigWCS{
+        String TRANS_MODE_3T4 = "3#_4#_TRANS_MODE";
+    }
     public enum UserSexEnum{
 
         FEMALE(1, "女"),
