@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.led.ZanCunRkLedMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.led.ZanCunRkLed" >
+    <constructor >
+      <arg column="DD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IDSTATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COUNTID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.led.ZanCunRkLed" >
+    insert into ZANCUNRKLED (DD, IDSTATUS, COUNTID
+      )
+    values (#{dd,jdbcType=VARCHAR}, #{idstatus,jdbcType=VARCHAR}, #{countid,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.led.ZanCunRkLed" >
+    insert into ZANCUNRKLED
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dd != null" >
+        DD,
+      </if>
+      <if test="idstatus != null" >
+        IDSTATUS,
+      </if>
+      <if test="countid != null" >
+        COUNTID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dd != null" >
+        #{dd,jdbcType=VARCHAR},
+      </if>
+      <if test="idstatus != null" >
+        #{idstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="countid != null" >
+        #{countid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="getTotalToday" resultType="integer">
+    select sum(countid)
+    from zancunrkLed
+    where dd = to_char(sysdate,'yyyymmdd') and idstatus in ('A','1','2')
+  </select>
+  <select id="getComplete" resultType="integer">
+    select sum(countid)
+    from zancunrkLed
+    where dd = to_char(sysdate,'yyyymmdd') and idstatus in ('1')
+  </select>
+  <select id="getIncomplete" resultType="java.lang.Integer">
+    select sum(countId) from zancunrkLed where idstatus in ('A')
+  </select>
+</mapper>
