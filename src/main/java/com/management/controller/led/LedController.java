@@ -4,6 +4,7 @@ package com.management.controller.led;
 import com.management.common.ServerResponse;
 import com.management.service.led.BaoZhuangLedService;
 import com.management.service.led.ILedService;
+import com.management.service.led.ZanCunRKLedService;
 import com.management.service.led.ZhuPeiLedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,8 @@ public class LedController {
     BaoZhuangLedService baoZhuangLedService;
     @Autowired
     ZhuPeiLedService zhuPeiLedService;
+    @Autowired
+    ZanCunRKLedService zanCunRKLedService;
 
 
     @RequestMapping("/lushunku")
@@ -39,6 +42,12 @@ public class LedController {
     @ResponseBody
     public ServerResponse zhupei(){
         ServerResponse response = zhuPeiLedService.getZhuPeiLedData();
+        return response;
+    }
+    @RequestMapping(value = {"/tuopan4" }, method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse tuopan4(){
+        ServerResponse response = zanCunRKLedService.getTuoPan4LedData();
         return response;
     }
 

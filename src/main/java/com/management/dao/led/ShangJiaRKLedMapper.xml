@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.dao.led.ShangJiaRKLedMapper" >
+  <resultMap id="BaseResultMap" type="com.management.pojo.led.ShangJiaRKLed" >
+    <constructor >
+      <arg column="DD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="QTY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="COUNTBOXNO" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.led.ShangJiaRKLed" >
+    insert into SHANGJIARKLED (DD, STATUS, QTY, 
+      COUNTBOXNO)
+    values (#{dd,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{qty,jdbcType=DECIMAL}, 
+      #{countboxno,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.led.ShangJiaRKLed" >
+    insert into SHANGJIARKLED
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dd != null" >
+        DD,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="countboxno != null" >
+        COUNTBOXNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dd != null" >
+        #{dd,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="countboxno != null" >
+        #{countboxno,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="getTotalToday" resultType="com.management.vo.led.SumAndCount">
+    select sum(qty) sumQty,sum(countboxno) countQty from shangjiarkLed where dd = to_char(sysdate,'yyyymmdd')
+  </select>
+  <select id="getComplete" resultType="com.management.vo.led.SumAndCount">
+    select sum(qty) sumQty,sum(countBoxno) countQty from (
+    select sum(qty) qty,sum(countboxno) countBoxno from shangjiarkLed where dd = to_char(sysdate,'yyyymmdd') and status = '9'
+    union
+    SELECT sum(qty) qty,count(distinct boxno) countBoxno FROM WMS_BOX_BIND WHERE  boxno like '%P%' AND STATUS = '99' and trunc(sysdate) = trunc(finishdate)
+    )
+  </select>
+  <select id="getIncomplete" resultType="com.management.vo.led.SumAndCount">
+    select sum(qty) qty,sum(countBoxno) countBoxno from (
+    select sum(qty) qty,sum(countboxno) countBoxno from shangjiarkLed where status <![CDATA[ <> ]]> '9'
+    union
+    SELECT sum(qty) qty,count(distinct boxno) countBoxno FROM WMS_BOX_BIND WHERE  boxno like '%P%' AND STATUS <![CDATA[ <> ]]> '99'
+    )
+  </select>
+  <select id="getTotalTodayCase" resultType="com.management.vo.led.SumAndCount">
+    select count(distinct boxno_bind) countQty,sum(nvl(susr1,1)) sumQty
+    from caseid
+    where to_char(adddate,'yyyymmdd') = to_char(sysdate,'yyyymmdd') and BOXNO_BIND LIKE '%P%'  AND contouttaskno IS NOT NULL
+  </select>
+  <select id="getCompleteCase" resultType="com.management.vo.led.SumAndCount">
+    select count(distinct boxno_bind) countQty,sum(nvl(susr1,1)) sumQty
+    from caseid
+    where to_char(adddate,'yyyymmdd') = to_char(sysdate,'yyyymmdd') and BOXNO_BIND LIKE '%P%'  AND contouttaskno <![CDATA[ <> ]]> '0'
+  </select>
+  <select id="getIncompletePK" resultType="com.management.vo.led.SumAndCount">
+    select count(distinct old_id) countQty, sum(qty) sumQty
+    from pickdetail
+    where uom = 2
+     and old_loc = '42SMART'
+     and status = '0'
+  </select>
+  <select id="getCompletePK" resultType="com.management.vo.led.SumAndCount">
+    select count(distinct old_id) countQty, sum(qty) sumQty
+    from pickdetail
+    where uom = 2
+    and old_loc = '42SMART'
+    and to_char(pick_date, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')
+    and status <![CDATA[ <> ]]> '0'
+  </select>
+  <select id="getIncompleteZanCunCK" resultType="java.lang.Integer">
+    select count(distinct id)
+    from xsogroupdetail
+    where idstatus in ('2')
+  </select>
+  <select id="getCompleteZanCunCK" resultType="java.lang.Integer">
+    select count(distinct id)
+    from xsogroupdetail
+    where to_char(TRAYS_OUT_TIME,'yyyymmdd') = to_char(sysdate, 'yyyymmdd')
+    and  idstatus in ('3')
+  </select>
+  <select id="getTotalTodayCaseCK" resultType="com.management.vo.led.SumAndCount">
+    select count(distinct boxno_bind) countQty,
+       sum(nvl(susr1, 1)) sumQty
+  from caseid
+ where to_char(caseouttime, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')
+   and BOXNO_BIND LIKE '%P%'
+   AND contouttaskno in ('2', '3')
+   group by to_char(adddate, 'yyyymmdd')
+  </select>
+  <select id="getBuHuoData" resultType="com.management.vo.led.SumAndCount">
+    select
+    (select sum(qty) from replenishment where status<![CDATA[ <> ]]>'4' and qty>0 and trunc(sysdate)=trunc(adddate)) sumQty,
+    (select count(0) from (select id from replenishment where status<![CDATA[ <> ]]>'4' and qty>0 and trunc(sysdate)=trunc(adddate) group by id)) countQty,
+    (select sum(qtyinpickloc) from replenishment where status='9' and trunc(sysdate)=trunc(adddate)) completeQty,
+    (select count(0) from (select id from replenishment where status='9' and trunc(sysdate)=trunc(adddate) group by id)) completeCount
+    from dual
+  </select>
+  <select id="getcompleteBuHuoData" resultType="com.management.vo.led.SumAndCount">
+    select sum(qtyinpickloc) sumQty,count (distinct id) countQty from replenishment where status='9' and trunc(sysdate)=trunc(adddate)
+  </select>
+  <select id="getIncompleteBuHuoData" resultType="com.management.vo.led.SumAndCount">
+    select sum(qtyinpickloc) sumQty,count (distinct id) countQty from replenishment where status in('0','1','2')
+  </select>
+</mapper>
