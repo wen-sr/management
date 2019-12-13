@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.dao.led.ZhuPeiLedMapper">
+  <resultMap id="BaseResultMap" type="com.management.pojo.led.ZhuPeiLed">
+    <constructor>
+      <arg column="AILID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sorqty" javaType="java.math.BigDecimal" jdbcType="NUMERIC" />
+      <arg column="skucount" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="dd" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="efficiency" javaType="java.math.BigDecimal" jdbcType="NUMERIC" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.led.ZhuPeiLed">
+    insert into zhupeiLed (AILID, sorqty, skucount, 
+      dd, efficiency)
+    values (#{ailid,jdbcType=VARCHAR}, #{sorqty,jdbcType=NUMERIC}, #{skucount,jdbcType=INTEGER}, 
+      #{dd,jdbcType=VARCHAR}, #{efficiency,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.led.ZhuPeiLed">
+    insert into zhupeiLed
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ailid != null">
+        AILID,
+      </if>
+      <if test="sorqty != null">
+        sorqty,
+      </if>
+      <if test="skucount != null">
+        skucount,
+      </if>
+      <if test="dd != null">
+        dd,
+      </if>
+      <if test="efficiency != null">
+        efficiency,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ailid != null">
+        #{ailid,jdbcType=VARCHAR},
+      </if>
+      <if test="sorqty != null">
+        #{sorqty,jdbcType=NUMERIC},
+      </if>
+      <if test="skucount != null">
+        #{skucount,jdbcType=INTEGER},
+      </if>
+      <if test="dd != null">
+        #{dd,jdbcType=VARCHAR},
+      </if>
+      <if test="efficiency != null">
+        #{efficiency,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <select id="getZhuPeiLedData" resultType="com.management.pojo.led.ZhuPeiLed">
+    select ailid,sorqty,skucount,dd,efficiency from zhupeiLed where dd = convert(varchar(8),getdate(),112) order by 5 DESC
+  </select>
+  <select id="getZhuPeiZongBiaoData" resultType="com.management.pojo.led.ZhuPeiZongBiao">
+    select tt,completeQty+incompleteQty totalQty,completeQty,incompleteQty,completeCount,incompleteCount,completeCount+incompleteCount totalCount from zhupeiZongBiao order by 1 desc
+  </select>
+</mapper>
