@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.dao.led.PickLedMapper">
+  <resultMap id="BaseResultMap" type="com.management.pojo.led.PickLed">
+    <constructor>
+      <arg column="EmployeeName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="OperationTime" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="Count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="OrderCode" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="efficiency" javaType="java.math.BigDecimal" jdbcType="NUMERIC" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.led.PickLed">
+    insert into pickLed (EmployeeName, OperationTime, Count, 
+      OrderCode, efficiency)
+    values (#{employeename,jdbcType=VARCHAR}, #{operationtime,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{ordercode,jdbcType=INTEGER}, #{efficiency,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.led.PickLed">
+    insert into pickLed
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeename != null">
+        EmployeeName,
+      </if>
+      <if test="operationtime != null">
+        OperationTime,
+      </if>
+      <if test="count != null">
+        Count,
+      </if>
+      <if test="ordercode != null">
+        OrderCode,
+      </if>
+      <if test="efficiency != null">
+        efficiency,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeename != null">
+        #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="operationtime != null">
+        #{operationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="ordercode != null">
+        #{ordercode,jdbcType=INTEGER},
+      </if>
+      <if test="efficiency != null">
+        #{efficiency,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+    <select id="getPickLedData" resultType="com.management.pojo.led.PickLed">
+      select EmployeeName,OperationTime,COUNT,ordercode,efficiency
+      from pickLed
+      where operationTime = CONVERT(varchar(10), GETDATE(), 120 )
+      order by 5 desc
+    </select>
+</mapper>
