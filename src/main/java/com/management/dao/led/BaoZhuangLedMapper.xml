@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.dao.led.BaoZhuangLedMapper">
+  <resultMap id="BaseResultMap" type="com.management.pojo.led.BaoZhuangLed">
+    <constructor>
+      <arg column="DD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PACK_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="USR_FNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CASEQTY" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="QTY" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="SKUCOUNT" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="EFFICIENCY" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.management.pojo.led.BaoZhuangLed">
+    insert into BAOZHUANGLED (DD, PACK_USER, USR_FNAME, 
+      CASEQTY, QTY, SKUCOUNT, 
+      EFFICIENCY)
+    values (#{dd,jdbcType=VARCHAR}, #{packUser,jdbcType=VARCHAR}, #{usrFname,jdbcType=VARCHAR}, 
+      #{caseqty,jdbcType=DECIMAL}, #{qty,jdbcType=DECIMAL}, #{skucount,jdbcType=DECIMAL}, 
+      #{efficiency,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.pojo.led.BaoZhuangLed">
+    insert into BAOZHUANGLED
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dd != null">
+        DD,
+      </if>
+      <if test="packUser != null">
+        PACK_USER,
+      </if>
+      <if test="usrFname != null">
+        USR_FNAME,
+      </if>
+      <if test="caseqty != null">
+        CASEQTY,
+      </if>
+      <if test="qty != null">
+        QTY,
+      </if>
+      <if test="skucount != null">
+        SKUCOUNT,
+      </if>
+      <if test="efficiency != null">
+        EFFICIENCY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dd != null">
+        #{dd,jdbcType=VARCHAR},
+      </if>
+      <if test="packUser != null">
+        #{packUser,jdbcType=VARCHAR},
+      </if>
+      <if test="usrFname != null">
+        #{usrFname,jdbcType=VARCHAR},
+      </if>
+      <if test="caseqty != null">
+        #{caseqty,jdbcType=DECIMAL},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="skucount != null">
+        #{skucount,jdbcType=DECIMAL},
+      </if>
+      <if test="efficiency != null">
+        #{efficiency,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="getBaoZhuangLedData" resultMap="BaseResultMap">
+    select dd,pack_user,usr_fname,caseqty,qty,skucount,efficiency
+    from baozhuangLed
+    where dd = to_char(sysdate, 'yyyymmdd')
+    order by 7 DESC
+  </select>
+</mapper>
