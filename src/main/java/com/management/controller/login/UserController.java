@@ -49,7 +49,7 @@ public class UserController extends BaseCotroller {
             //cookie
             //Cookie cookie = new Cookie("user_name", URLEncoder.encode(user.getName() + "", "utf-8"));
             Cookie cookie = new Cookie(Constant.USERID, user.getId());
-            cookie.setMaxAge(24*3600*30);
+            cookie.setMaxAge(24*3600*30*12);
             cookie.setPath("/");
             //把cookie给浏览器
             response.addCookie(cookie);
